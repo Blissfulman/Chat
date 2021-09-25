@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum GlobalFlags {
+    static var loggingEnabled: Bool {
+        UserDefaults.standard.bool(forKey: "loggingEnabled")
+    }
+}
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -21,6 +27,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        if GlobalFlags.loggingEnabled { print(#function) }
         return true
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        if GlobalFlags.loggingEnabled { print("Application moved from active to inactive:", #function) }
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        if GlobalFlags.loggingEnabled { print("Application moved from inactive to active:", #function) }
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        if GlobalFlags.loggingEnabled { print("Application moved from background to foreground:", #function) }
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        if GlobalFlags.loggingEnabled { print("Application moved from foreground to background:", #function) }
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        if GlobalFlags.loggingEnabled { print(#function) }
     }
 }
