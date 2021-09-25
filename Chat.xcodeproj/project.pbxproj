@@ -9,17 +9,17 @@
 /* Begin PBXBuildFile section */
 		CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */; };
 		CE1F08B126F3BB67002A5985 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08B026F3BB67002A5985 /* ViewController.swift */; };
-		CE1F08B626F3BB68002A5985 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE1F08B526F3BB68002A5985 /* Assets.xcassets */; };
 		CE1F08B926F3BB68002A5985 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1F08B726F3BB68002A5985 /* LaunchScreen.storyboard */; };
+		CED023E726FFB61100062489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED023E626FFB61100062489 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CE1F08A926F3BB67002A5985 /* Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE1F08B026F3BB67002A5985 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CE1F08B526F3BB68002A5985 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE1F08B826F3BB68002A5985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE1F08BA26F3BB68002A5985 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CED023E626FFB61100062489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +62,7 @@
 		CED023E326FFAEE300062489 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				CE1F08B526F3BB68002A5985 /* Assets.xcassets */,
+				CED023E626FFB61100062489 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -142,8 +142,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED023E726FFB61100062489 /* Assets.xcassets in Resources */,
 				CE1F08B926F3BB68002A5985 /* LaunchScreen.storyboard in Resources */,
-				CE1F08B626F3BB68002A5985 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
