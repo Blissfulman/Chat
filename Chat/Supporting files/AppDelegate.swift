@@ -15,14 +15,18 @@ enum GlobalFlags {
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
+    // MARK: - Public methods
+    
     var window: UIWindow?
-
+    
+    // MARK: - Lifecycle methods
+    
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        let rootViewController = ViewController()
+        let rootViewController = MainViewController()
         let navigationController = UINavigationController(rootViewController: rootViewController)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
