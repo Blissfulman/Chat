@@ -8,6 +8,7 @@
 import Foundation
 
 enum GlobalFlags {
+    
     static var loggingEnabled: Bool {
         UserDefaults.standard.bool(forKey: "loggingEnabled")
     }
