@@ -7,12 +7,6 @@
 
 import UIKit
 
-enum GlobalFlags {
-    static var loggingEnabled: Bool {
-        UserDefaults.standard.bool(forKey: "loggingEnabled")
-    }
-}
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     

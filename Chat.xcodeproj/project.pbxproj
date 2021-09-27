@@ -12,6 +12,7 @@
 		CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */; };
 		CE1F08B126F3BB67002A5985 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08B026F3BB67002A5985 /* MainViewController.swift */; };
 		CE1F08B926F3BB68002A5985 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1F08B726F3BB68002A5985 /* LaunchScreen.storyboard */; };
+		CE4E07E227023DEF00AE0113 /* GlobalFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07E127023DEF00AE0113 /* GlobalFlags.swift */; };
 		CED023E726FFB61100062489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED023E626FFB61100062489 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 		CE1F08B026F3BB67002A5985 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CE1F08B826F3BB68002A5985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE1F08BA26F3BB68002A5985 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE4E07E127023DEF00AE0113 /* GlobalFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFlags.swift; sourceTree = "<group>"; };
 		CED023E626FFB61100062489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,10 +59,19 @@
 			isa = PBXGroup;
 			children = (
 				CED023E526FFAFE100062489 /* Presentation */,
+				CE4E07E027023DE100AE0113 /* Additional files */,
 				CED023E426FFAFA800062489 /* Supporting files */,
 				CED023E326FFAEE300062489 /* Resources */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		CE4E07E027023DE100AE0113 /* Additional files */ = {
+			isa = PBXGroup;
+			children = (
+				CE4E07E127023DEF00AE0113 /* GlobalFlags.swift */,
+			);
+			path = "Additional files";
 			sourceTree = "<group>";
 		};
 		CED023E326FFAEE300062489 /* Resources */ = {
@@ -163,6 +174,7 @@
 			files = (
 				CE0FDBBA26FFCABA00809ABB /* SecondViewController.swift in Sources */,
 				CE1F08B126F3BB67002A5985 /* MainViewController.swift in Sources */,
+				CE4E07E227023DEF00AE0113 /* GlobalFlags.swift in Sources */,
 				CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
