@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "Chat-logo.png",
       "idiom" : "universal"
     }
   ],
