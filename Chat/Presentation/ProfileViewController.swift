@@ -60,6 +60,8 @@ final class ProfileViewController: UIViewController {
     
     private var descriptionLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
+        label.numberOfLines = 0
+        label.textAlignment = .center
         label.text = "UX/UI designer, web-designer Moscow, Russia"
         return label
     }()
@@ -83,10 +85,24 @@ final class ProfileViewController: UIViewController {
         return button
     }()
     
+    private let imagePickerController = UIImagePickerController()
+    
+    // MARK: - Initialization
+    
+    init() {
+        print("Edit button frame in \(#function): ", editAvatarButton.frame)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Edit button frame in \(#function): ", editAvatarButton.frame)
         setupUI()
         setupLayout()
     }
@@ -94,6 +110,12 @@ final class ProfileViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         avatarImageView.round()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // Здесь фрейм уже будет иметь правильные значения после расчёта на основе констрейнтов
+        print("Edit button frame in \(#function): ", editAvatarButton.frame)
+    }
+    
     // MARK: - Actions
     
     @objc
@@ -105,15 +127,16 @@ final class ProfileViewController: UIViewController {
     private func editAvatarButtonTapped() {
         print("Выбери изображение профиля")
         let actionSheetAC = UIAlertController(
-            title: "Выберите источник",
-            message: "Откуда взять изображение?",
+            title: "Выберите источник изображения",
+            message: nil,
             preferredStyle: .actionSheet
         )
         let cameraAction = UIAlertAction(title: "Камера", style: .default) { action in
             print("Камера")
         }
-        let galleryAction = UIAlertAction(title: "Галерея", style: .default) { action in
-            print("Галерея")
+        let galleryAction = UIAlertAction(title: "Галерея", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.present(self.imagePickerController, animated: true)
         }
         actionSheetAC.addAction(cameraAction)
         actionSheetAC.addAction(galleryAction)
@@ -139,6 +162,10 @@ final class ProfileViewController: UIViewController {
         
         topStackView.addArrangedSubviews([titleLabel, closeButton])
         centralStackView.addArrangedSubviews([avatarImageView, fullNameLabel, descriptionLabel])
+        
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .savedPhotosAlbum
+        imagePickerController.allowsEditing = true
     }
     
     private func setupLayout() {
@@ -154,7 +181,9 @@ final class ProfileViewController: UIViewController {
             topStackView.bottomAnchor.constraint(equalTo: topView.bottomAnchor),
             
             centralStackView.topAnchor.constraint(equalTo: topView.bottomAnchor, constant: 10),
-            centralStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            centralStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            centralStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            centralStackView.bottomAnchor.constraint(lessThanOrEqualTo: saveButton.topAnchor, constant: -16),
             
             avatarImageView.widthAnchor.constraint(equalToConstant: 240),
             avatarImageView.heightAnchor.constraint(equalToConstant: 240),
@@ -167,5 +196,19 @@ final class ProfileViewController: UIViewController {
             saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             saveButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+
+extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
+        defer { imagePickerController.dismiss(animated: true) }
+        guard let image = info[.editedImage] as? UIImage else { return }
+        avatarImageView.image = image
     }
 }
