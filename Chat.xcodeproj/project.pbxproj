@@ -15,6 +15,7 @@
 		CE32F21A270484EE007262A5 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */; };
 		CE32F21B270484F1007262A5 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */; };
 		CE32F21D27048600007262A5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32F21C27048600007262A5 /* Fonts.swift */; };
+		CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */; };
 		CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */; };
 		CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */; };
 		CED023E726FFB61100062489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED023E626FFB61100062489 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 		CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		CE32F21C27048600007262A5 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		CED023E626FFB61100062489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */,
+				CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */,
 				CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */,
 			);
 			path = Extensions;
@@ -228,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */,
 				CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */,
 				CE1F08B126F3BB67002A5985 /* MainViewController.swift in Sources */,
 				CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */,

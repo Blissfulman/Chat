@@ -127,22 +127,33 @@ final class ProfileViewController: UIViewController {
     
     @objc
     private func editAvatarButtonTapped() {
-        print("Выбери изображение профиля")
-        let actionSheetAC = UIAlertController(
-            title: "Выберите источник изображения",
+        print("Select profile image")
+        let imageSelectionAlertController = UIAlertController(
+            title: "Select image source",
             message: nil,
             preferredStyle: .actionSheet
         )
-        let cameraAction = UIAlertAction(title: "Камера", style: .default) { action in
-            print("Камера")
-        }
-        let galleryAction = UIAlertAction(title: "Галерея", style: .default) { [weak self] _ in
+        
+        let galleryAction = UIAlertAction(title: "Select from the gallery", style: .default) { [weak self] _ in
             guard let self = self else { return }
+            self.imagePickerController.sourceType = .savedPhotosAlbum
+            self.imagePickerController.allowsEditing = true
             self.present(self.imagePickerController, animated: true)
         }
-        actionSheetAC.addAction(cameraAction)
-        actionSheetAC.addAction(galleryAction)
-        present(actionSheetAC, animated: true)
+        let cameraAction = UIAlertAction(title: "Take a photo", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            guard UIImagePickerController.isCameraDeviceAvailable(.rear) else {
+                self.showAlert(title: "The camera insn't available")
+                return
+            }
+            self.imagePickerController.sourceType = .camera
+            self.imagePickerController.allowsEditing = false
+            self.present(self.imagePickerController, animated: true)
+        }
+        
+        imageSelectionAlertController.addAction(galleryAction)
+        imageSelectionAlertController.addAction(cameraAction)
+        present(imageSelectionAlertController, animated: true)
     }
     
     @objc
@@ -153,7 +164,6 @@ final class ProfileViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupUI() {
-        view.backgroundColor = .white
         view.roundCorners([.topLeft, .topRight], radius: 18)
         
         view.addSubview(topView)
@@ -164,10 +174,6 @@ final class ProfileViewController: UIViewController {
         
         topStackView.addArrangedSubviews([titleLabel, closeButton])
         centralStackView.addArrangedSubviews([avatarImageView, fullNameLabel, descriptionLabel])
-        
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .savedPhotosAlbum
-        imagePickerController.allowsEditing = true
     }
     
     private func setupLayout() {
@@ -201,6 +207,8 @@ final class ProfileViewController: UIViewController {
     }
     
     private func configureUI() {
+        view.backgroundColor = .white
+        imagePickerController.delegate = self
         fullNameLabel.text = "Marina Dudarenko"
         descriptionLabel.text = "UX/UI designer, web-designer Moscow, Russia"
     }
