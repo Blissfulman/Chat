@@ -137,7 +137,6 @@ final class ProfileViewController: UIViewController {
         let galleryAction = UIAlertAction(title: "Select from the gallery", style: .default) { [weak self] _ in
             guard let self = self else { return }
             self.imagePickerController.sourceType = .savedPhotosAlbum
-            self.imagePickerController.allowsEditing = true
             self.present(self.imagePickerController, animated: true)
         }
         let cameraAction = UIAlertAction(title: "Take a photo", style: .default) { [weak self] _ in
@@ -147,7 +146,6 @@ final class ProfileViewController: UIViewController {
                 return
             }
             self.imagePickerController.sourceType = .camera
-            self.imagePickerController.allowsEditing = false
             self.present(self.imagePickerController, animated: true)
         }
         
@@ -223,7 +221,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
     ) {
         defer { imagePickerController.dismiss(animated: true) }
-        guard let image = info[.editedImage] as? UIImage else { return }
+        guard let image = info[.originalImage] as? UIImage else { return }
         avatarImageView.image = image
     }
 }
