@@ -17,7 +17,7 @@
                BlueprintIdentifier = "CE1F08A826F3BB67002A5985"
                BuildableName = "Chat.app"
                BlueprintName = "Chat"
-               ReferencedContainer = "container:../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/Work/Tinkoff/Chat/Chat.xcodeproj">
+               ReferencedContainer = "container:Chat.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,7 +47,7 @@
             BlueprintIdentifier = "CE1F08A826F3BB67002A5985"
             BuildableName = "Chat.app"
             BlueprintName = "Chat"
-            ReferencedContainer = "container:../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/Work/Tinkoff/Chat/Chat.xcodeproj">
+            ReferencedContainer = "container:Chat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "CE1F08A826F3BB67002A5985"
             BuildableName = "Chat.app"
             BlueprintName = "Chat"
-            ReferencedContainer = "container:../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/Work/Tinkoff/Chat/Chat.xcodeproj">
+            ReferencedContainer = "container:Chat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
