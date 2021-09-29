@@ -17,7 +17,7 @@
                BlueprintIdentifier = "CE1F08A826F3BB67002A5985"
                BuildableName = "Chat.app"
                BlueprintName = "Chat"
-               ReferencedContainer = "container:Chat.xcodeproj">
+               ReferencedContainer = "container:../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/Work/Tinkoff/Chat/Chat.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,15 +47,9 @@
             BlueprintIdentifier = "CE1F08A826F3BB67002A5985"
             BuildableName = "Chat.app"
             BlueprintName = "Chat"
-            ReferencedContainer = "container:Chat.xcodeproj">
+            ReferencedContainer = "container:../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/Work/Tinkoff/Chat/Chat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-loggingEnabled YES"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -70,7 +64,7 @@
             BlueprintIdentifier = "CE1F08A826F3BB67002A5985"
             BuildableName = "Chat.app"
             BlueprintName = "Chat"
-            ReferencedContainer = "container:Chat.xcodeproj">
+            ReferencedContainer = "container:../../../../Library/Mobile Documents/com~apple~CloudDocs/Documents/Work/Tinkoff/Chat/Chat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
