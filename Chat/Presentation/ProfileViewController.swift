@@ -24,15 +24,16 @@ final class ProfileViewController: UIViewController {
     
     private var titleLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
-        label.font = .boldSystemFont(ofSize: 26)
+        label.font = Fonts.title
         label.text = "My Profile"
         return label
     }()
     
     private var closeButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
+        button.titleLabel?.font = Fonts.buttonTitle
+        button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
         button.setTitle("Close", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -53,23 +54,23 @@ final class ProfileViewController: UIViewController {
     
     private var fullNameLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
-        label.font = .boldSystemFont(ofSize: 24)
-        label.text = "Marina Dudarenko"
+        label.font = Fonts.subTitle
         return label
     }()
     
     private var descriptionLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
+        label.font = Fonts.body
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.text = "UX/UI designer, web-designer Moscow, Russia"
         return label
     }()
     
     private var editAvatarButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
+        button.titleLabel?.font = Fonts.buttonTitle
+        button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
         button.setTitle("Edit", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(editAvatarButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -77,9 +78,9 @@ final class ProfileViewController: UIViewController {
     private var saveButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
         button.backgroundColor = Palette.barGray
+        button.titleLabel?.font = Fonts.buttonTitle
+        button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
         button.setTitle("Save", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 19)
         button.setCornerRadius(14)
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         return button
@@ -105,6 +106,7 @@ final class ProfileViewController: UIViewController {
         print("Edit button frame in \(#function): ", editAvatarButton.frame)
         setupUI()
         setupLayout()
+        configureUI()
     }
     
     override func viewWillLayoutSubviews() {
@@ -196,6 +198,11 @@ final class ProfileViewController: UIViewController {
             saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             saveButton.heightAnchor.constraint(equalToConstant: 40)
         ])
+    }
+    
+    private func configureUI() {
+        fullNameLabel.text = "Marina Dudarenko"
+        descriptionLabel.text = "UX/UI designer, web-designer Moscow, Russia"
     }
 }
 

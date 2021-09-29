@@ -13,8 +13,8 @@ final class MainViewController: UIViewController {
     
     private var openProfileButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
+        button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
         button.setTitle("Open Profile", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(openProfileButtonTapped), for: .touchUpInside)
         return button
     }()
