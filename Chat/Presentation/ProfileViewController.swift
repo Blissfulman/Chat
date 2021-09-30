@@ -114,6 +114,7 @@ final class ProfileViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // Здесь фрейм уже будет иметь правильные значения после расчёта на основе констрейнтов
         print("Edit button frame in \(#function): ", editAvatarButton.frame)
     }
@@ -191,8 +192,8 @@ final class ProfileViewController: UIViewController {
             centralStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             centralStackView.bottomAnchor.constraint(lessThanOrEqualTo: saveButton.topAnchor, constant: -16),
             
-            avatarImageView.widthAnchor.constraint(equalToConstant: 240),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 240),
+            avatarImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
             
             editAvatarButton.trailingAnchor.constraint(equalTo: avatarImageView.trailingAnchor),
             editAvatarButton.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
