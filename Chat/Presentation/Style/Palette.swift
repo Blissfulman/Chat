@@ -9,5 +9,6 @@ import UIKit
 
 enum Palette {
     static let barGray = UIColor(named: "barGray")!
+    static let barTint = UIColor(named: "barTint")!
     static let buttonTitleBlue = UIColor(named: "buttonTitleBlue")!
 }

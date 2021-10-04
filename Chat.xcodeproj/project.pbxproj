@@ -10,7 +10,7 @@
 		CE0FDBB826FFC7C800809ABB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0FDBB726FFC7C800809ABB /* Images.xcassets */; };
 		CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */; };
 		CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */; };
-		CE1F08B126F3BB67002A5985 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08B026F3BB67002A5985 /* MainViewController.swift */; };
+		CE1F08B126F3BB67002A5985 /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08B026F3BB67002A5985 /* ConversationListViewController.swift */; };
 		CE1F08B926F3BB68002A5985 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1F08B726F3BB68002A5985 /* LaunchScreen.storyboard */; };
 		CE32F21A270484EE007262A5 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */; };
 		CE32F21B270484F1007262A5 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */; };
@@ -18,6 +18,9 @@
 		CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */; };
 		CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */; };
 		CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */; };
+		CE9AF681270B89C1006D44A8 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AF680270B89C1006D44A8 /* ConversationViewController.swift */; };
+		CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AF682270B8D39006D44A8 /* Icons.swift */; };
+		CE9AF685270B8D44006D44A8 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9AF684270B8D44006D44A8 /* Icons.xcassets */; };
 		CED023E726FFB61100062489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED023E626FFB61100062489 /* Assets.xcassets */; };
 		CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED84B3827025BC300D4E4EB /* Palette.xcassets */; };
 		CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3B27025D1700D4E4EB /* Palette.swift */; };
@@ -29,7 +32,7 @@
 		CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE1F08A926F3BB67002A5985 /* Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE1F08B026F3BB67002A5985 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		CE1F08B026F3BB67002A5985 /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		CE1F08B826F3BB68002A5985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE1F08BA26F3BB68002A5985 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
@@ -38,6 +41,9 @@
 		CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		CE9AF680270B89C1006D44A8 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
+		CE9AF682270B8D39006D44A8 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
+		CE9AF684270B8D44006D44A8 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		CED023E626FFB61100062489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CED84B3827025BC300D4E4EB /* Palette.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Palette.xcassets; sourceTree = "<group>"; };
 		CED84B3B27025D1700D4E4EB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -87,6 +93,7 @@
 			children = (
 				CED023E626FFB61100062489 /* Assets.xcassets */,
 				CE0FDBB726FFC7C800809ABB /* Images.xcassets */,
+				CE9AF684270B8D44006D44A8 /* Icons.xcassets */,
 				CED84B3827025BC300D4E4EB /* Palette.xcassets */,
 			);
 			path = Assets;
@@ -119,6 +126,30 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		CE9AF67D270B8986006D44A8 /* ConversationList */ = {
+			isa = PBXGroup;
+			children = (
+				CE1F08B026F3BB67002A5985 /* ConversationListViewController.swift */,
+			);
+			path = ConversationList;
+			sourceTree = "<group>";
+		};
+		CE9AF67E270B8995006D44A8 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		CE9AF67F270B89A7006D44A8 /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				CE9AF680270B89C1006D44A8 /* ConversationViewController.swift */,
+			);
+			path = Conversation;
+			sourceTree = "<group>";
+		};
 		CED023E326FFAEE300062489 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,8 +172,9 @@
 		CED023E526FFAFE100062489 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				CE1F08B026F3BB67002A5985 /* MainViewController.swift */,
-				CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */,
+				CE9AF67D270B8986006D44A8 /* ConversationList */,
+				CE9AF67F270B89A7006D44A8 /* Conversation */,
+				CE9AF67E270B8995006D44A8 /* Profile */,
 				CED84B3A27025CFE00D4E4EB /* Style */,
 			);
 			path = Presentation;
@@ -151,8 +183,9 @@
 		CED84B3A27025CFE00D4E4EB /* Style */ = {
 			isa = PBXGroup;
 			children = (
-				CED84B3B27025D1700D4E4EB /* Palette.swift */,
 				CED84B3D27025F4200D4E4EB /* Images.swift */,
+				CE9AF682270B8D39006D44A8 /* Icons.swift */,
+				CED84B3B27025D1700D4E4EB /* Palette.swift */,
 				CE32F21C27048600007262A5 /* Fonts.swift */,
 			);
 			path = Style;
@@ -217,6 +250,7 @@
 			files = (
 				CE0FDBB826FFC7C800809ABB /* Images.xcassets in Resources */,
 				CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */,
+				CE9AF685270B8D44006D44A8 /* Icons.xcassets in Resources */,
 				CE32F21A270484EE007262A5 /* SF-Pro-Display-Bold.otf in Resources */,
 				CED023E726FFB61100062489 /* Assets.xcassets in Resources */,
 				CE1F08B926F3BB68002A5985 /* LaunchScreen.storyboard in Resources */,
@@ -233,8 +267,10 @@
 			files = (
 				CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */,
 				CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */,
-				CE1F08B126F3BB67002A5985 /* MainViewController.swift in Sources */,
+				CE9AF681270B89C1006D44A8 /* ConversationViewController.swift in Sources */,
+				CE1F08B126F3BB67002A5985 /* ConversationListViewController.swift in Sources */,
 				CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */,
+				CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */,
 				CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */,
 				CE32F21D27048600007262A5 /* Fonts.swift in Sources */,
 				CED84B3E27025F4200D4E4EB /* Images.swift in Sources */,
