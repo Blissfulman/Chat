@@ -10,7 +10,7 @@ import UIKit
 protocol ConversationCellConfiguration {
     var name: String? { get set }
     var message: Date? { get set }
-    var date: Date? { get set }
+    var date: String? { get set }
     var isOnline: Bool { get set }
     var hasUnreadMessage: Bool { get set }
 }
@@ -21,7 +21,7 @@ final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
     
     var name: String?
     var message: Date?
-    var date: Date?
+    var date: String?
     var isOnline = false
     var hasUnreadMessage = false
     
@@ -106,16 +106,25 @@ final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
     // MARK: - Lifecycle methods
     
     override func prepareForReuse() {
-//        avatarImageView.image = Images.noPhoto
-//        fullNameLabel.text = nil
-//        dateLabel.text = nil
-//        messageLabel.text = nil
+        avatarImageView.image = Images.noPhoto
+        fullNameLabel.text = nil
+        dateLabel.text = nil
+        messageLabel.text = nil
     }
     
     // MARK: - Public methods
     
-    func configure() {
-//        avatarImageView.round()
+    func configure(with conversation: Conversation) {
+        if let avatarData = conversation.avatarData {
+            avatarImageView.image = UIImage(data: avatarData)
+        }
+        fullNameLabel.text = conversation.name
+        if let date = conversation.date {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            dateLabel.text = dateFormatter.string(from: date)
+        }
+        messageLabel.text = conversation.message
     }
     
     // MARK: - Private methods

@@ -32,6 +32,9 @@ final class ConversationListViewController: UIViewController {
         return tableView
     }()
     
+    private let onlineConversations: [Conversation] = Conversation.mockData().filter { $0.isOnline }
+    private let offlineConversations: [Conversation] = Conversation.mockData().filter { !$0.isOnline }
+    
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
@@ -90,7 +93,7 @@ extension ConversationListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        return section == 0 ? onlineConversations.count : offlineConversations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,7 +102,9 @@ extension ConversationListViewController: UITableViewDataSource {
             for: indexPath
         ) as? ConversationCell else { return UITableViewCell() }
         
-        cell.configure()
+        cell.configure(
+            with: indexPath.section == 0 ? onlineConversations[indexPath.row] : offlineConversations[indexPath.row]
+        )
         return cell
     }
     
