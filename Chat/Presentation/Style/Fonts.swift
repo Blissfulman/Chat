@@ -15,5 +15,7 @@ enum Fonts {
     
     static let conversationCellName = UIFont(name: "SF Pro Text Semibold", size: 15)
     static let conversationCellDate = UIFont(name: "SF Pro Text Regular", size: 15)
-    static let conversationCellMessage = UIFont(name: "SF Pro Text Regular", size: 13)
+    static let conversationCellReadMessage = UIFont(name: "SF Pro Text Regular", size: 13)
+    static let conversationCellUnreadMessage = UIFont(name: "SF Pro Text Bold", size: 13)
+    static let conversationCellNoMessage = UIFont(name: "SF Pro Text Regular Italic", size: 13)
 }

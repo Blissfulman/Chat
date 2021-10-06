@@ -31,7 +31,7 @@ extension Conversation {
             Conversation(
                 avatarData: nil,
                 name: "Ronald Robertson",
-                message: "Reprehenderit mollit excepteur labore deserunt officia laboris eiusmod cillum eu duis",
+                message: nil,
                 date: Date(),
                 isOnline: true,
                 hasUnreadMessage: true
@@ -71,7 +71,7 @@ extension Conversation {
             Conversation(
                 avatarData: nil,
                 name: "Irma Flores",
-                message: "Reprehenderit mollit excepteur labore deserunt officia laboris eiusmod cillum eu duis",
+                message: nil,
                 date: Date(),
                 isOnline: true,
                 hasUnreadMessage: false
@@ -87,7 +87,7 @@ extension Conversation {
             Conversation(
                 avatarData: nil,
                 name: "John Roberts",
-                message: "Reprehenderit mollit excepteur labore deserunt officia laboris eiusmod cillum eu duis",
+                message: nil,
                 date: Date(),
                 isOnline: false,
                 hasUnreadMessage: true

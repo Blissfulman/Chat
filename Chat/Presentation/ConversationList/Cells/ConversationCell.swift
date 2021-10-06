@@ -83,7 +83,7 @@ final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
     
     private var messageLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
-        label.font = Fonts.conversationCellMessage
+        label.font = Fonts.conversationCellReadMessage
         label.textColor = Palette.labelGray
         label.numberOfLines = 2
         label.text = "Dolore veniam Lorem occaecat veniam irure laborum est amet."
@@ -110,6 +110,7 @@ final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
         fullNameLabel.text = nil
         dateLabel.text = nil
         messageLabel.text = nil
+        messageLabel.font = Fonts.conversationCellReadMessage
     }
     
     // MARK: - Public methods
@@ -124,7 +125,15 @@ final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
             dateFormatter.dateFormat = "dd/MM/yyyy"
             dateLabel.text = dateFormatter.string(from: date)
         }
-        messageLabel.text = conversation.message
+        if let message = conversation.message {
+            messageLabel.text = message
+            if conversation.hasUnreadMessage {
+                messageLabel.font = Fonts.conversationCellUnreadMessage
+            }
+        } else {
+            messageLabel.text = "No messages yet"
+            messageLabel.font = Fonts.conversationCellNoMessage
+        }
     }
     
     // MARK: - Private methods

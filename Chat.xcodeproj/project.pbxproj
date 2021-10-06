@@ -19,6 +19,8 @@
 		CE32F21D27048600007262A5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32F21C27048600007262A5 /* Fonts.swift */; };
 		CE3E913D270E21070029DA74 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E913C270E21070029DA74 /* Conversation.swift */; };
 		CE3E913F270E21120029DA74 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E913E270E21120029DA74 /* Message.swift */; };
+		CE3E9141270E2B950029DA74 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE3E9140270E2B950029DA74 /* SF-Pro-Text-Bold.otf */; };
+		CE3E9143270E2C440029DA74 /* SF-Pro-Text-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE3E9142270E2C440029DA74 /* SF-Pro-Text-RegularItalic.otf */; };
 		CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */; };
 		CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */; };
 		CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */; };
@@ -46,6 +48,8 @@
 		CE32F21C27048600007262A5 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		CE3E913C270E21070029DA74 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		CE3E913E270E21120029DA74 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		CE3E9140270E2B950029DA74 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
+		CE3E9142270E2C440029DA74 /* SF-Pro-Text-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-RegularItalic.otf"; sourceTree = "<group>"; };
 		CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
@@ -120,7 +124,9 @@
 			isa = PBXGroup;
 			children = (
 				CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */,
+				CE3E9142270E2C440029DA74 /* SF-Pro-Text-RegularItalic.otf */,
 				CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */,
+				CE3E9140270E2B950029DA74 /* SF-Pro-Text-Bold.otf */,
 				CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */,
 			);
 			path = Fonts;
@@ -278,12 +284,14 @@
 			files = (
 				CE0FDBB826FFC7C800809ABB /* Images.xcassets in Resources */,
 				CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */,
+				CE3E9143270E2C440029DA74 /* SF-Pro-Text-RegularItalic.otf in Resources */,
 				CE9AF685270B8D44006D44A8 /* Icons.xcassets in Resources */,
 				CE32F21A270484EE007262A5 /* SF-Pro-Display-Bold.otf in Resources */,
 				CE0B5F21270CA84E004B6232 /* SF-Pro-Text-Semibold.otf in Resources */,
 				CED023E726FFB61100062489 /* Assets.xcassets in Resources */,
 				CE1F08B926F3BB68002A5985 /* LaunchScreen.storyboard in Resources */,
 				CE32F21B270484F1007262A5 /* SF-Pro-Text-Regular.otf in Resources */,
+				CE3E9141270E2B950029DA74 /* SF-Pro-Text-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
