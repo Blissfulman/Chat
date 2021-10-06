@@ -78,6 +78,7 @@ final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
     private var arrowImageView: UIImageView = {
         let imageView = UIImageView().prepareForAutoLayout()
         imageView.image = Icons.arrowRight
+        imageView.setContentHuggingPriority(.required, for: .horizontal)
         return imageView
     }()
     
@@ -106,6 +107,7 @@ final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
     // MARK: - Lifecycle methods
     
     override func prepareForReuse() {
+        contentView.backgroundColor = .white
         avatarImageView.image = Images.noPhoto
         fullNameLabel.text = nil
         dateLabel.text = nil
@@ -133,6 +135,9 @@ final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
         } else {
             messageLabel.text = "No messages yet"
             messageLabel.font = Fonts.conversationCellNoMessage
+        }
+        if conversation.isOnline {
+            contentView.backgroundColor = .yellow.withAlphaComponent(0.1)
         }
     }
     

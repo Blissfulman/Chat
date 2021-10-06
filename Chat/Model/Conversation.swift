@@ -99,6 +99,86 @@ extension Conversation {
                 date: Date(),
                 isOnline: true,
                 hasUnreadMessage: true
+            ),
+            Conversation(
+                avatarData: nil,
+                name: "Entony Torres",
+                message: "An suas viderer pro. Vis cu magna altera, ex his vivendo atomorum.",
+                date: Date(),
+                isOnline: true,
+                hasUnreadMessage: false
+            ),
+            Conversation(
+                avatarData: nil,
+                name: "Alex Todd",
+                message: nil,
+                date: Date(),
+                isOnline: true,
+                hasUnreadMessage: true
+            ),
+            Conversation(
+                avatarData: nil,
+                name: "Samantha Fog",
+                message: "Ex Lorem veniam veniam irure sunt adipisicing culpa.",
+                date: Date(),
+                isOnline: false,
+                hasUnreadMessage: true
+            ),
+            Conversation(
+                avatarData: nil,
+                name: "Richard Adams",
+                message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
+                date: Date(),
+                isOnline: true,
+                hasUnreadMessage: false
+            ),
+            Conversation(
+                avatarData: nil,
+                name: "Kate Lima",
+                message: "Voluptate irure aliquip consectetur commodo ex ex.",
+                date: Date(),
+                isOnline: false,
+                hasUnreadMessage: false
+            ),
+            Conversation(
+                avatarData: nil,
+                name: "Adam Bruge",
+                message: "Dolore veniam Lorem occaecat veniam irure laborum est amet.",
+                date: Date(),
+                isOnline: false,
+                hasUnreadMessage: true
+            ),
+            Conversation(
+                avatarData: nil,
+                name: "Emma Collins",
+                message: nil,
+                date: Date(),
+                isOnline: false,
+                hasUnreadMessage: false
+            ),
+            Conversation(
+                avatarData: nil,
+                name: "Duck McRoe",
+                message: "Amet enim do laborum tempor nisi aliqua ad adipisicing.",
+                date: Date(),
+                isOnline: false,
+                hasUnreadMessage: true
+            ),
+            Conversation(
+                avatarData: nil,
+                name: "Erik Grant",
+                message: nil,
+                date: Date(),
+                isOnline: false,
+                hasUnreadMessage: true
+            ),
+            Conversation(
+                avatarData: nil,
+                name: "Brad Duglas",
+                message: "Reprehenderit mollit excepteur labore deserunt officia laboris eiusmod cillum eu duis",
+                date: Date(),
+                isOnline: false,
+                hasUnreadMessage: true
             )
         ]
     }
