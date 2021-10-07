@@ -9,7 +9,7 @@ import Foundation
 
 struct Conversation {
     let avatarData: Data?
-    let name: String?
+    let name: String
     let message: String?
     let date: Date?
     let isOnline: Bool

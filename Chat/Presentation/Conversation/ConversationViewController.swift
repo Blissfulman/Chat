@@ -20,6 +20,18 @@ final class ConversationViewController: UIViewController {
     
     private let messages: [Message] = Message.mockData()
     
+    // MARK: - Initialization
+    
+    // Позднее, скорее всего, нужно будет передавать модель или ID контакта
+    init(contactName: String) {
+        super.init(nibName: nil, bundle: nil)
+        title = contactName
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
@@ -46,8 +58,8 @@ final class ConversationViewController: UIViewController {
     }
     
     private func configureUI() {
+        navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = .white
-        title = "Name" // TEMP
     }
 }
 

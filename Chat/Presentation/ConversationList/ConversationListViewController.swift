@@ -78,8 +78,9 @@ final class ConversationListViewController: UIViewController {
     }
     
     private func configureUI() {
+        navigationItem.backButtonTitle = ""
         view.backgroundColor = .white
-        title = "Tinkoff Chat"
+        title = "Chat"
         tableView.rowHeight = 88
     }
 }
@@ -118,7 +119,10 @@ extension ConversationListViewController: UITableViewDataSource {
 extension ConversationListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let conversationVC = ConversationViewController()
+        let contactName = indexPath.section == 0
+            ? onlineConversations[indexPath.row].name
+            : offlineConversations[indexPath.row].name
+        let conversationVC = ConversationViewController(contactName: contactName)
         navigationController?.show(conversationVC, sender: self)
     }
 }
