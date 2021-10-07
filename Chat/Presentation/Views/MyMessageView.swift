@@ -14,7 +14,7 @@ final class MyMessageView: UIView {
     struct Model {
         let text: String
         let date: String
-        let isUnread: Bool
+        let isUnread: Bool // FIXME: Необходимо реализовать галочки, отображающие прочитано ли сообщение
     }
     
     // MARK: - Private properties
