@@ -93,7 +93,7 @@ extension ConversationListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? onlineConversations.count : offlineConversations.count
+        section == 0 ? onlineConversations.count : offlineConversations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,4 +117,8 @@ extension ConversationListViewController: UITableViewDataSource {
 
 extension ConversationListViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let conversationVC = ConversationViewController()
+        navigationController?.show(conversationVC, sender: self)
+    }
 }

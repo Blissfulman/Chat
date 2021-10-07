@@ -7,23 +7,9 @@
 
 import UIKit
 
-protocol ConversationCellConfiguration {
-    var name: String? { get set }
-    var message: Date? { get set }
-    var date: String? { get set }
-    var isOnline: Bool { get set }
-    var hasUnreadMessage: Bool { get set }
-}
-
-final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
+final class ConversationCell: UITableViewCell, ConfigurableCell {
     
-    // MARK: - Public properties
-    
-    var name: String?
-    var message: Date?
-    var date: String?
-    var isOnline = false
-    var hasUnreadMessage = false
+    typealias ConfigurationModel = Conversation
     
     // MARK: - Private properties
     
@@ -63,7 +49,6 @@ final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
     private var fullNameLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
         label.font = Fonts.conversationCellName
-        label.text = "Johnny Watson"
         return label
     }()
     
@@ -71,7 +56,6 @@ final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
         let label = UILabel().prepareForAutoLayout()
         label.font = Fonts.conversationCellDate
         label.textColor = Palette.labelGray
-        label.text = "Yesterday"
         return label
     }()
     
@@ -87,7 +71,6 @@ final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
         label.font = Fonts.conversationCellReadMessage
         label.textColor = Palette.labelGray
         label.numberOfLines = 2
-        label.text = "Dolore veniam Lorem occaecat veniam irure laborum est amet."
         return label
     }()
     
@@ -117,26 +100,26 @@ final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
     
     // MARK: - Public methods
     
-    func configure(with conversation: Conversation) {
-        if let avatarData = conversation.avatarData {
+    func configure(with model: ConfigurationModel) {
+        if let avatarData = model.avatarData {
             avatarImageView.image = UIImage(data: avatarData)
         }
-        fullNameLabel.text = conversation.name
-        if let date = conversation.date {
-            let dateFormatter = DateFormatter()
+        fullNameLabel.text = model.name
+        if let date = model.date {
+            let dateFormatter = DateFormatter() // TEMP - нужно будет вынести форматтер из вью
             dateFormatter.dateFormat = "dd/MM/yyyy"
             dateLabel.text = dateFormatter.string(from: date)
         }
-        if let message = conversation.message {
+        if let message = model.message {
             messageLabel.text = message
-            if conversation.hasUnreadMessage {
+            if model.hasUnreadMessage {
                 messageLabel.font = Fonts.conversationCellUnreadMessage
             }
         } else {
             messageLabel.text = "No messages yet"
             messageLabel.font = Fonts.conversationCellNoMessage
         }
-        if conversation.isOnline {
+        if model.isOnline {
             contentView.backgroundColor = .yellow.withAlphaComponent(0.1)
         }
     }
@@ -165,5 +148,6 @@ final class ConversationCell: UITableViewCell, ConversationCellConfiguration {
     
     private func configureUI() {
         avatarImageView.setCornerRadius(24)
+        selectionStyle = .none
     }
 }
