@@ -9,6 +9,22 @@ import UIKit
 
 final class ConversationListViewController: UIViewController {
     
+    // MARK: - Nested types
+    
+    private enum Sections: Int, CaseIterable {
+        case online
+        case history
+        
+        var title: String {
+            switch self {
+            case .online:
+                return "Online"
+            case .history:
+                return "History"
+            }
+        }
+    }
+    
     // MARK: - Private properties
     
     private lazy var openSettingsBarButton = UIBarButtonItem(
@@ -90,11 +106,11 @@ final class ConversationListViewController: UIViewController {
 extension ConversationListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        Sections.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? onlineConversations.count : offlineConversations.count
+        section == Sections.online.rawValue ? onlineConversations.count : offlineConversations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -104,13 +120,15 @@ extension ConversationListViewController: UITableViewDataSource {
         ) as? ConversationCell else { return UITableViewCell() }
         
         cell.configure(
-            with: indexPath.section == 0 ? onlineConversations[indexPath.row] : offlineConversations[indexPath.row]
+            with: indexPath.section == Sections.online.rawValue
+                ? onlineConversations[indexPath.row]
+                : offlineConversations[indexPath.row]
         )
         return cell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        section == 0 ? "Online" : "History"
+        Sections(rawValue: section)?.title
     }
 }
 
@@ -119,7 +137,7 @@ extension ConversationListViewController: UITableViewDataSource {
 extension ConversationListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contactName = indexPath.section == 0
+        let contactName = indexPath.section == Sections.online.rawValue
             ? onlineConversations[indexPath.row].name
             : offlineConversations[indexPath.row].name
         let conversationVC = ConversationViewController(contactName: contactName)
