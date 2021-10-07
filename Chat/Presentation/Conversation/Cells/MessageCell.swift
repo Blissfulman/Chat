@@ -13,21 +13,44 @@ final class MessageCell: UITableViewCell, ConfigurableCell {
     
     // MARK: - Private properties
     
-    private var shapeImageView: UIImageView = {
+    private var partnerShapeImageView: UIImageView = {
         let imageView = UIImageView().prepareForAutoLayout()
         imageView.contentMode = .scaleToFill
+        imageView.isHidden = true
         imageView.image = Images.partnerMessageShape
         return imageView
     }()
     
-    private var messageLabel: UILabel = {
+    private var myShapeImageView: UIImageView = {
+        let imageView = UIImageView().prepareForAutoLayout()
+        imageView.contentMode = .scaleToFill
+        imageView.isHidden = true
+        imageView.image = Images.myMessageShape
+        return imageView
+    }()
+    
+    private var partnerMessageLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
         label.font = Fonts.messageCellText
         label.numberOfLines = 0
         return label
     }()
     
-    private var dateLabel: UILabel = {
+    private var myMessageLabel: UILabel = {
+        let label = UILabel().prepareForAutoLayout()
+        label.font = Fonts.messageCellText
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private var partnerDateLabel: UILabel = {
+        let label = UILabel().prepareForAutoLayout()
+        label.font = Fonts.messageCellDate
+        label.textColor = .black.withAlphaComponent(0.25)
+        return label
+    }()
+    
+    private var myDateLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
         label.font = Fonts.messageCellDate
         label.textColor = .black.withAlphaComponent(0.25)
@@ -47,44 +70,86 @@ final class MessageCell: UITableViewCell, ConfigurableCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle methods
+    
+    override func prepareForReuse() {
+        partnerShapeImageView.isHidden = true
+        myShapeImageView.isHidden = true
+    }
+    
     // MARK: - Public methods
     
     func configure(with model: ConfigurationModel) {
-        messageLabel.text = model.text
         let dateFormatter = DateFormatter() // TEMP - нужно будет вынести форматтер из вью
         dateFormatter.timeStyle = .short
-        dateLabel.text = dateFormatter.string(from: model.date)
+        
+        if model.isMine {
+            myMessageLabel.text = model.text
+            myDateLabel.text = dateFormatter.string(from: model.date)
+            myShapeImageView.isHidden = false
+        } else {
+            partnerMessageLabel.text = model.text
+            partnerDateLabel.text = dateFormatter.string(from: model.date)
+            partnerShapeImageView.isHidden = false
+        }
     }
     
     // MARK: - Private methods
     
     private func setupUI() {
-        contentView.addSubview(shapeImageView)
-        contentView.addSubview(messageLabel)
-        contentView.addSubview(dateLabel)
+        contentView.addSubview(partnerShapeImageView)
+        partnerShapeImageView.addSubview(partnerMessageLabel)
+        partnerShapeImageView.addSubview(partnerDateLabel)
+        contentView.addSubview(myShapeImageView)
+        myShapeImageView.addSubview(myMessageLabel)
+        myShapeImageView.addSubview(myDateLabel)
     }
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            shapeImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            shapeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 7),
-            shapeImageView.trailingAnchor.constraint(
+            // Partner's message views
+            partnerShapeImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            partnerShapeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 7),
+            partnerShapeImageView.trailingAnchor.constraint(
                 lessThanOrEqualTo: contentView.trailingAnchor,
                 constant: -(contentView.bounds.width / 4)
             ),
-            shapeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            partnerShapeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
-            messageLabel.topAnchor.constraint(equalTo: shapeImageView.topAnchor, constant: 5),
-            messageLabel.leadingAnchor.constraint(equalTo: shapeImageView.leadingAnchor, constant: 16),
-            messageLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -8),
-            messageLabel.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -26),
+            partnerMessageLabel.topAnchor.constraint(equalTo: partnerShapeImageView.topAnchor, constant: 5),
+            partnerMessageLabel.leadingAnchor.constraint(equalTo: partnerShapeImageView.leadingAnchor, constant: 16),
+            partnerMessageLabel.trailingAnchor.constraint(equalTo: partnerShapeImageView.trailingAnchor, constant: -8),
+            partnerMessageLabel.bottomAnchor.constraint(equalTo: partnerShapeImageView.bottomAnchor, constant: -26),
             
-            dateLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -8),
-            dateLabel.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -6)
+            partnerDateLabel.trailingAnchor.constraint(equalTo: partnerShapeImageView.trailingAnchor, constant: -8),
+            partnerDateLabel.bottomAnchor.constraint(equalTo: partnerShapeImageView.bottomAnchor, constant: -6),
+            
+            // My message views
+            myShapeImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            myShapeImageView.leadingAnchor.constraint(
+                greaterThanOrEqualTo: contentView.leadingAnchor,
+                constant: (contentView.bounds.width / 4)
+            ),
+            myShapeImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -7),
+            myShapeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            
+            myMessageLabel.topAnchor.constraint(equalTo: myShapeImageView.topAnchor, constant: 5),
+            myMessageLabel.leadingAnchor.constraint(equalTo: myShapeImageView.leadingAnchor, constant: 8),
+            myMessageLabel.trailingAnchor.constraint(equalTo: myShapeImageView.trailingAnchor, constant: -16),
+            myMessageLabel.bottomAnchor.constraint(equalTo: myShapeImageView.bottomAnchor, constant: -26),
+            
+            myDateLabel.trailingAnchor.constraint(equalTo: myShapeImageView.trailingAnchor, constant: -16),
+            myDateLabel.bottomAnchor.constraint(equalTo: myShapeImageView.bottomAnchor, constant: -6)
         ])
     }
     
     private func configureUI() {
         selectionStyle = .none
+        partnerShapeImageView.layer.shadowRadius = 1
+        partnerShapeImageView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        partnerShapeImageView.layer.shadowOpacity = 0.1
+        myShapeImageView.layer.shadowRadius = 1
+        myShapeImageView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        myShapeImageView.layer.shadowOpacity = 0.1
     }
 }
