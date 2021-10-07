@@ -19,6 +19,7 @@
 		CE32F21D27048600007262A5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32F21C27048600007262A5 /* Fonts.swift */; };
 		CE39478E270F73CE004C6FD1 /* MyMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39478D270F73CE004C6FD1 /* MyMessageView.swift */; };
 		CE394790270F7C1C004C6FD1 /* PartnerMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39478F270F7C1C004C6FD1 /* PartnerMessageView.swift */; };
+		CE394792270F8581004C6FD1 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE394791270F8581004C6FD1 /* Date+Extension.swift */; };
 		CE3E913D270E21070029DA74 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E913C270E21070029DA74 /* Conversation.swift */; };
 		CE3E913F270E21120029DA74 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E913E270E21120029DA74 /* Message.swift */; };
 		CE3E9141270E2B950029DA74 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE3E9140270E2B950029DA74 /* SF-Pro-Text-Bold.otf */; };
@@ -52,6 +53,7 @@
 		CE32F21C27048600007262A5 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		CE39478D270F73CE004C6FD1 /* MyMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageView.swift; sourceTree = "<group>"; };
 		CE39478F270F7C1C004C6FD1 /* PartnerMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerMessageView.swift; sourceTree = "<group>"; };
+		CE394791270F8581004C6FD1 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		CE3E913C270E21070029DA74 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		CE3E913E270E21120029DA74 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CE3E9140270E2B950029DA74 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */,
 				CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */,
 				CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */,
+				CE394791270F8581004C6FD1 /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				CE0B5F1E270CA538004B6232 /* ConversationCell.swift in Sources */,
 				CED84B3E27025F4200D4E4EB /* Images.swift in Sources */,
 				CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */,
+				CE394792270F8581004C6FD1 /* Date+Extension.swift in Sources */,
 				CE3E9146270EAD430029DA74 /* MessageCell.swift in Sources */,
 				CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */,
 				CE3E913D270E21070029DA74 /* Conversation.swift in Sources */,

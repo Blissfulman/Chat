@@ -31,13 +31,10 @@ final class MessageCell: UITableViewCell, ConfigurableCell {
     // MARK: - Public methods
     
     func configure(with model: ConfigurationModel) {
-        let dateFormatter = DateFormatter() // TEMP - нужно будет вынести форматтер из вью
-        dateFormatter.dateFormat = "HH:mm"
-        
         if model.isMine {
             let model = MyMessageView.Model(
                 text: model.text,
-                date: dateFormatter.string(from: model.date),
+                date: model.date.messageCellDate(),
                 isUnread: model.isUnread
             )
             let messageView = MyMessageView(frame: .zero, model: model)
@@ -46,7 +43,7 @@ final class MessageCell: UITableViewCell, ConfigurableCell {
         } else {
             let model = PartnerMessageView.Model(
                 text: model.text,
-                date: dateFormatter.string(from: model.date)
+                date: model.date.messageCellDate()
             )
             let messageView = PartnerMessageView(frame: .zero, model: model)
             contentView.addSubview(messageView)

@@ -106,9 +106,7 @@ final class ConversationCell: UITableViewCell, ConfigurableCell {
         }
         fullNameLabel.text = model.name
         if let date = model.date {
-            let dateFormatter = DateFormatter() // TEMP - нужно будет вынести форматтер из вью
-            dateFormatter.dateFormat = "dd/MM/yyyy"
-            dateLabel.text = dateFormatter.string(from: date)
+            dateLabel.text = date.conversationCellDate()
         }
         if let message = model.message {
             messageLabel.text = message
