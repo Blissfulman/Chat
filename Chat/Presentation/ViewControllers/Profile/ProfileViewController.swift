@@ -91,7 +91,6 @@ final class ProfileViewController: UIViewController {
     // MARK: - Initialization
     
     init() {
-        print("Edit button frame in \(#function): ", editAvatarButton.frame)
         super.init(nibName: nil, bundle: nil)
     }
     

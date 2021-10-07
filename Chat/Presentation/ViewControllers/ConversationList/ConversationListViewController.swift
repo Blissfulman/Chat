@@ -35,7 +35,7 @@ final class ConversationListViewController: UIViewController {
     )
     
     private lazy var openProfileBarButton = UIBarButtonItem(
-        image: Icons.settings,
+        image: Icons.avatarTemp, // TEMP
         style: .plain,
         target: self,
         action: #selector(openProfileBarButtonTapped)
