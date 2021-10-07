@@ -17,6 +17,8 @@
 		CE32F21A270484EE007262A5 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */; };
 		CE32F21B270484F1007262A5 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */; };
 		CE32F21D27048600007262A5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32F21C27048600007262A5 /* Fonts.swift */; };
+		CE39478E270F73CE004C6FD1 /* MyMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39478D270F73CE004C6FD1 /* MyMessageView.swift */; };
+		CE394790270F7C1C004C6FD1 /* PartnerMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39478F270F7C1C004C6FD1 /* PartnerMessageView.swift */; };
 		CE3E913D270E21070029DA74 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E913C270E21070029DA74 /* Conversation.swift */; };
 		CE3E913F270E21120029DA74 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E913E270E21120029DA74 /* Message.swift */; };
 		CE3E9141270E2B950029DA74 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE3E9140270E2B950029DA74 /* SF-Pro-Text-Bold.otf */; };
@@ -48,6 +50,8 @@
 		CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		CE32F21C27048600007262A5 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		CE39478D270F73CE004C6FD1 /* MyMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageView.swift; sourceTree = "<group>"; };
+		CE39478F270F7C1C004C6FD1 /* PartnerMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerMessageView.swift; sourceTree = "<group>"; };
 		CE3E913C270E21070029DA74 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		CE3E913E270E21120029DA74 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CE3E9140270E2B950029DA74 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
@@ -134,6 +138,25 @@
 				CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		CE39478B270F738D004C6FD1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CE9AF67D270B8986006D44A8 /* ConversationList */,
+				CE9AF67F270B89A7006D44A8 /* Conversation */,
+				CE9AF67E270B8995006D44A8 /* Profile */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CE39478C270F73A9004C6FD1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE39478F270F7C1C004C6FD1 /* PartnerMessageView.swift */,
+				CE39478D270F73CE004C6FD1 /* MyMessageView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CE3E913B270E20DE0029DA74 /* Model */ = {
@@ -228,9 +251,8 @@
 		CED023E526FFAFE100062489 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				CE9AF67D270B8986006D44A8 /* ConversationList */,
-				CE9AF67F270B89A7006D44A8 /* Conversation */,
-				CE9AF67E270B8995006D44A8 /* Profile */,
+				CE39478B270F738D004C6FD1 /* ViewControllers */,
+				CE39478C270F73A9004C6FD1 /* Views */,
 				CED84B3A27025CFE00D4E4EB /* Style */,
 			);
 			path = Presentation;
@@ -325,6 +347,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */,
+				CE394790270F7C1C004C6FD1 /* PartnerMessageView.swift in Sources */,
+				CE39478E270F73CE004C6FD1 /* MyMessageView.swift in Sources */,
 				CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */,
 				CE9C657C270F2F8A008756AC /* ConfigurableCell.swift in Sources */,
 				CE9AF681270B89C1006D44A8 /* ConversationViewController.swift in Sources */,

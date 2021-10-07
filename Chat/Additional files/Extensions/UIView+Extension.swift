@@ -9,6 +9,7 @@ import UIKit
 
 extension UIView {
     
+    @discardableResult
     func prepareForAutoLayout() -> Self {
         self.translatesAutoresizingMaskIntoConstraints = false
         return self
@@ -37,5 +38,12 @@ extension UIView {
     func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
         setCornerRadius(radius)
         layer.maskedCorners = CACornerMask(rawValue: corners.rawValue)
+    }
+    
+    /// Устанавливает тень для фигуры сообщения.
+    func setMessageShapeShadow() {
+        layer.shadowRadius = 1
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowOpacity = 0.1
     }
 }
