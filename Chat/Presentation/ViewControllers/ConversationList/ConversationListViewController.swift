@@ -5,8 +5,6 @@
 //  Created by Evgeny Novgorodov on 16.09.2021.
 //
 
-import UIKit
-
 final class ConversationListViewController: UIViewController {
     
     // MARK: - Nested types
@@ -64,7 +62,9 @@ final class ConversationListViewController: UIViewController {
     
     @objc
     private func openSettingsBarButtonTapped() {
-        let themesViewController = ThemesViewController(delegate: self)
+        let themesViewController = ThemesViewController { theme in
+            print(theme)
+        }
         themesViewController.modalPresentationStyle = .fullScreen
         present(themesViewController, animated: true)
     }
@@ -144,14 +144,5 @@ extension ConversationListViewController: UITableViewDelegate {
             : offlineConversations[indexPath.row].name
         let conversationVC = ConversationViewController(contactName: contactName)
         navigationController?.show(conversationVC, sender: self)
-    }
-}
-
-// MARK: - ThemesViewControllerDelegate
-
-extension ConversationListViewController: ThemesViewControllerDelegate {
-    
-    func didChooseTheme(_ theme: Theme) {
-        print(theme)
     }
 }

@@ -5,12 +5,6 @@
 //  Created by Evgeny Novgorodov on 12.10.2021.
 //
 
-import Foundation
-
-protocol ThemesViewControllerDelegate: AnyObject {
-    func didChooseTheme(_ theme: Theme)
-}
-
 final class ThemesViewController: UIViewController {
     
     // MARK: - Private properties
@@ -63,20 +57,26 @@ final class ThemesViewController: UIViewController {
         return button
     }()
     
-    private weak var delegate: ThemesViewControllerDelegate?
+    private var didChooseThemeHandler: ((Theme) -> Void)?
     
     // MARK: - Initialization
     
-    init(delegate: ThemesViewControllerDelegate) {
-        self.delegate = delegate
+    init(didChooseThemeHandler: @escaping ((Theme) -> Void)) {
+        self.didChooseThemeHandler = didChooseThemeHandler
         super.init(nibName: nil, bundle: nil)
-        setupUI()
-        setupLayout()
-        configureUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Lifecycle methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+        setupLayout()
+        configureUI()
     }
     
     // MARK: - Actions
@@ -88,17 +88,17 @@ final class ThemesViewController: UIViewController {
     
     @objc
     private func lightThemeButtonTapped() {
-        delegate?.didChooseTheme(.light)
+        didChooseThemeHandler?(.light)
     }
     
     @objc
     private func darkThemeButtonTapped() {
-        delegate?.didChooseTheme(.dark)
+        didChooseThemeHandler?(.dark)
     }
     
     @objc
     private func champagneThemeButtonTapped() {
-        delegate?.didChooseTheme(.champagne)
+        didChooseThemeHandler?(.champagne)
     }
     
     // MARK: - Private methods

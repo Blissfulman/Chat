@@ -5,8 +5,6 @@
 //  Created by Evgeny Novgorodov on 05.10.2021.
 //
 
-import UIKit
-
 final class ConversationCell: UITableViewCell, ConfigurableCell {
     
     typealias ConfigurationModel = Conversation

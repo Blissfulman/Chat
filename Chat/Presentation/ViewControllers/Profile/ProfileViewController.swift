@@ -5,8 +5,6 @@
 //  Created by Evgeny Novgorodov on 26.09.2021.
 //
 
-import UIKit
-
 final class ProfileViewController: UIViewController {
     
     // MARK: - Private properties

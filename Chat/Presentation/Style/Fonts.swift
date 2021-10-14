@@ -5,8 +5,6 @@
 //  Created by Evgeny Novgorodov on 29.09.2021.
 //
 
-import UIKit
-
 enum Fonts {
     static let title = UIFont(name: "SF Pro Display Bold", size: 26)
     static let subTitle = UIFont(name: "SF Pro Display Bold", size: 24)
