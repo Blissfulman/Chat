@@ -133,6 +133,7 @@ final class ThemesViewController: UIViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = .systemYellow
+        let theme = SettingsManager().theme
+        view.backgroundColor = theme.themeColors.backgroundColor
     }
 }
