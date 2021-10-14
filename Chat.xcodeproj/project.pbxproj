@@ -18,6 +18,7 @@
 		CE1F08B926F3BB68002A5985 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1F08B726F3BB68002A5985 /* LaunchScreen.storyboard */; };
 		CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */; };
 		CE2608802718B01800CAE9B6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087F2718B01800CAE9B6 /* Theme.swift */; };
+		CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */; };
 		CE32F21A270484EE007262A5 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */; };
 		CE32F21B270484F1007262A5 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */; };
 		CE32F21D27048600007262A5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32F21C27048600007262A5 /* Fonts.swift */; };
@@ -59,6 +60,7 @@
 		CE1F08BA26F3BB68002A5985 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		CE26087F2718B01800CAE9B6 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		CE32F21C27048600007262A5 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -133,11 +135,20 @@
 			children = (
 				CE3E913B270E20DE0029DA74 /* Model */,
 				CED023E526FFAFE100062489 /* Presentation */,
+				CE2608812718C3C200CAE9B6 /* Managers */,
 				CE4E07E027023DE100AE0113 /* Additional files */,
 				CED023E426FFAFA800062489 /* Supporting files */,
 				CED023E326FFAEE300062489 /* Resources */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		CE2608812718C3C200CAE9B6 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		CE32F21627048490007262A5 /* Assets */ = {
@@ -414,6 +425,7 @@
 				CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */,
 				CE394792270F8581004C6FD1 /* Date+Extension.swift in Sources */,
 				CE3E9146270EAD430029DA74 /* MessageCell.swift in Sources */,
+				CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */,
 				CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */,
 				CE3E913D270E21070029DA74 /* Conversation.swift in Sources */,
 				CE3E913F270E21120029DA74 /* Message.swift in Sources */,

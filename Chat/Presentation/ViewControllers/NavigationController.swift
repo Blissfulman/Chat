@@ -11,7 +11,7 @@ final class NavigationController: UINavigationController {
     
     // MARK: - Static methods
     
-    static func setupAppearance(for theme: Theme = .light) {
+    static func setupAppearance(for theme: Theme) {
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
             appearance.titleTextAttributes = [.font: Fonts.navBarTitle]
@@ -22,6 +22,8 @@ final class NavigationController: UINavigationController {
             navigationBar.compactAppearance = appearance
             navigationBar.scrollEdgeAppearance = appearance
             navigationBar.prefersLargeTitles = true
+            
+            updateColors(for: theme)
         }
     }
     

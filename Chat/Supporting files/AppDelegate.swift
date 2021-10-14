@@ -18,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        NavigationController.setupAppearance()
+        let theme = SettingsManager().theme
+        NavigationController.setupAppearance(for: theme)
         
         let mainViewController = ConversationListViewController()
         let navigationController = NavigationController(rootViewController: mainViewController)
