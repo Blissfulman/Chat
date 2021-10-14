@@ -7,6 +7,25 @@
 
 final class ThemesViewController: UIViewController {
     
+    // MARK: - Nested types
+    
+    enum Theme {
+        case light
+        case dark
+        case champagne
+        
+        var themeColor: UIColor {
+            switch self {
+            case .light:
+                return .white
+            case .dark:
+                return .gray
+            case .champagne:
+                return .yellow
+            }
+        }
+    }
+    
     // MARK: - Private properties
     
     private var topBarView: UIView = {
@@ -57,11 +76,11 @@ final class ThemesViewController: UIViewController {
         return button
     }()
     
-    private var didChooseThemeHandler: ((Theme) -> Void)?
+    private var didChooseThemeHandler: ((UIColor) -> Void)?
     
     // MARK: - Initialization
     
-    init(didChooseThemeHandler: @escaping ((Theme) -> Void)) {
+    init(didChooseThemeHandler: @escaping ((UIColor) -> Void)) {
         self.didChooseThemeHandler = didChooseThemeHandler
         super.init(nibName: nil, bundle: nil)
     }
@@ -88,17 +107,23 @@ final class ThemesViewController: UIViewController {
     
     @objc
     private func lightThemeButtonTapped() {
-        didChooseThemeHandler?(.light)
+        let color = Theme.light.themeColor
+        view.backgroundColor = color
+        didChooseThemeHandler?(color)
     }
     
     @objc
     private func darkThemeButtonTapped() {
-        didChooseThemeHandler?(.dark)
+        let color = Theme.dark.themeColor
+        view.backgroundColor = color
+        didChooseThemeHandler?(color)
     }
     
     @objc
     private func champagneThemeButtonTapped() {
-        didChooseThemeHandler?(.champagne)
+        let color = Theme.champagne.themeColor
+        view.backgroundColor = color
+        didChooseThemeHandler?(color)
     }
     
     // MARK: - Private methods

@@ -62,8 +62,8 @@ final class ConversationListViewController: UIViewController {
     
     @objc
     private func openSettingsBarButtonTapped() {
-        let themesViewController = ThemesViewController { theme in
-            print(theme)
+        let themesViewController = ThemesViewController { [weak self] color in
+            self?.handleChangingTheme(to: color)
         }
         themesViewController.modalPresentationStyle = .fullScreen
         present(themesViewController, animated: true)
@@ -100,6 +100,10 @@ final class ConversationListViewController: UIViewController {
         view.backgroundColor = .white
         title = "Chat"
         tableView.rowHeight = 88
+    }
+    
+    private func handleChangingTheme(to color: UIColor) {
+        print(color)
     }
 }
 
