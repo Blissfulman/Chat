@@ -1,0 +1,87 @@
+//
+//  MyMessageView.swift
+//  Chat
+//
+//  Created by Evgeny Novgorodov on 07.10.2021.
+//
+
+import UIKit
+
+final class MyMessageView: UIView {
+    
+    // MARK: - Nested types
+    
+    struct Model {
+        let text: String
+        let date: String
+        let isUnread: Bool // FIXME: Необходимо реализовать галочки, отображающие прочитано ли сообщение
+    }
+    
+    // MARK: - Private properties
+    
+    private var shapeImageView: UIImageView = {
+        let imageView = UIImageView().prepareForAutoLayout()
+        imageView.contentMode = .scaleToFill
+        imageView.image = Images.myMessageShape
+        return imageView
+    }()
+    
+    private var messageLabel: UILabel = {
+        let label = UILabel().prepareForAutoLayout()
+        label.font = Fonts.messageCellText
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private var dateLabel: UILabel = {
+        let label = UILabel().prepareForAutoLayout()
+        label.font = Fonts.messageCellDate
+        label.textColor = .black.withAlphaComponent(0.25)
+        return label
+    }()
+    
+    // MARK: - Initialization
+    
+    init(frame: CGRect, model: Model) {
+        super.init(frame: frame)
+        setupUI()
+        setupLayout()
+        configureUI(model: model)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Private methods
+    
+    private func setupUI() {
+        prepareForAutoLayout()
+        addSubview(shapeImageView)
+        addSubview(messageLabel)
+        addSubview(dateLabel)
+    }
+    
+    private func setupLayout() {
+        NSLayoutConstraint.activate([
+            shapeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            shapeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            shapeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            shapeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+            
+            messageLabel.topAnchor.constraint(equalTo: shapeImageView.topAnchor, constant: 5),
+            messageLabel.leadingAnchor.constraint(equalTo: shapeImageView.leadingAnchor, constant: 8),
+            messageLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -16),
+            messageLabel.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -26),
+            
+            dateLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -16),
+            dateLabel.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -6)
+        ])
+    }
+    
+    private func configureUI(model: Model) {
+        messageLabel.text = model.text
+        dateLabel.text = model.date
+        shapeImageView.setMessageShapeShadow()
+    }
+}

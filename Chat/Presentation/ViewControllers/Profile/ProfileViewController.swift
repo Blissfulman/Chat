@@ -91,7 +91,6 @@ final class ProfileViewController: UIViewController {
     // MARK: - Initialization
     
     init() {
-        print("Edit button frame in \(#function): ", editAvatarButton.frame)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -103,7 +102,6 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Edit button frame in \(#function): ", editAvatarButton.frame)
         setupUI()
         setupLayout()
         configureUI()
@@ -111,12 +109,6 @@ final class ProfileViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         avatarImageView.round()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        // Здесь фрейм уже будет иметь правильные значения после расчёта на основе констрейнтов
-        print("Edit button frame in \(#function): ", editAvatarButton.frame)
     }
     
     // MARK: - Actions
@@ -128,7 +120,6 @@ final class ProfileViewController: UIViewController {
     
     @objc
     private func editAvatarButtonTapped() {
-        print("Select profile image")
         let imageSelectionAlertController = UIAlertController(
             title: "Select image source",
             message: nil,
@@ -208,8 +199,8 @@ final class ProfileViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = .white
         imagePickerController.delegate = self
-        fullNameLabel.text = "Marina Dudarenko"
-        descriptionLabel.text = "UX/UI designer, web-designer Moscow, Russia"
+        fullNameLabel.text = "Marina Dudarenko" // TEMP
+        descriptionLabel.text = "UX/UI designer, web-designer Moscow, Russia" // TEMP
     }
 }
 

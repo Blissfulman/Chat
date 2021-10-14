@@ -20,8 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        let mainViewController = MainViewController()
+        let mainViewController = ConversationListViewController()
         let navigationController = UINavigationController(rootViewController: mainViewController)
+        navigationController.navigationBar.tintColor = Palette.barTint // TEMP
+        navigationController.navigationBar.prefersLargeTitles = true // TEMP
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
