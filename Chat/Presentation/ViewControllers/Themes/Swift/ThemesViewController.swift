@@ -7,25 +7,6 @@
 
 final class ThemesViewController: UIViewController {
     
-    // MARK: - Nested types
-    
-    enum Theme {
-        case light
-        case dark
-        case champagne
-        
-        var themeColor: UIColor {
-            switch self {
-            case .light:
-                return .white
-            case .dark:
-                return .gray
-            case .champagne:
-                return .yellow
-            }
-        }
-    }
-    
     // MARK: - Private properties
     
     private var topBarView: UIView = {
@@ -76,11 +57,11 @@ final class ThemesViewController: UIViewController {
         return button
     }()
     
-    private var didChooseThemeHandler: ((UIColor) -> Void)?
+    private var didChooseThemeHandler: ((Theme) -> Void)?
     
     // MARK: - Initialization
     
-    init(didChooseThemeHandler: @escaping ((UIColor) -> Void)) {
+    init(didChooseThemeHandler: @escaping ((Theme) -> Void)) {
         self.didChooseThemeHandler = didChooseThemeHandler
         super.init(nibName: nil, bundle: nil)
     }
@@ -107,23 +88,23 @@ final class ThemesViewController: UIViewController {
     
     @objc
     private func lightThemeButtonTapped() {
-        let color = Theme.light.themeColor
-        view.backgroundColor = color
-        didChooseThemeHandler?(color)
+        let themeColors = Theme.light.themeColors
+        view.backgroundColor = themeColors.backgroundColor
+        didChooseThemeHandler?(.light)
     }
     
     @objc
     private func darkThemeButtonTapped() {
-        let color = Theme.dark.themeColor
-        view.backgroundColor = color
-        didChooseThemeHandler?(color)
+        let themeColors = Theme.dark.themeColors
+        view.backgroundColor = themeColors.backgroundColor
+        didChooseThemeHandler?(.dark)
     }
     
     @objc
     private func champagneThemeButtonTapped() {
-        let color = Theme.champagne.themeColor
-        view.backgroundColor = color
-        didChooseThemeHandler?(color)
+        let themeColors = Theme.champagne.themeColors
+        view.backgroundColor = themeColors.backgroundColor
+        didChooseThemeHandler?(.champagne)
     }
     
     // MARK: - Private methods

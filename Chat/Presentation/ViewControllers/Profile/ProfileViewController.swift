@@ -11,7 +11,7 @@ final class ProfileViewController: UIViewController {
     
     private var topView: UIView = {
         let view = UIView().prepareForAutoLayout()
-        view.backgroundColor = Palette.barGray
+        view.backgroundColor = Palette.lightBarColor
         return view
     }()
     
@@ -75,7 +75,7 @@ final class ProfileViewController: UIViewController {
     
     private var saveButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
-        button.backgroundColor = Palette.barGray
+        button.backgroundColor = Palette.lightBarColor
         button.titleLabel?.font = Fonts.buttonTitle
         button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
         button.setTitle("Save", for: .normal)
