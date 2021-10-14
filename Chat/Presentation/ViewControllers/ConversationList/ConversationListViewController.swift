@@ -64,7 +64,9 @@ final class ConversationListViewController: UIViewController {
     
     @objc
     private func openSettingsBarButtonTapped() {
-        print("Settings") // TEMP
+        let themesViewController = ThemesViewController(delegate: self)
+        themesViewController.modalPresentationStyle = .fullScreen
+        present(themesViewController, animated: true)
     }
     
     @objc
@@ -142,5 +144,14 @@ extension ConversationListViewController: UITableViewDelegate {
             : offlineConversations[indexPath.row].name
         let conversationVC = ConversationViewController(contactName: contactName)
         navigationController?.show(conversationVC, sender: self)
+    }
+}
+
+// MARK: - ThemesViewControllerDelegate
+
+extension ConversationListViewController: ThemesViewControllerDelegate {
+    
+    func didChooseTheme(_ theme: Theme) {
+        print(theme)
     }
 }

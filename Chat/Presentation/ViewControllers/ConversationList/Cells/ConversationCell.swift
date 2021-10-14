@@ -126,10 +126,10 @@ final class ConversationCell: UITableViewCell, ConfigurableCell {
 
     private func setupUI() {
         contentView.addSubview(mainStackView)
-        mainStackView.addArrangedSubviews([avatarImageView, secondStackView])
-        secondStackView.addArrangedSubviews([thirdStackView, messageLabel])
-        thirdStackView.addArrangedSubviews([fullNameLabel, dateStackView])
-        dateStackView.addArrangedSubviews([dateLabel, arrowImageView])
+        mainStackView.addArrangedSubviews(avatarImageView, secondStackView)
+        secondStackView.addArrangedSubviews(thirdStackView, messageLabel)
+        thirdStackView.addArrangedSubviews(fullNameLabel, dateStackView)
+        dateStackView.addArrangedSubviews(dateLabel, arrowImageView)
     }
     
     private func setupLayout() {

@@ -162,8 +162,8 @@ final class ProfileViewController: UIViewController {
         view.addSubview(saveButton)
         topView.addSubview(topStackView)
         
-        topStackView.addArrangedSubviews([titleLabel, closeButton])
-        centralStackView.addArrangedSubviews([avatarImageView, fullNameLabel, descriptionLabel])
+        topStackView.addArrangedSubviews(titleLabel, closeButton)
+        centralStackView.addArrangedSubviews(avatarImageView, fullNameLabel, descriptionLabel)
     }
     
     private func setupLayout() {
