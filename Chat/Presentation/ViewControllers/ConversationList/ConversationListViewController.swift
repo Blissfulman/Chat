@@ -103,7 +103,6 @@ final class ConversationListViewController: UIViewController {
     }
     
     private func handleChangingTheme(to theme: Theme) {
-        print(theme)
         NavigationController.updateColors(for: theme)
         SettingsManager().theme = theme
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Theme: String {
+enum Theme: String, Codable {
     case light
     case dark
     case champagne

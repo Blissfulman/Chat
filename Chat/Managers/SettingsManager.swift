@@ -11,17 +11,18 @@ final class SettingsManager {
     
     // MARK: - Private properties
     
-    private let themeKey = "ThemeKey"
+    private let fileStorageManager = FileStorageManager()
+    private let dataType = FileStorageManager.DataType.settings
+    private let themeKey = "Theme"
     
     // MARK: - Public properties
     
     var theme: Theme {
-        set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: themeKey)
-        }
         get {
-            guard let value = UserDefaults.standard.string(forKey: themeKey) else { return .light }
-            return Theme(rawValue: value) ?? .light
+            fileStorageManager.getValue(withKey: themeKey, dataType: dataType) ?? .light
+        }
+        set {
+            fileStorageManager.saveValue(newValue, withKey: themeKey, dataType: dataType)
         }
     }
 }

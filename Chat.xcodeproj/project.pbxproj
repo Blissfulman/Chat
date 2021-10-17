@@ -33,6 +33,7 @@
 		CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */; };
 		CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */; };
 		CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */; };
+		CE8C4079271BEEE000D0C0B5 /* FileStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */; };
 		CE9AF681270B89C1006D44A8 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AF680270B89C1006D44A8 /* ConversationViewController.swift */; };
 		CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AF682270B8D39006D44A8 /* Icons.swift */; };
 		CE9AF685270B8D44006D44A8 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9AF684270B8D44006D44A8 /* Icons.xcassets */; };
@@ -75,6 +76,7 @@
 		CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
+		CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileStorageManager.swift; sourceTree = "<group>"; };
 		CE9AF680270B89C1006D44A8 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		CE9AF682270B8D39006D44A8 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		CE9AF684270B8D44006D44A8 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */,
+				CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				CED84B3E27025F4200D4E4EB /* Images.swift in Sources */,
 				CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */,
 				CE394792270F8581004C6FD1 /* Date+Extension.swift in Sources */,
+				CE8C4079271BEEE000D0C0B5 /* FileStorageManager.swift in Sources */,
 				CE3E9146270EAD430029DA74 /* MessageCell.swift in Sources */,
 				CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */,
 				CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */,
