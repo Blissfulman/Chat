@@ -43,6 +43,7 @@
 		CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED84B3827025BC300D4E4EB /* Palette.xcassets */; };
 		CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3B27025D1700D4E4EB /* Palette.swift */; };
 		CED84B3E27025F4200D4E4EB /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3D27025F4200D4E4EB /* Images.swift */; };
+		CEEDAEE9271C8823005B8F21 /* KeyboardNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDAEE8271C8823005B8F21 /* KeyboardNotificationsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		CED84B3827025BC300D4E4EB /* Palette.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Palette.xcassets; sourceTree = "<group>"; };
 		CED84B3B27025D1700D4E4EB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		CED84B3D27025F4200D4E4EB /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		CEEDAEE8271C8823005B8F21 /* KeyboardNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardNotificationsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,11 +182,11 @@
 		CE39478B270F738D004C6FD1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */,
 				CE9AF67D270B8986006D44A8 /* ConversationList */,
 				CE9AF67F270B89A7006D44A8 /* Conversation */,
 				CE044E3C27133B5500DE259F /* Themes */,
 				CE9AF67E270B8995006D44A8 /* Profile */,
+				CEEDAEE7271C8815005B8F21 /* Common */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -329,6 +331,15 @@
 			path = Style;
 			sourceTree = "<group>";
 		};
+		CEEDAEE7271C8815005B8F21 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */,
+				CEEDAEE8271C8823005B8F21 /* KeyboardNotificationsViewController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -408,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEDAEE9271C8823005B8F21 /* KeyboardNotificationsViewController.swift in Sources */,
 				CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */,
 				CE394790270F7C1C004C6FD1 /* PartnerMessageView.swift in Sources */,
 				CE044E4127133BBE00DE259F /* OCThemesViewController.m in Sources */,
