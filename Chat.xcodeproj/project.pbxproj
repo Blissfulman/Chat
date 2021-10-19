@@ -10,6 +10,7 @@
 		CE044E4127133BBE00DE259F /* OCThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE044E3F27133BBE00DE259F /* OCThemesViewController.m */; };
 		CE044E4227133BBE00DE259F /* OCThemesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE044E4027133BBE00DE259F /* OCThemesViewController.xib */; };
 		CE04B4E3271F41270027F649 /* ProfileTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04B4E2271F41270027F649 /* ProfileTextView.swift */; };
+		CE04B4E7271F52B80027F649 /* ProfileFilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04B4E6271F52B80027F649 /* ProfileFilledButton.swift */; };
 		CE0B5F1E270CA538004B6232 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B5F1D270CA538004B6232 /* ConversationCell.swift */; };
 		CE0B5F21270CA84E004B6232 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */; };
 		CE0FDBB826FFC7C800809ABB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0FDBB726FFC7C800809ABB /* Images.xcassets */; };
@@ -53,6 +54,7 @@
 		CE044E3F27133BBE00DE259F /* OCThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCThemesViewController.m; sourceTree = "<group>"; };
 		CE044E4027133BBE00DE259F /* OCThemesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OCThemesViewController.xib; sourceTree = "<group>"; };
 		CE04B4E2271F41270027F649 /* ProfileTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextView.swift; sourceTree = "<group>"; };
+		CE04B4E6271F52B80027F649 /* ProfileFilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilledButton.swift; sourceTree = "<group>"; };
 		CE0B5F1D270CA538004B6232 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		CE0FDBB726FFC7C800809ABB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				CE04B4E2271F41270027F649 /* ProfileTextView.swift */,
+				CE04B4E6271F52B80027F649 /* ProfileFilledButton.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */,
 				CE394792270F8581004C6FD1 /* Date+Extension.swift in Sources */,
 				CE8C4079271BEEE000D0C0B5 /* FileStorageManager.swift in Sources */,
+				CE04B4E7271F52B80027F649 /* ProfileFilledButton.swift in Sources */,
 				CE3E9146270EAD430029DA74 /* MessageCell.swift in Sources */,
 				CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */,
 				CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */,

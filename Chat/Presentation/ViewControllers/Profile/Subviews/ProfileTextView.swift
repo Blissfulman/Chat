@@ -5,8 +5,6 @@
 //  Created by Evgeny Novgorodov on 19.10.2021.
 //
 
-import UIKit
-
 final class ProfileTextView: UITextView {
     
     // MARK: - Private properties

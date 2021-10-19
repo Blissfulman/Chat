@@ -79,12 +79,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     }()
     
     private var editProfileButton: UIButton = {
-        let button = UIButton().prepareForAutoLayout()
-        button.backgroundColor = Palette.lightBarColor
-        button.titleLabel?.font = Fonts.buttonTitle
-        button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
-        button.setTitle("Edit profile", for: .normal)
-        button.setCornerRadius(14)
+        let button = ProfileFilledButton(withTitle: "Edit profile")
         button.addTarget(self, action: #selector(editProfileButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -98,24 +93,14 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     }()
     
     private var cancelButton: UIButton = {
-        let button = UIButton().prepareForAutoLayout()
-        button.backgroundColor = Palette.lightBarColor
-        button.titleLabel?.font = Fonts.buttonTitle
-        button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
-        button.setTitle("Cancel", for: .normal)
-        button.setCornerRadius(14)
+        let button = ProfileFilledButton(withTitle: "Cancel")
         button.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         return button
     }()
     
     private var saveButton: UIButton = {
-        let button = UIButton().prepareForAutoLayout()
-        button.backgroundColor = Palette.lightBarColor
-        button.titleLabel?.font = Fonts.buttonTitle
-        button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
-        button.setTitle("Save", for: .normal)
+        let button = ProfileFilledButton(withTitle: "Save")
         button.isEnabled = false
-        button.setCornerRadius(14)
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         return button
     }()
