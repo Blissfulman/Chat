@@ -7,6 +7,14 @@
 
 final class ProfileViewController: KeyboardNotificationsViewController {
     
+    // MARK: - Nested types
+    
+    enum State {
+        case initial
+        case editing
+        case edited
+    }
+    
     // MARK: - Private properties
     
     private var topView: UIView = {
@@ -70,10 +78,22 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         return button
     }()
     
+    private var editProfileButton: UIButton = {
+        let button = UIButton().prepareForAutoLayout()
+        button.backgroundColor = Palette.lightBarColor
+        button.titleLabel?.font = Fonts.buttonTitle
+        button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
+        button.setTitle("Edit profile", for: .normal)
+        button.setCornerRadius(14)
+        button.addTarget(self, action: #selector(editProfileButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     private var buttonsStackView: UIStackView = {
         let stackView = UIStackView().prepareForAutoLayout()
         stackView.axis = .vertical
         stackView.spacing = 20
+        stackView.isHidden = true
         return stackView
     }()
     
@@ -94,6 +114,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         button.titleLabel?.font = Fonts.buttonTitle
         button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
         button.setTitle("Save", for: .normal)
+        button.isEnabled = false
         button.setCornerRadius(14)
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         return button
@@ -102,6 +123,11 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private let imagePickerController = UIImagePickerController()
     private var buttonsStackViewBottomConstraint: NSLayoutConstraint?
     private let defaultLowerButtonsBottomSpacing: CGFloat = 30
+    private var state: State = .initial {
+        didSet {
+            updateView()
+        }
+    }
     
     // MARK: - Initialization
     
@@ -186,8 +212,13 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     }
     
     @objc
+    private func editProfileButtonTapped() {
+        state = .editing
+    }
+        
+    @objc
     private func cancelButtonTapped() {
-        print("Cancel tapped")
+        state = .edited
     }
     
     @objc
@@ -221,6 +252,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         view.addSubview(centralStackView)
         view.addSubview(editAvatarButton)
         view.addSubview(buttonsStackView)
+        view.addSubview(editProfileButton)
         topView.addSubview(topStackView)
         // Добавляется последним, чтобы быть более верхним слоем поверх остального контента
         view.addSubview(topView)
@@ -259,7 +291,15 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -50),
             
             cancelButton.heightAnchor.constraint(equalToConstant: 40),
-            saveButton.heightAnchor.constraint(equalToConstant: 40)
+            saveButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            editProfileButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:  50),
+            editProfileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -50),
+            editProfileButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                constant:  -defaultLowerButtonsBottomSpacing
+            ),
+            editProfileButton.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         buttonsStackViewBottomConstraint = buttonsStackView.bottomAnchor.constraint(
@@ -272,6 +312,27 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private func configureUI() {
         view.backgroundColor = .white
         imagePickerController.delegate = self
+    }
+    
+    private func updateView() {
+        switch state {
+        case .editing:
+            handleGoToEditingState()
+        case .edited:
+            handleGoToEditedState()
+        default:
+            break
+        }
+    }
+    
+    private func handleGoToEditingState() {
+        editProfileButton.isHidden = true
+        buttonsStackView.isHidden = false
+    }
+    
+    private func handleGoToEditedState() {
+        buttonsStackView.isHidden = true
+        editProfileButton.isHidden = false
     }
 }
 
