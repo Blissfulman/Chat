@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CE044E4127133BBE00DE259F /* OCThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE044E3F27133BBE00DE259F /* OCThemesViewController.m */; };
 		CE044E4227133BBE00DE259F /* OCThemesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE044E4027133BBE00DE259F /* OCThemesViewController.xib */; };
+		CE04B4E3271F41270027F649 /* ProfileDescriptionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04B4E2271F41270027F649 /* ProfileDescriptionTextView.swift */; };
 		CE0B5F1E270CA538004B6232 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B5F1D270CA538004B6232 /* ConversationCell.swift */; };
 		CE0B5F21270CA84E004B6232 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */; };
 		CE0FDBB826FFC7C800809ABB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0FDBB726FFC7C800809ABB /* Images.xcassets */; };
@@ -51,6 +52,7 @@
 		CE044E3E27133BBE00DE259F /* OCThemesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCThemesViewController.h; sourceTree = "<group>"; };
 		CE044E3F27133BBE00DE259F /* OCThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCThemesViewController.m; sourceTree = "<group>"; };
 		CE044E4027133BBE00DE259F /* OCThemesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OCThemesViewController.xib; sourceTree = "<group>"; };
+		CE04B4E2271F41270027F649 /* ProfileDescriptionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionTextView.swift; sourceTree = "<group>"; };
 		CE0B5F1D270CA538004B6232 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		CE0FDBB726FFC7C800809ABB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -108,6 +110,23 @@
 				CEA143DC271600C400F39F61 /* Swift */,
 			);
 			path = Themes;
+			sourceTree = "<group>";
+		};
+		CE04B4E4271F413C0027F649 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				CE04B4E2271F41270027F649 /* ProfileDescriptionTextView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		CE04B4E5271F41610027F649 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				CE39478F270F7C1C004C6FD1 /* PartnerMessageView.swift */,
+				CE39478D270F73CE004C6FD1 /* MyMessageView.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		CE0B5F1F270CA53F004B6232 /* Cells */ = {
@@ -191,13 +210,13 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		CE39478C270F73A9004C6FD1 /* Views */ = {
+		CE39478C270F73A9004C6FD1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				CE39478F270F7C1C004C6FD1 /* PartnerMessageView.swift */,
-				CE39478D270F73CE004C6FD1 /* MyMessageView.swift */,
+				CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */,
+				CEEDAEE8271C8823005B8F21 /* KeyboardNotificationsViewController.swift */,
 			);
-			path = Views;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		CE3E913B270E20DE0029DA74 /* Model */ = {
@@ -214,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				CE3E9145270EAD430029DA74 /* MessageCell.swift */,
+				CE04B4E5271F41610027F649 /* Subviews */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -251,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */,
+				CE04B4E4271F413C0027F649 /* Subviews */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -314,8 +335,6 @@
 			isa = PBXGroup;
 			children = (
 				CE39478B270F738D004C6FD1 /* ViewControllers */,
-				CE39478C270F73A9004C6FD1 /* Views */,
-				CED84B3A27025CFE00D4E4EB /* Style */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -334,8 +353,8 @@
 		CEEDAEE7271C8815005B8F21 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */,
-				CEEDAEE8271C8823005B8F21 /* KeyboardNotificationsViewController.swift */,
+				CE39478C270F73A9004C6FD1 /* ViewControllers */,
+				CED84B3A27025CFE00D4E4EB /* Style */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -444,6 +463,7 @@
 				CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */,
 				CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */,
 				CE3E913D270E21070029DA74 /* Conversation.swift in Sources */,
+				CE04B4E3271F41270027F649 /* ProfileDescriptionTextView.swift in Sources */,
 				CE3E913F270E21120029DA74 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
