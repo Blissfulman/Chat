@@ -7,6 +7,14 @@
 
 final class ProfileTextView: UITextView {
     
+    // MARK: - Override properties
+    
+    override var isUserInteractionEnabled: Bool {
+        didSet {
+            layer.borderColor = isUserInteractionEnabled ? Palette.textViewBorderGray?.cgColor : UIColor.clear.cgColor
+        }
+    }
+    
     // MARK: - Private properties
     
     private var placeholder: String?
@@ -42,7 +50,6 @@ final class ProfileTextView: UITextView {
         textAlignment = .center
         setCornerRadius(5)
         layer.borderWidth = 0.5
-        layer.borderColor = Palette.textViewBorderGray?.cgColor
     }
     
     private func showPlaceholder() {

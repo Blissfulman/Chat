@@ -58,16 +58,18 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     }()
     
     private lazy var fullNameTextField: UITextField = {
-        let textField = UITextField().prepareForAutoLayout()
-        textField.font = Fonts.subTitle
-        textField.borderStyle = .roundedRect
-        textField.textAlignment = .center
+        let textField = ProfileNameTextField()
         textField.placeholder = "Name"
+        textField.isEnabled = false
         textField.delegate = self
         return textField
     }()
     
-    private var descriptionTextView = ProfileTextView(withPlaceholder: "Profile information")
+    private var descriptionTextView: UITextView = {
+        let textView = ProfileTextView(withPlaceholder: "Profile information")
+        textView.isUserInteractionEnabled = false
+        return textView
+    }()
     
     private var editAvatarButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
@@ -284,7 +286,9 @@ final class ProfileViewController: KeyboardNotificationsViewController {
                 equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                 constant:  -defaultLowerButtonsBottomSpacing
             ),
-            editProfileButton.heightAnchor.constraint(equalToConstant: 40)
+            editProfileButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            fullNameTextField.heightAnchor.constraint(equalToConstant: 38)
         ])
         
         buttonsStackViewBottomConstraint = buttonsStackView.bottomAnchor.constraint(
@@ -311,13 +315,19 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     }
     
     private func handleGoToEditingState() {
-        editProfileButton.isHidden = true
-        buttonsStackView.isHidden = false
+        editProfileButton.disappear(duration: 0.3) {
+            self.buttonsStackView.appear(duration: 0.3)
+        }
+        fullNameTextField.isEnabled = true
+        descriptionTextView.isUserInteractionEnabled = true
     }
     
     private func handleGoToEditedState() {
-        buttonsStackView.isHidden = true
-        editProfileButton.isHidden = false
+        buttonsStackView.disappear(duration: 0.3) {
+            self.editProfileButton.appear(duration: 0.3)
+        }
+        fullNameTextField.isEnabled = false
+        descriptionTextView.isUserInteractionEnabled = false
     }
 }
 
