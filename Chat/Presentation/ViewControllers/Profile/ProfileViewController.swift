@@ -59,16 +59,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         return textField
     }()
     
-    private var descriptionTextView: UITextView = {
-        let textView = UITextView().prepareForAutoLayout()
-        textView.font = Fonts.body
-        textView.isScrollEnabled = false
-        textView.textAlignment = .center
-        textView.setCornerRadius(5)
-        textView.layer.borderWidth = 0.5
-        textView.layer.borderColor = Palette.textViewBorderGray?.cgColor
-        return textView
-    }()
+    private var descriptionTextView = ProfileTextView(withPlaceholder: "Profile information")
     
     private var editAvatarButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		CE044E4127133BBE00DE259F /* OCThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE044E3F27133BBE00DE259F /* OCThemesViewController.m */; };
 		CE044E4227133BBE00DE259F /* OCThemesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE044E4027133BBE00DE259F /* OCThemesViewController.xib */; };
-		CE04B4E3271F41270027F649 /* ProfileDescriptionTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04B4E2271F41270027F649 /* ProfileDescriptionTextView.swift */; };
+		CE04B4E3271F41270027F649 /* ProfileTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04B4E2271F41270027F649 /* ProfileTextView.swift */; };
 		CE0B5F1E270CA538004B6232 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B5F1D270CA538004B6232 /* ConversationCell.swift */; };
 		CE0B5F21270CA84E004B6232 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */; };
 		CE0FDBB826FFC7C800809ABB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0FDBB726FFC7C800809ABB /* Images.xcassets */; };
@@ -52,7 +52,7 @@
 		CE044E3E27133BBE00DE259F /* OCThemesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCThemesViewController.h; sourceTree = "<group>"; };
 		CE044E3F27133BBE00DE259F /* OCThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCThemesViewController.m; sourceTree = "<group>"; };
 		CE044E4027133BBE00DE259F /* OCThemesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OCThemesViewController.xib; sourceTree = "<group>"; };
-		CE04B4E2271F41270027F649 /* ProfileDescriptionTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionTextView.swift; sourceTree = "<group>"; };
+		CE04B4E2271F41270027F649 /* ProfileTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextView.swift; sourceTree = "<group>"; };
 		CE0B5F1D270CA538004B6232 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		CE0FDBB726FFC7C800809ABB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 		CE04B4E4271F413C0027F649 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				CE04B4E2271F41270027F649 /* ProfileDescriptionTextView.swift */,
+				CE04B4E2271F41270027F649 /* ProfileTextView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -463,7 +463,7 @@
 				CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */,
 				CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */,
 				CE3E913D270E21070029DA74 /* Conversation.swift in Sources */,
-				CE04B4E3271F41270027F649 /* ProfileDescriptionTextView.swift in Sources */,
+				CE04B4E3271F41270027F649 /* ProfileTextView.swift in Sources */,
 				CE3E913F270E21120029DA74 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
