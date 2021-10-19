@@ -52,5 +52,4 @@ final class FileStorageManager {
         }
         return folderDirectory.appendingPathComponent(dataType.key).appendingPathExtension("plist")
     }
-    
 }

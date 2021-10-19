@@ -39,7 +39,6 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private var centralStackView: UIStackView = {
         let stackView = UIStackView().prepareForAutoLayout()
         stackView.axis = .vertical
-        stackView.alignment = .center
         stackView.spacing = 32
         return stackView
     }()
@@ -50,9 +49,13 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         return imageView
     }()
     
-    private var fullTextField: UITextField = {
+    private lazy var fullNameTextField: UITextField = {
         let textField = UITextField().prepareForAutoLayout()
         textField.font = Fonts.subTitle
+        textField.borderStyle = .roundedRect
+        textField.textAlignment = .center
+        textField.placeholder = "Name"
+        textField.delegate = self
         return textField
     }()
     
@@ -61,6 +64,9 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         textView.font = Fonts.body
         textView.isScrollEnabled = false
         textView.textAlignment = .center
+        textView.setCornerRadius(5)
+        textView.layer.borderWidth = 0.5
+        textView.layer.borderColor = Palette.textViewBorderGray?.cgColor
         return textView
     }()
     
@@ -158,6 +164,8 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     @objc
     private func editAvatarButtonTapped() {
+        view.endEditing(true)
+        
         let imageSelectionAlertController = UIAlertController(
             title: "Select image source",
             message: nil,
@@ -178,9 +186,11 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             self.imagePickerController.sourceType = .camera
             self.present(self.imagePickerController, animated: true)
         }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         
         imageSelectionAlertController.addAction(galleryAction)
         imageSelectionAlertController.addAction(cameraAction)
+        imageSelectionAlertController.addAction(cancelAction)
         present(imageSelectionAlertController, animated: true)
     }
     
@@ -191,7 +201,24 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     @objc
     private func saveButtonTapped() {
-        print("Save tapped")
+        let savingAlertController = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        
+        let saveWithGCDAction = UIAlertAction(title: "Save with GCD", style: .default) { _ in
+            print("Saved with GCD")
+        }
+        let saveWithOperationsAction = UIAlertAction(title: "Save with Operations", style: .default) { _ in
+            print("Saved with Operations")
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        
+        savingAlertController.addAction(saveWithGCDAction)
+        savingAlertController.addAction(saveWithOperationsAction)
+        savingAlertController.addAction(cancelAction)
+        present(savingAlertController, animated: true)
     }
     
     // MARK: - Private methods
@@ -199,6 +226,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private func setupUI() {
         view.roundCorners([.topLeft, .topRight], radius: 18)
         
+        view.addSubview(avatarImageView)
         view.addSubview(centralStackView)
         view.addSubview(editAvatarButton)
         view.addSubview(buttonsStackView)
@@ -207,7 +235,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         view.addSubview(topView)
         
         topStackView.addArrangedSubviews(titleLabel, closeButton)
-        centralStackView.addArrangedSubviews(avatarImageView, fullTextField, descriptionTextView)
+        centralStackView.addArrangedSubviews(fullNameTextField, descriptionTextView)
         buttonsStackView.addArrangedSubviews(cancelButton, saveButton)
     }
     
@@ -223,13 +251,15 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             topStackView.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -16),
             topStackView.bottomAnchor.constraint(equalTo: topView.bottomAnchor),
             
-            centralStackView.topAnchor.constraint(lessThanOrEqualTo: topView.bottomAnchor, constant: 10),
-            centralStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            centralStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            centralStackView.bottomAnchor.constraint(lessThanOrEqualTo: buttonsStackView.topAnchor, constant: -16),
-            
+            avatarImageView.topAnchor.constraint(lessThanOrEqualTo: topView.bottomAnchor, constant: 10),
+            avatarImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             avatarImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
+            
+            centralStackView.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 32),
+            centralStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            centralStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            centralStackView.bottomAnchor.constraint(lessThanOrEqualTo: buttonsStackView.topAnchor, constant: -24),
             
             editAvatarButton.trailingAnchor.constraint(equalTo: avatarImageView.trailingAnchor),
             editAvatarButton.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
@@ -243,7 +273,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         
         buttonsStackViewBottomConstraint = buttonsStackView.bottomAnchor.constraint(
             equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-            constant: -30
+            constant: -defaultLowerButtonsBottomSpacing
         )
         buttonsStackViewBottomConstraint?.isActive = true
     }
@@ -251,8 +281,6 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private func configureUI() {
         view.backgroundColor = .white
         imagePickerController.delegate = self
-        fullTextField.text = "Marina Dudarenko" // TEMP
-        descriptionTextView.text = "UX/UI designer, web-designer Moscow, Russia" // TEMP
     }
 }
 
@@ -267,5 +295,15 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         defer { imagePickerController.dismiss(animated: true) }
         guard let image = info[.originalImage] as? UIImage else { return }
         avatarImageView.image = image
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension ProfileViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
