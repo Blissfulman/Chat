@@ -388,11 +388,17 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         
         switch savingVariant {
         case .gcd:
-            profileDataManager.profileData = profile
-            print("Saved with GCD")
+            let handler = GCDBackgroundHandler()
+            handler.handle { [weak self] in
+                self?.profileDataManager.profileData = profile
+                print("Saved with GCD", Thread.current)
+            }
         case .operations:
-            profileDataManager.profileData = profile
-            print("Saved with Operations")
+            let handler = OperationsBackgroundHandler()
+            handler.handle { [weak self] in
+                self?.profileDataManager.profileData = profile
+                print("Saved with Operations", Thread.current)
+            }
         }
         saveCurrentViewData()
         state = .saved

@@ -96,8 +96,11 @@ final class ConversationListViewController: UIViewController {
     }
     
     private func handleChangingTheme(to theme: Theme) {
-        NavigationController.updateColors(for: theme)
-        SettingsManager().theme = theme
+        let handler = GCDBackgroundHandler()
+        handler.handle {
+            NavigationController.updateColors(for: theme)
+            SettingsManager().theme = theme
+        }
     }
     
     private func customProfileBarButton() -> UIBarButtonItem {
