@@ -117,6 +117,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         return button
     }()
     
+    private let progressView = ProgressView()
     private let imagePickerController = UIImagePickerController()
     private var buttonsStackViewBottomConstraint: NSLayoutConstraint?
     private let defaultLowerButtonsBottomSpacing: CGFloat = 30
@@ -333,6 +334,17 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         }
     }
     
+    private func showProgressView() {
+        view.addSubview(progressView)
+        NSLayoutConstraint.activate([
+            progressView.topAnchor.constraint(equalTo: topView.bottomAnchor),
+            progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            progressView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        progressView.show()
+    }
+    
     private func updateView() {
         switch state {
         case .editing:
@@ -386,18 +398,21 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             avatarData: avatarImageView.image?.jpegData(compressionQuality: 0.5)
         )
         
+        showProgressView()
         switch savingVariant {
         case .gcd:
             let handler = GCDBackgroundHandler()
             handler.handle { [weak self] in
                 self?.profileDataManager.profileData = profile
                 print("Saved with GCD", Thread.current)
+                self?.progressView.hide()
             }
         case .operations:
             let handler = OperationsBackgroundHandler()
             handler.handle { [weak self] in
                 self?.profileDataManager.profileData = profile
                 print("Saved with Operations", Thread.current)
+                self?.progressView.hide()
             }
         }
         saveCurrentViewData()
