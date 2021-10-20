@@ -32,13 +32,6 @@ final class ConversationListViewController: UIViewController {
         action: #selector(openSettingsBarButtonTapped)
     )
     
-    private lazy var openProfileBarButton = UIBarButtonItem(
-        image: Icons.avatarTemp, // TEMP
-        style: .plain,
-        target: self,
-        action: #selector(openProfileBarButtonTapped)
-    )
-    
     private lazy var tableView: UITableView = {
         let tableView = UITableView().prepareForAutoLayout()
         tableView.dataSource = self
@@ -48,6 +41,7 @@ final class ConversationListViewController: UIViewController {
     
     private let onlineConversations: [Conversation] = Conversation.mockData().filter { $0.isOnline }
     private let offlineConversations: [Conversation] = Conversation.mockData().filter { !$0.isOnline }
+    private let profileDataManager = ProfileDataManager()
     
     // MARK: - Lifecycle methods
     
@@ -78,12 +72,11 @@ final class ConversationListViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupUI() {
-        navigationItem.leftBarButtonItem = openSettingsBarButton
-        navigationItem.rightBarButtonItem = openProfileBarButton
-        
+        tableView.register(ConversationCell.self, forCellReuseIdentifier: String(describing: ConversationCell.self))
         view.addSubview(tableView)
         
-        tableView.register(ConversationCell.self, forCellReuseIdentifier: String(describing: ConversationCell.self))
+        navigationItem.leftBarButtonItem = openSettingsBarButton
+        navigationItem.rightBarButtonItem = customProfileBarButton()
     }
     
     private func setupLayout() {
@@ -105,6 +98,27 @@ final class ConversationListViewController: UIViewController {
     private func handleChangingTheme(to theme: Theme) {
         NavigationController.updateColors(for: theme)
         SettingsManager().theme = theme
+    }
+    
+    private func customProfileBarButton() -> UIBarButtonItem {
+        let size = CGSize(width: 40, height: 40)
+        
+        var iconData = Data()
+        if let avatarImageData = profileDataManager.profileData?.avatarData {
+            iconData = avatarImageData
+        } else {
+            iconData = Images.noPhoto.jpegData(compressionQuality: 0.5) ?? Data()
+        }
+        iconData = iconData.resizeImageFromImageData(to: CGSize(width: size.width, height: size.height))
+        
+        let button = UIButton()
+        button.widthAnchor.constraint(equalToConstant: size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: size.height).isActive = true
+        button.addTarget(self, action: #selector(openProfileBarButtonTapped), for: .touchUpInside)
+        button.setImage(UIImage(data: iconData), for: .normal)
+        button.setCornerRadius(size.width / 2)
+        
+        return UIBarButtonItem(customView: button)
     }
 }
 
