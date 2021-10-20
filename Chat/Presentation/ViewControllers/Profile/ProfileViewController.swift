@@ -15,6 +15,11 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         case saved
     }
     
+    enum SavingVariant {
+        case gcd
+        case operations
+    }
+    
     // MARK: - Private properties
     
     private var topView: UIView = {
@@ -115,6 +120,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private let imagePickerController = UIImagePickerController()
     private var buttonsStackViewBottomConstraint: NSLayoutConstraint?
     private let defaultLowerButtonsBottomSpacing: CGFloat = 30
+    private let profileDataManager = ProfileDataManager()
     private var savedData: (fullName: String?, description: String?, avatarImage: UIImage?)
     private var state: State = .saved {
         didSet {
@@ -226,16 +232,10 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         )
         
         let saveWithGCDAction = UIAlertAction(title: "Save with GCD", style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            print("Saved with GCD")
-            self.saveCurrentViewData()
-            self.state = .saved
+            self?.saveData(savingVariant: .gcd)
         }
         let saveWithOperationsAction = UIAlertAction(title: "Save with Operations", style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            print("Saved with Operations")
-            self.saveCurrentViewData()
-            self.state = .saved
+            self?.saveData(savingVariant: .operations)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         
@@ -321,6 +321,16 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private func configureUI() {
         view.backgroundColor = .white
         imagePickerController.delegate = self
+        
+        if let profile = profileDataManager.profileData {
+            fullNameTextField.text = profile.fullName
+            descriptionTextView.text = profile.description
+            if let avatarData = profile.avatarData {
+                avatarImageView.image = UIImage(data: avatarData)
+            } else {
+                avatarImageView.image = Images.noPhoto
+            }
+        }
     }
     
     private func updateView() {
@@ -367,6 +377,25 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         fullNameTextField.text = savedData.fullName
         descriptionTextView.text = savedData.description
         avatarImageView.image = savedData.avatarImage
+    }
+    
+    private func saveData(savingVariant: SavingVariant) {
+        let profile = Profile(
+            fullName: fullNameTextField.text ?? "",
+            description: descriptionTextView.nonplaceholderText,
+            avatarData: avatarImageView.image?.jpegData(compressionQuality: 0.5)
+        )
+        
+        switch savingVariant {
+        case .gcd:
+            profileDataManager.profileData = profile
+            print("Saved with GCD")
+        case .operations:
+            profileDataManager.profileData = profile
+            print("Saved with Operations")
+        }
+        saveCurrentViewData()
+        state = .saved
     }
 }
 
