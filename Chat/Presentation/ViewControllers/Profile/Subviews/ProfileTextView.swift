@@ -15,6 +15,13 @@ final class ProfileTextView: UITextView {
         }
     }
     
+    // MARK: - Public properties
+    
+    var nonplaceholderText: String {
+        isShownPlaceholder ? "" : text
+    }
+    var didChangedHandler: (() -> Void)?
+    
     // MARK: - Private properties
     
     private var placeholder: String?
@@ -79,5 +86,9 @@ extension ProfileTextView: UITextViewDelegate {
         if text.isEmpty {
             showPlaceholder()
         }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        didChangedHandler?()
     }
 }

@@ -10,9 +10,9 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     // MARK: - Nested types
     
     enum State {
-        case initial
         case editing
         case edited
+        case saved
     }
     
     // MARK: - Private properties
@@ -62,11 +62,15 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         textField.placeholder = "Name"
         textField.isEnabled = false
         textField.delegate = self
+        textField.addTarget(self, action: #selector(fullNameTextFieldEditingChanged), for: .editingChanged)
         return textField
     }()
     
-    private var descriptionTextView: UITextView = {
+    private lazy var descriptionTextView: ProfileTextView = {
         let textView = ProfileTextView(withPlaceholder: "Profile information")
+        textView.didChangedHandler = { [weak self] in
+            self?.state = textView.nonplaceholderText == self?.savedData.description ? .editing : .edited
+        }
         textView.isUserInteractionEnabled = false
         return textView
     }()
@@ -76,6 +80,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         button.titleLabel?.font = Fonts.buttonTitle
         button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
         button.setTitle("Edit", for: .normal)
+        button.isHidden = true
         button.addTarget(self, action: #selector(editAvatarButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -110,7 +115,8 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private let imagePickerController = UIImagePickerController()
     private var buttonsStackViewBottomConstraint: NSLayoutConstraint?
     private let defaultLowerButtonsBottomSpacing: CGFloat = 30
-    private var state: State = .initial {
+    private var savedData: (fullName: String?, description: String?, avatarImage: UIImage?)
+    private var state: State = .saved {
         didSet {
             updateView()
         }
@@ -133,6 +139,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         setupUI()
         setupLayout()
         configureUI()
+        saveCurrentViewData()
     }
     
     override func viewWillLayoutSubviews() {
@@ -205,7 +212,9 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         
     @objc
     private func cancelButtonTapped() {
-        state = .edited
+        view.endEditing(true)
+        rollbackCurrentViewData()
+        state = .saved
     }
     
     @objc
@@ -216,11 +225,17 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             preferredStyle: .actionSheet
         )
         
-        let saveWithGCDAction = UIAlertAction(title: "Save with GCD", style: .default) { _ in
+        let saveWithGCDAction = UIAlertAction(title: "Save with GCD", style: .default) { [weak self] _ in
+            guard let self = self else { return }
             print("Saved with GCD")
+            self.saveCurrentViewData()
+            self.state = .saved
         }
-        let saveWithOperationsAction = UIAlertAction(title: "Save with Operations", style: .default) { _ in
+        let saveWithOperationsAction = UIAlertAction(title: "Save with Operations", style: .default) { [weak self] _ in
+            guard let self = self else { return }
             print("Saved with Operations")
+            self.saveCurrentViewData()
+            self.state = .saved
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         
@@ -228,6 +243,11 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         savingAlertController.addAction(saveWithOperationsAction)
         savingAlertController.addAction(cancelAction)
         present(savingAlertController, animated: true)
+    }
+    
+    @objc
+    private func fullNameTextFieldEditingChanged() {
+        state = (fullNameTextField.text == savedData.fullName) ? .editing : .edited
     }
     
     // MARK: - Private methods
@@ -309,8 +329,8 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             handleGoToEditingState()
         case .edited:
             handleGoToEditedState()
-        default:
-            break
+        case .saved:
+            handleGoToSavedState()
         }
     }
     
@@ -318,16 +338,35 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         editProfileButton.disappear(duration: 0.3) {
             self.buttonsStackView.appear(duration: 0.3)
         }
+        editAvatarButton.appear(duration: 0.3)
+        saveButton.isEnabled = false
         fullNameTextField.isEnabled = true
         descriptionTextView.isUserInteractionEnabled = true
     }
     
     private func handleGoToEditedState() {
+        saveButton.isEnabled = true
+    }
+    
+    private func handleGoToSavedState() {
         buttonsStackView.disappear(duration: 0.3) {
             self.editProfileButton.appear(duration: 0.3)
         }
+        editAvatarButton.disappear(duration: 0.3)
         fullNameTextField.isEnabled = false
         descriptionTextView.isUserInteractionEnabled = false
+    }
+    
+    private func saveCurrentViewData() {
+        savedData.fullName = fullNameTextField.text
+        savedData.description = descriptionTextView.nonplaceholderText
+        savedData.avatarImage = avatarImageView.image
+    }
+    
+    private func rollbackCurrentViewData() {
+        fullNameTextField.text = savedData.fullName
+        descriptionTextView.text = savedData.description
+        avatarImageView.image = savedData.avatarImage
     }
 }
 
@@ -339,7 +378,10 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         _ picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
     ) {
-        defer { imagePickerController.dismiss(animated: true) }
+        defer {
+            imagePickerController.dismiss(animated: true)
+            state = .edited
+        }
         guard let image = info[.originalImage] as? UIImage else { return }
         avatarImageView.image = image
     }
