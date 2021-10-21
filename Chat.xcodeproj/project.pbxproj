@@ -189,7 +189,6 @@
 				CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */,
 				CE8B576227205F2E002E3434 /* ProfileDataManager.swift */,
 				CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */,
-				CE6667CB272099F100DD6B40 /* BackgroundHandler.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -310,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */,
+				CE6667CB272099F100DD6B40 /* BackgroundHandler.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";

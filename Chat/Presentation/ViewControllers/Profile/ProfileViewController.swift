@@ -226,12 +226,13 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     @objc
     private func saveButtonTapped() {
+        view.endEditing(true)
+        
         let savingAlertController = UIAlertController(
             title: nil,
             message: nil,
             preferredStyle: .actionSheet
         )
-        
         let saveWithGCDAction = UIAlertAction(title: "Save with GCD", style: .default) { [weak self] _ in
             self?.saveData(savingVariant: .gcd)
         }
@@ -323,14 +324,18 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         view.backgroundColor = .white
         imagePickerController.delegate = self
         
-        if let profile = profileDataManager.profileData {
-            fullNameTextField.text = profile.fullName
-            descriptionTextView.text = profile.description
-            if let avatarData = profile.avatarData {
+        let profileRequestResult = profileDataManager.fetchProfile()
+        switch profileRequestResult {
+        case .success(let profile):
+            fullNameTextField.text = profile?.fullName
+            descriptionTextView.text = profile?.description
+            if let avatarData = profile?.avatarData {
                 avatarImageView.image = UIImage(data: avatarData)
             } else {
                 avatarImageView.image = Images.noPhoto
             }
+        case .failure(let error):
+            print(error.localizedDescription)
         }
     }
     
@@ -379,41 +384,52 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         descriptionTextView.isUserInteractionEnabled = false
     }
     
+    /// Сохраняет текущее состояние вью для возможности возврата к этому состоянию в случае нажатия кнопки "Cancel" в процессе редактирования.
     private func saveCurrentViewData() {
         savedData.fullName = fullNameTextField.text
         savedData.description = descriptionTextView.nonplaceholderText
         savedData.avatarImage = avatarImageView.image
     }
     
+    /// Возвращает вью к состоянию, которое было до начала редактирования (при нажатии кнопки "Cancel").
     private func rollbackCurrentViewData() {
         fullNameTextField.text = savedData.fullName
         descriptionTextView.text = savedData.description
         avatarImageView.image = savedData.avatarImage
     }
     
+    /// Сохранение текущих данных профиля в постоянное хранилище.
     private func saveData(savingVariant: SavingVariant) {
+        showProgressView()
+        
         let profile = Profile(
             fullName: fullNameTextField.text ?? "",
             description: descriptionTextView.nonplaceholderText,
             avatarData: avatarImageView.image?.jpegData(compressionQuality: 0.5)
         )
         
-        showProgressView()
+        let savingTask: ((SavingVariant) -> Void) = { [weak self, profileDataManager] savingVariant in
+            let result = profileDataManager.saveProfile(profile: profile)
+            switch result {
+            case .success:
+                print("Saved with \(savingVariant).", Thread.current) // TEMP
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+            self?.progressView.hide()
+        }
+        
+        var savingHandler: BackgroundHandler?
         switch savingVariant {
         case .gcd:
-            let handler = GCDBackgroundHandler()
-            handler.handle { [weak self] in
-                self?.profileDataManager.profileData = profile
-                print("Saved with GCD", Thread.current)
-                self?.progressView.hide()
-            }
+            savingHandler = GCDBackgroundHandler()
         case .operations:
-            let handler = OperationsBackgroundHandler()
-            handler.handle { [weak self] in
-                self?.profileDataManager.profileData = profile
-                print("Saved with Operations", Thread.current)
-                self?.progressView.hide()
-            }
+            savingHandler = OperationsBackgroundHandler()
+        }
+        
+        savingHandler?.handle {
+            sleep(1) // TEMP (для демонстрации вью прогресса)
+            savingTask(savingVariant)
         }
         saveCurrentViewData()
         state = .saved

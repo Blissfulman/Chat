@@ -17,12 +17,22 @@ final class ProfileDataManager {
     
     // MARK: - Public properties
     
-    var profileData: Profile? {
-        get {
-            fileStorageManager.getValue(withKey: profileKey, dataType: dataType)
+    func saveProfile(profile: Profile) -> Result<Void, Error> {
+        fileStorageManager.saveValue(profile, withKey: profileKey, dataType: dataType)
+        return .success(())
+    }
+    
+    func fetchProfile() -> Result<Profile?, Error> {
+        do {
+            return .success(try getProfileValue())
+        } catch {
+            return .failure(error)
         }
-        set {
-            fileStorageManager.saveValue(newValue, withKey: profileKey, dataType: dataType)
-        }
+    }
+    
+    // MARK: - Private methods
+    
+    private func getProfileValue() throws -> Profile? {
+        try fileStorageManager.getValue(withKey: profileKey, dataType: dataType)
     }
 }

@@ -19,7 +19,7 @@ final class SettingsManager {
     
     var theme: Theme {
         get {
-            fileStorageManager.getValue(withKey: themeKey, dataType: dataType) ?? .light
+            (try? fileStorageManager.getValue(withKey: themeKey, dataType: dataType)) ?? .light
         }
         set {
             fileStorageManager.saveValue(newValue, withKey: themeKey, dataType: dataType)

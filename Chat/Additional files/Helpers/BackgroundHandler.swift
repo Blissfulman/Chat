@@ -50,5 +50,3 @@ final class OperationsBackgroundHandler: BackgroundHandler {
         queue.addOperation(backgroundOperation)
     }
 }
-
-

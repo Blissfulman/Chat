@@ -7,6 +7,20 @@
 
 import Foundation
 
+enum FileStorageManagerError: Error, LocalizedError {
+    case fileReadingError(wrappedError: Error?)
+    case decodingError(wrappedError: Error)
+
+    var errorDescription: String? {
+        switch self {
+        case .fileReadingError(let wrappedError):
+            return "File reading error. \(wrappedError?.localizedDescription ?? "")"
+        case .decodingError(let wrappedError):
+            return "Decoding error. \(wrappedError.localizedDescription)"
+        }
+    }
+}
+
 final class FileStorageManager {
     
     // MARK: - Nested types
@@ -22,15 +36,21 @@ final class FileStorageManager {
     
     // MARK: - Public methods
     
-    func getValue<Value: Decodable>(withKey key: String, dataType: DataType) -> Value? {
-        guard let fileDirectory = fileDirectory(for: dataType) else { return nil }
+    func getValue<Value: Decodable>(withKey key: String, dataType: DataType) throws -> Value? {
+        guard let fileDirectory = fileDirectory(for: dataType) else {
+            throw FileStorageManagerError.fileReadingError(wrappedError: nil)
+        }
+        
         do {
             let data = try Data(contentsOf: fileDirectory)
-            let dictionary = try PropertyListDecoder().decode([String: Value].self, from: data)
-            return dictionary[key]
+            do {
+                let dictionary = try PropertyListDecoder().decode([String: Value].self, from: data)
+                return dictionary[key]
+            } catch {
+                throw FileStorageManagerError.decodingError(wrappedError: error)
+            }
         } catch {
-            print(error)
-            return nil
+            throw FileStorageManagerError.fileReadingError(wrappedError: error)
         }
     }
     

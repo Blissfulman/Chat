@@ -107,7 +107,9 @@ final class ConversationListViewController: UIViewController {
         let size = CGSize(width: 40, height: 40)
         
         var iconData = Data()
-        if let avatarImageData = profileDataManager.profileData?.avatarData {
+        let profileRequestResult = profileDataManager.fetchProfile()
+        if case let .success(profile) = profileRequestResult,
+           let avatarImageData = profile?.avatarData {
             iconData = avatarImageData
         } else {
             iconData = Images.noPhoto.jpegData(compressionQuality: 0.5) ?? Data()
