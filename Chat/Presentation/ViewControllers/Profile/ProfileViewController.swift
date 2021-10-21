@@ -428,17 +428,12 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             asyncDataManager.saveProfile(profile: profile) { result in
                 switch result {
                 case .success:
-                    print("Saved with \(savingVariant).", Thread.current) // TEMP
-                    DispatchQueue.main.async {
-                        self?.state = .saved
-                        self?.showAlert(title: "Данные сохранены")
-                    }
+                    self?.state = .saved
+                    self?.showAlert(title: "Данные сохранены")
                 case .failure(let error):
                     print(error.localizedDescription)
-                    DispatchQueue.main.async {
-                        self?.showFailureSavingAlert {
-                            print("Repeating...")
-                        }
+                    self?.showFailureSavingAlert {
+                        print("Repeating...") // TEMP (не успел доделать)
                     }
                 }
             }
