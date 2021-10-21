@@ -122,10 +122,26 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private var buttonsStackViewBottomConstraint: NSLayoutConstraint?
     private let defaultLowerButtonsBottomSpacing: CGFloat = 30
     private let profileDataManager = ProfileDataManager()
+    private var isChanedAvatar = false {
+        didSet {
+            state = .edited
+        }
+    }
     private var savedData: (fullName: String?, description: String?, avatarImage: UIImage?)
     private var state: State = .saved {
         didSet {
-            updateView()
+            switch state {
+            case .editing:
+                if oldValue == .saved {
+                    switchToEditingState()
+                } else {
+                    updateSaveButtonState()
+                }
+            case .edited:
+                updateSaveButtonState()
+            case .saved:
+                switchToSavedState()
+            }
         }
     }
     
@@ -249,6 +265,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     @objc
     private func textFieldsEditingChanged() {
+        guard !isChanedAvatar else { return }
         if (fullNameTextField.text == savedData.fullName) && (descriptionTextField.text == savedData.description) {
             state = .editing
         } else {
@@ -355,18 +372,11 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         progressView.show()
     }
     
-    private func updateView() {
-        switch state {
-        case .editing:
-            handleGoToEditingState()
-        case .edited:
-            handleGoToEditedState()
-        case .saved:
-            handleGoToSavedState()
-        }
+    private func updateSaveButtonState() {
+        saveButton.isEnabled = isChanedAvatar || state == .edited
     }
     
-    private func handleGoToEditingState() {
+    private func switchToEditingState() {
         editProfileButton.disappear(duration: 0.3) {
             self.buttonsStackView.appear(duration: 0.3)
         }
@@ -376,11 +386,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         descriptionTextField.isEnabled = true
     }
     
-    private func handleGoToEditedState() {
-        saveButton.isEnabled = true
-    }
-    
-    private func handleGoToSavedState() {
+    private func switchToSavedState() {
         buttonsStackView.disappear(duration: 0.3) {
             self.editProfileButton.appear(duration: 0.3)
         }
@@ -452,7 +458,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
     ) {
         defer {
             imagePickerController.dismiss(animated: true)
-            state = .edited
+            isChanedAvatar = true
         }
         guard let image = info[.originalImage] as? UIImage else { return }
         avatarImageView.image = image
