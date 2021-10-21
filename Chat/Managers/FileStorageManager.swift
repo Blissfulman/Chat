@@ -9,14 +9,20 @@ import Foundation
 
 enum FileStorageManagerError: Error, LocalizedError {
     case fileReadingError(wrappedError: Error?)
+    case fileSavingError(wrappedError: Error)
     case decodingError(wrappedError: Error)
+    case encodingError(wrappedError: Error)
 
     var errorDescription: String? {
         switch self {
         case .fileReadingError(let wrappedError):
             return "File reading error. \(wrappedError?.localizedDescription ?? "")"
+        case .fileSavingError(let wrappedError):
+            return "File saving error. \(wrappedError.localizedDescription)"
         case .decodingError(let wrappedError):
             return "Decoding error. \(wrappedError.localizedDescription)"
+        case .encodingError(let wrappedError):
+            return "Encoding error. \(wrappedError.localizedDescription)"
         }
     }
 }
@@ -54,13 +60,20 @@ final class FileStorageManager {
         }
     }
     
-    func saveValue<Value: Encodable>(_ value: Value, withKey key: String, dataType: DataType) {
-        guard let fileDirectory = fileDirectory(for: dataType) else { return }
+    func saveValue<Value: Encodable>(_ value: Value, withKey key: String, dataType: DataType) throws {
+        guard let fileDirectory = fileDirectory(for: dataType) else {
+            throw FileStorageManagerError.fileReadingError(wrappedError: nil)
+        }
+        
         do {
             let data = try PropertyListEncoder().encode([key: value])
-            try data.write(to: fileDirectory, options: .noFileProtection)
+            do {
+                try data.write(to: fileDirectory, options: .noFileProtection)
+            } catch {
+                throw FileStorageManagerError.fileSavingError(wrappedError: error)
+            }
         } catch {
-            print(error)
+            throw FileStorageManagerError.encodingError(wrappedError: error)
         }
     }
     

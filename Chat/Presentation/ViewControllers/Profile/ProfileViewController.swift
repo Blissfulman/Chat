@@ -413,6 +413,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             switch result {
             case .success:
                 print("Saved with \(savingVariant).", Thread.current) // TEMP
+                DispatchQueue.main.async { self?.showAlert(title: "Данные сохранены") }
             case .failure(let error):
                 print(error.localizedDescription)
             }

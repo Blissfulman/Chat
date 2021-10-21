@@ -22,7 +22,7 @@ final class SettingsManager {
             (try? fileStorageManager.getValue(withKey: themeKey, dataType: dataType)) ?? .light
         }
         set {
-            fileStorageManager.saveValue(newValue, withKey: themeKey, dataType: dataType)
+            try? fileStorageManager.saveValue(newValue, withKey: themeKey, dataType: dataType)
         }
     }
 }

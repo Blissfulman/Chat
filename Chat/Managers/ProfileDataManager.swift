@@ -18,8 +18,12 @@ final class ProfileDataManager {
     // MARK: - Public properties
     
     func saveProfile(profile: Profile) -> Result<Void, Error> {
-        fileStorageManager.saveValue(profile, withKey: profileKey, dataType: dataType)
-        return .success(())
+        do {
+            try fileStorageManager.saveValue(profile, withKey: profileKey, dataType: dataType)
+            return .success(())
+        } catch {
+            return .failure(error)
+        }
     }
     
     func fetchProfile() -> Result<Profile?, Error> {
