@@ -98,7 +98,7 @@ final class ConversationListViewController: UIViewController {
     }
     
     private func handleChangingTheme(to theme: Theme) {
-        let asyncHandler = OperationsAsyncHandler(qos: .userInteractive)
+        let asyncHandler = GCDAsyncHandler(qos: .userInteractive)
         asyncHandler.handle {
             NavigationController.updateColors(for: theme)
             SettingsManager().theme = theme
