@@ -12,7 +12,7 @@ final class ProgressView: UIView {
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView().prepareForAutoLayout()
         activityIndicator.style = .whiteLarge
-        activityIndicator.backgroundColor = .lightGray.withAlphaComponent(0.3)
+        activityIndicator.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
         activityIndicator.hidesWhenStopped = true
         activityIndicator.setCornerRadius(25)
         return activityIndicator
@@ -46,7 +46,7 @@ final class ProgressView: UIView {
     
     private func setupView() {
         prepareForAutoLayout()
-        backgroundColor = .lightGray.withAlphaComponent(0.3)
+        backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
         addSubview(activityIndicator)
         
         activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
