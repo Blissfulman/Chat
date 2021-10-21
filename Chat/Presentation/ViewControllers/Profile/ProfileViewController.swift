@@ -121,12 +121,13 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private let imagePickerController = UIImagePickerController()
     private var buttonsStackViewBottomConstraint: NSLayoutConstraint?
     private let defaultLowerButtonsBottomSpacing: CGFloat = 30
-    private let profileDataManager = ProfileDataManager()
+    private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
     private var isChanedAvatar = false {
         didSet {
             state = .edited
         }
     }
+    /// Сохранённое состояние данных вью для возможности возврата к этому состоянию в случае нажатия кнопки "Cancel".
     private var savedViewData: (fullName: String?, description: String?, avatarImage: UIImage?)
     private var state: State = .saved {
         didSet {
@@ -162,7 +163,6 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         setupUI()
         setupLayout()
         configureUI()
-        saveCurrentViewData()
     }
     
     override func viewWillLayoutSubviews() {
@@ -345,19 +345,24 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private func configureUI() {
         view.backgroundColor = .white
         imagePickerController.delegate = self
-        
-        let profileRequestResult = profileDataManager.fetchProfile()
-        switch profileRequestResult {
-        case .success(let profile):
-            fullNameTextField.text = profile?.fullName
-            descriptionTextField.text = profile?.description
-            if let avatarData = profile?.avatarData {
-                avatarImageView.image = UIImage(data: avatarData)
-            } else {
-                avatarImageView.image = Images.noPhoto
+        fetchInitialViewData()
+    }
+    
+    private func fetchInitialViewData() {
+        asyncDataManager.fetchProfile { [weak self] result in
+            switch result {
+            case .success(let profile):
+                self?.fullNameTextField.text = profile?.fullName
+                self?.descriptionTextField.text = profile?.description
+                if let avatarData = profile?.avatarData {
+                    self?.avatarImageView.image = UIImage(data: avatarData)
+                } else {
+                    self?.avatarImageView.image = Images.noPhoto
+                }
+                self?.saveCurrentViewData()
+            case .failure(let error):
+                print(error.localizedDescription)
             }
-        case .failure(let error):
-            print(error.localizedDescription)
         }
     }
     
@@ -419,32 +424,33 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             avatarData: avatarImageView.image?.jpegData(compressionQuality: 0.5)
         )
         
-        let savingTask: ((SavingVariant) -> Void) = { [weak self, profileDataManager] savingVariant in
-            let result = profileDataManager.saveProfile(profile: profile)
-            switch result {
-            case .success:
-                print("Saved with \(savingVariant).", Thread.current) // TEMP
-                DispatchQueue.main.async {
-                    self?.state = .saved
-                    self?.showAlert(title: "Данные сохранены")
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-                DispatchQueue.main.async {
-                    self?.showFailureSavingAlert {
-                        print("Repeating...")
+        let savingTask: ((SavingVariant) -> Void) = { [weak self, asyncDataManager] savingVariant in
+            asyncDataManager.saveProfile(profile: profile) { result in
+                switch result {
+                case .success:
+                    print("Saved with \(savingVariant).", Thread.current) // TEMP
+                    DispatchQueue.main.async {
+                        self?.state = .saved
+                        self?.showAlert(title: "Данные сохранены")
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        self?.showFailureSavingAlert {
+                            print("Repeating...")
+                        }
                     }
                 }
             }
             self?.progressView.hide()
         }
         
-        var savingHandler: BackgroundHandler?
+        var savingHandler: AsyncHandler?
         switch savingVariant {
         case .gcd:
-            savingHandler = GCDBackgroundHandler()
+            savingHandler = GCDAsyncHandler(qos: .userInitiated)
         case .operations:
-            savingHandler = OperationsBackgroundHandler()
+            savingHandler = OperationsAsyncHandler(qos: .userInitiated)
         }
         
         savingHandler?.handle {

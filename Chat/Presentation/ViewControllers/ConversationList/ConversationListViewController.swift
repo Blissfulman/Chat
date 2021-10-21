@@ -41,7 +41,7 @@ final class ConversationListViewController: UIViewController {
     
     private let onlineConversations: [Conversation] = Conversation.mockData().filter { $0.isOnline }
     private let offlineConversations: [Conversation] = Conversation.mockData().filter { !$0.isOnline }
-    private let profileDataManager = ProfileDataManager()
+    private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
     
     // MARK: - Lifecycle methods
     
@@ -76,7 +76,9 @@ final class ConversationListViewController: UIViewController {
         view.addSubview(tableView)
         
         navigationItem.leftBarButtonItem = openSettingsBarButton
-        navigationItem.rightBarButtonItem = customProfileBarButton()
+        customProfileBarButton { [weak self] barButtonItem in
+            self?.navigationItem.rightBarButtonItem = barButtonItem
+        }
     }
     
     private func setupLayout() {
@@ -96,34 +98,37 @@ final class ConversationListViewController: UIViewController {
     }
     
     private func handleChangingTheme(to theme: Theme) {
-        let handler = GCDBackgroundHandler()
-        handler.handle {
+        let asyncHandler = OperationsAsyncHandler(qos: .userInteractive)
+        asyncHandler.handle {
             NavigationController.updateColors(for: theme)
             SettingsManager().theme = theme
         }
     }
     
-    private func customProfileBarButton() -> UIBarButtonItem {
+    private func customProfileBarButton(completion: @escaping (UIBarButtonItem) -> Void) {
         let size = CGSize(width: 40, height: 40)
         
-        var iconData = Data()
-        let profileRequestResult = profileDataManager.fetchProfile()
-        if case let .success(profile) = profileRequestResult,
-           let avatarImageData = profile?.avatarData {
-            iconData = avatarImageData
-        } else {
-            iconData = Images.noPhoto.jpegData(compressionQuality: 0.5) ?? Data()
+        asyncDataManager.fetchProfile { [weak self] result in
+            guard let self = self else { return }
+            var iconData = Data()
+            
+            if case let .success(profile) = result,
+               let avatarImageData = profile?.avatarData {
+                iconData = avatarImageData
+            } else {
+                iconData = Images.noPhoto.jpegData(compressionQuality: 0.5) ?? Data()
+            }
+            iconData = iconData.resizeImageFromImageData(to: CGSize(width: size.width, height: size.height))
+
+            let button = UIButton()
+            button.widthAnchor.constraint(equalToConstant: size.width).isActive = true
+            button.heightAnchor.constraint(equalToConstant: size.height).isActive = true
+            button.addTarget(self, action: #selector(self.openProfileBarButtonTapped), for: .touchUpInside)
+            button.setImage(UIImage(data: iconData), for: .normal)
+            button.setCornerRadius(size.width / 2)
+            
+            completion(UIBarButtonItem(customView: button))
         }
-        iconData = iconData.resizeImageFromImageData(to: CGSize(width: size.width, height: size.height))
-        
-        let button = UIButton()
-        button.widthAnchor.constraint(equalToConstant: size.width).isActive = true
-        button.heightAnchor.constraint(equalToConstant: size.height).isActive = true
-        button.addTarget(self, action: #selector(openProfileBarButtonTapped), for: .touchUpInside)
-        button.setImage(UIImage(data: iconData), for: .normal)
-        button.setCornerRadius(size.width / 2)
-        
-        return UIBarButtonItem(customView: button)
     }
 }
 

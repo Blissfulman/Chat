@@ -36,7 +36,7 @@
 		CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */; };
 		CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */; };
 		CE6667CA2720871200DD6B40 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6667C92720871200DD6B40 /* Data+Extension.swift */; };
-		CE6667CC272099F100DD6B40 /* BackgroundHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6667CB272099F100DD6B40 /* BackgroundHandler.swift */; };
+		CE6667CC272099F100DD6B40 /* AsyncHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6667CB272099F100DD6B40 /* AsyncHandler.swift */; };
 		CE6667CE2720ACB100DD6B40 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6667CD2720ACB100DD6B40 /* ProgressView.swift */; };
 		CE8B576127205E8E002E3434 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B576027205E8E002E3434 /* Profile.swift */; };
 		CE8B576327205F2E002E3434 /* ProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B576227205F2E002E3434 /* ProfileDataManager.swift */; };
@@ -51,6 +51,7 @@
 		CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED84B3827025BC300D4E4EB /* Palette.xcassets */; };
 		CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3B27025D1700D4E4EB /* Palette.swift */; };
 		CED84B3E27025F4200D4E4EB /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3D27025F4200D4E4EB /* Images.swift */; };
+		CEE6513E2721F013009DD993 /* AcynsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE6513D2721F013009DD993 /* AcynsDataManager.swift */; };
 		CEEDAEE9271C8823005B8F21 /* KeyboardNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDAEE8271C8823005B8F21 /* KeyboardNotificationsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,7 +89,7 @@
 		CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		CE6667C92720871200DD6B40 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
-		CE6667CB272099F100DD6B40 /* BackgroundHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundHandler.swift; sourceTree = "<group>"; };
+		CE6667CB272099F100DD6B40 /* AsyncHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncHandler.swift; sourceTree = "<group>"; };
 		CE6667CD2720ACB100DD6B40 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		CE8B576027205E8E002E3434 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		CE8B576227205F2E002E3434 /* ProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManager.swift; sourceTree = "<group>"; };
@@ -103,6 +104,7 @@
 		CED84B3827025BC300D4E4EB /* Palette.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Palette.xcassets; sourceTree = "<group>"; };
 		CED84B3B27025D1700D4E4EB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		CED84B3D27025F4200D4E4EB /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		CEE6513D2721F013009DD993 /* AcynsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcynsDataManager.swift; sourceTree = "<group>"; };
 		CEEDAEE8271C8823005B8F21 /* KeyboardNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardNotificationsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,6 +191,7 @@
 				CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */,
 				CE8B576227205F2E002E3434 /* ProfileDataManager.swift */,
 				CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */,
+				CEE6513D2721F013009DD993 /* AcynsDataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -309,7 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */,
-				CE6667CB272099F100DD6B40 /* BackgroundHandler.swift */,
+				CE6667CB272099F100DD6B40 /* AsyncHandler.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				CE044E4127133BBE00DE259F /* OCThemesViewController.m in Sources */,
 				CE2608802718B01800CAE9B6 /* Theme.swift in Sources */,
 				CE39478E270F73CE004C6FD1 /* MyMessageView.swift in Sources */,
+				CEE6513E2721F013009DD993 /* AcynsDataManager.swift in Sources */,
 				CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */,
 				CE9C657C270F2F8A008756AC /* ConfigurableCell.swift in Sources */,
 				CE9AF681270B89C1006D44A8 /* ConversationViewController.swift in Sources */,
@@ -487,7 +491,7 @@
 				CE8C4079271BEEE000D0C0B5 /* FileStorageManager.swift in Sources */,
 				CE8B576327205F2E002E3434 /* ProfileDataManager.swift in Sources */,
 				CE04B4E7271F52B80027F649 /* ProfileFilledButton.swift in Sources */,
-				CE6667CC272099F100DD6B40 /* BackgroundHandler.swift in Sources */,
+				CE6667CC272099F100DD6B40 /* AsyncHandler.swift in Sources */,
 				CE3E9146270EAD430029DA74 /* MessageCell.swift in Sources */,
 				CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */,
 				CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */,
