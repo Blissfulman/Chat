@@ -127,7 +127,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             state = .edited
         }
     }
-    private var savedData: (fullName: String?, description: String?, avatarImage: UIImage?)
+    private var savedViewData: (fullName: String?, description: String?, avatarImage: UIImage?)
     private var state: State = .saved {
         didSet {
             switch state {
@@ -266,7 +266,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     @objc
     private func textFieldsEditingChanged() {
         guard !isChanedAvatar else { return }
-        if (fullNameTextField.text == savedData.fullName) && (descriptionTextField.text == savedData.description) {
+        if fullNameTextField.text == savedViewData.fullName && descriptionTextField.text == savedViewData.description {
             state = .editing
         } else {
             state = .edited
@@ -397,16 +397,16 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     /// Сохраняет текущее состояние вью для возможности возврата к этому состоянию в случае нажатия кнопки "Cancel" в процессе редактирования.
     private func saveCurrentViewData() {
-        savedData.fullName = fullNameTextField.text
-        savedData.description = descriptionTextField.text
-        savedData.avatarImage = avatarImageView.image
+        savedViewData.fullName = fullNameTextField.text
+        savedViewData.description = descriptionTextField.text
+        savedViewData.avatarImage = avatarImageView.image
     }
     
     /// Возвращает вью к состоянию, которое было до начала редактирования (при нажатии кнопки "Cancel").
     private func rollbackCurrentViewData() {
-        fullNameTextField.text = savedData.fullName
-        descriptionTextField.text = savedData.description
-        avatarImageView.image = savedData.avatarImage
+        fullNameTextField.text = savedViewData.fullName
+        descriptionTextField.text = savedViewData.description
+        avatarImageView.image = savedViewData.avatarImage
     }
     
     /// Сохранение текущих данных профиля в постоянное хранилище.
@@ -424,9 +424,17 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             switch result {
             case .success:
                 print("Saved with \(savingVariant).", Thread.current) // TEMP
-                DispatchQueue.main.async { self?.showAlert(title: "Данные сохранены") }
+                DispatchQueue.main.async {
+                    self?.state = .saved
+                    self?.showAlert(title: "Данные сохранены")
+                }
             case .failure(let error):
                 print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    self?.showFailureSavingAlert {
+                        print("Repeating...")
+                    }
+                }
             }
             self?.progressView.hide()
         }
@@ -443,8 +451,18 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             sleep(1) // TEMP (для демонстрации вью прогресса)
             savingTask(savingVariant)
         }
-        saveCurrentViewData()
-        state = .saved
+    }
+    
+    private func showFailureSavingAlert(repeatitionHandler: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: "Error", message: "Failed to save data", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { _ in }
+        let repeatitionAction = UIAlertAction(title: "Repeat", style: .default) { _ in
+            repeatitionHandler?()
+        }
+        alert.addAction(okAction)
+        alert.addAction(repeatitionAction)
+        alert.preferredAction = repeatitionAction
+        present(alert, animated: true)
     }
 }
 
