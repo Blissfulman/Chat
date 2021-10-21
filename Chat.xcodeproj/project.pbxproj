@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		CE044E4127133BBE00DE259F /* OCThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE044E3F27133BBE00DE259F /* OCThemesViewController.m */; };
 		CE044E4227133BBE00DE259F /* OCThemesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE044E4027133BBE00DE259F /* OCThemesViewController.xib */; };
-		CE04B4E3271F41270027F649 /* ProfileTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04B4E2271F41270027F649 /* ProfileTextView.swift */; };
 		CE04B4E7271F52B80027F649 /* ProfileFilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04B4E6271F52B80027F649 /* ProfileFilledButton.swift */; };
 		CE04B4E9271F59270027F649 /* ProfileNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04B4E8271F59270027F649 /* ProfileNameTextField.swift */; };
 		CE0B5F1E270CA538004B6232 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B5F1D270CA538004B6232 /* ConversationCell.swift */; };
@@ -45,6 +44,7 @@
 		CE9AF681270B89C1006D44A8 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AF680270B89C1006D44A8 /* ConversationViewController.swift */; };
 		CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AF682270B8D39006D44A8 /* Icons.swift */; };
 		CE9AF685270B8D44006D44A8 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9AF684270B8D44006D44A8 /* Icons.xcassets */; };
+		CE9B0BC32721BEC60001DF15 /* ProfileDescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0BC22721BEC60001DF15 /* ProfileDescriptionTextField.swift */; };
 		CE9C657C270F2F8A008756AC /* ConfigurableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */; };
 		CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA143DD271600D400F39F61 /* ThemesViewController.swift */; };
 		CED023E726FFB61100062489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED023E626FFB61100062489 /* Assets.xcassets */; };
@@ -59,7 +59,6 @@
 		CE044E3E27133BBE00DE259F /* OCThemesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCThemesViewController.h; sourceTree = "<group>"; };
 		CE044E3F27133BBE00DE259F /* OCThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCThemesViewController.m; sourceTree = "<group>"; };
 		CE044E4027133BBE00DE259F /* OCThemesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OCThemesViewController.xib; sourceTree = "<group>"; };
-		CE04B4E2271F41270027F649 /* ProfileTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextView.swift; sourceTree = "<group>"; };
 		CE04B4E6271F52B80027F649 /* ProfileFilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilledButton.swift; sourceTree = "<group>"; };
 		CE04B4E8271F59270027F649 /* ProfileNameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNameTextField.swift; sourceTree = "<group>"; };
 		CE0B5F1D270CA538004B6232 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
@@ -97,6 +96,7 @@
 		CE9AF680270B89C1006D44A8 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		CE9AF682270B8D39006D44A8 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		CE9AF684270B8D44006D44A8 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
+		CE9B0BC22721BEC60001DF15 /* ProfileDescriptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionTextField.swift; sourceTree = "<group>"; };
 		CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableCell.swift; sourceTree = "<group>"; };
 		CEA143DD271600D400F39F61 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		CED023E626FFB61100062489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				CE04B4E8271F59270027F649 /* ProfileNameTextField.swift */,
-				CE04B4E2271F41270027F649 /* ProfileTextView.swift */,
+				CE9B0BC22721BEC60001DF15 /* ProfileDescriptionTextField.swift */,
 				CE04B4E6271F52B80027F649 /* ProfileFilledButton.swift */,
 				CE6667CD2720ACB100DD6B40 /* ProgressView.swift */,
 			);
@@ -461,6 +461,7 @@
 			files = (
 				CEEDAEE9271C8823005B8F21 /* KeyboardNotificationsViewController.swift in Sources */,
 				CE8B576127205E8E002E3434 /* Profile.swift in Sources */,
+				CE9B0BC32721BEC60001DF15 /* ProfileDescriptionTextField.swift in Sources */,
 				CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */,
 				CE394790270F7C1C004C6FD1 /* PartnerMessageView.swift in Sources */,
 				CE044E4127133BBE00DE259F /* OCThemesViewController.m in Sources */,
@@ -491,7 +492,6 @@
 				CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */,
 				CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */,
 				CE3E913D270E21070029DA74 /* Conversation.swift in Sources */,
-				CE04B4E3271F41270027F649 /* ProfileTextView.swift in Sources */,
 				CE3E913F270E21120029DA74 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

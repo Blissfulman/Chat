@@ -67,17 +67,17 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         textField.placeholder = "Name"
         textField.isEnabled = false
         textField.delegate = self
-        textField.addTarget(self, action: #selector(fullNameTextFieldEditingChanged), for: .editingChanged)
+        textField.addTarget(self, action: #selector(textFieldsEditingChanged), for: .editingChanged)
         return textField
     }()
     
-    private lazy var descriptionTextView: ProfileTextView = {
-        let textView = ProfileTextView(withPlaceholder: "Profile information")
-        textView.didChangedHandler = { [weak self] in
-            self?.state = textView.nonplaceholderText == self?.savedData.description ? .editing : .edited
-        }
-        textView.isUserInteractionEnabled = false
-        return textView
+    private lazy var descriptionTextField: UITextField = {
+        let textField = ProfileDescriptionTextField()
+        textField.placeholder = "Profile information"
+        textField.isEnabled = false
+        textField.delegate = self
+        textField.addTarget(self, action: #selector(textFieldsEditingChanged), for: .editingChanged)
+        return textField
     }()
     
     private var editAvatarButton: UIButton = {
@@ -248,8 +248,12 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     }
     
     @objc
-    private func fullNameTextFieldEditingChanged() {
-        state = (fullNameTextField.text == savedData.fullName) ? .editing : .edited
+    private func textFieldsEditingChanged() {
+        if (fullNameTextField.text == savedData.fullName) && (descriptionTextField.text == savedData.description) {
+            state = .editing
+        } else {
+            state = .edited
+        }
     }
     
     // MARK: - Private methods
@@ -267,7 +271,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         view.addSubview(topView)
         
         topStackView.addArrangedSubviews(titleLabel, closeButton)
-        centralStackView.addArrangedSubviews(fullNameTextField, descriptionTextView)
+        centralStackView.addArrangedSubviews(fullNameTextField, descriptionTextField)
         buttonsStackView.addArrangedSubviews(cancelButton, saveButton)
     }
     
@@ -310,7 +314,8 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             ),
             editProfileButton.heightAnchor.constraint(equalToConstant: 40),
             
-            fullNameTextField.heightAnchor.constraint(equalToConstant: 38)
+            fullNameTextField.heightAnchor.constraint(equalToConstant: 38),
+            descriptionTextField.heightAnchor.constraint(equalToConstant: 34)
         ])
         
         buttonsStackViewBottomConstraint = buttonsStackView.bottomAnchor.constraint(
@@ -328,7 +333,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         switch profileRequestResult {
         case .success(let profile):
             fullNameTextField.text = profile?.fullName
-            descriptionTextView.text = profile?.description
+            descriptionTextField.text = profile?.description
             if let avatarData = profile?.avatarData {
                 avatarImageView.image = UIImage(data: avatarData)
             } else {
@@ -368,7 +373,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         editAvatarButton.appear(duration: 0.3)
         saveButton.isEnabled = false
         fullNameTextField.isEnabled = true
-        descriptionTextView.isUserInteractionEnabled = true
+        descriptionTextField.isEnabled = true
     }
     
     private func handleGoToEditedState() {
@@ -381,20 +386,20 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         }
         editAvatarButton.disappear(duration: 0.3)
         fullNameTextField.isEnabled = false
-        descriptionTextView.isUserInteractionEnabled = false
+        descriptionTextField.isEnabled = false
     }
     
     /// Сохраняет текущее состояние вью для возможности возврата к этому состоянию в случае нажатия кнопки "Cancel" в процессе редактирования.
     private func saveCurrentViewData() {
         savedData.fullName = fullNameTextField.text
-        savedData.description = descriptionTextView.nonplaceholderText
+        savedData.description = descriptionTextField.text
         savedData.avatarImage = avatarImageView.image
     }
     
     /// Возвращает вью к состоянию, которое было до начала редактирования (при нажатии кнопки "Cancel").
     private func rollbackCurrentViewData() {
         fullNameTextField.text = savedData.fullName
-        descriptionTextView.text = savedData.description
+        descriptionTextField.text = savedData.description
         avatarImageView.image = savedData.avatarImage
     }
     
@@ -404,7 +409,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         
         let profile = Profile(
             fullName: fullNameTextField.text ?? "",
-            description: descriptionTextView.nonplaceholderText,
+            description: descriptionTextField.text ?? "",
             avatarData: avatarImageView.image?.jpegData(compressionQuality: 0.5)
         )
         
