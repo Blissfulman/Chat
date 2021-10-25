@@ -5,6 +5,8 @@
 //  Created by Evgeny Novgorodov on 16.09.2021.
 //
 
+import Firebase
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -18,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        FirebaseApp.configure()
+        
         let theme = SettingsManager().theme
         NavigationController.setupAppearance(for: theme)
         
