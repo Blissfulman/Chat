@@ -1,5 +1,5 @@
 //
-//  Conversation.swift
+//  Channel.swift
 //  Chat
 //
 //  Created by Evgeny Novgorodov on 06.10.2021.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Conversation {
+struct Channel {
     let avatarData: Data?
     let name: String
     let message: String?
@@ -16,7 +16,7 @@ struct Conversation {
     let hasUnreadMessage: Bool
 }
 
-extension Conversation {
+extension Channel {
     
     static func mockData() -> [Self] {
         var randomDate: Date {
@@ -24,7 +24,7 @@ extension Conversation {
         }
         
         return [
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Johnny Watson",
                 message: "An suas viderer pro. Vis cu magna altera, ex his vivendo atomorum.",
@@ -32,7 +32,7 @@ extension Conversation {
                 isOnline: true,
                 hasUnreadMessage: false
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Ronald Robertson",
                 message: nil,
@@ -40,7 +40,7 @@ extension Conversation {
                 isOnline: true,
                 hasUnreadMessage: true
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Martha Craig",
                 message: "Ex Lorem veniam veniam irure sunt adipisicing culpa.",
@@ -48,7 +48,7 @@ extension Conversation {
                 isOnline: true,
                 hasUnreadMessage: true
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Arthur Bell",
                 message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
@@ -56,7 +56,7 @@ extension Conversation {
                 isOnline: true,
                 hasUnreadMessage: false
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Jane Warren",
                 message: "Voluptate irure aliquip consectetur commodo ex ex.",
@@ -64,7 +64,7 @@ extension Conversation {
                 isOnline: false,
                 hasUnreadMessage: false
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Morris Henry",
                 message: "Dolore veniam Lorem occaecat veniam irure laborum est amet.",
@@ -72,7 +72,7 @@ extension Conversation {
                 isOnline: false,
                 hasUnreadMessage: true
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Irma Flores",
                 message: nil,
@@ -80,7 +80,7 @@ extension Conversation {
                 isOnline: true,
                 hasUnreadMessage: false
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Colin Williams",
                 message: "Amet enim do laborum tempor nisi aliqua ad adipisicing.",
@@ -88,7 +88,7 @@ extension Conversation {
                 isOnline: true,
                 hasUnreadMessage: true
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "John Roberts",
                 message: nil,
@@ -96,7 +96,7 @@ extension Conversation {
                 isOnline: false,
                 hasUnreadMessage: true
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Abdulie Gordon",
                 message: "Reprehenderit mollit excepteur labore deserunt officia laboris eiusmod cillum eu duis",
@@ -104,7 +104,7 @@ extension Conversation {
                 isOnline: true,
                 hasUnreadMessage: true
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Entony Torres",
                 message: "An suas viderer pro. Vis cu magna altera, ex his vivendo atomorum.",
@@ -112,7 +112,7 @@ extension Conversation {
                 isOnline: true,
                 hasUnreadMessage: false
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Alex Todd",
                 message: nil,
@@ -120,7 +120,7 @@ extension Conversation {
                 isOnline: true,
                 hasUnreadMessage: true
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Samantha Fog",
                 message: "Ex Lorem veniam veniam irure sunt adipisicing culpa.",
@@ -128,7 +128,7 @@ extension Conversation {
                 isOnline: false,
                 hasUnreadMessage: true
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Richard Adams",
                 message: "Aliqua mollit nisi incididunt id eu consequat eu cupidatat.",
@@ -136,7 +136,7 @@ extension Conversation {
                 isOnline: true,
                 hasUnreadMessage: false
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Kate Lima",
                 message: "Voluptate irure aliquip consectetur commodo ex ex.",
@@ -144,7 +144,7 @@ extension Conversation {
                 isOnline: false,
                 hasUnreadMessage: false
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Adam Bruge",
                 message: "Dolore veniam Lorem occaecat veniam irure laborum est amet.",
@@ -152,7 +152,7 @@ extension Conversation {
                 isOnline: false,
                 hasUnreadMessage: true
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Emma Collins",
                 message: nil,
@@ -160,7 +160,7 @@ extension Conversation {
                 isOnline: false,
                 hasUnreadMessage: false
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Duck McRoe",
                 message: "Amet enim do laborum tempor nisi aliqua ad adipisicing.",
@@ -168,7 +168,7 @@ extension Conversation {
                 isOnline: false,
                 hasUnreadMessage: true
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Erik Grant",
                 message: nil,
@@ -176,7 +176,7 @@ extension Conversation {
                 isOnline: false,
                 hasUnreadMessage: true
             ),
-            Conversation(
+            Channel(
                 avatarData: nil,
                 name: "Brad Duglas",
                 message: "Reprehenderit mollit excepteur labore deserunt officia laboris eiusmod cillum eu duis",

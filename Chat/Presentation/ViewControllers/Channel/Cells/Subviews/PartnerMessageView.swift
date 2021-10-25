@@ -1,37 +1,36 @@
 //
-//  MyMessageView.swift
+//  PartnerMessageView.swift
 //  Chat
 //
-//  Created by Evgeny Novgorodov on 07.10.2021.
+//  Created by Evgeny Novgorodov on 08.10.2021.
 //
 
-final class MyMessageView: UIView {
+final class PartnerMessageView: UIView {
     
     // MARK: - Nested types
     
     struct Model {
         let text: String
         let date: String
-        let isUnread: Bool // FIXME: Необходимо реализовать галочки, отображающие прочитано ли сообщение
     }
     
     // MARK: - Private properties
     
-    private var shapeImageView: UIImageView = {
+    private lazy var shapeImageView: UIImageView = {
         let imageView = UIImageView().prepareForAutoLayout()
         imageView.contentMode = .scaleToFill
-        imageView.image = Images.myMessageShape
+        imageView.image = Images.partnerMessageShape
         return imageView
     }()
     
-    private var messageLabel: UILabel = {
+    private lazy var messageLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
         label.font = Fonts.messageCellText
         label.numberOfLines = 0
         return label
     }()
     
-    private var dateLabel: UILabel = {
+    private lazy var dateLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
         label.font = Fonts.messageCellDate
         label.textColor = UIColor.black.withAlphaComponent(0.25)
@@ -68,11 +67,11 @@ final class MyMessageView: UIView {
             shapeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             
             messageLabel.topAnchor.constraint(equalTo: shapeImageView.topAnchor, constant: 5),
-            messageLabel.leadingAnchor.constraint(equalTo: shapeImageView.leadingAnchor, constant: 8),
-            messageLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -16),
+            messageLabel.leadingAnchor.constraint(equalTo: shapeImageView.leadingAnchor, constant: 16),
+            messageLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -8),
             messageLabel.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -26),
             
-            dateLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -16),
+            dateLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -8),
             dateLabel.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -6)
         ])
     }

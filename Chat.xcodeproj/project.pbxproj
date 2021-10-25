@@ -12,12 +12,12 @@
 		CE044E4227133BBE00DE259F /* OCThemesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE044E4027133BBE00DE259F /* OCThemesViewController.xib */; };
 		CE04B4E7271F52B80027F649 /* ProfileFilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04B4E6271F52B80027F649 /* ProfileFilledButton.swift */; };
 		CE04B4E9271F59270027F649 /* ProfileNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04B4E8271F59270027F649 /* ProfileNameTextField.swift */; };
-		CE0B5F1E270CA538004B6232 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B5F1D270CA538004B6232 /* ConversationCell.swift */; };
+		CE0B5F1E270CA538004B6232 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B5F1D270CA538004B6232 /* ChannelCell.swift */; };
 		CE0B5F21270CA84E004B6232 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */; };
 		CE0FDBB826FFC7C800809ABB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0FDBB726FFC7C800809ABB /* Images.xcassets */; };
 		CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */; };
 		CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */; };
-		CE1F08B126F3BB67002A5985 /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08B026F3BB67002A5985 /* ConversationListViewController.swift */; };
+		CE1F08B126F3BB67002A5985 /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08B026F3BB67002A5985 /* ChannelListViewController.swift */; };
 		CE1F08B926F3BB68002A5985 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1F08B726F3BB68002A5985 /* LaunchScreen.storyboard */; };
 		CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */; };
 		CE2608802718B01800CAE9B6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087F2718B01800CAE9B6 /* Theme.swift */; };
@@ -28,7 +28,7 @@
 		CE39478E270F73CE004C6FD1 /* MyMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39478D270F73CE004C6FD1 /* MyMessageView.swift */; };
 		CE394790270F7C1C004C6FD1 /* PartnerMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39478F270F7C1C004C6FD1 /* PartnerMessageView.swift */; };
 		CE394792270F8581004C6FD1 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE394791270F8581004C6FD1 /* Date+Extension.swift */; };
-		CE3E913D270E21070029DA74 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E913C270E21070029DA74 /* Conversation.swift */; };
+		CE3E913D270E21070029DA74 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E913C270E21070029DA74 /* Channel.swift */; };
 		CE3E913F270E21120029DA74 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E913E270E21120029DA74 /* Message.swift */; };
 		CE3E9141270E2B950029DA74 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE3E9140270E2B950029DA74 /* SF-Pro-Text-Bold.otf */; };
 		CE3E9143270E2C440029DA74 /* SF-Pro-Text-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE3E9142270E2C440029DA74 /* SF-Pro-Text-RegularItalic.otf */; };
@@ -42,7 +42,7 @@
 		CE8B576127205E8E002E3434 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B576027205E8E002E3434 /* Profile.swift */; };
 		CE8B576327205F2E002E3434 /* ProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B576227205F2E002E3434 /* ProfileDataManager.swift */; };
 		CE8C4079271BEEE000D0C0B5 /* FileStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */; };
-		CE9AF681270B89C1006D44A8 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AF680270B89C1006D44A8 /* ConversationViewController.swift */; };
+		CE9AF681270B89C1006D44A8 /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AF680270B89C1006D44A8 /* ChannelViewController.swift */; };
 		CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AF682270B8D39006D44A8 /* Icons.swift */; };
 		CE9AF685270B8D44006D44A8 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9AF684270B8D44006D44A8 /* Icons.xcassets */; };
 		CE9B0BC32721BEC60001DF15 /* ProfileDescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0BC22721BEC60001DF15 /* ProfileDescriptionTextField.swift */; };
@@ -65,13 +65,13 @@
 		CE044E4027133BBE00DE259F /* OCThemesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OCThemesViewController.xib; sourceTree = "<group>"; };
 		CE04B4E6271F52B80027F649 /* ProfileFilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilledButton.swift; sourceTree = "<group>"; };
 		CE04B4E8271F59270027F649 /* ProfileNameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNameTextField.swift; sourceTree = "<group>"; };
-		CE0B5F1D270CA538004B6232 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
+		CE0B5F1D270CA538004B6232 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		CE0FDBB726FFC7C800809ABB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE1F08A926F3BB67002A5985 /* Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE1F08B026F3BB67002A5985 /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
+		CE1F08B026F3BB67002A5985 /* ChannelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewController.swift; sourceTree = "<group>"; };
 		CE1F08B826F3BB68002A5985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE1F08BA26F3BB68002A5985 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 		CE39478D270F73CE004C6FD1 /* MyMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageView.swift; sourceTree = "<group>"; };
 		CE39478F270F7C1C004C6FD1 /* PartnerMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerMessageView.swift; sourceTree = "<group>"; };
 		CE394791270F8581004C6FD1 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		CE3E913C270E21070029DA74 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		CE3E913C270E21070029DA74 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		CE3E913E270E21120029DA74 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CE3E9140270E2B950029DA74 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
 		CE3E9142270E2C440029DA74 /* SF-Pro-Text-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-RegularItalic.otf"; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		CE8B576027205E8E002E3434 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		CE8B576227205F2E002E3434 /* ProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManager.swift; sourceTree = "<group>"; };
 		CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileStorageManager.swift; sourceTree = "<group>"; };
-		CE9AF680270B89C1006D44A8 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
+		CE9AF680270B89C1006D44A8 /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
 		CE9AF682270B8D39006D44A8 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		CE9AF684270B8D44006D44A8 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		CE9B0BC22721BEC60001DF15 /* ProfileDescriptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionTextField.swift; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 		CE0B5F1F270CA53F004B6232 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				CE0B5F1D270CA538004B6232 /* ConversationCell.swift */,
+				CE0B5F1D270CA538004B6232 /* ChannelCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -231,8 +231,8 @@
 		CE39478B270F738D004C6FD1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				CE9AF67D270B8986006D44A8 /* ConversationList */,
-				CE9AF67F270B89A7006D44A8 /* Conversation */,
+				CE9AF67D270B8986006D44A8 /* ChannelList */,
+				CE9AF67F270B89A7006D44A8 /* Channel */,
 				CE044E3C27133B5500DE259F /* Themes */,
 				CE9AF67E270B8995006D44A8 /* Profile */,
 				CEEDAEE7271C8815005B8F21 /* Common */,
@@ -252,7 +252,7 @@
 		CE3E913B270E20DE0029DA74 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CE3E913C270E21070029DA74 /* Conversation.swift */,
+				CE3E913C270E21070029DA74 /* Channel.swift */,
 				CE3E913E270E21120029DA74 /* Message.swift */,
 				CE26087F2718B01800CAE9B6 /* Theme.swift */,
 				CE8B576027205E8E002E3434 /* Profile.swift */,
@@ -290,13 +290,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		CE9AF67D270B8986006D44A8 /* ConversationList */ = {
+		CE9AF67D270B8986006D44A8 /* ChannelList */ = {
 			isa = PBXGroup;
 			children = (
-				CE1F08B026F3BB67002A5985 /* ConversationListViewController.swift */,
+				CE1F08B026F3BB67002A5985 /* ChannelListViewController.swift */,
 				CE0B5F1F270CA53F004B6232 /* Cells */,
 			);
-			path = ConversationList;
+			path = ChannelList;
 			sourceTree = "<group>";
 		};
 		CE9AF67E270B8995006D44A8 /* Profile */ = {
@@ -308,13 +308,13 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		CE9AF67F270B89A7006D44A8 /* Conversation */ = {
+		CE9AF67F270B89A7006D44A8 /* Channel */ = {
 			isa = PBXGroup;
 			children = (
-				CE9AF680270B89C1006D44A8 /* ConversationViewController.swift */,
+				CE9AF680270B89C1006D44A8 /* ChannelViewController.swift */,
 				CE3E9144270EAD320029DA74 /* Cells */,
 			);
-			path = Conversation;
+			path = Channel;
 			sourceTree = "<group>";
 		};
 		CE9C657A270F2F6F008756AC /* Helpers */ = {
@@ -564,17 +564,17 @@
 				CEE6513E2721F013009DD993 /* AcynsDataManager.swift in Sources */,
 				CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */,
 				CE9C657C270F2F8A008756AC /* ConfigurableCell.swift in Sources */,
-				CE9AF681270B89C1006D44A8 /* ConversationViewController.swift in Sources */,
+				CE9AF681270B89C1006D44A8 /* ChannelViewController.swift in Sources */,
 				CE04B4E9271F59270027F649 /* ProfileNameTextField.swift in Sources */,
 				CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */,
-				CE1F08B126F3BB67002A5985 /* ConversationListViewController.swift in Sources */,
+				CE1F08B126F3BB67002A5985 /* ChannelListViewController.swift in Sources */,
 				CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */,
 				CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */,
 				CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */,
 				CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */,
 				CE6667CA2720871200DD6B40 /* Data+Extension.swift in Sources */,
 				CE32F21D27048600007262A5 /* Fonts.swift in Sources */,
-				CE0B5F1E270CA538004B6232 /* ConversationCell.swift in Sources */,
+				CE0B5F1E270CA538004B6232 /* ChannelCell.swift in Sources */,
 				CED84B3E27025F4200D4E4EB /* Images.swift in Sources */,
 				CE6667CE2720ACB100DD6B40 /* ProgressView.swift in Sources */,
 				CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */,
@@ -586,7 +586,7 @@
 				CE3E9146270EAD430029DA74 /* MessageCell.swift in Sources */,
 				CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */,
 				CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */,
-				CE3E913D270E21070029DA74 /* Conversation.swift in Sources */,
+				CE3E913D270E21070029DA74 /* Channel.swift in Sources */,
 				CE3E913F270E21120029DA74 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

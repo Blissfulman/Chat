@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let theme = SettingsManager().theme
         NavigationController.setupAppearance(for: theme)
         
-        let mainViewController = ConversationListViewController()
+        let mainViewController = ChannelListViewController()
         let navigationController = NavigationController(rootViewController: mainViewController)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController

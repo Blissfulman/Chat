@@ -9,8 +9,8 @@ import Foundation
 
 extension Date {
     
-    /// Получение даты в текстовом формате, используемой в ячейке беседы.
-    func conversationCellDate() -> String {
+    /// Получение даты в текстовом формате, используемой в ячейке канала.
+    func channelCellDate() -> String {
         let relativeDateFormatter = DateFormatter()
         relativeDateFormatter.doesRelativeDateFormatting = true
         relativeDateFormatter.dateStyle = .short

@@ -1,11 +1,11 @@
 //
-//  ConversationViewController.swift
+//  ChannelViewController.swift
 //  Chat
 //
 //  Created by Evgeny Novgorodov on 05.10.2021.
 //
 
-final class ConversationViewController: UIViewController {
+final class ChannelViewController: UIViewController {
     
     // MARK: - Private properties
     
@@ -63,7 +63,7 @@ final class ConversationViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 
-extension ConversationViewController: UITableViewDataSource {
+extension ChannelViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         messages.count

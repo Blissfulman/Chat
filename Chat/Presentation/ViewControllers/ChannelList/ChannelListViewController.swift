@@ -1,11 +1,13 @@
 //
-//  ConversationListViewController.swift
+//  ChannelListViewController.swift
 //  Chat
 //
 //  Created by Evgeny Novgorodov on 16.09.2021.
 //
 
-final class ConversationListViewController: UIViewController {
+import Firebase
+
+final class ChannelListViewController: UIViewController {
     
     // MARK: - Nested types
     
@@ -39,9 +41,11 @@ final class ConversationListViewController: UIViewController {
         return tableView
     }()
     
-    private let onlineConversations: [Conversation] = Conversation.mockData().filter { $0.isOnline }
-    private let offlineConversations: [Conversation] = Conversation.mockData().filter { !$0.isOnline }
+    private let onlineChannels: [Channel] = Channel.mockData().filter { $0.isOnline }
+    private let offlineChannels: [Channel] = Channel.mockData().filter { !$0.isOnline }
     private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
+    private lazy var db = Firestore.firestore()
+    private lazy var reference = db.collection("channels")
     
     // MARK: - Lifecycle methods
     
@@ -72,7 +76,7 @@ final class ConversationListViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupUI() {
-        tableView.register(ConversationCell.self, forCellReuseIdentifier: String(describing: ConversationCell.self))
+        tableView.register(ChannelCell.self, forCellReuseIdentifier: String(describing: ChannelCell.self))
         view.addSubview(tableView)
         
         navigationItem.leftBarButtonItem = openSettingsBarButton
@@ -134,26 +138,26 @@ final class ConversationListViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 
-extension ConversationListViewController: UITableViewDataSource {
+extension ChannelListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         Sections.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == Sections.online.rawValue ? onlineConversations.count : offlineConversations.count
+        section == Sections.online.rawValue ? onlineChannels.count : offlineChannels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: ConversationCell.self),
+            withIdentifier: String(describing: ChannelCell.self),
             for: indexPath
-        ) as? ConversationCell else { return UITableViewCell() }
+        ) as? ChannelCell else { return UITableViewCell() }
         
         cell.configure(
             with: indexPath.section == Sections.online.rawValue
-                ? onlineConversations[indexPath.row]
-                : offlineConversations[indexPath.row]
+                ? onlineChannels[indexPath.row]
+                : offlineChannels[indexPath.row]
         )
         return cell
     }
@@ -165,13 +169,13 @@ extension ConversationListViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension ConversationListViewController: UITableViewDelegate {
+extension ChannelListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contactName = indexPath.section == Sections.online.rawValue
-            ? onlineConversations[indexPath.row].name
-            : offlineConversations[indexPath.row].name
-        let conversationVC = ConversationViewController(contactName: contactName)
-        navigationController?.show(conversationVC, sender: self)
+            ? onlineChannels[indexPath.row].name
+            : offlineChannels[indexPath.row].name
+        let channelVC = ChannelViewController(contactName: contactName)
+        navigationController?.show(channelVC, sender: self)
     }
 }
