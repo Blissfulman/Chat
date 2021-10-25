@@ -88,6 +88,7 @@ final class ConversationCell: UITableViewCell, ConfigurableCell {
     // MARK: - Lifecycle methods
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         contentView.backgroundColor = .white
         avatarImageView.image = Images.noPhoto
         fullNameLabel.text = nil

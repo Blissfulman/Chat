@@ -23,7 +23,7 @@ extension Date {
         let relativeDate = relativeDateFormatter.string(from: self)
         let absoluteDate = absoluteDateFormatter.string(from: self)
         
-        if (relativeDate == absoluteDate) {
+        if relativeDate == absoluteDate {
             absoluteDateFormatter.dateFormat = "d/MM/yyyy"
             return absoluteDateFormatter.string(from: self)
         } else {

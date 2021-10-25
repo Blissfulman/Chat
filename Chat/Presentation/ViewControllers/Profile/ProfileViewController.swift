@@ -22,25 +22,25 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     // MARK: - Private properties
     
-    private var topView: UIView = {
+    private lazy var topView: UIView = {
         let view = UIView().prepareForAutoLayout()
         view.backgroundColor = Palette.lightBarColor
         return view
     }()
     
-    private var topStackView: UIStackView = {
+    private lazy var topStackView: UIStackView = {
         let stackView = UIStackView().prepareForAutoLayout()
         return stackView
     }()
     
-    private var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
         label.font = Fonts.title
         label.text = "My Profile"
         return label
     }()
     
-    private var closeButton: UIButton = {
+    private lazy var closeButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
         button.titleLabel?.font = Fonts.buttonTitle
         button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
@@ -49,14 +49,14 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         return button
     }()
     
-    private var centralStackView: UIStackView = {
+    private lazy var centralStackView: UIStackView = {
         let stackView = UIStackView().prepareForAutoLayout()
         stackView.axis = .vertical
         stackView.spacing = 32
         return stackView
     }()
     
-    private var avatarImageView: UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView().prepareForAutoLayout()
         imageView.image = Images.noPhoto
         return imageView
@@ -80,7 +80,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         return textField
     }()
     
-    private var editAvatarButton: UIButton = {
+    private lazy var editAvatarButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
         button.titleLabel?.font = Fonts.buttonTitle
         button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
@@ -90,13 +90,13 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         return button
     }()
     
-    private var editProfileButton: UIButton = {
+    private lazy var editProfileButton: UIButton = {
         let button = ProfileFilledButton(withTitle: "Edit profile")
         button.addTarget(self, action: #selector(editProfileButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    private var buttonsStackView: UIStackView = {
+    private lazy var buttonsStackView: UIStackView = {
         let stackView = UIStackView().prepareForAutoLayout()
         stackView.axis = .vertical
         stackView.spacing = 20
@@ -104,13 +104,13 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         return stackView
     }()
     
-    private var cancelButton: UIButton = {
+    private lazy var cancelButton: UIButton = {
         let button = ProfileFilledButton(withTitle: "Cancel")
         button.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    private var saveButton: UIButton = {
+    private lazy var saveButton: UIButton = {
         let button = ProfileFilledButton(withTitle: "Save")
         button.isEnabled = false
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
@@ -317,17 +317,17 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             editAvatarButton.trailingAnchor.constraint(equalTo: avatarImageView.trailingAnchor),
             editAvatarButton.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
             
-            buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:  50),
-            buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -50),
+            buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             
             cancelButton.heightAnchor.constraint(equalToConstant: 40),
             saveButton.heightAnchor.constraint(equalToConstant: 40),
             
-            editProfileButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:  50),
-            editProfileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -50),
+            editProfileButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            editProfileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             editProfileButton.bottomAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                constant:  -defaultLowerButtonsBottomSpacing
+                constant: -defaultLowerButtonsBottomSpacing
             ),
             editProfileButton.heightAnchor.constraint(equalToConstant: 40),
             
@@ -424,7 +424,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             avatarData: avatarImageView.image?.jpegData(compressionQuality: 0.5)
         )
         
-        let savingTask: ((SavingVariant) -> Void) = { [weak self, asyncDataManager] savingVariant in
+        let savingTask: ((SavingVariant) -> Void) = { [weak self, asyncDataManager] _ in
             asyncDataManager.saveProfile(profile: profile) { result in
                 switch result {
                 case .success:

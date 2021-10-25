@@ -23,6 +23,7 @@ final class MessageCell: UITableViewCell, ConfigurableCell {
     // MARK: - Lifecycle methods
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         contentView.subviews.forEach { $0.removeFromSuperview() }
     }
     

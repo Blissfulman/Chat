@@ -9,7 +9,7 @@ import Foundation
 
 /// Асинхронный обработчик.
 protocol AsyncHandler {
-    func handle(task: @escaping () -> Void) -> Void
+    func handle(task: @escaping () -> Void)
 }
 
 /// Асинхронный обработчик на основе GCD.

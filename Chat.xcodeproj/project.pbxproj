@@ -422,6 +422,7 @@
 				CE1F08A626F3BB67002A5985 /* Frameworks */,
 				CE1F08A726F3BB67002A5985 /* Resources */,
 				CB106A6F488B8C7067D7C235 /* [CP] Embed Pods Frameworks */,
+				CEDBA13E2727367B00B5C98E /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -526,6 +527,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Chat/Pods-Chat-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		CEDBA13E2727367B00B5C98E /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
