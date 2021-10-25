@@ -5,8 +5,6 @@
 //  Created by Evgeny Novgorodov on 16.09.2021.
 //
 
-import UIKit
-
 final class ConversationListViewController: UIViewController {
     
     // MARK: - Nested types
@@ -64,7 +62,11 @@ final class ConversationListViewController: UIViewController {
     
     @objc
     private func openSettingsBarButtonTapped() {
-        print("Settings") // TEMP
+        let themesViewController = ThemesViewController { [weak self] theme in
+            self?.handleChangingTheme(to: theme)
+        }
+        themesViewController.modalPresentationStyle = .fullScreen
+        present(themesViewController, animated: true)
     }
     
     @objc
@@ -98,6 +100,12 @@ final class ConversationListViewController: UIViewController {
         view.backgroundColor = .white
         title = "Chat"
         tableView.rowHeight = 88
+    }
+    
+    private func handleChangingTheme(to theme: Theme) {
+        print(theme)
+        NavigationController.updateColors(for: theme)
+        SettingsManager().theme = theme
     }
 }
 

@@ -5,8 +5,6 @@
 //  Created by Evgeny Novgorodov on 16.09.2021.
 //
 
-import UIKit
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -20,10 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        let theme = SettingsManager().theme
+        NavigationController.setupAppearance(for: theme)
+        
         let mainViewController = ConversationListViewController()
-        let navigationController = UINavigationController(rootViewController: mainViewController)
-        navigationController.navigationBar.tintColor = Palette.barTint // TEMP
-        navigationController.navigationBar.prefersLargeTitles = true // TEMP
+        let navigationController = NavigationController(rootViewController: mainViewController)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

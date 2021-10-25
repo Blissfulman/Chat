@@ -5,8 +5,6 @@
 //  Created by Evgeny Novgorodov on 05.10.2021.
 //
 
-import UIKit
-
 final class ConversationCell: UITableViewCell, ConfigurableCell {
     
     typealias ConfigurationModel = Conversation
@@ -126,10 +124,10 @@ final class ConversationCell: UITableViewCell, ConfigurableCell {
 
     private func setupUI() {
         contentView.addSubview(mainStackView)
-        mainStackView.addArrangedSubviews([avatarImageView, secondStackView])
-        secondStackView.addArrangedSubviews([thirdStackView, messageLabel])
-        thirdStackView.addArrangedSubviews([fullNameLabel, dateStackView])
-        dateStackView.addArrangedSubviews([dateLabel, arrowImageView])
+        mainStackView.addArrangedSubviews(avatarImageView, secondStackView)
+        secondStackView.addArrangedSubviews(thirdStackView, messageLabel)
+        thirdStackView.addArrangedSubviews(fullNameLabel, dateStackView)
+        dateStackView.addArrangedSubviews(dateLabel, arrowImageView)
     }
     
     private func setupLayout() {

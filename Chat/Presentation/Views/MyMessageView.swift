@@ -5,8 +5,6 @@
 //  Created by Evgeny Novgorodov on 07.10.2021.
 //
 
-import UIKit
-
 final class MyMessageView: UIView {
     
     // MARK: - Nested types

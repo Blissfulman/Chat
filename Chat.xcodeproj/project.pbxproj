@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE044E4127133BBE00DE259F /* OCThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE044E3F27133BBE00DE259F /* OCThemesViewController.m */; };
+		CE044E4227133BBE00DE259F /* OCThemesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE044E4027133BBE00DE259F /* OCThemesViewController.xib */; };
 		CE0B5F1E270CA538004B6232 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B5F1D270CA538004B6232 /* ConversationCell.swift */; };
 		CE0B5F21270CA84E004B6232 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */; };
 		CE0FDBB826FFC7C800809ABB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0FDBB726FFC7C800809ABB /* Images.xcassets */; };
@@ -14,6 +16,9 @@
 		CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */; };
 		CE1F08B126F3BB67002A5985 /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08B026F3BB67002A5985 /* ConversationListViewController.swift */; };
 		CE1F08B926F3BB68002A5985 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1F08B726F3BB68002A5985 /* LaunchScreen.storyboard */; };
+		CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */; };
+		CE2608802718B01800CAE9B6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087F2718B01800CAE9B6 /* Theme.swift */; };
+		CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */; };
 		CE32F21A270484EE007262A5 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */; };
 		CE32F21B270484F1007262A5 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */; };
 		CE32F21D27048600007262A5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32F21C27048600007262A5 /* Fonts.swift */; };
@@ -32,6 +37,7 @@
 		CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AF682270B8D39006D44A8 /* Icons.swift */; };
 		CE9AF685270B8D44006D44A8 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9AF684270B8D44006D44A8 /* Icons.xcassets */; };
 		CE9C657C270F2F8A008756AC /* ConfigurableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */; };
+		CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA143DD271600D400F39F61 /* ThemesViewController.swift */; };
 		CED023E726FFB61100062489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED023E626FFB61100062489 /* Assets.xcassets */; };
 		CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED84B3827025BC300D4E4EB /* Palette.xcassets */; };
 		CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3B27025D1700D4E4EB /* Palette.swift */; };
@@ -39,6 +45,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE044E3D27133BBE00DE259F /* Chat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Chat-Bridging-Header.h"; sourceTree = "<group>"; };
+		CE044E3E27133BBE00DE259F /* OCThemesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCThemesViewController.h; sourceTree = "<group>"; };
+		CE044E3F27133BBE00DE259F /* OCThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCThemesViewController.m; sourceTree = "<group>"; };
+		CE044E4027133BBE00DE259F /* OCThemesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OCThemesViewController.xib; sourceTree = "<group>"; };
 		CE0B5F1D270CA538004B6232 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		CE0FDBB726FFC7C800809ABB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -48,6 +58,9 @@
 		CE1F08B026F3BB67002A5985 /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		CE1F08B826F3BB68002A5985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE1F08BA26F3BB68002A5985 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		CE26087F2718B01800CAE9B6 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		CE32F21C27048600007262A5 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -66,6 +79,7 @@
 		CE9AF682270B8D39006D44A8 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		CE9AF684270B8D44006D44A8 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableCell.swift; sourceTree = "<group>"; };
+		CEA143DD271600D400F39F61 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		CED023E626FFB61100062489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CED84B3827025BC300D4E4EB /* Palette.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Palette.xcassets; sourceTree = "<group>"; };
 		CED84B3B27025D1700D4E4EB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -83,6 +97,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE044E3C27133B5500DE259F /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				CEA143DF271600DD00F39F61 /* Obj-C */,
+				CEA143DC271600C400F39F61 /* Swift */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
 		CE0B5F1F270CA53F004B6232 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,11 +135,20 @@
 			children = (
 				CE3E913B270E20DE0029DA74 /* Model */,
 				CED023E526FFAFE100062489 /* Presentation */,
+				CE2608812718C3C200CAE9B6 /* Managers */,
 				CE4E07E027023DE100AE0113 /* Additional files */,
 				CED023E426FFAFA800062489 /* Supporting files */,
 				CED023E326FFAEE300062489 /* Resources */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		CE2608812718C3C200CAE9B6 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		CE32F21627048490007262A5 /* Assets */ = {
@@ -145,8 +177,10 @@
 		CE39478B270F738D004C6FD1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */,
 				CE9AF67D270B8986006D44A8 /* ConversationList */,
 				CE9AF67F270B89A7006D44A8 /* Conversation */,
+				CE044E3C27133B5500DE259F /* Themes */,
 				CE9AF67E270B8995006D44A8 /* Profile */,
 			);
 			path = ViewControllers;
@@ -166,6 +200,7 @@
 			children = (
 				CE3E913C270E21070029DA74 /* Conversation.swift */,
 				CE3E913E270E21120029DA74 /* Message.swift */,
+				CE26087F2718B01800CAE9B6 /* Theme.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -230,6 +265,25 @@
 				CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CEA143DC271600C400F39F61 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				CEA143DD271600D400F39F61 /* ThemesViewController.swift */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
+		CEA143DF271600DD00F39F61 /* Obj-C */ = {
+			isa = PBXGroup;
+			children = (
+				CE044E3E27133BBE00DE259F /* OCThemesViewController.h */,
+				CE044E3F27133BBE00DE259F /* OCThemesViewController.m */,
+				CE044E4027133BBE00DE259F /* OCThemesViewController.xib */,
+				CE044E3D27133BBE00DE259F /* Chat-Bridging-Header.h */,
+			);
+			path = "Obj-C";
 			sourceTree = "<group>";
 		};
 		CED023E326FFAEE300062489 /* Resources */ = {
@@ -303,6 +357,7 @@
 				TargetAttributes = {
 					CE1F08A826F3BB67002A5985 = {
 						CreatedOnToolsVersion = 12.5.1;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -332,6 +387,7 @@
 				CE0FDBB826FFC7C800809ABB /* Images.xcassets in Resources */,
 				CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */,
 				CE3E9143270E2C440029DA74 /* SF-Pro-Text-RegularItalic.otf in Resources */,
+				CE044E4227133BBE00DE259F /* OCThemesViewController.xib in Resources */,
 				CE9AF685270B8D44006D44A8 /* Icons.xcassets in Resources */,
 				CE32F21A270484EE007262A5 /* SF-Pro-Display-Bold.otf in Resources */,
 				CE0B5F21270CA84E004B6232 /* SF-Pro-Text-Semibold.otf in Resources */,
@@ -351,13 +407,17 @@
 			files = (
 				CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */,
 				CE394790270F7C1C004C6FD1 /* PartnerMessageView.swift in Sources */,
+				CE044E4127133BBE00DE259F /* OCThemesViewController.m in Sources */,
+				CE2608802718B01800CAE9B6 /* Theme.swift in Sources */,
 				CE39478E270F73CE004C6FD1 /* MyMessageView.swift in Sources */,
 				CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */,
 				CE9C657C270F2F8A008756AC /* ConfigurableCell.swift in Sources */,
 				CE9AF681270B89C1006D44A8 /* ConversationViewController.swift in Sources */,
+				CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */,
 				CE1F08B126F3BB67002A5985 /* ConversationListViewController.swift in Sources */,
 				CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */,
 				CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */,
+				CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */,
 				CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */,
 				CE32F21D27048600007262A5 /* Fonts.swift in Sources */,
 				CE0B5F1E270CA538004B6232 /* ConversationCell.swift in Sources */,
@@ -365,6 +425,7 @@
 				CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */,
 				CE394792270F8581004C6FD1 /* Date+Extension.swift in Sources */,
 				CE3E9146270EAD430029DA74 /* MessageCell.swift in Sources */,
+				CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */,
 				CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */,
 				CE3E913D270E21070029DA74 /* Conversation.swift in Sources */,
 				CE3E913F270E21120029DA74 /* Message.swift in Sources */,
@@ -394,7 +455,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -455,7 +516,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -506,6 +567,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SMTJMFX82;
 				INFOPLIST_FILE = "Chat/Supporting files/Info.plist";
@@ -515,6 +577,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.evgeny-novgorodov.Chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Chat/Presentation/ViewControllers/Themes/Obj-C/Chat-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -525,6 +589,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SMTJMFX82;
 				INFOPLIST_FILE = "Chat/Supporting files/Info.plist";
@@ -534,6 +599,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.evgeny-novgorodov.Chat";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Chat/Presentation/ViewControllers/Themes/Obj-C/Chat-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

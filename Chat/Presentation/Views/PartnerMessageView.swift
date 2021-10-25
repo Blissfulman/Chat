@@ -5,8 +5,6 @@
 //  Created by Evgeny Novgorodov on 08.10.2021.
 //
 
-import UIKit
-
 final class PartnerMessageView: UIView {
     
     // MARK: - Nested types
