@@ -429,7 +429,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
                 switch result {
                 case .success:
                     self?.state = .saved
-                    self?.showAlert(title: "Данные сохранены")
+                    self?.showAlert(title: "Data saved")
                 case .failure(let error):
                     print(error.localizedDescription)
                     self?.showFailureSavingAlert {
