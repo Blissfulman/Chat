@@ -44,6 +44,7 @@ final class ChannelViewController: UIViewController {
     private lazy var newMessageTextField: UITextField = {
         let textField = NewMessageTextField()
         textField.setCornerRadius(Constants.newMessageTexrFieldHeight / 2)
+        textField.delegate = self
         return textField
     }()
     
@@ -53,6 +54,7 @@ final class ChannelViewController: UIViewController {
         return button
     }()
     
+    private let mySenderID = SettingsManager.mySenderID // TEMP
     private let channel: Channel
     private lazy var db = Firestore.firestore()
     private lazy var reference: CollectionReference = {
@@ -130,9 +132,14 @@ final class ChannelViewController: UIViewController {
                 return
             }
             if let messages = snapshot?.documents {
-                self?.messages = messages.map { Message(snapshot: $0) }
+                self?.messages = messages.map { Message(snapshot: $0) }.sorted(by: { $0.created < $1.created })
             }
         }
+    }
+    
+    private func sendMessage(_ text: String) {
+        let newMessage = Message(content: text, created: Date(), senderId: mySenderID, senderName: "Ferry") // TEMP
+        reference.addDocument(data: newMessage.toDict)
     }
 }
 
@@ -152,5 +159,18 @@ extension ChannelViewController: UITableViewDataSource {
         
         cell.configure(with: messages[indexPath.row])
         return cell
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension ChannelViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let text = textField.text {
+            sendMessage(text)
+            textField.text = ""
+        }
+        return true
     }
 }

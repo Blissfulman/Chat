@@ -8,10 +8,31 @@
 import Firebase
 
 struct Message {
+    
+    // MARK: - Public properties
+    
     let content: String
     let created: Date
     let senderId: String
     let senderName: String
+    
+    var toDict: [String: Any] {
+        [
+            "content": content,
+            "created": Timestamp(date: created),
+            "senderID": senderId,
+            "senderName": senderName
+        ]
+    }
+    
+    // MARK: - Initialization
+    
+    init(content: String, created: Date, senderId: String, senderName: String) {
+        self.content = content
+        self.created = created
+        self.senderId = senderId
+        self.senderName = senderName
+    }
     
     init(snapshot: QueryDocumentSnapshot) {
         let data = snapshot.data()

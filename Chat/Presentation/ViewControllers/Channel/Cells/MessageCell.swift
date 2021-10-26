@@ -11,7 +11,7 @@ final class MessageCell: UITableViewCell, ConfigurableCell {
     
     // MARK: - Private properties
     
-    private let mySenderID = SettingsManager.mySenderID
+    private let mySenderID = SettingsManager.mySenderID // TEMP
     
     // MARK: - Initialization
     

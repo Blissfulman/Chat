@@ -72,6 +72,7 @@ final class MyMessageView: UIView {
             messageLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -16),
             messageLabel.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -26),
             
+            dateLabel.leadingAnchor.constraint(greaterThanOrEqualTo: messageLabel.leadingAnchor),
             dateLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -16),
             dateLabel.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -6)
         ])
