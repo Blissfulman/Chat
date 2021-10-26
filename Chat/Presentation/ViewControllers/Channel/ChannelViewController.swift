@@ -7,11 +7,12 @@
 
 import Firebase
 
-final class ChannelViewController: UIViewController {
+final class ChannelViewController: KeyboardNotificationsViewController {
     
     // MARK: - Nested types
     
     enum Constants {
+        static let bottomViewHeight: CGFloat = 80
         static let newMessageTexrFieldHeight: CGFloat = 32
     }
     
@@ -29,8 +30,12 @@ final class ChannelViewController: UIViewController {
         let view = UIView().prepareForAutoLayout()
         let theme = SettingsManager().theme
         view.backgroundColor = theme.themeColors.backgroundColor
-        view.layer.borderWidth = 0.5
-        view.layer.borderColor = UIColor.gray.cgColor
+        return view
+    }()
+    
+    private lazy var borderView: UIView = {
+        let view = UIView().prepareForAutoLayout()
+        view.backgroundColor = .gray // TEMP
         return view
     }()
     
@@ -54,6 +59,8 @@ final class ChannelViewController: UIViewController {
         return button
     }()
     
+    private var bottomViewBottomConstraint: NSLayoutConstraint?
+    private let defaultBottomViewBottomSpacing: CGFloat = 0
     private let mySenderID = SettingsManager.mySenderID // TEMP
     private let channel: Channel
     private lazy var db = Firestore.firestore()
@@ -88,11 +95,27 @@ final class ChannelViewController: UIViewController {
         setupDataFetching()
     }
     
+    // MARK: - KeyboardNotificationsViewController
+    
+    override func keyboardWillShow(_ notification: Notification) {
+        animateWithKeyboard(notification: notification) { keyboardFrame in
+            self.bottomViewBottomConstraint?.constant = -keyboardFrame.height
+                - self.defaultBottomViewBottomSpacing
+        }
+    }
+    
+    override func keyboardWillHide(_ notification: Notification) {
+        animateWithKeyboard(notification: notification) { _ in
+            self.bottomViewBottomConstraint?.constant = -self.defaultBottomViewBottomSpacing
+        }
+    }
+    
     // MARK: - Private methods
     
     private func setupUI() {
         view.addSubview(tableView)
         view.addSubview(bottomView)
+        bottomView.addSubview(borderView)
         bottomView.addSubview(bottomViewStackView)
         bottomViewStackView.addArrangedSubviews(addButton, newMessageTextField)
         tableView.register(MessageCell.self, forCellReuseIdentifier: String(describing: MessageCell.self))
@@ -105,10 +128,14 @@ final class ChannelViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
             
-            bottomView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
-            bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -1),
-            bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 1),
-            bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 1),
+            bottomView.topAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: -Constants.bottomViewHeight),
+            bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            
+            borderView.topAnchor.constraint(equalTo: bottomView.topAnchor),
+            borderView.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor),
+            borderView.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor),
+            borderView.heightAnchor.constraint(equalToConstant: 0.5),
             
             bottomViewStackView.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 17),
             bottomViewStackView.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 20),
@@ -117,6 +144,9 @@ final class ChannelViewController: UIViewController {
             newMessageTextField.heightAnchor.constraint(equalToConstant: Constants.newMessageTexrFieldHeight),
             addButton.widthAnchor.constraint(equalToConstant: 19)
         ])
+        
+        bottomViewBottomConstraint = bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+        bottomViewBottomConstraint?.isActive = true
     }
     
     private func configureUI() {
@@ -132,7 +162,7 @@ final class ChannelViewController: UIViewController {
                 return
             }
             if let messages = snapshot?.documents {
-                self?.messages = messages.map { Message(snapshot: $0) }.sorted(by: { $0.created < $1.created })
+                self?.messages = messages.map { Message(snapshot: $0) }.sorted { $0.created < $1.created }
             }
         }
     }
