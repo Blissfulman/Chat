@@ -9,6 +9,8 @@ import Foundation
 
 final class SettingsManager {
     
+    static var mySenderID = String(describing: UUID()) // TEMP
+    
     // MARK: - Private properties
     
     private let fileStorageManager = FileStorageManager()

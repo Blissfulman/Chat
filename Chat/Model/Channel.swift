@@ -13,12 +13,12 @@ struct Channel {
     let lastMessage: String?
     let lastActivity: Date?
     
-    init?(snapshot: QueryDocumentSnapshot) {
+    init(snapshot: QueryDocumentSnapshot) {
         let data = snapshot.data()
-        guard let name = data["name"] as? String else { return nil }
         self.identifier = snapshot.documentID
-        self.name = name
+        self.name = data["name"] as? String ?? ""
         self.lastMessage = data["lastMessage"] as? String
-        self.lastActivity = data["lastActivity"] as? Date
+        let timestamp = data["lastActivity"] as? Timestamp
+        self.lastActivity = timestamp?.dateValue()
     }
 }

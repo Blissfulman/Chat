@@ -27,14 +27,14 @@ final class ChannelListViewController: UIViewController {
         return tableView
     }()
     
+    private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
+    private lazy var db = Firestore.firestore()
+    private lazy var reference = db.collection("channels")
     private var channels = [Channel]() {
         didSet {
             tableView.reloadData()
         }
     }
-    private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
-    private lazy var db = Firestore.firestore()
-    private lazy var reference = db.collection("channels")
     
     // MARK: - Lifecycle methods
     
@@ -97,7 +97,7 @@ final class ChannelListViewController: UIViewController {
                 return
             }
             if let channels = snapshot?.documents {
-                self?.channels = channels.compactMap { Channel(snapshot: $0) }
+                self?.channels = channels.map { Channel(snapshot: $0) }
             }
         }
     }
@@ -161,8 +161,7 @@ extension ChannelListViewController: UITableViewDataSource {
 extension ChannelListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let channelName = channels[indexPath.row].name
-        let channelVC = ChannelViewController(channelName: channelName)
+        let channelVC = ChannelViewController(channel: channels[indexPath.row])
         navigationController?.show(channelVC, sender: self)
     }
 }

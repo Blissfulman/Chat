@@ -5,6 +5,8 @@
 //  Created by Evgeny Novgorodov on 05.10.2021.
 //
 
+import Firebase
+
 final class ChannelViewController: UIViewController {
     
     // MARK: - Private properties
@@ -16,14 +18,23 @@ final class ChannelViewController: UIViewController {
         return tableView
     }()
     
-    private let messages: [Message] = Message.mockData()
+    private let channel: Channel
+    private lazy var db = Firestore.firestore()
+    private lazy var reference: CollectionReference = {
+        let channelIdentifier = channel.identifier
+        return db.collection("channels").document(channelIdentifier).collection("messages")
+    }()
+    private var messages = [Message]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     // MARK: - Initialization
     
-    // Позднее, скорее всего, нужно будет передавать модель или ID канала
-    init(channelName: String) {
+    init(channel: Channel) {
+        self.channel = channel
         super.init(nibName: nil, bundle: nil)
-        title = channelName
     }
     
     required init?(coder: NSCoder) {
@@ -37,6 +48,7 @@ final class ChannelViewController: UIViewController {
         setupUI()
         setupLayout()
         configureUI()
+        setupDataFetching()
     }
     
     // MARK: - Private methods
@@ -58,6 +70,19 @@ final class ChannelViewController: UIViewController {
     private func configureUI() {
         navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = .white
+        title = channel.name
+    }
+    
+    private func setupDataFetching() {
+        reference.addSnapshotListener { [weak self] snapshot, error in
+            guard error == nil else {
+                self?.showAlert(title: "Error", message: error?.localizedDescription)
+                return
+            }
+            if let messages = snapshot?.documents {
+                self?.messages = messages.map { Message(snapshot: $0) }
+            }
+        }
     }
 }
 
