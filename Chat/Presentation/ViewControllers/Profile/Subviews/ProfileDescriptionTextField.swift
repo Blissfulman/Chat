@@ -11,7 +11,7 @@ final class ProfileDescriptionTextField: UITextField {
     
     override var isEnabled: Bool {
         didSet {
-            layer.borderColor = isEnabled ? Palette.textViewBorderGray?.cgColor : UIColor.clear.cgColor
+            layer.borderColor = isEnabled ? Palette.textFieldBorderGray?.cgColor : UIColor.clear.cgColor
         }
     }
     

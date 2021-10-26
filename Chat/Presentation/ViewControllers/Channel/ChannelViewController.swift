@@ -9,13 +9,48 @@ import Firebase
 
 final class ChannelViewController: UIViewController {
     
+    // MARK: - Nested types
+    
+    enum Constants {
+        static let newMessageTexrFieldHeight: CGFloat = 32
+    }
+    
     // MARK: - Private properties
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView().prepareForAutoLayout()
         tableView.separatorStyle = .none
+        tableView.keyboardDismissMode = .onDrag
         tableView.dataSource = self
         return tableView
+    }()
+    
+    private lazy var bottomView: UIView = {
+        let view = UIView().prepareForAutoLayout()
+        let theme = SettingsManager().theme
+        view.backgroundColor = theme.themeColors.backgroundColor
+        view.layer.borderWidth = 0.5
+        view.layer.borderColor = UIColor.gray.cgColor
+        return view
+    }()
+    
+    private lazy var bottomViewStackView: UIStackView = {
+        let stackView = UIStackView().prepareForAutoLayout()
+        stackView.alignment = .center
+        stackView.spacing = 13.5
+        return stackView
+    }()
+    
+    private lazy var newMessageTextField: UITextField = {
+        let textField = NewMessageTextField()
+        textField.setCornerRadius(Constants.newMessageTexrFieldHeight / 2)
+        return textField
+    }()
+    
+    private lazy var addButton: UIButton = {
+        let button = UIButton().prepareForAutoLayout()
+        button.setImage(Icons.addToMessage, for: .normal)
+        return button
     }()
     
     private let channel: Channel
@@ -55,6 +90,9 @@ final class ChannelViewController: UIViewController {
     
     private func setupUI() {
         view.addSubview(tableView)
+        view.addSubview(bottomView)
+        bottomView.addSubview(bottomViewStackView)
+        bottomViewStackView.addArrangedSubviews(addButton, newMessageTextField)
         tableView.register(MessageCell.self, forCellReuseIdentifier: String(describing: MessageCell.self))
     }
     
@@ -63,7 +101,19 @@ final class ChannelViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
+            
+            bottomView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
+            bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -1),
+            bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 1),
+            bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 1),
+            
+            bottomViewStackView.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 17),
+            bottomViewStackView.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 20),
+            bottomViewStackView.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
+            
+            newMessageTextField.heightAnchor.constraint(equalToConstant: Constants.newMessageTexrFieldHeight),
+            addButton.widthAnchor.constraint(equalToConstant: 19)
         ])
     }
     

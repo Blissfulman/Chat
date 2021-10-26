@@ -8,4 +8,5 @@
 enum Icons {
     static let settings = #imageLiteral(resourceName: "settings")
     static let arrowRight = #imageLiteral(resourceName: "arrow-right")
+    static let addToMessage = #imageLiteral(resourceName: "add-to-message")
 }

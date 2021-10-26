@@ -14,6 +14,7 @@ enum Fonts {
     static let subTitle = UIFont(name: "SF Pro Display Bold", size: 24) ?? .systemFont(ofSize: 24, weight: .bold)
     static let buttonTitle = UIFont(name: "SF Pro Text Regular", size: 17) ?? .systemFont(ofSize: 17)
     static let body = UIFont(name: "SF Pro Text Regular", size: 16) ?? .systemFont(ofSize: 16)
+    static let newMessageTextField = UIFont(name: "SF Pro Text Regular", size: 17) ?? .systemFont(ofSize: 17)
     
     static let channelCellName = UIFont(name: "SF Pro Text Semibold", size: 15)
         ?? .systemFont(ofSize: 15, weight: .semibold)
