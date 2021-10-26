@@ -18,6 +18,13 @@ final class ChannelListViewController: UIViewController {
         action: #selector(openSettingsBarButtonTapped)
     )
     
+    private lazy var addChannelBarButton = UIBarButtonItem(
+        image: Icons.addToMessage, // TEMP
+        style: .plain,
+        target: self,
+        action: #selector(addChannelBarButtonTapped)
+    )
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView().prepareForAutoLayout()
         tableView.rowHeight = 88
@@ -58,6 +65,15 @@ final class ChannelListViewController: UIViewController {
     }
     
     @objc
+    private func addChannelBarButtonTapped() {
+        showAddChannelAlert { [weak self] channelName in
+            guard let channelName = channelName, !channelName.isEmpty else { return }
+            let newChannel = Channel(identifier: "", name: channelName, lastMessage: nil, lastActivity: nil)
+            self?.reference.addDocument(data: newChannel.toDict)
+        }
+    }
+    
+    @objc
     private func openProfileBarButtonTapped() {
         let profileVC = ProfileViewController()
         present(profileVC, animated: true)
@@ -69,7 +85,7 @@ final class ChannelListViewController: UIViewController {
         tableView.register(ChannelCell.self, forCellReuseIdentifier: String(describing: ChannelCell.self))
         view.addSubview(tableView)
         
-        navigationItem.leftBarButtonItem = openSettingsBarButton
+        navigationItem.leftBarButtonItems = [openSettingsBarButton, addChannelBarButton]
         customProfileBarButton { [weak self] barButtonItem in
             self?.navigationItem.rightBarButtonItem = barButtonItem
         }
@@ -97,7 +113,7 @@ final class ChannelListViewController: UIViewController {
                 return
             }
             if let channels = snapshot?.documents {
-                self?.channels = channels.map { Channel(snapshot: $0) }
+                self?.channels = channels.map { Channel(snapshot: $0) }.sorted { $0.name < $1.name } // TEMP
             }
         }
     }
@@ -134,6 +150,22 @@ final class ChannelListViewController: UIViewController {
             
             completion(UIBarButtonItem(customView: button))
         }
+    }
+    
+    private func showAddChannelAlert(competion: @escaping ((String?) -> Void)) {
+        let alert = UIAlertController(title: "Input channel name", message: nil, preferredStyle: .alert)
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Channel name"
+        }
+        let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
+            competion(alert.textFields?.first?.text)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        alert.preferredAction = okAction
+        present(alert, animated: true)
     }
 }
 
