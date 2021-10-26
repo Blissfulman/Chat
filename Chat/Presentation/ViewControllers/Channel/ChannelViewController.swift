@@ -20,10 +20,10 @@ final class ChannelViewController: UIViewController {
     
     // MARK: - Initialization
     
-    // Позднее, скорее всего, нужно будет передавать модель или ID контакта
-    init(contactName: String) {
+    // Позднее, скорее всего, нужно будет передавать модель или ID канала
+    init(channelName: String) {
         super.init(nibName: nil, bundle: nil)
-        title = contactName
+        title = channelName
     }
     
     required init?(coder: NSCoder) {

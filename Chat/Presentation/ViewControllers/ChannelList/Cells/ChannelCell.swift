@@ -89,8 +89,6 @@ final class ChannelCell: UITableViewCell, ConfigurableCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        contentView.backgroundColor = .white
-        avatarImageView.image = Images.noPhoto
         fullNameLabel.text = nil
         dateLabel.text = nil
         messageLabel.text = nil
@@ -100,24 +98,18 @@ final class ChannelCell: UITableViewCell, ConfigurableCell {
     // MARK: - Public methods
     
     func configure(with model: ConfigurationModel) {
-        if let avatarData = model.avatarData {
-            avatarImageView.image = UIImage(data: avatarData)
-        }
         fullNameLabel.text = model.name
-        if let date = model.date {
+        if let date = model.lastActivity {
             dateLabel.text = date.channelCellDate()
         }
-        if let message = model.message {
+        if let message = model.lastMessage {
             messageLabel.text = message
-            if model.hasUnreadMessage {
+            if model.lastMessage != nil {
                 messageLabel.font = Fonts.channelCellUnreadMessage
             }
         } else {
             messageLabel.text = "No messages yet"
             messageLabel.font = Fonts.channelCellNoMessage
-        }
-        if model.isOnline {
-            contentView.backgroundColor = UIColor.yellow.withAlphaComponent(0.1)
         }
     }
     
@@ -146,5 +138,6 @@ final class ChannelCell: UITableViewCell, ConfigurableCell {
     private func configureUI() {
         avatarImageView.setCornerRadius(24)
         selectionStyle = .none
+        avatarImageView.image = Images.noPhoto // TEMP
     }
 }

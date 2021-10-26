@@ -9,22 +9,6 @@ import Firebase
 
 final class ChannelListViewController: UIViewController {
     
-    // MARK: - Nested types
-    
-    private enum Sections: Int, CaseIterable {
-        case online
-        case history
-        
-        var title: String {
-            switch self {
-            case .online:
-                return "Online"
-            case .history:
-                return "History"
-            }
-        }
-    }
-    
     // MARK: - Private properties
     
     private lazy var openSettingsBarButton = UIBarButtonItem(
@@ -36,13 +20,18 @@ final class ChannelListViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView().prepareForAutoLayout()
+        tableView.rowHeight = 88
+        tableView.estimatedRowHeight = 88
         tableView.dataSource = self
         tableView.delegate = self
         return tableView
     }()
     
-    private let onlineChannels: [Channel] = Channel.mockData().filter { $0.isOnline }
-    private let offlineChannels: [Channel] = Channel.mockData().filter { !$0.isOnline }
+    private var channels = [Channel]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
     private lazy var db = Firestore.firestore()
     private lazy var reference = db.collection("channels")
@@ -54,6 +43,7 @@ final class ChannelListViewController: UIViewController {
         setupUI()
         setupLayout()
         configureUI()
+        setupDataFetching()
     }
     
     // MARK: - Actions
@@ -97,8 +87,19 @@ final class ChannelListViewController: UIViewController {
     private func configureUI() {
         navigationItem.backButtonTitle = ""
         view.backgroundColor = .white
-        title = "Chat"
-        tableView.rowHeight = 88
+        title = "Channels"
+    }
+    
+    private func setupDataFetching() {
+        reference.addSnapshotListener { [weak self] snapshot, error in
+            guard error == nil else {
+                self?.showAlert(title: "Error", message: error?.localizedDescription)
+                return
+            }
+            if let channels = snapshot?.documents {
+                self?.channels = channels.compactMap { Channel(snapshot: $0) }
+            }
+        }
     }
     
     private func handleChangingTheme(to theme: Theme) {
@@ -140,12 +141,8 @@ final class ChannelListViewController: UIViewController {
 
 extension ChannelListViewController: UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        Sections.allCases.count
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == Sections.online.rawValue ? onlineChannels.count : offlineChannels.count
+        channels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -154,16 +151,8 @@ extension ChannelListViewController: UITableViewDataSource {
             for: indexPath
         ) as? ChannelCell else { return UITableViewCell() }
         
-        cell.configure(
-            with: indexPath.section == Sections.online.rawValue
-                ? onlineChannels[indexPath.row]
-                : offlineChannels[indexPath.row]
-        )
+        cell.configure(with: channels[indexPath.row])
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        Sections(rawValue: section)?.title
     }
 }
 
@@ -172,10 +161,8 @@ extension ChannelListViewController: UITableViewDataSource {
 extension ChannelListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contactName = indexPath.section == Sections.online.rawValue
-            ? onlineChannels[indexPath.row].name
-            : offlineChannels[indexPath.row].name
-        let channelVC = ChannelViewController(contactName: contactName)
+        let channelName = channels[indexPath.row].name
+        let channelVC = ChannelViewController(channelName: channelName)
         navigationController?.show(channelVC, sender: self)
     }
 }
