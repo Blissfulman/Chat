@@ -71,6 +71,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     private var messages = [Message]() {
         didSet {
             tableView.reloadData()
+            scrollToBottom()
         }
     }
     
@@ -99,8 +100,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     
     override func keyboardWillShow(_ notification: Notification) {
         animateWithKeyboard(notification: notification) { keyboardFrame in
-            self.bottomViewBottomConstraint?.constant = -keyboardFrame.height
-                - self.defaultBottomViewBottomSpacing
+            self.bottomViewBottomConstraint?.constant = -keyboardFrame.height - self.defaultBottomViewBottomSpacing
         }
     }
     
@@ -170,6 +170,15 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     private func sendMessage(_ text: String) {
         let newMessage = Message(content: text, created: Date(), senderID: mySenderID, senderName: "Ferry") // TEMP
         reference.addDocument(data: newMessage.toDict)
+    }
+    
+    private func scrollToBottom() {
+        guard !messages.isEmpty else { return }
+        tableView.scrollToBottom(animated: false)
+        // TEMP: Костыль, т.к. с первого раза не всегда до самого низа скроллится, а как это решить ещё не понял
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
+            self?.tableView.scrollToBottom(animated: false)
+        }
     }
 }
 
