@@ -49,6 +49,7 @@ final class PartnerMessageView: UIView {
         let label = UILabel().prepareForAutoLayout()
         label.font = Fonts.messageCellDate
         label.textColor = UIColor.black.withAlphaComponent(0.25)
+        label.textAlignment = .right
         return label
     }()
     
@@ -71,8 +72,7 @@ final class PartnerMessageView: UIView {
         prepareForAutoLayout()
         addSubview(shapeImageView)
         addSubview(stackView)
-        stackView.addArrangedSubviews(authorNameLabel, messageLabel)
-        addSubview(dateLabel)
+        stackView.addArrangedSubviews(authorNameLabel, messageLabel, dateLabel)
     }
     
     private func setupLayout() {
@@ -85,11 +85,7 @@ final class PartnerMessageView: UIView {
             stackView.topAnchor.constraint(equalTo: shapeImageView.topAnchor, constant: 5),
             stackView.leadingAnchor.constraint(equalTo: shapeImageView.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -8),
-            stackView.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -26),
-            
-            dateLabel.leadingAnchor.constraint(greaterThanOrEqualTo: stackView.leadingAnchor),
-            dateLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -8),
-            dateLabel.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -6)
+            stackView.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -6)
         ])
     }
     
