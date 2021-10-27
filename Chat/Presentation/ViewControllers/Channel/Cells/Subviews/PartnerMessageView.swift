@@ -10,6 +10,7 @@ final class PartnerMessageView: UIView {
     // MARK: - Nested types
     
     struct Model {
+        let authorName: String
         let text: String
         let date: String
     }
@@ -21,6 +22,20 @@ final class PartnerMessageView: UIView {
         imageView.contentMode = .scaleToFill
         imageView.image = Images.partnerMessageShape
         return imageView
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView().prepareForAutoLayout()
+        stackView.axis = .vertical
+        stackView.spacing = 3
+        return stackView
+    }()
+    
+    private lazy var authorNameLabel: UILabel = {
+        let label = UILabel().prepareForAutoLayout()
+        label.font = Fonts.messageCellAuthorName
+        label.textColor = Palette.authorNameMessageColor
+        return label
     }()
     
     private lazy var messageLabel: UILabel = {
@@ -55,7 +70,8 @@ final class PartnerMessageView: UIView {
     private func setupUI() {
         prepareForAutoLayout()
         addSubview(shapeImageView)
-        addSubview(messageLabel)
+        addSubview(stackView)
+        stackView.addArrangedSubviews(authorNameLabel, messageLabel)
         addSubview(dateLabel)
     }
     
@@ -66,18 +82,19 @@ final class PartnerMessageView: UIView {
             shapeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             shapeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             
-            messageLabel.topAnchor.constraint(equalTo: shapeImageView.topAnchor, constant: 5),
-            messageLabel.leadingAnchor.constraint(equalTo: shapeImageView.leadingAnchor, constant: 16),
-            messageLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -8),
-            messageLabel.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -26),
+            stackView.topAnchor.constraint(equalTo: shapeImageView.topAnchor, constant: 5),
+            stackView.leadingAnchor.constraint(equalTo: shapeImageView.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -8),
+            stackView.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -26),
             
-            dateLabel.leadingAnchor.constraint(greaterThanOrEqualTo: messageLabel.leadingAnchor),
+            dateLabel.leadingAnchor.constraint(greaterThanOrEqualTo: stackView.leadingAnchor),
             dateLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -8),
             dateLabel.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -6)
         ])
     }
     
     private func configureUI(model: Model) {
+        authorNameLabel.text = model.authorName
         messageLabel.text = model.text
         dateLabel.text = model.date
         shapeImageView.setMessageShapeShadow()

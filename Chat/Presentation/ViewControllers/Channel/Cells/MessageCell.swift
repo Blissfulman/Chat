@@ -35,16 +35,13 @@ final class MessageCell: UITableViewCell, ConfigurableCell {
     
     func configure(with model: ConfigurationModel) {
         if model.senderID == mySenderID {
-            let model = MyMessageView.Model(
-                text: model.content,
-                date: model.created.messageCellDate(),
-                isUnread: true // TEMP
-            )
+            let model = MyMessageView.Model(text: model.content, date: model.created.messageCellDate())
             let messageView = MyMessageView(frame: .zero, model: model)
             contentView.addSubview(messageView)
             setupMyMessageLayout(messageView)
         } else {
             let model = PartnerMessageView.Model(
+                authorName: model.senderName,
                 text: model.content,
                 date: model.created.messageCellDate()
             )

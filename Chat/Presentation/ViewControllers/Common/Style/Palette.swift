@@ -10,6 +10,7 @@ enum Palette {
     static let labelGray = UIColor(named: "labelGray")
     static let textFieldBorderGray = UIColor(named: "textFieldBorderGray")
     static let placeholderTextColor = UIColor(named: "placeholderTextColor")
+    static let authorNameMessageColor = UIColor(named: "authorNameMessageColor")
     
     static let lightBarColor = UIColor(named: "lightBarColor")
     static let darkBarColor = UIColor(named: "darkBarColor")
