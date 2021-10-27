@@ -168,7 +168,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     }
     
     private func sendMessage(_ text: String) {
-        let newMessage = Message(content: text, created: Date(), senderId: mySenderID, senderName: "Ferry") // TEMP
+        let newMessage = Message(content: text, created: Date(), senderID: mySenderID, senderName: "Ferry") // TEMP
         reference.addDocument(data: newMessage.toDict)
     }
 }

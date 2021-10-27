@@ -13,24 +13,24 @@ struct Message {
     
     let content: String
     let created: Date
-    let senderId: String
+    let senderID: String
     let senderName: String
     
     var toDict: [String: Any] {
         [
             "content": content,
             "created": Timestamp(date: created),
-            "senderID": senderId,
+            "senderId": senderID,
             "senderName": senderName
         ]
     }
     
     // MARK: - Initialization
     
-    init(content: String, created: Date, senderId: String, senderName: String) {
+    init(content: String, created: Date, senderID: String, senderName: String) {
         self.content = content
         self.created = created
-        self.senderId = senderId
+        self.senderID = senderID
         self.senderName = senderName
     }
     
@@ -39,7 +39,7 @@ struct Message {
         self.content = data["content"] as? String ?? ""
         let timestamp = data["created"] as? Timestamp
         self.created = timestamp?.dateValue() ?? Date()
-        self.senderId = data["senderId"] as? String ?? ""
+        self.senderID = data["senderId"] as? String ?? ""
         self.senderName = data["senderName"] as? String ?? ""
     }
 }

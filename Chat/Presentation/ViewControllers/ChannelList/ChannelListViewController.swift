@@ -113,7 +113,7 @@ final class ChannelListViewController: UIViewController {
                 return
             }
             if let channels = snapshot?.documents {
-                self?.channels = channels.map { Channel(snapshot: $0) }.sorted { $0.name < $1.name } // TEMP
+                self?.channels = channels.map { Channel(snapshot: $0) }.sorted { $0.name > $1.name } // TEMP
             }
         }
     }

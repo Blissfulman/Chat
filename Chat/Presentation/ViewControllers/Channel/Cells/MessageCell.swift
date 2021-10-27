@@ -34,7 +34,7 @@ final class MessageCell: UITableViewCell, ConfigurableCell {
     // MARK: - Public methods
     
     func configure(with model: ConfigurationModel) {
-        if model.senderId == mySenderID {
+        if model.senderID == mySenderID {
             let model = MyMessageView.Model(
                 text: model.content,
                 date: model.created.messageCellDate(),
