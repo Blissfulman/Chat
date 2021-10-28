@@ -37,6 +37,7 @@
 		CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */; };
 		CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */; };
 		CE54E62F2729CBF000B20B69 /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54E62E2729CBF000B20B69 /* UITableView+Extension.swift */; };
+		CE54E6312729D19700B20B69 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54E6302729D19700B20B69 /* KeychainManager.swift */; };
 		CE6667CA2720871200DD6B40 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6667C92720871200DD6B40 /* Data+Extension.swift */; };
 		CE6667CC272099F100DD6B40 /* AsyncHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6667CB272099F100DD6B40 /* AsyncHandler.swift */; };
 		CE6667CE2720ACB100DD6B40 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6667CD2720ACB100DD6B40 /* ProgressView.swift */; };
@@ -94,6 +95,7 @@
 		CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		CE54E62E2729CBF000B20B69 /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		CE54E6302729D19700B20B69 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		CE6667C92720871200DD6B40 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		CE6667CB272099F100DD6B40 /* AsyncHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncHandler.swift; sourceTree = "<group>"; };
 		CE6667CD2720ACB100DD6B40 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				CE8B576227205F2E002E3434 /* ProfileDataManager.swift */,
 				CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */,
 				CEE6513D2721F013009DD993 /* AcynsDataManager.swift */,
+				CE54E6302729D19700B20B69 /* KeychainManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */,
 				CE6667CA2720871200DD6B40 /* Data+Extension.swift in Sources */,
 				CE32F21D27048600007262A5 /* Fonts.swift in Sources */,
+				CE54E6312729D19700B20B69 /* KeychainManager.swift in Sources */,
 				CE0B5F1E270CA538004B6232 /* ChannelCell.swift in Sources */,
 				CED84B3E27025F4200D4E4EB /* Images.swift in Sources */,
 				CE6667CE2720ACB100DD6B40 /* ProgressView.swift in Sources */,

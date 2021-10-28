@@ -20,10 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        FirebaseApp.configure()
-        
-        let theme = SettingsManager().theme
-        NavigationController.setupAppearance(for: theme)
+        initialConfigure()
         
         let mainViewController = ChannelListViewController()
         let navigationController = NavigationController(rootViewController: mainViewController)
@@ -31,5 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true
+    }
+    
+    private func initialConfigure() {
+        FirebaseApp.configure()
+        let settingsManager = SettingsManager()
+        settingsManager.generateMySenderIDIfNeeded()
+        NavigationController.setupAppearance(for: settingsManager.theme)
     }
 }

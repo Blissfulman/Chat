@@ -35,6 +35,7 @@ final class ChannelListViewController: UIViewController {
     }()
     
     private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
+    private var profile: Profile?
     private lazy var db = Firestore.firestore()
     private lazy var reference = db.collection("channels")
     private var channels = [Channel]() {
@@ -69,7 +70,7 @@ final class ChannelListViewController: UIViewController {
         showAddChannelAlert { [weak self] channelName in
             guard let channelName = channelName, !channelName.isEmpty else { return }
             let newChannel = Channel(identifier: "", name: channelName, lastMessage: nil, lastActivity: nil)
-            self?.reference.addDocument(data: newChannel.toDict)
+            self?.reference.addDocument(data: newChannel.toDictionary)
         }
     }
     
@@ -113,7 +114,13 @@ final class ChannelListViewController: UIViewController {
                 return
             }
             if let channels = snapshot?.documents {
-                self?.channels = channels.map { Channel(snapshot: $0) }.sorted { $0.name > $1.name } // TEMP
+                self?.channels = channels.compactMap { Channel(snapshot: $0) }.sorted { $0.name > $1.name } // TEMP
+            }
+        }
+        
+        asyncDataManager.fetchProfile { [weak self] result in
+            if case let .success(profile) = result {
+                self?.profile = profile
             }
         }
     }
@@ -193,7 +200,10 @@ extension ChannelListViewController: UITableViewDataSource {
 extension ChannelListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let channelVC = ChannelViewController(channel: channels[indexPath.row])
+        let channelVC = ChannelViewController(
+            channel: channels[indexPath.row],
+            senderName: profile?.fullName ?? "No name"
+        )
         navigationController?.show(channelVC, sender: self)
     }
 }

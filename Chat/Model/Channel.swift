@@ -16,7 +16,7 @@ struct Channel {
     let lastMessage: String?
     let lastActivity: Date?
     
-    var toDict: [String: Any] {
+    var toDictionary: [String: Any] {
         var lastActivityValue: Timestamp?
         if let lastActivity = lastActivity {
             lastActivityValue = Timestamp(date: lastActivity)
@@ -38,10 +38,11 @@ struct Channel {
         self.lastActivity = lastActivity
     }
     
-    init(snapshot: QueryDocumentSnapshot) {
+    init?(snapshot: QueryDocumentSnapshot) {
         let data = snapshot.data()
+        guard let name = data["name"] as? String else { return nil }
         self.identifier = snapshot.documentID
-        self.name = data["name"] as? String ?? ""
+        self.name = name
         self.lastMessage = data["lastMessage"] as? String
         let timestamp = data["lastActivity"] as? Timestamp
         self.lastActivity = timestamp?.dateValue()

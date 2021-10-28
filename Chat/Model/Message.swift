@@ -16,11 +16,11 @@ struct Message {
     let senderID: String
     let senderName: String
     
-    var toDict: [String: Any] {
+    var toDictionary: [String: Any] {
         [
             "content": content,
             "created": Timestamp(date: created),
-            "senderId": senderID,
+            "senderID": senderID,
             "senderName": senderName
         ]
     }
@@ -34,12 +34,19 @@ struct Message {
         self.senderName = senderName
     }
     
-    init(snapshot: QueryDocumentSnapshot) {
+    init?(snapshot: QueryDocumentSnapshot) {
         let data = snapshot.data()
-        self.content = data["content"] as? String ?? ""
-        let timestamp = data["created"] as? Timestamp
-        self.created = timestamp?.dateValue() ?? Date()
-        self.senderID = data["senderId"] as? String ?? ""
-        self.senderName = data["senderName"] as? String ?? ""
+        guard
+            let content = data["content"] as? String,
+            let timestamp = data["created"] as? Timestamp,
+            let senderID = data["senderID"] as? String,
+            let senderName = data["senderName"] as? String
+        else {
+            return nil
+        }
+        self.content = content
+        self.created = timestamp.dateValue()
+        self.senderID = senderID
+        self.senderName = senderName
     }
 }

@@ -61,8 +61,9 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     
     private var bottomViewBottomConstraint: NSLayoutConstraint?
     private let defaultBottomViewBottomSpacing: CGFloat = 0
-    private let mySenderID = SettingsManager.mySenderID // TEMP
+    private let settingsManager = SettingsManager()
     private let channel: Channel
+    private let senderName: String
     private lazy var db = Firestore.firestore()
     private lazy var reference: CollectionReference = {
         let channelIdentifier = channel.identifier
@@ -77,8 +78,9 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     
     // MARK: - Initialization
     
-    init(channel: Channel) {
+    init(channel: Channel, senderName: String) {
         self.channel = channel
+        self.senderName = senderName
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -162,14 +164,19 @@ final class ChannelViewController: KeyboardNotificationsViewController {
                 return
             }
             if let messages = snapshot?.documents {
-                self?.messages = messages.map { Message(snapshot: $0) }.sorted { $0.created < $1.created }
+                self?.messages = messages.compactMap { Message(snapshot: $0) }.sorted { $0.created < $1.created }
             }
         }
     }
     
     private func sendMessage(_ text: String) {
-        let newMessage = Message(content: text, created: Date(), senderID: mySenderID, senderName: "Ferry") // TEMP
-        reference.addDocument(data: newMessage.toDict)
+        let newMessage = Message(
+            content: text,
+            created: Date(),
+            senderID: settingsManager.mySenderID,
+            senderName: senderName
+        )
+        reference.addDocument(data: newMessage.toDictionary)
     }
     
     private func scrollToBottom() {
@@ -196,7 +203,11 @@ extension ChannelViewController: UITableViewDataSource {
             for: indexPath
         ) as? MessageCell else { return UITableViewCell() }
         
-        cell.configure(with: messages[indexPath.row])
+        let cellModel = MessageCell.ConfigurationModel(
+            message: messages[indexPath.row],
+            mySenderID: settingsManager.mySenderID
+        )
+        cell.configure(with: cellModel)
         return cell
     }
 }
