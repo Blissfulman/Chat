@@ -34,6 +34,7 @@ final class ChannelListViewController: UIViewController {
         return tableView
     }()
     
+    private let settingsManager = SettingsManager()
     private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
     private var profile: Profile?
     private lazy var db = Firestore.firestore()
@@ -127,9 +128,9 @@ final class ChannelListViewController: UIViewController {
     
     private func handleChangingTheme(to theme: Theme) {
         let asyncHandler = GCDAsyncHandler(qos: .userInteractive)
-        asyncHandler.handle {
+        asyncHandler.handle { [weak self] in
             NavigationController.updateColors(for: theme)
-            SettingsManager().theme = theme
+            self?.settingsManager.theme = theme
         }
     }
     

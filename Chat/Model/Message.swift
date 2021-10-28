@@ -36,17 +36,20 @@ struct Message {
     
     init?(snapshot: QueryDocumentSnapshot) {
         let data = snapshot.data()
+        // TEMP: временное решение пока есть сообщения с обоими вариантами ключей
+        let senderID = data["senderID"] as? String
+        let senderId = data["senderId"] as? String
         guard
             let content = data["content"] as? String,
             let timestamp = data["created"] as? Timestamp,
-            let senderID = data["senderID"] as? String,
+            let totalSenderID = senderID ?? (senderId ?? nil),
             let senderName = data["senderName"] as? String
         else {
             return nil
         }
         self.content = content
         self.created = timestamp.dateValue()
-        self.senderID = senderID
+        self.senderID = totalSenderID
         self.senderName = senderName
     }
 }
