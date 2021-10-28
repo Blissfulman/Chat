@@ -77,7 +77,7 @@ final class ChannelListViewController: UIViewController {
     
     @objc
     private func openProfileBarButtonTapped() {
-        let profileVC = ProfileViewController()
+        let profileVC = ProfileViewController(delegate: self)
         present(profileVC, animated: true)
     }
     
@@ -206,5 +206,16 @@ extension ChannelListViewController: UITableViewDelegate {
             senderName: profile?.fullName ?? "No name"
         )
         navigationController?.show(channelVC, sender: self)
+    }
+}
+
+// MARK: - ProfileViewControllerDelegate
+
+extension ChannelListViewController: ProfileViewControllerDelegate {
+
+    func didChangeAvatarImage() {
+        customProfileBarButton { [weak self] barButtonItem in
+            self?.navigationItem.rightBarButtonItem = barButtonItem
+        }
     }
 }

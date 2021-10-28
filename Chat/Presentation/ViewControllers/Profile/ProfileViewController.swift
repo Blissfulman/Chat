@@ -5,6 +5,10 @@
 //  Created by Evgeny Novgorodov on 26.09.2021.
 //
 
+protocol ProfileViewControllerDelegate {
+    func didChangeAvatarImage()
+}
+
 final class ProfileViewController: KeyboardNotificationsViewController {
     
     // MARK: - Nested types
@@ -116,17 +120,16 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         return button
     }()
-    
+
+    private let delegate: ProfileViewControllerDelegate
     private let progressView = ProgressView()
     private let imagePickerController = UIImagePickerController()
     private var buttonsStackViewBottomConstraint: NSLayoutConstraint?
     private let defaultLowerButtonsBottomSpacing: CGFloat = 30
-    private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
-    private var isChanedAvatar = false {
-        didSet {
-            state = .edited
-        }
-    }
+    private var asyncDataManager: AsyncDataManagerProtocol = AsyncDataManager(asyncHandlerType: .gcd)
+    // Хранение задачи сохранения данных необходимо для возможности её повторения
+    private var savingTask: ((Profile, SavingVariant) -> Void)?
+    private var isChangedAvatar = false
     /// Сохранённое состояние данных вью для возможности возврата к этому состоянию в случае нажатия кнопки "Cancel".
     private var savedViewData: (fullName: String?, description: String?, avatarImage: UIImage?)
     private var state: State = .saved {
@@ -148,7 +151,8 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     // MARK: - Initialization
     
-    init() {
+    init(delegate: ProfileViewControllerDelegate) {
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -205,7 +209,6 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             message: nil,
             preferredStyle: .actionSheet
         )
-        
         let galleryAction = UIAlertAction(title: "Select from the gallery", style: .default) { [weak self] _ in
             guard let self = self else { return }
             self.imagePickerController.sourceType = .savedPhotosAlbum
@@ -230,6 +233,8 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     @objc
     private func editProfileButtonTapped() {
+        saveCurrentViewData()
+        isChangedAvatar = false
         state = .editing
     }
         
@@ -265,7 +270,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     @objc
     private func textFieldsEditingChanged() {
-        guard !isChanedAvatar else { return }
+        guard !isChangedAvatar else { return }
         if fullNameTextField.text == savedViewData.fullName && descriptionTextField.text == savedViewData.description {
             state = .editing
         } else {
@@ -359,7 +364,6 @@ final class ProfileViewController: KeyboardNotificationsViewController {
                 } else {
                     self?.avatarImageView.image = Images.noPhoto
                 }
-                self?.saveCurrentViewData()
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -378,7 +382,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     }
     
     private func updateSaveButtonState() {
-        saveButton.isEnabled = isChanedAvatar || state == .edited
+        saveButton.isEnabled = isChangedAvatar || state == .edited
     }
     
     private func switchToEditingState() {
@@ -416,42 +420,43 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     /// Сохранение текущих данных профиля в постоянное хранилище.
     private func saveData(savingVariant: SavingVariant) {
-        showProgressView()
-        
         let profile = Profile(
             fullName: fullNameTextField.text ?? "",
             description: descriptionTextField.text ?? "",
             avatarData: avatarImageView.image?.jpegData(compressionQuality: 0.5)
         )
         
-        let savingTask: ((SavingVariant) -> Void) = { [weak self, asyncDataManager] _ in
+        savingTask = { [weak self, asyncDataManager, delegate] profile, savingVariant in
+            guard let self = self else {
+                // Если экран уже закрыт, то просто вызывается ещё одна попытка сохранить профиль
+                asyncDataManager.saveProfile(profile: profile) { result in
+                    if case .success = result { delegate.didChangeAvatarImage() }
+                }
+                return
+            }
+            self.showProgressView()
+            
             asyncDataManager.saveProfile(profile: profile) { result in
+                self.progressView.hide()
                 switch result {
                 case .success:
-                    self?.state = .saved
-                    self?.showAlert(title: "Data saved")
+                    self.state = .saved
+                    self.showAlert(title: "Data saved")
+                    delegate.didChangeAvatarImage()
                 case .failure(let error):
                     print(error.localizedDescription)
-                    self?.showFailureSavingAlert {
-                        print("Repeating...") // TEMP (не успел доделать)
+                    self.showFailureSavingAlert {
+                        self.savingTask?(profile, savingVariant)
                     }
                 }
             }
-            self?.progressView.hide()
         }
-        
-        var savingHandler: AsyncHandler?
-        switch savingVariant {
-        case .gcd:
-            savingHandler = GCDAsyncHandler(qos: .userInitiated)
-        case .operations:
-            savingHandler = OperationsAsyncHandler(qos: .userInitiated)
+        if savingVariant == .gcd {
+            asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
+        } else {
+            asyncDataManager = AsyncDataManager(asyncHandlerType: .operations)
         }
-        
-        savingHandler?.handle {
-            sleep(1) // TEMP (для демонстрации вью прогресса)
-            savingTask(savingVariant)
-        }
+        savingTask?(profile, savingVariant)
     }
     
     private func showFailureSavingAlert(repeatitionHandler: (() -> Void)? = nil) {
@@ -475,12 +480,12 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         _ picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
     ) {
-        defer {
-            imagePickerController.dismiss(animated: true)
-            isChanedAvatar = true
-        }
+        defer { imagePickerController.dismiss(animated: true) }
+        
         guard let image = info[.originalImage] as? UIImage else { return }
         avatarImageView.image = image
+        isChangedAvatar = true
+        state = .edited
     }
 }
 
