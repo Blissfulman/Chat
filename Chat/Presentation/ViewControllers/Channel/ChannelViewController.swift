@@ -14,6 +14,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     private enum Constants {
         static let bottomViewHeight: CGFloat = 80
         static let newMessageTexrFieldHeight: CGFloat = 32
+        static let defaultBottomViewBottomSpacing: CGFloat = 0
     }
     
     // MARK: - Private properties
@@ -60,7 +61,6 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     }()
     
     private var bottomViewBottomConstraint: NSLayoutConstraint?
-    private let defaultBottomViewBottomSpacing: CGFloat = 0
     private let settingsManager = SettingsManager()
     private let channel: Channel
     private let senderName: String
@@ -102,13 +102,13 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     
     override func keyboardWillShow(_ notification: Notification) {
         animateWithKeyboard(notification: notification) { keyboardFrame in
-            self.bottomViewBottomConstraint?.constant = -keyboardFrame.height - self.defaultBottomViewBottomSpacing
+            self.bottomViewBottomConstraint?.constant = -keyboardFrame.height - Constants.defaultBottomViewBottomSpacing
         }
     }
     
     override func keyboardWillHide(_ notification: Notification) {
         animateWithKeyboard(notification: notification) { _ in
-            self.bottomViewBottomConstraint?.constant = -self.defaultBottomViewBottomSpacing
+            self.bottomViewBottomConstraint?.constant = -Constants.defaultBottomViewBottomSpacing
         }
     }
     
@@ -182,10 +182,6 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     private func scrollToBottom() {
         guard !messages.isEmpty else { return }
         tableView.scrollToBottom(animated: false)
-        // TEMP: Костыль, т.к. с первого раза не всегда до самого низа скроллится, а как это решить ещё не понял
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) { [weak self] in
-            self?.tableView.scrollToBottom(animated: false)
-        }
     }
 }
 
