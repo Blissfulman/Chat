@@ -9,6 +9,12 @@ import Firebase
 
 final class ChannelListViewController: UIViewController {
     
+    // MARK: - Nested types
+    
+    private enum Constants {
+        static let profileBarButtonSize = CGSize(width: 40, height: 40)
+    }
+    
     // MARK: - Private properties
     
     private lazy var openSettingsBarButton = UIBarButtonItem(
@@ -36,7 +42,11 @@ final class ChannelListViewController: UIViewController {
     
     private let settingsManager = SettingsManager()
     private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
-    private var profile: Profile?
+    private var profile: Profile? {
+        didSet {
+            navigationItem.rightBarButtonItem = customProfileBarButton(for: profile)
+        }
+    }
     private lazy var db = Firestore.firestore()
     private lazy var reference = db.collection("channels")
     private var channels = [Channel]() {
@@ -52,7 +62,7 @@ final class ChannelListViewController: UIViewController {
         setupUI()
         setupLayout()
         configureUI()
-        setupDataFetching()
+        setupData()
     }
     
     // MARK: - Actions
@@ -88,9 +98,6 @@ final class ChannelListViewController: UIViewController {
         view.addSubview(tableView)
         
         navigationItem.leftBarButtonItems = [openSettingsBarButton, addChannelBarButton]
-        customProfileBarButton { [weak self] barButtonItem in
-            self?.navigationItem.rightBarButtonItem = barButtonItem
-        }
     }
     
     private func setupLayout() {
@@ -108,7 +115,12 @@ final class ChannelListViewController: UIViewController {
         title = "Channels"
     }
     
-    private func setupDataFetching() {
+    private func setupData() {
+        asyncDataManager.fetchProfile { [weak self] result in
+            if case let .success(profile) = result {
+                self?.profile = profile
+            }
+        }
         reference.addSnapshotListener { [weak self] snapshot, error in
             guard error == nil else {
                 self?.showAlert(title: "Error", message: error?.localizedDescription)
@@ -116,12 +128,6 @@ final class ChannelListViewController: UIViewController {
             }
             if let channels = snapshot?.documents {
                 self?.channels = channels.compactMap { Channel(snapshot: $0) }.sorted { $0.name > $1.name } // TEMP
-            }
-        }
-        
-        asyncDataManager.fetchProfile { [weak self] result in
-            if case let .success(profile) = result {
-                self?.profile = profile
             }
         }
     }
@@ -134,30 +140,25 @@ final class ChannelListViewController: UIViewController {
         }
     }
     
-    private func customProfileBarButton(completion: @escaping (UIBarButtonItem) -> Void) {
-        let size = CGSize(width: 40, height: 40)
+    private func customProfileBarButton(for profile: Profile?) -> UIBarButtonItem {
+        let size = Constants.profileBarButtonSize
+        var iconData = Data()
         
-        asyncDataManager.fetchProfile { [weak self] result in
-            guard let self = self else { return }
-            var iconData = Data()
-            
-            if case let .success(profile) = result,
-               let avatarImageData = profile?.avatarData {
-                iconData = avatarImageData
-            } else {
-                iconData = Images.noPhoto.jpegData(compressionQuality: 0.5) ?? Data()
-            }
-            iconData = iconData.resizeImageFromImageData(to: CGSize(width: size.width, height: size.height))
-
-            let button = UIButton()
-            button.widthAnchor.constraint(equalToConstant: size.width).isActive = true
-            button.heightAnchor.constraint(equalToConstant: size.height).isActive = true
-            button.addTarget(self, action: #selector(self.openProfileBarButtonTapped), for: .touchUpInside)
-            button.setImage(UIImage(data: iconData), for: .normal)
-            button.setCornerRadius(size.width / 2)
-            
-            completion(UIBarButtonItem(customView: button))
+        if let avatarImageData = profile?.avatarData {
+            iconData = avatarImageData
+        } else {
+            iconData = Images.noPhoto.jpegData(compressionQuality: 0.5) ?? Data()
         }
+        iconData = iconData.resizeImageFromImageData(to: CGSize(width: size.width, height: size.height))
+        
+        let button = UIButton()
+        button.widthAnchor.constraint(equalToConstant: size.width).isActive = true
+        button.heightAnchor.constraint(equalToConstant: size.height).isActive = true
+        button.addTarget(self, action: #selector(self.openProfileBarButtonTapped), for: .touchUpInside)
+        button.setImage(UIImage(data: iconData), for: .normal)
+        button.setCornerRadius(size.width / 2)
+        
+        return UIBarButtonItem(customView: button)
     }
     
     private func showAddChannelAlert(competion: @escaping ((String?) -> Void)) {
@@ -213,9 +214,7 @@ extension ChannelListViewController: UITableViewDelegate {
 
 extension ChannelListViewController: ProfileViewControllerDelegate {
 
-    func didChangeAvatarImage() {
-        customProfileBarButton { [weak self] barButtonItem in
-            self?.navigationItem.rightBarButtonItem = barButtonItem
-        }
+    func didChangeProfileData(profile: Profile) {
+        self.profile = profile
     }
 }

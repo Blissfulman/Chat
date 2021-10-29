@@ -11,7 +11,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     
     // MARK: - Nested types
     
-    enum Constants {
+    private enum Constants {
         static let bottomViewHeight: CGFloat = 80
         static let newMessageTexrFieldHeight: CGFloat = 32
     }

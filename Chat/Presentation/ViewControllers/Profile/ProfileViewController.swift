@@ -6,20 +6,20 @@
 //
 
 protocol ProfileViewControllerDelegate {
-    func didChangeAvatarImage()
+    func didChangeProfileData(profile: Profile)
 }
 
 final class ProfileViewController: KeyboardNotificationsViewController {
     
     // MARK: - Nested types
     
-    enum State {
+    private enum State {
         case editing
         case edited
         case saved
     }
     
-    enum SavingVariant {
+    private enum SavingVariant {
         case gcd
         case operations
     }
@@ -430,7 +430,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             guard let self = self else {
                 // Если экран уже закрыт, то просто вызывается ещё одна попытка сохранить профиль
                 asyncDataManager.saveProfile(profile: profile) { result in
-                    if case .success = result { delegate.didChangeAvatarImage() }
+                    if case .success = result { delegate.didChangeProfileData(profile: profile) }
                 }
                 return
             }
@@ -442,7 +442,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
                 case .success:
                     self.state = .saved
                     self.showAlert(title: "Data saved")
-                    delegate.didChangeAvatarImage()
+                    delegate.didChangeProfileData(profile: profile)
                 case .failure(let error):
                     print(error.localizedDescription)
                     self.showFailureSavingAlert {
