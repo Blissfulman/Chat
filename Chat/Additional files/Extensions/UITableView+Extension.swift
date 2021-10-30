@@ -5,6 +5,8 @@
 //  Created by Evgeny Novgorodov on 27.10.2021.
 //
 
+import UIKit
+
 extension UITableView {
     
     /// Прокрутка таблицы до низа (работает корректно если у таблицы единственная секция).

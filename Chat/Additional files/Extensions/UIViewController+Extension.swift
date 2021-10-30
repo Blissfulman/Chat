@@ -5,6 +5,8 @@
 //  Created by Evgeny Novgorodov on 29.09.2021.
 //
 
+import UIKit
+
 extension UIViewController {
     
     /// Отображение всплывающего окна с переданным заголовком и сообщением с помощью `UIAlertController`.
