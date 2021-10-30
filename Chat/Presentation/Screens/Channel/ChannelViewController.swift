@@ -8,6 +8,12 @@
 import UIKit
 import Firebase
 
+protocol ChannelDisplayLogic: AnyObject {
+    func displayTheme(viewModel: ChannelModel.FetchTheme.ViewModel)
+    func displayMessages(viewModel: ChannelModel.FetchMessages.ViewModel)
+    func displayFetchingMessagesError(viewModel: ChannelModel.FetchingMessagesError.ViewModel)
+}
+
 final class ChannelViewController: KeyboardNotificationsViewController {
     
     // MARK: - Nested types
@@ -28,12 +34,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         return tableView
     }()
     
-    private lazy var bottomView: UIView = {
-        let view = UIView().prepareForAutoLayout()
-        let theme = SettingsManager().theme
-        view.backgroundColor = theme.themeColors.backgroundColor
-        return view
-    }()
+    private lazy var bottomView = UIView().prepareForAutoLayout()
     
     private lazy var borderView: UIView = {
         let view = UIView().prepareForAutoLayout()
@@ -62,14 +63,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     }()
     
     private var bottomViewBottomConstraint: NSLayoutConstraint?
-    private let settingsManager = SettingsManager()
-    private let channel: Channel
-    private let senderName: String
-    private lazy var db = Firestore.firestore()
-    private lazy var reference: CollectionReference = {
-        let channelIdentifier = channel.identifier
-        return db.collection("channels").document(channelIdentifier).collection("messages")
-    }()
+    private let interactor: ChannelBusinessLogic
     private var messages = [Message]() {
         didSet {
             tableView.reloadData()
@@ -79,10 +73,10 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     
     // MARK: - Initialization
     
-    init(channel: Channel, senderName: String) {
-        self.channel = channel
-        self.senderName = senderName
+    init(interactor: ChannelBusinessLogic, channelName: String) {
+        self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
+        title = channelName
     }
     
     required init?(coder: NSCoder) {
@@ -96,7 +90,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         setupUI()
         setupLayout()
         configureUI()
-        setupDataFetching()
+        interactor.fetchMessages(request: ChannelModel.FetchMessages.Request())
     }
     
     // MARK: - KeyboardNotificationsViewController
@@ -155,31 +149,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     private func configureUI() {
         navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = .white
-        title = channel.name
-    }
-    
-    private func setupDataFetching() {
-        reference.addSnapshotListener { [weak self] snapshot, error in
-            guard error == nil else {
-                self?.showAlert(title: "Error", message: error?.localizedDescription)
-                return
-            }
-            if let messageSnapshots = snapshot?.documents {
-                self?.messages = messageSnapshots
-                    .compactMap { Message(snapshot: $0) }
-                    .sorted { $0.created < $1.created }
-            }
-        }
-    }
-    
-    private func sendMessage(_ text: String) {
-        let newMessage = Message(
-            content: text,
-            created: Date(),
-            senderID: settingsManager.mySenderID,
-            senderName: senderName
-        )
-        reference.addDocument(data: newMessage.toDictionary)
+        interactor.fetchTheme(request: ChannelModel.FetchTheme.Request())
     }
     
     private func scrollToBottom() {
@@ -202,11 +172,7 @@ extension ChannelViewController: UITableViewDataSource {
             for: indexPath
         ) as? MessageCell else { return UITableViewCell() }
         
-        let cellModel = MessageCell.ConfigurationModel(
-            message: messages[indexPath.row],
-            mySenderID: settingsManager.mySenderID
-        )
-        cell.configure(with: cellModel)
+        cell.configure(with: messages[indexPath.row])
         return cell
     }
 }
@@ -217,9 +183,26 @@ extension ChannelViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let text = textField.text {
-            sendMessage(text)
+            interactor.sendMessage(request: ChannelModel.SendMessage.Request(text: text))
             textField.text = ""
         }
         return true
+    }
+}
+
+// MARK: - ChannelDisplayLogic
+
+extension ChannelViewController: ChannelDisplayLogic {
+    
+    func displayTheme(viewModel: ChannelModel.FetchTheme.ViewModel) {
+        bottomView.backgroundColor = viewModel.theme.themeColors.backgroundColor
+    }
+    
+    func displayMessages(viewModel: ChannelModel.FetchMessages.ViewModel) {
+        messages = viewModel.messages
+    }
+    
+    func displayFetchingMessagesError(viewModel: ChannelModel.FetchingMessagesError.ViewModel) {
+        showAlert(title: viewModel.title, message: viewModel.message)
     }
 }

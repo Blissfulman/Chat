@@ -33,7 +33,8 @@ final class ChannelListRouter: ChannelListRoutingLogic {
     }
     
     func navigateToChannel(route: ChannelListModel.Route.ChannelScreen) {
-        let channelViewController = ChannelViewController(channel: route.channel, senderName: route.senderName)
+        let parameters = ChannelAssembly.Parameters(channel: route.channel, senderName: route.senderName)
+        let channelViewController = ChannelAssembly.assembly(parameters: parameters)
         viewController?.navigationController?.show(channelViewController, sender: self)
     }
 }

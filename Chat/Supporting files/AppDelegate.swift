@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func initialConfigure() {
         FirebaseApp.configure()
         let settingsManager = SettingsManager()
-        settingsManager.generateMySenderIDIfNeeded()
+        settingsManager.loadMySenderID()
         NavigationController.setupAppearance(for: settingsManager.theme)
     }
 }

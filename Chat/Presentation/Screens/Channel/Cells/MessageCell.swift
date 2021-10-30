@@ -9,14 +9,7 @@ import UIKit
 
 final class MessageCell: UITableViewCell, ConfigurableCell {
     
-    typealias ConfigurationModel = CellModel
-    
-    // MARK: - Nested types
-    
-    struct CellModel {
-        let message: Message
-        let mySenderID: String?
-    }
+    typealias ConfigurationModel = Message
     
     // MARK: - Private properties
     
@@ -43,17 +36,16 @@ final class MessageCell: UITableViewCell, ConfigurableCell {
     // MARK: - Public methods
     
     func configure(with model: ConfigurationModel) {
-        let message = model.message
-        if message.senderID == model.mySenderID {
-            let model = MyMessageView.Model(text: message.content, date: message.created.messageCellDate())
+        if model.senderID == SettingsManager.mySenderID {
+            let model = MyMessageView.Model(text: model.content, date: model.created.messageCellDate())
             let messageView = MyMessageView(frame: .zero, model: model)
             contentView.addSubview(messageView)
             setupMyMessageLayout(messageView)
         } else {
             let model = PartnerMessageView.Model(
-                authorName: message.senderName,
-                text: message.content,
-                date: message.created.messageCellDate()
+                authorName: model.senderName,
+                text: model.content,
+                date: model.created.messageCellDate()
             )
             let messageView = PartnerMessageView(frame: .zero, model: model)
             contentView.addSubview(messageView)

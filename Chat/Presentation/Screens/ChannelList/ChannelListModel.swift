@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class ChannelListModel {
+enum ChannelListModel {
     
     enum FetchProfile {
         struct Request {}

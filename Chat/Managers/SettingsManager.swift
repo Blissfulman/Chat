@@ -9,6 +9,17 @@ import Foundation
 
 final class SettingsManager {
     
+    // MARK: - Static properties
+    
+    /// Уникальный ID текущего пользователя для текущего устройства.
+    ///
+    /// Значение данного свойства доступно для чтения на протяжении всего времени работы приложения.
+    ///
+    /// При запуске приложения должна происходить проверка наличия значения ID текущего пользователя в постоянном хранилище (Keychain).
+    /// В случае успешного получения значения, оно присваивается данному параметру.
+    /// В случае неудачной попытки, новое значение параметра должно генерироваться и сохраняться в постоянное хранилище (с его присвоением данному параметру).
+    static private(set) var mySenderID = ""
+        
     // MARK: - Public properties
     
     var theme: Theme {
@@ -18,10 +29,6 @@ final class SettingsManager {
         set {
             try? fileStorageManager.saveValue(newValue, withKey: themeKey, dataType: dataType)
         }
-    }
-    
-    var mySenderID: String {
-        keychainManager.fetchValue(withLabel: mySenderIDKey) ?? ""
     }
     
     // MARK: - Private properties
@@ -34,10 +41,14 @@ final class SettingsManager {
     
     // MARK: - Public methods
     
-    func generateMySenderIDIfNeeded() {
-        if mySenderID.isEmpty {
+    func loadMySenderID() {
+        if let mySenderID = keychainManager.fetchValue(withLabel: mySenderIDKey),
+           !mySenderID.isEmpty {
+            SettingsManager.mySenderID = mySenderID
+        } else {
             let newSenderID = String(describing: UUID())
             keychainManager.saveValue(newSenderID, withLabel: mySenderIDKey)
+            SettingsManager.mySenderID = newSenderID
         }
     }
 }

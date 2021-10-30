@@ -15,6 +15,10 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     // MARK: - Nested types
     
+    private enum Constants {
+        static let defaultLowerButtonsBottomSpacing: CGFloat = 30
+    }
+    
     private enum State {
         case editing
         case edited
@@ -127,7 +131,6 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private let imagePickerController = UIImagePickerController()
     private let didChangeProfileHandler: ((Profile) -> Void)
     private var buttonsStackViewBottomConstraint: NSLayoutConstraint?
-    private let defaultLowerButtonsBottomSpacing: CGFloat = 30
     private var asyncDataManager: AsyncDataManagerProtocol = AsyncDataManager(asyncHandlerType: .gcd)
     // Хранение задачи сохранения данных необходимо для возможности её повторения
     private var savingTask: ((Profile, SavingVariant) -> Void)?
@@ -185,13 +188,13 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     override func keyboardWillShow(_ notification: Notification) {
         animateWithKeyboard(notification: notification) { keyboardFrame in
             self.buttonsStackViewBottomConstraint?.constant = -keyboardFrame.height
-                - self.defaultLowerButtonsBottomSpacing
+                - Constants.defaultLowerButtonsBottomSpacing
         }
     }
     
     override func keyboardWillHide(_ notification: Notification) {
         animateWithKeyboard(notification: notification) { _ in
-            self.buttonsStackViewBottomConstraint?.constant = -self.defaultLowerButtonsBottomSpacing
+            self.buttonsStackViewBottomConstraint?.constant = -Constants.defaultLowerButtonsBottomSpacing
         }
     }
     
@@ -334,7 +337,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             editProfileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             editProfileButton.bottomAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                constant: -defaultLowerButtonsBottomSpacing
+                constant: -Constants.defaultLowerButtonsBottomSpacing
             ),
             editProfileButton.heightAnchor.constraint(equalToConstant: 40),
             
@@ -344,7 +347,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         
         buttonsStackViewBottomConstraint = buttonsStackView.bottomAnchor.constraint(
             equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-            constant: -defaultLowerButtonsBottomSpacing
+            constant: -Constants.defaultLowerButtonsBottomSpacing
         )
         buttonsStackViewBottomConstraint?.isActive = true
     }

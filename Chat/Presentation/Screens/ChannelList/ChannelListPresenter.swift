@@ -35,7 +35,8 @@ final class ChannelListPresenter: ChannelListPresentationLogic {
     
     func presentFetchingChannelsError(response: ChannelListModel.FetchingChannelsError.Response) {
         let viewModel = ChannelListModel.FetchingChannelsError.ViewModel(
-            title: "Error", message: response.error.localizedDescription
+            title: "Error",
+            message: response.error.localizedDescription
         )
         view?.displayFetchingChannelsError(viewModel: viewModel)
     }

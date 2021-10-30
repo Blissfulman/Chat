@@ -49,6 +49,10 @@
 		CE9B0BC32721BEC60001DF15 /* ProfileDescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0BC22721BEC60001DF15 /* ProfileDescriptionTextField.swift */; };
 		CE9C657C270F2F8A008756AC /* ConfigurableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */; };
 		CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA143DD271600D400F39F61 /* ThemesViewController.swift */; };
+		CEB97AB8272D3C8800C405CA /* ChannelAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AB7272D3C8800C405CA /* ChannelAssembly.swift */; };
+		CEB97ABA272D3C9A00C405CA /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AB9272D3C9A00C405CA /* ChannelModel.swift */; };
+		CEB97ABE272D3CC200C405CA /* ChannelInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97ABD272D3CC200C405CA /* ChannelInteractor.swift */; };
+		CEB97AC0272D3CCB00C405CA /* ChannelPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97ABF272D3CCB00C405CA /* ChannelPresenter.swift */; };
 		CED023E726FFB61100062489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED023E626FFB61100062489 /* Assets.xcassets */; };
 		CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED84B3827025BC300D4E4EB /* Palette.xcassets */; };
 		CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3B27025D1700D4E4EB /* Palette.swift */; };
@@ -108,6 +112,10 @@
 		CE9B0BC22721BEC60001DF15 /* ProfileDescriptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionTextField.swift; sourceTree = "<group>"; };
 		CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableCell.swift; sourceTree = "<group>"; };
 		CEA143DD271600D400F39F61 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
+		CEB97AB7272D3C8800C405CA /* ChannelAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelAssembly.swift; sourceTree = "<group>"; };
+		CEB97AB9272D3C9A00C405CA /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
+		CEB97ABD272D3CC200C405CA /* ChannelInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelInteractor.swift; sourceTree = "<group>"; };
+		CEB97ABF272D3CCB00C405CA /* ChannelPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelPresenter.swift; sourceTree = "<group>"; };
 		CED023E626FFB61100062489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CED84B3827025BC300D4E4EB /* Palette.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Palette.xcassets; sourceTree = "<group>"; };
 		CED84B3B27025D1700D4E4EB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -327,7 +335,11 @@
 		CE9AF67F270B89A7006D44A8 /* Channel */ = {
 			isa = PBXGroup;
 			children = (
+				CEB97AB7272D3C8800C405CA /* ChannelAssembly.swift */,
+				CEB97AB9272D3C9A00C405CA /* ChannelModel.swift */,
 				CE9AF680270B89C1006D44A8 /* ChannelViewController.swift */,
+				CEB97ABD272D3CC200C405CA /* ChannelInteractor.swift */,
+				CEB97ABF272D3CCB00C405CA /* ChannelPresenter.swift */,
 				CE3E9144270EAD320029DA74 /* Cells */,
 			);
 			path = Channel;
@@ -567,8 +579,10 @@
 				CE54E62F2729CBF000B20B69 /* UITableView+Extension.swift in Sources */,
 				CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */,
 				CE1F08B126F3BB67002A5985 /* ChannelListViewController.swift in Sources */,
+				CEB97AC0272D3CCB00C405CA /* ChannelPresenter.swift in Sources */,
 				CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */,
 				CEE9FF0D272C749B00628F34 /* ChannelListAssembly.swift in Sources */,
+				CEB97AB8272D3C8800C405CA /* ChannelAssembly.swift in Sources */,
 				CEE9FF0B272C748500628F34 /* ChannelListPresenter.swift in Sources */,
 				CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */,
 				CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */,
@@ -584,6 +598,8 @@
 				CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */,
 				CE394792270F8581004C6FD1 /* Date+Extension.swift in Sources */,
 				CE8C4079271BEEE000D0C0B5 /* FileStorageManager.swift in Sources */,
+				CEB97ABE272D3CC200C405CA /* ChannelInteractor.swift in Sources */,
+				CEB97ABA272D3C9A00C405CA /* ChannelModel.swift in Sources */,
 				CE8B576327205F2E002E3434 /* ProfileDataManager.swift in Sources */,
 				CE04B4E7271F52B80027F649 /* ProfileFilledButton.swift in Sources */,
 				CE6667CC272099F100DD6B40 /* AsyncHandler.swift in Sources */,
