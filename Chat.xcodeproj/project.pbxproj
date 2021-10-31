@@ -53,6 +53,11 @@
 		CEB97ABA272D3C9A00C405CA /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AB9272D3C9A00C405CA /* ChannelModel.swift */; };
 		CEB97ABE272D3CC200C405CA /* ChannelInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97ABD272D3CC200C405CA /* ChannelInteractor.swift */; };
 		CEB97AC0272D3CCB00C405CA /* ChannelPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97ABF272D3CCB00C405CA /* ChannelPresenter.swift */; };
+		CEB97AC2272D94B800C405CA /* ProfileAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AC1272D94B800C405CA /* ProfileAssembly.swift */; };
+		CEB97AC4272D94CC00C405CA /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AC3272D94CC00C405CA /* ProfileModel.swift */; };
+		CEB97AC6272D94E600C405CA /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AC5272D94E600C405CA /* ProfileRouter.swift */; };
+		CEB97AC8272D94F000C405CA /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AC7272D94F000C405CA /* ProfileInteractor.swift */; };
+		CEB97ACA272D94F900C405CA /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AC9272D94F900C405CA /* ProfilePresenter.swift */; };
 		CED023E726FFB61100062489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED023E626FFB61100062489 /* Assets.xcassets */; };
 		CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED84B3827025BC300D4E4EB /* Palette.xcassets */; };
 		CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3B27025D1700D4E4EB /* Palette.swift */; };
@@ -116,6 +121,11 @@
 		CEB97AB9272D3C9A00C405CA /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
 		CEB97ABD272D3CC200C405CA /* ChannelInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelInteractor.swift; sourceTree = "<group>"; };
 		CEB97ABF272D3CCB00C405CA /* ChannelPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelPresenter.swift; sourceTree = "<group>"; };
+		CEB97AC1272D94B800C405CA /* ProfileAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssembly.swift; sourceTree = "<group>"; };
+		CEB97AC3272D94CC00C405CA /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		CEB97AC5272D94E600C405CA /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		CEB97AC7272D94F000C405CA /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
+		CEB97AC9272D94F900C405CA /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		CED023E626FFB61100062489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CED84B3827025BC300D4E4EB /* Palette.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Palette.xcassets; sourceTree = "<group>"; };
 		CED84B3B27025D1700D4E4EB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -326,7 +336,12 @@
 		CE9AF67E270B8995006D44A8 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				CEB97AC1272D94B800C405CA /* ProfileAssembly.swift */,
+				CEB97AC3272D94CC00C405CA /* ProfileModel.swift */,
+				CEB97AC5272D94E600C405CA /* ProfileRouter.swift */,
 				CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */,
+				CEB97AC7272D94F000C405CA /* ProfileInteractor.swift */,
+				CEB97AC9272D94F900C405CA /* ProfilePresenter.swift */,
 				CE04B4E4271F413C0027F649 /* Subviews */,
 			);
 			path = Profile;
@@ -577,10 +592,14 @@
 				CE9AF681270B89C1006D44A8 /* ChannelViewController.swift in Sources */,
 				CE04B4E9271F59270027F649 /* ProfileNameTextField.swift in Sources */,
 				CE54E62F2729CBF000B20B69 /* UITableView+Extension.swift in Sources */,
+				CEB97AC4272D94CC00C405CA /* ProfileModel.swift in Sources */,
+				CEB97AC2272D94B800C405CA /* ProfileAssembly.swift in Sources */,
 				CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */,
 				CE1F08B126F3BB67002A5985 /* ChannelListViewController.swift in Sources */,
 				CEB97AC0272D3CCB00C405CA /* ChannelPresenter.swift in Sources */,
+				CEB97AC6272D94E600C405CA /* ProfileRouter.swift in Sources */,
 				CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */,
+				CEB97AC8272D94F000C405CA /* ProfileInteractor.swift in Sources */,
 				CEE9FF0D272C749B00628F34 /* ChannelListAssembly.swift in Sources */,
 				CEB97AB8272D3C8800C405CA /* ChannelAssembly.swift in Sources */,
 				CEE9FF0B272C748500628F34 /* ChannelListPresenter.swift in Sources */,
@@ -602,6 +621,7 @@
 				CEB97ABA272D3C9A00C405CA /* ChannelModel.swift in Sources */,
 				CE8B576327205F2E002E3434 /* ProfileDataManager.swift in Sources */,
 				CE04B4E7271F52B80027F649 /* ProfileFilledButton.swift in Sources */,
+				CEB97ACA272D94F900C405CA /* ProfilePresenter.swift in Sources */,
 				CE6667CC272099F100DD6B40 /* AsyncHandler.swift in Sources */,
 				CE3E9146270EAD430029DA74 /* MessageCell.swift in Sources */,
 				CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */,

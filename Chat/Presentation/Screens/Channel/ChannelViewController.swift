@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Firebase
 
 protocol ChannelDisplayLogic: AnyObject {
     func displayTheme(viewModel: ChannelModel.FetchTheme.ViewModel)

@@ -7,8 +7,15 @@
 
 import UIKit
 
-protocol ProfileViewControllerDelegate {
-    func didChangeProfileData(profile: Profile)
+protocol ProfileDisplayLogic: AnyObject {
+    func displayProfile(viewModel: ProfileModel.FetchProfile.ViewModel)
+    func displayEditingState(viewModel: ProfileModel.EditingState.ViewModel)
+    func displaySavedState(viewModel: ProfileModel.SavedState.ViewModel)
+    func updateSaveButtonState(viewModel: ProfileModel.UpdateSaveButtonState.ViewModel)
+    func showProgressView(viewModel: ProfileModel.ShowProgressView.ViewModel)
+    func hideProgressView(viewModel: ProfileModel.HideProgressView.ViewModel)
+    func displayProfileSaved(viewModel: ProfileModel.ProfileSaved.ViewModel)
+    func displaySavingProfileError(viewModel: ProfileModel.SavingProfileError.ViewModel)
 }
 
 final class ProfileViewController: KeyboardNotificationsViewController {
@@ -17,17 +24,6 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     private enum Constants {
         static let defaultLowerButtonsBottomSpacing: CGFloat = 30
-    }
-    
-    private enum State {
-        case editing
-        case edited
-        case saved
-    }
-    
-    private enum SavingVariant {
-        case gcd
-        case operations
     }
     
     // MARK: - Private properties
@@ -129,35 +125,15 @@ final class ProfileViewController: KeyboardNotificationsViewController {
 
     private let progressView = ProgressView()
     private let imagePickerController = UIImagePickerController()
-    private let didChangeProfileHandler: ((Profile) -> Void)
     private var buttonsStackViewBottomConstraint: NSLayoutConstraint?
-    private var asyncDataManager: AsyncDataManagerProtocol = AsyncDataManager(asyncHandlerType: .gcd)
-    // Хранение задачи сохранения данных необходимо для возможности её повторения
-    private var savingTask: ((Profile, SavingVariant) -> Void)?
-    private var isChangedAvatar = false
-    /// Сохранённое состояние данных вью для возможности возврата к этому состоянию в случае нажатия кнопки "Cancel".
-    private var savedViewData: (fullName: String?, description: String?, avatarImage: UIImage?)
-    private var state: State = .saved {
-        didSet {
-            switch state {
-            case .editing:
-                if oldValue == .saved {
-                    switchToEditingState()
-                } else {
-                    updateSaveButtonState()
-                }
-            case .edited:
-                updateSaveButtonState()
-            case .saved:
-                switchToSavedState()
-            }
-        }
-    }
+    private let interactor: ProfileBusinessLogic
+    private let router: ProfileRoutingLogic
     
     // MARK: - Initialization
     
-    init(didChangeProfileHandler: @escaping ((Profile) -> Void)) {
-        self.didChangeProfileHandler = didChangeProfileHandler
+    init(interactor: ProfileBusinessLogic, router: ProfileRoutingLogic) {
+        self.interactor = interactor
+        self.router = router
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -202,7 +178,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     @objc
     private func closeButtonTapped() {
-        dismiss(animated: true)
+        router.dismiss()
     }
     
     @objc
@@ -238,16 +214,19 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     @objc
     private func editProfileButtonTapped() {
-        saveCurrentViewData()
-        isChangedAvatar = false
-        state = .editing
+        let request = ProfileModel.EditProfileButtonTapped.Request(
+            fullName: fullNameTextField.text,
+            description: descriptionTextField.text,
+            avatarImageData: avatarImageView.image?.pngData()
+        )
+        interactor.editProfileButtonTapped(request: request)
     }
         
     @objc
     private func cancelButtonTapped() {
         view.endEditing(true)
-        rollbackCurrentViewData()
-        state = .saved
+        // Возврат вью к состоянию, которое было до начала редактирования
+        interactor.rollbackCurrentViewData(request: ProfileModel.RollbackCurrentViewData.Request())
     }
     
     @objc
@@ -275,12 +254,11 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     @objc
     private func textFieldsEditingChanged() {
-        guard !isChangedAvatar else { return }
-        if fullNameTextField.text == savedViewData.fullName && descriptionTextField.text == savedViewData.description {
-            state = .editing
-        } else {
-            state = .edited
-        }
+        let request = ProfileModel.TextFieldsEditingChanged.Request(
+            fullName: fullNameTextField.text,
+            description: descriptionTextField.text
+        )
+        interactor.textFieldsEditingChanged(request: request)
     }
     
     // MARK: - Private methods
@@ -355,27 +333,67 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private func configureUI() {
         view.backgroundColor = .white
         imagePickerController.delegate = self
-        fetchInitialViewData()
+        interactor.fetchProfile(request: ProfileModel.FetchProfile.Request())
     }
     
-    private func fetchInitialViewData() {
-        asyncDataManager.fetchProfile { [weak self] result in
-            switch result {
-            case .success(let profile):
-                self?.fullNameTextField.text = profile?.fullName
-                self?.descriptionTextField.text = profile?.description
-                if let avatarData = profile?.avatarData {
-                    self?.avatarImageView.image = UIImage(data: avatarData)
-                } else {
-                    self?.avatarImageView.image = Images.noPhoto
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
+    /// Сохранение текущих данных профиля в постоянное хранилище.
+    private func saveData(savingVariant: ProfileModel.SavingVariant) {
+        let request = ProfileModel.SaveProfile.Request(
+            fullName: fullNameTextField.text,
+            description: descriptionTextField.text,
+            avatarImageData: avatarImageView.image?.jpegData(compressionQuality: 0.5),
+            savingVariant: savingVariant
+        )
+        interactor.saveProfile(request: request)
+    }
+    
+    private func showSavingErrorAlert(retryHandler: @escaping () -> Void) {
+        let alert = UIAlertController(title: "Error", message: "Failed to save data", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { _ in }
+        let retryAction = UIAlertAction(title: "Repeat", style: .default) { _ in
+            retryHandler()
         }
+        alert.addAction(okAction)
+        alert.addAction(retryAction)
+        alert.preferredAction = retryAction
+        present(alert, animated: true)
+    }
+}
+
+// MARK: - ProfileDisplayLogic
+
+extension ProfileViewController: ProfileDisplayLogic {
+    
+    func displayProfile(viewModel: ProfileModel.FetchProfile.ViewModel) {
+        fullNameTextField.text = viewModel.fullName
+        descriptionTextField.text = viewModel.description
+        avatarImageView.image = UIImage(data: viewModel.avatarImageData)
     }
     
-    private func showProgressView() {
+    func displayEditingState(viewModel: ProfileModel.EditingState.ViewModel) {
+        editProfileButton.disappear(duration: 0.3) {
+            self.buttonsStackView.appear(duration: 0.3)
+        }
+        editAvatarButton.appear(duration: 0.3)
+        saveButton.isEnabled = false
+        fullNameTextField.isEnabled = true
+        descriptionTextField.isEnabled = true
+    }
+    
+    func displaySavedState(viewModel: ProfileModel.SavedState.ViewModel) {
+        buttonsStackView.disappear(duration: 0.3) {
+            self.editProfileButton.appear(duration: 0.3)
+        }
+        editAvatarButton.disappear(duration: 0.3)
+        fullNameTextField.isEnabled = false
+        descriptionTextField.isEnabled = false
+    }
+    
+    func updateSaveButtonState(viewModel: ProfileModel.UpdateSaveButtonState.ViewModel) {
+        saveButton.isEnabled = viewModel.isEnabledButton
+    }
+    
+    func showProgressView(viewModel: ProfileModel.ShowProgressView.ViewModel) {
         view.addSubview(progressView)
         NSLayoutConstraint.activate([
             progressView.topAnchor.constraint(equalTo: topView.bottomAnchor),
@@ -386,94 +404,16 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         progressView.show()
     }
     
-    private func updateSaveButtonState() {
-        saveButton.isEnabled = isChangedAvatar || state == .edited
+    func hideProgressView(viewModel: ProfileModel.HideProgressView.ViewModel) {
+        progressView.hide()
     }
     
-    private func switchToEditingState() {
-        editProfileButton.disappear(duration: 0.3) {
-            self.buttonsStackView.appear(duration: 0.3)
-        }
-        editAvatarButton.appear(duration: 0.3)
-        saveButton.isEnabled = false
-        fullNameTextField.isEnabled = true
-        descriptionTextField.isEnabled = true
+    func displayProfileSaved(viewModel: ProfileModel.ProfileSaved.ViewModel) {
+        showAlert(title: viewModel.title)
     }
     
-    private func switchToSavedState() {
-        buttonsStackView.disappear(duration: 0.3) {
-            self.editProfileButton.appear(duration: 0.3)
-        }
-        editAvatarButton.disappear(duration: 0.3)
-        fullNameTextField.isEnabled = false
-        descriptionTextField.isEnabled = false
-    }
-    
-    /// Сохраняет текущее состояние вью для возможности возврата к этому состоянию в случае нажатия кнопки "Cancel" в процессе редактирования.
-    private func saveCurrentViewData() {
-        savedViewData.fullName = fullNameTextField.text
-        savedViewData.description = descriptionTextField.text
-        savedViewData.avatarImage = avatarImageView.image
-    }
-    
-    /// Возвращает вью к состоянию, которое было до начала редактирования (при нажатии кнопки "Cancel").
-    private func rollbackCurrentViewData() {
-        fullNameTextField.text = savedViewData.fullName
-        descriptionTextField.text = savedViewData.description
-        avatarImageView.image = savedViewData.avatarImage
-    }
-    
-    /// Сохранение текущих данных профиля в постоянное хранилище.
-    private func saveData(savingVariant: SavingVariant) {
-        let profile = Profile(
-            fullName: fullNameTextField.text ?? "",
-            description: descriptionTextField.text ?? "",
-            avatarData: avatarImageView.image?.jpegData(compressionQuality: 0.5)
-        )
-        
-        savingTask = { [weak self, asyncDataManager, didChangeProfileHandler] profile, savingVariant in
-            guard let self = self else {
-                // Если экран уже закрыт, то просто вызывается ещё одна попытка сохранить профиль
-                asyncDataManager.saveProfile(profile: profile) { result in
-                    if case .success = result { didChangeProfileHandler(profile) }
-                }
-                return
-            }
-            self.showProgressView()
-            
-            asyncDataManager.saveProfile(profile: profile) { result in
-                self.progressView.hide()
-                switch result {
-                case .success:
-                    self.state = .saved
-                    self.showAlert(title: "Data saved")
-                    didChangeProfileHandler(profile)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    self.showFailureSavingAlert {
-                        self.savingTask?(profile, savingVariant)
-                    }
-                }
-            }
-        }
-        if savingVariant == .gcd {
-            asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
-        } else {
-            asyncDataManager = AsyncDataManager(asyncHandlerType: .operations)
-        }
-        savingTask?(profile, savingVariant)
-    }
-    
-    private func showFailureSavingAlert(repeatitionHandler: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: "Error", message: "Failed to save data", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default) { _ in }
-        let repeatitionAction = UIAlertAction(title: "Repeat", style: .default) { _ in
-            repeatitionHandler?()
-        }
-        alert.addAction(okAction)
-        alert.addAction(repeatitionAction)
-        alert.preferredAction = repeatitionAction
-        present(alert, animated: true)
+    func displaySavingProfileError(viewModel: ProfileModel.SavingProfileError.ViewModel) {
+        showSavingErrorAlert(retryHandler: viewModel.retryHandler)
     }
 }
 
@@ -489,8 +429,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         guard let image = info[.originalImage] as? UIImage else { return }
         avatarImageView.image = image
-        isChangedAvatar = true
-        state = .edited
+        interactor.didSelectNewAvatar(request: ProfileModel.DidSelectNewAvatar.Request())
     }
 }
 

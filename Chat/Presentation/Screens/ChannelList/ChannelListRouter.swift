@@ -28,7 +28,8 @@ final class ChannelListRouter: ChannelListRoutingLogic {
     }
     
     func navigateToProfile(route: ChannelListModel.Route.ProfileScreen) {
-        let profileViewController = ProfileViewController(didChangeProfileHandler: route.didChangeProfileHandler)
+        let parameters = ProfileAssembly.Parameters(didChangeProfileHandler: route.didChangeProfileHandler)
+        let profileViewController = ProfileAssembly.assembly(parameters: parameters)
         viewController?.present(profileViewController, animated: true)
     }
     
