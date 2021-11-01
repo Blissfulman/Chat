@@ -11,6 +11,7 @@ protocol ChannelDisplayLogic: AnyObject {
     func displayTheme(viewModel: ChannelModel.FetchTheme.ViewModel)
     func displayMessages(viewModel: ChannelModel.FetchMessages.ViewModel)
     func displayFetchingMessagesError(viewModel: ChannelModel.FetchingMessagesError.ViewModel)
+    func displaySendMessage(viewModel: ChannelModel.SendMessage.ViewModel)
 }
 
 final class ChannelViewController: KeyboardNotificationsViewController {
@@ -49,7 +50,9 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     }()
     
     private lazy var newMessageTextField: UITextField = {
-        let textField = NewMessageTextField()
+        let textField = NewMessageTextField { [weak self] text in
+            self?.interactor.sendMessage(request: ChannelModel.SendMessage.Request(text: text))
+        }
         textField.setCornerRadius(Constants.newMessageTexrFieldHeight / 2)
         textField.delegate = self
         return textField
@@ -172,6 +175,10 @@ extension ChannelViewController: ChannelDisplayLogic {
     func displayFetchingMessagesError(viewModel: ChannelModel.FetchingMessagesError.ViewModel) {
         showAlertController(title: viewModel.title, message: viewModel.message)
     }
+    
+    func displaySendMessage(viewModel: ChannelModel.SendMessage.ViewModel) {
+        newMessageTextField.text = ""
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -198,10 +205,7 @@ extension ChannelViewController: UITableViewDataSource {
 extension ChannelViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let text = textField.text {
-            interactor.sendMessage(request: ChannelModel.SendMessage.Request(text: text))
-            textField.text = ""
-        }
+        interactor.sendMessage(request: ChannelModel.SendMessage.Request(text: textField.text))
         return true
     }
 }

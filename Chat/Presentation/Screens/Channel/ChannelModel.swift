@@ -41,7 +41,9 @@ enum ChannelModel {
     
     enum SendMessage {
         struct Request {
-            let text: String
+            let text: String?
         }
+        struct Response {}
+        struct ViewModel {}
     }
 }

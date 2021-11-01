@@ -11,6 +11,7 @@ protocol ChannelPresentationLogic: AnyObject {
     func presentTheme(response: ChannelModel.FetchTheme.Response)
     func presentMessages(response: ChannelModel.FetchMessages.Response)
     func presentFetchingMessagesError(response: ChannelModel.FetchingMessagesError.Response)
+    func presentSendMessage(response: ChannelModel.SendMessage.Response)
 }
 
 final class ChannelPresenter: ChannelPresentationLogic {
@@ -35,5 +36,9 @@ final class ChannelPresenter: ChannelPresentationLogic {
             message: response.error.localizedDescription
         )
         view?.displayFetchingMessagesError(viewModel: viewModel)
+    }
+    
+    func presentSendMessage(response: ChannelModel.SendMessage.Response) {
+        view?.displaySendMessage(viewModel: ChannelModel.SendMessage.ViewModel())
     }
 }

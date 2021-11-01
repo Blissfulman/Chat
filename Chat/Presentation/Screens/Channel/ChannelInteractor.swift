@@ -59,12 +59,14 @@ final class ChannelInteractor: ChannelBusinessLogic {
     }
     
     func sendMessage(request: ChannelModel.SendMessage.Request) {
+        guard let text = request.text else { return }
         let newMessage = Message(
-            content: request.text,
+            content: text,
             created: Date(),
             senderID: SettingsManager.mySenderID,
             senderName: senderName
         )
         reference.addDocument(data: newMessage.toDictionary)
+        presenter.presentSendMessage(response: ChannelModel.SendMessage.Response())
     }
 }
