@@ -31,6 +31,20 @@ enum ProfileModel {
         }
     }
     
+    enum EditingAvatarAlert {
+        struct Request {}
+        struct Response {}
+        struct ViewModel {
+            let title: String
+        }
+    }
+    
+    enum SavingProfileAlert {
+        struct Request {}
+        struct Response {}
+        struct ViewModel {}
+    }
+    
     enum DidSelectNewAvatar {
         struct Request {}
     }
@@ -84,7 +98,7 @@ enum ProfileModel {
         struct ViewModel {}
     }
     
-    enum ProfileSaved {
+    enum ProfileSavedAlert {
         struct Response {}
         struct ViewModel {
             let title: String
@@ -96,6 +110,8 @@ enum ProfileModel {
             let retryHandler: () -> Void
         }
         struct ViewModel {
+            let title: String
+            let message: String
             let retryHandler: () -> Void
         }
     }

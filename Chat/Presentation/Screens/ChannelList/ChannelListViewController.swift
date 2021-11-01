@@ -155,14 +155,18 @@ extension ChannelListViewController: ChannelListDisplayLogic {
     }
     
     func displayFetchingChannelsError(viewModel: ChannelListModel.FetchingChannelsError.ViewModel) {
-        showAlert(title: viewModel.title, message: viewModel.message)
+        showAlertController(title: viewModel.title, message: viewModel.message)
     }
     
     func displayAddChannelAlert(viewModel: ChannelListModel.AddChannelAlert.ViewModel) {
-        let alert = AddChannelAlert(title: viewModel.title, message: nil, okActionHandler: { [weak self] channelName in
-            self?.interactor.addNewChannel(request: ChannelListModel.NewChannel.Request(channelName: channelName))
-        })
-        present(alert, animated: true)
+        let alertController = AddChannelAlertalertController(
+            title: viewModel.title,
+            message: nil,
+            okActionHandler: { [weak self] channelName in
+                self?.interactor.addNewChannel(request: ChannelListModel.NewChannel.Request(channelName: channelName))
+            }
+        )
+        present(alertController, animated: true)
     }
 }
 

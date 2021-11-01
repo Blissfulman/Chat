@@ -157,6 +157,23 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     }
 }
 
+// MARK: - ChannelDisplayLogic
+
+extension ChannelViewController: ChannelDisplayLogic {
+    
+    func displayTheme(viewModel: ChannelModel.FetchTheme.ViewModel) {
+        bottomView.backgroundColor = viewModel.theme.themeColors.backgroundColor
+    }
+    
+    func displayMessages(viewModel: ChannelModel.FetchMessages.ViewModel) {
+        messages = viewModel.messages
+    }
+    
+    func displayFetchingMessagesError(viewModel: ChannelModel.FetchingMessagesError.ViewModel) {
+        showAlertController(title: viewModel.title, message: viewModel.message)
+    }
+}
+
 // MARK: - UITableViewDataSource
 
 extension ChannelViewController: UITableViewDataSource {
@@ -186,22 +203,5 @@ extension ChannelViewController: UITextFieldDelegate {
             textField.text = ""
         }
         return true
-    }
-}
-
-// MARK: - ChannelDisplayLogic
-
-extension ChannelViewController: ChannelDisplayLogic {
-    
-    func displayTheme(viewModel: ChannelModel.FetchTheme.ViewModel) {
-        bottomView.backgroundColor = viewModel.theme.themeColors.backgroundColor
-    }
-    
-    func displayMessages(viewModel: ChannelModel.FetchMessages.ViewModel) {
-        messages = viewModel.messages
-    }
-    
-    func displayFetchingMessagesError(viewModel: ChannelModel.FetchingMessagesError.ViewModel) {
-        showAlert(title: viewModel.title, message: viewModel.message)
     }
 }

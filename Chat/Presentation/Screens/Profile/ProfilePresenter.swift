@@ -9,12 +9,14 @@ import Foundation
 
 protocol ProfilePresentationLogic: AnyObject {
     func presentProfile(response: ProfileModel.FetchProfile.Response)
+    func presentEditingAvatarAlert(response: ProfileModel.EditingAvatarAlert.Response)
     func presentEditingState(response: ProfileModel.EditingState.Response)
     func presentSavedState(response: ProfileModel.SavedState.Response)
     func updateSaveButtonState(response: ProfileModel.UpdateSaveButtonState.Response)
+    func presentSavingProfileAlert(response: ProfileModel.SavingProfileAlert.Response)
     func showProgressView(response: ProfileModel.ShowProgressView.Response)
     func hideProgressView(response: ProfileModel.HideProgressView.Response)
-    func presentProfileSaved(response: ProfileModel.ProfileSaved.Response)
+    func presentProfileSavedAlert(response: ProfileModel.ProfileSavedAlert.Response)
     func presentSavingProfileError(response: ProfileModel.SavingProfileError.Response)
 }
 
@@ -34,6 +36,11 @@ final class ProfilePresenter: ProfilePresentationLogic {
         view?.displayProfile(viewModel: viewModel)
     }
     
+    func presentEditingAvatarAlert(response: ProfileModel.EditingAvatarAlert.Response) {
+        let viewModel = ProfileModel.EditingAvatarAlert.ViewModel(title: "Select image source")
+        view?.displayEditingAvatarAlert(viewModel: viewModel)
+    }
+    
     func presentEditingState(response: ProfileModel.EditingState.Response) {
         view?.displayEditingState(viewModel: ProfileModel.EditingState.ViewModel())
     }
@@ -43,9 +50,12 @@ final class ProfilePresenter: ProfilePresentationLogic {
     }
     
     func updateSaveButtonState(response: ProfileModel.UpdateSaveButtonState.Response) {
-        view?.updateSaveButtonState(
-            viewModel: ProfileModel.UpdateSaveButtonState.ViewModel(isEnabledButton: response.isEnabledButton)
-        )
+        let viewModel = ProfileModel.UpdateSaveButtonState.ViewModel(isEnabledButton: response.isEnabledButton)
+        view?.updateSaveButtonState(viewModel: viewModel)
+    }
+    
+    func presentSavingProfileAlert(response: ProfileModel.SavingProfileAlert.Response) {
+        view?.displaySavingProfileAlert(viewModel: ProfileModel.SavingProfileAlert.ViewModel())
     }
     
     func showProgressView(response: ProfileModel.ShowProgressView.Response) {
@@ -56,12 +66,16 @@ final class ProfilePresenter: ProfilePresentationLogic {
         view?.hideProgressView(viewModel: ProfileModel.HideProgressView.ViewModel())
     }
     
-    func presentProfileSaved(response: ProfileModel.ProfileSaved.Response) {
-        view?.displayProfileSaved(viewModel: ProfileModel.ProfileSaved.ViewModel(title: "Data saved"))
+    func presentProfileSavedAlert(response: ProfileModel.ProfileSavedAlert.Response) {
+        view?.displayProfileSavedAlert(viewModel: ProfileModel.ProfileSavedAlert.ViewModel(title: "Data saved"))
     }
     
     func presentSavingProfileError(response: ProfileModel.SavingProfileError.Response) {
-        let viewModel = ProfileModel.SavingProfileError.ViewModel(retryHandler: response.retryHandler)
+        let viewModel = ProfileModel.SavingProfileError.ViewModel(
+            title: "Error",
+            message: "Failed to save data",
+            retryHandler: response.retryHandler
+        )
         view?.displaySavingProfileError(viewModel: viewModel)
     }
 }

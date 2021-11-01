@@ -9,7 +9,7 @@ import UIKit
 
 extension ChannelListViewController {
     
-    final class AddChannelAlert: UIAlertController {
+    final class AddChannelAlertalertController: UIAlertController {
         
         // MARK: - Private properties
         

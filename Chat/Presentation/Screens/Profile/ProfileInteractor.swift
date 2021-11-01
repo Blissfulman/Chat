@@ -10,9 +10,11 @@ import Foundation
 protocol ProfileBusinessLogic: AnyObject {
     func fetchProfile(request: ProfileModel.FetchProfile.Request)
     func editProfileButtonTapped(request: ProfileModel.EditProfileButtonTapped.Request)
+    func requestEditingAvatarAlert(request: ProfileModel.EditingAvatarAlert.Request)
     func didSelectNewAvatar(request: ProfileModel.DidSelectNewAvatar.Request)
     func textFieldsEditingChanged(request: ProfileModel.TextFieldsEditingChanged.Request)
     func rollbackCurrentViewData(request: ProfileModel.RollbackCurrentViewData.Request)
+    func requestSavingProfileAlert(request: ProfileModel.SavingProfileAlert.Request)
     func saveProfile(request: ProfileModel.SaveProfile.Request)
 }
 
@@ -87,6 +89,10 @@ final class ProfileInteractor: ProfileBusinessLogic {
         state = .editing
     }
     
+    func requestEditingAvatarAlert(request: ProfileModel.EditingAvatarAlert.Request) {
+        presenter.presentEditingAvatarAlert(response: ProfileModel.EditingAvatarAlert.Response())
+    }
+    
     func didSelectNewAvatar(request: ProfileModel.DidSelectNewAvatar.Request) {
         isChangedAvatar = true
         state = .edited
@@ -111,6 +117,10 @@ final class ProfileInteractor: ProfileBusinessLogic {
         state = .saved
     }
     
+    func requestSavingProfileAlert(request: ProfileModel.SavingProfileAlert.Request) {
+        presenter.presentSavingProfileAlert(response: ProfileModel.SavingProfileAlert.Response())
+    }
+    
     func saveProfile(request: ProfileModel.SaveProfile.Request) {
         let profile = Profile(
             fullName: request.fullName ?? "",
@@ -133,7 +143,7 @@ final class ProfileInteractor: ProfileBusinessLogic {
                 switch result {
                 case .success:
                     self.state = .saved
-                    self.presenter.presentProfileSaved(response: ProfileModel.ProfileSaved.Response())
+                    self.presenter.presentProfileSavedAlert(response: ProfileModel.ProfileSavedAlert.Response())
                     didChangeProfileHandler(profile)
                 case .failure(let error):
                     print(error.localizedDescription)

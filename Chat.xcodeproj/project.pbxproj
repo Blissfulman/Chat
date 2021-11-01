@@ -59,6 +59,7 @@
 		CEB97AC8272D94F000C405CA /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AC7272D94F000C405CA /* ProfileInteractor.swift */; };
 		CEB97ACA272D94F900C405CA /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AC9272D94F900C405CA /* ProfilePresenter.swift */; };
 		CEB97ACD272FD81700C405CA /* ChannelListViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97ACC272FD81700C405CA /* ChannelListViewController+Extension.swift */; };
+		CEB97ACF272FD9CD00C405CA /* ProfileViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97ACE272FD9CD00C405CA /* ProfileViewController+Extension.swift */; };
 		CED023E726FFB61100062489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED023E626FFB61100062489 /* Assets.xcassets */; };
 		CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED84B3827025BC300D4E4EB /* Palette.xcassets */; };
 		CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3B27025D1700D4E4EB /* Palette.swift */; };
@@ -128,6 +129,7 @@
 		CEB97AC7272D94F000C405CA /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 		CEB97AC9272D94F900C405CA /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		CEB97ACC272FD81700C405CA /* ChannelListViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChannelListViewController+Extension.swift"; sourceTree = "<group>"; };
+		CEB97ACE272FD9CD00C405CA /* ProfileViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController+Extension.swift"; sourceTree = "<group>"; };
 		CED023E626FFB61100062489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CED84B3827025BC300D4E4EB /* Palette.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Palette.xcassets; sourceTree = "<group>"; };
 		CED84B3B27025D1700D4E4EB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */,
 				CEB97AC7272D94F000C405CA /* ProfileInteractor.swift */,
 				CEB97AC9272D94F900C405CA /* ProfilePresenter.swift */,
+				CEB97ACE272FD9CD00C405CA /* ProfileViewController+Extension.swift */,
 				CE04B4E4271F413C0027F649 /* Subviews */,
 			);
 			path = Profile;
@@ -619,6 +622,7 @@
 				CE6667CE2720ACB100DD6B40 /* ProgressView.swift in Sources */,
 				CEE9FF12272C75A600628F34 /* ChannelListRouter.swift in Sources */,
 				CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */,
+				CEB97ACF272FD9CD00C405CA /* ProfileViewController+Extension.swift in Sources */,
 				CE394792270F8581004C6FD1 /* Date+Extension.swift in Sources */,
 				CE8C4079271BEEE000D0C0B5 /* FileStorageManager.swift in Sources */,
 				CEB97ABE272D3CC200C405CA /* ChannelInteractor.swift in Sources */,

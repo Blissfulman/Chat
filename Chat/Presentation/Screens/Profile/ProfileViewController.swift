@@ -9,12 +9,14 @@ import UIKit
 
 protocol ProfileDisplayLogic: AnyObject {
     func displayProfile(viewModel: ProfileModel.FetchProfile.ViewModel)
+    func displayEditingAvatarAlert(viewModel: ProfileModel.EditingAvatarAlert.ViewModel)
     func displayEditingState(viewModel: ProfileModel.EditingState.ViewModel)
     func displaySavedState(viewModel: ProfileModel.SavedState.ViewModel)
     func updateSaveButtonState(viewModel: ProfileModel.UpdateSaveButtonState.ViewModel)
+    func displaySavingProfileAlert(viewModel: ProfileModel.SavingProfileAlert.ViewModel)
     func showProgressView(viewModel: ProfileModel.ShowProgressView.ViewModel)
     func hideProgressView(viewModel: ProfileModel.HideProgressView.ViewModel)
-    func displayProfileSaved(viewModel: ProfileModel.ProfileSaved.ViewModel)
+    func displayProfileSavedAlert(viewModel: ProfileModel.ProfileSavedAlert.ViewModel)
     func displaySavingProfileError(viewModel: ProfileModel.SavingProfileError.ViewModel)
 }
 
@@ -184,32 +186,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     @objc
     private func editAvatarButtonTapped() {
         view.endEditing(true)
-        
-        let imageSelectionAlertController = UIAlertController(
-            title: "Select image source",
-            message: nil,
-            preferredStyle: .actionSheet
-        )
-        let galleryAction = UIAlertAction(title: "Select from the gallery", style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            self.imagePickerController.sourceType = .savedPhotosAlbum
-            self.present(self.imagePickerController, animated: true)
-        }
-        let cameraAction = UIAlertAction(title: "Take a photo", style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            guard UIImagePickerController.isCameraDeviceAvailable(.rear) else {
-                self.showAlert(title: "The camera insn't available")
-                return
-            }
-            self.imagePickerController.sourceType = .camera
-            self.present(self.imagePickerController, animated: true)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
-        
-        imageSelectionAlertController.addAction(galleryAction)
-        imageSelectionAlertController.addAction(cameraAction)
-        imageSelectionAlertController.addAction(cancelAction)
-        present(imageSelectionAlertController, animated: true)
+        interactor.requestEditingAvatarAlert(request: ProfileModel.EditingAvatarAlert.Request())
     }
     
     @objc
@@ -232,24 +209,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     @objc
     private func saveButtonTapped() {
         view.endEditing(true)
-        
-        let savingAlertController = UIAlertController(
-            title: nil,
-            message: nil,
-            preferredStyle: .actionSheet
-        )
-        let saveWithGCDAction = UIAlertAction(title: "Save with GCD", style: .default) { [weak self] _ in
-            self?.saveData(savingVariant: .gcd)
-        }
-        let saveWithOperationsAction = UIAlertAction(title: "Save with Operations", style: .default) { [weak self] _ in
-            self?.saveData(savingVariant: .operations)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
-        
-        savingAlertController.addAction(saveWithGCDAction)
-        savingAlertController.addAction(saveWithOperationsAction)
-        savingAlertController.addAction(cancelAction)
-        present(savingAlertController, animated: true)
+        interactor.requestSavingProfileAlert(request: ProfileModel.SavingProfileAlert.Request())
     }
     
     @objc
@@ -346,18 +306,6 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         )
         interactor.saveProfile(request: request)
     }
-    
-    private func showSavingErrorAlert(retryHandler: @escaping () -> Void) {
-        let alert = UIAlertController(title: "Error", message: "Failed to save data", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default) { _ in }
-        let retryAction = UIAlertAction(title: "Repeat", style: .default) { _ in
-            retryHandler()
-        }
-        alert.addAction(okAction)
-        alert.addAction(retryAction)
-        alert.preferredAction = retryAction
-        present(alert, animated: true)
-    }
 }
 
 // MARK: - ProfileDisplayLogic
@@ -368,6 +316,23 @@ extension ProfileViewController: ProfileDisplayLogic {
         fullNameTextField.text = viewModel.fullName
         descriptionTextField.text = viewModel.description
         avatarImageView.image = UIImage(data: viewModel.avatarImageData)
+    }
+    
+    func displayEditingAvatarAlert(viewModel: ProfileModel.EditingAvatarAlert.ViewModel) {
+        let alertController = editAvatarAlert(title: viewModel.title, galleryAction: { [weak self] in
+            guard let self = self else { return }
+            self.imagePickerController.sourceType = .savedPhotosAlbum
+            self.present(self.imagePickerController, animated: true)
+        }, cameraAction: { [weak self] in
+            guard let self = self else { return }
+            guard UIImagePickerController.isCameraDeviceAvailable(.rear) else {
+                self.showAlertController(title: "The camera insn't available")
+                return
+            }
+            self.imagePickerController.sourceType = .camera
+            self.present(self.imagePickerController, animated: true)
+        })
+        present(alertController, animated: true)
     }
     
     func displayEditingState(viewModel: ProfileModel.EditingState.ViewModel) {
@@ -393,6 +358,15 @@ extension ProfileViewController: ProfileDisplayLogic {
         saveButton.isEnabled = viewModel.isEnabledButton
     }
     
+    func displaySavingProfileAlert(viewModel: ProfileModel.SavingProfileAlert.ViewModel) {
+        let alertController = savingProfileAlertController(saveWithGCDAction: { [weak self] in
+            self?.saveData(savingVariant: .gcd)
+        }, saveWithOperationsAction: { [weak self] in
+            self?.saveData(savingVariant: .operations)
+        })
+        present(alertController, animated: true)
+    }
+    
     func showProgressView(viewModel: ProfileModel.ShowProgressView.ViewModel) {
         view.addSubview(progressView)
         NSLayoutConstraint.activate([
@@ -408,12 +382,17 @@ extension ProfileViewController: ProfileDisplayLogic {
         progressView.hide()
     }
     
-    func displayProfileSaved(viewModel: ProfileModel.ProfileSaved.ViewModel) {
-        showAlert(title: viewModel.title)
+    func displayProfileSavedAlert(viewModel: ProfileModel.ProfileSavedAlert.ViewModel) {
+        showAlertController(title: viewModel.title)
     }
     
     func displaySavingProfileError(viewModel: ProfileModel.SavingProfileError.ViewModel) {
-        showSavingErrorAlert(retryHandler: viewModel.retryHandler)
+        let alertController = savingErrorAlert(
+            title: viewModel.title,
+            message: viewModel.message,
+            retryHandler: viewModel.retryHandler
+        )
+        present(alertController, animated: true)
     }
 }
 
