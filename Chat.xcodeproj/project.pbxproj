@@ -182,7 +182,6 @@
 			children = (
 				CE39478F270F7C1C004C6FD1 /* PartnerMessageView.swift */,
 				CE39478D270F73CE004C6FD1 /* MyMessageView.swift */,
-				CE7A11362728832600B92C0B /* NewMessageTextField.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -361,6 +360,7 @@
 				CE9AF680270B89C1006D44A8 /* ChannelViewController.swift */,
 				CEB97ABD272D3CC200C405CA /* ChannelInteractor.swift */,
 				CEB97ABF272D3CCB00C405CA /* ChannelPresenter.swift */,
+				CEB97AD027307CAB00C405CA /* Subviews */,
 				CE3E9144270EAD320029DA74 /* Cells */,
 			);
 			path = Channel;
@@ -373,6 +373,14 @@
 				CE6667CB272099F100DD6B40 /* AsyncHandler.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CEB97AD027307CAB00C405CA /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				CE7A11362728832600B92C0B /* NewMessageTextField.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		CED023E326FFAEE300062489 /* Resources */ = {
