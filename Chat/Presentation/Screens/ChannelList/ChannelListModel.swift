@@ -47,9 +47,17 @@ enum ChannelListModel {
         }
     }
     
+    enum AddChannelAlert {
+        struct Request {}
+        struct Response {}
+        struct ViewModel {
+            let title: String
+        }
+    }
+    
     enum NewChannel {
         struct Request {
-            let channelName: String?
+            let channelName: String
         }
     }
     

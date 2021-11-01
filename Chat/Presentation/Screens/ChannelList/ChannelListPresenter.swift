@@ -11,6 +11,7 @@ protocol ChannelListPresentationLogic: AnyObject {
     func presentProfileData(response: ChannelListModel.UpdateProfile.Response)
     func presentChannelList(response: ChannelListModel.ChannelList.Response)
     func presentFetchingChannelsError(response: ChannelListModel.FetchingChannelsError.Response)
+    func presentAddChannelAlert(response: ChannelListModel.AddChannelAlert.Response)
 }
 
 final class ChannelListPresenter: ChannelListPresentationLogic {
@@ -39,5 +40,9 @@ final class ChannelListPresenter: ChannelListPresentationLogic {
             message: response.error.localizedDescription
         )
         view?.displayFetchingChannelsError(viewModel: viewModel)
+    }
+    
+    func presentAddChannelAlert(response: ChannelListModel.AddChannelAlert.Response) {
+        view?.displayAddChannelAlert(viewModel: ChannelListModel.AddChannelAlert.ViewModel(title: "Input channel name"))
     }
 }

@@ -11,6 +11,7 @@ protocol ChannelListBusinessLogic: AnyObject {
     func fetchProfile(request: ChannelListModel.FetchProfile.Request)
     func updateProfile(request: ChannelListModel.UpdateProfile.Request)
     func fetchChannelList(request: ChannelListModel.ChannelList.Request)
+    func requestAddChannelAlert(request: ChannelListModel.AddChannelAlert.Request)
     func addNewChannel(request: ChannelListModel.NewChannel.Request)
     func updateTheme(request: ChannelListModel.UpdateTheme.Request)
 }
@@ -74,9 +75,12 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
         }
     }
     
+    func requestAddChannelAlert(request: ChannelListModel.AddChannelAlert.Request) {
+        presenter.presentAddChannelAlert(response: ChannelListModel.AddChannelAlert.Response())
+    }
+    
     func addNewChannel(request: ChannelListModel.NewChannel.Request) {
-        guard let channelName = request.channelName, !channelName.isEmpty else { return }
-        let newChannel = Channel(identifier: "", name: channelName, lastMessage: nil, lastActivity: nil)
+        let newChannel = Channel(identifier: "", name: request.channelName, lastMessage: nil, lastActivity: nil)
         reference.addDocument(data: newChannel.toDictionary)
     }
     

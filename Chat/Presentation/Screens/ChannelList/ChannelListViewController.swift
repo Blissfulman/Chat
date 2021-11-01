@@ -12,6 +12,7 @@ protocol ChannelListDisplayLogic: AnyObject {
     func displayProfileData(viewModel: ChannelListModel.UpdateProfile.ViewModel)
     func displayChannelList(viewModel: ChannelListModel.ChannelList.ViewModel)
     func displayFetchingChannelsError(viewModel: ChannelListModel.FetchingChannelsError.ViewModel)
+    func displayAddChannelAlert(viewModel: ChannelListModel.AddChannelAlert.ViewModel)
 }
 
 final class ChannelListViewController: UIViewController {
@@ -91,9 +92,7 @@ final class ChannelListViewController: UIViewController {
     
     @objc
     private func addChannelBarButtonTapped() {
-        showAddChannelAlert { [weak self] channelName in
-            self?.interactor.addNewChannel(request: ChannelListModel.NewChannel.Request(channelName: channelName))
-        }
+        interactor.requestAddChannelAlert(request: ChannelListModel.AddChannelAlert.Request())
     }
     
     @objc
@@ -140,20 +139,29 @@ final class ChannelListViewController: UIViewController {
         
         return UIBarButtonItem(customView: button)
     }
+}
+
+// MARK: - ChannelListDisplayLogic
+
+extension ChannelListViewController: ChannelListDisplayLogic {
     
-    private func showAddChannelAlert(competion: @escaping ((String?) -> Void)) {
-        let alert = UIAlertController(title: "Input channel name", message: nil, preferredStyle: .alert)
-        
-        alert.addTextField { textField in
-            textField.placeholder = "Channel name"
-        }
-        let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
-            competion(alert.textFields?.first?.text)
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
-        alert.addAction(okAction)
-        alert.addAction(cancelAction)
-        alert.preferredAction = okAction
+    func displayProfileData(viewModel: ChannelListModel.UpdateProfile.ViewModel) {
+        senderName = viewModel.senderName
+        navigationItem.rightBarButtonItem = customProfileBarButton(avatarData: viewModel.avatarImageData)
+    }
+    
+    func displayChannelList(viewModel: ChannelListModel.ChannelList.ViewModel) {
+        channels = viewModel.channels
+    }
+    
+    func displayFetchingChannelsError(viewModel: ChannelListModel.FetchingChannelsError.ViewModel) {
+        showAlert(title: viewModel.title, message: viewModel.message)
+    }
+    
+    func displayAddChannelAlert(viewModel: ChannelListModel.AddChannelAlert.ViewModel) {
+        let alert = AddChannelAlert(title: viewModel.title, message: nil, okActionHandler: { [weak self] channelName in
+            self?.interactor.addNewChannel(request: ChannelListModel.NewChannel.Request(channelName: channelName))
+        })
         present(alert, animated: true)
     }
 }
@@ -187,23 +195,5 @@ extension ChannelListViewController: UITableViewDelegate {
             senderName: senderName
         )
         router.navigateToChannel(route: route)
-    }
-}
-
-// MARK: - ChannelListDisplayLogic
-
-extension ChannelListViewController: ChannelListDisplayLogic {
-    
-    func displayProfileData(viewModel: ChannelListModel.UpdateProfile.ViewModel) {
-        senderName = viewModel.senderName
-        navigationItem.rightBarButtonItem = customProfileBarButton(avatarData: viewModel.avatarImageData)
-    }
-    
-    func displayChannelList(viewModel: ChannelListModel.ChannelList.ViewModel) {
-        channels = viewModel.channels
-    }
-    
-    func displayFetchingChannelsError(viewModel: ChannelListModel.FetchingChannelsError.ViewModel) {
-        showAlert(title: viewModel.title, message: viewModel.message)
     }
 }
