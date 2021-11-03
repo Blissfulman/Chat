@@ -19,15 +19,23 @@ final class SettingsManager {
     /// В случае успешного получения значения, оно присваивается данному параметру.
     /// В случае неудачной попытки, новое значение параметра должно генерироваться и сохраняться в постоянное хранилище (с его присвоением данному параметру).
     static private(set) var mySenderID = ""
-        
+    
+    // MARK: - Nested types {
+    
+    private enum Constants {
+        static let dataType: FileStorageManager.DataType = .settings
+        static let themeKey = "Theme"
+        static let mySenderIDKey = "MySenderID"
+    }
+    
     // MARK: - Public properties
     
     var theme: Theme {
         get {
-            (try? fileStorageManager.getValue(withKey: themeKey, dataType: dataType)) ?? .light
+            (try? fileStorageManager.getValue(withKey: Constants.themeKey, dataType: Constants.dataType)) ?? .light
         }
         set {
-            try? fileStorageManager.saveValue(newValue, withKey: themeKey, dataType: dataType)
+            try? fileStorageManager.saveValue(newValue, withKey: Constants.themeKey, dataType: Constants.dataType)
         }
     }
     
@@ -35,19 +43,16 @@ final class SettingsManager {
     
     private let fileStorageManager = FileStorageManager()
     private let keychainManager: KeychainManagerProtocol = KeychainManager()
-    private let dataType = FileStorageManager.DataType.settings
-    private let themeKey = "Theme"
-    private let mySenderIDKey = "MySenderID"
     
     // MARK: - Public methods
     
     func loadMySenderID() {
-        if let mySenderID = keychainManager.fetchValue(withLabel: mySenderIDKey),
+        if let mySenderID = keychainManager.fetchValue(withLabel: Constants.mySenderIDKey),
            !mySenderID.isEmpty {
             SettingsManager.mySenderID = mySenderID
         } else {
             let newSenderID = String(describing: UUID())
-            keychainManager.saveValue(newSenderID, withLabel: mySenderIDKey)
+            keychainManager.saveValue(newSenderID, withLabel: Constants.mySenderIDKey)
             SettingsManager.mySenderID = newSenderID
         }
     }
