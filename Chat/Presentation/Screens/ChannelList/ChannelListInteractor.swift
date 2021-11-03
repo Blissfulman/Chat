@@ -60,16 +60,16 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     
     func fetchChannelList(request: ChannelListModel.ChannelList.Request) {
         reference.addSnapshotListener { [weak self] snapshot, error in
+            guard let self = self else { return }
             if let error = error {
                 let response = ChannelListModel.FetchingChannelsError.Response(error: error)
-                self?.presenter.presentFetchingChannelsError(response: response)
+                self.presenter.presentFetchingChannelsError(response: response)
             } else {
                 if let channelSnapshots = snapshot?.documents {
-                    let channels = channelSnapshots
-                        .compactMap { Channel(snapshot: $0) }
-                        .sorted { $0.name > $1.name }
-                    let response = ChannelListModel.ChannelList.Response(channels: channels)
-                    self?.presenter.presentChannelList(response: response)
+                    let channels = channelSnapshots.compactMap { Channel(snapshot: $0) }
+                    let sortedChannels = self.sortChannels(channels)
+                    let response = ChannelListModel.ChannelList.Response(channels: sortedChannels)
+                    self.presenter.presentChannelList(response: response)
                 }
             }
         }
@@ -90,5 +90,24 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
             NavigationController.updateColors(for: request.theme)
             self?.settingsManager.theme = request.theme
         }
+    }
+    
+    // MARK: - Private methods
+    
+    private func sortChannels(_ channels: [Channel]) -> [Channel] {
+        let activeChannels = channels
+            .filter { $0.lastActivity != nil }
+            .sorted {
+                if let firstDate = $0.lastActivity,
+                   let secondDate = $1.lastActivity {
+                    return firstDate > secondDate
+                } else {
+                    return true
+                }
+            }
+        let inactiveChannels = channels
+            .filter { $0.lastActivity == nil }
+            .sorted { $0.name < $1.name }
+        return activeChannels + inactiveChannels
     }
 }
