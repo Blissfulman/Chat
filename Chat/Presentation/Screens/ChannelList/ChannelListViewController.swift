@@ -159,7 +159,7 @@ extension ChannelListViewController: ChannelListDisplayLogic {
     }
     
     func displayAddChannelAlert(viewModel: ChannelListModel.AddChannelAlert.ViewModel) {
-        let alertController = AddChannelAlertalertController(
+        let alertController = AddChannelAlertController(
             title: viewModel.title,
             message: nil,
             okActionHandler: { [weak self] channelName in

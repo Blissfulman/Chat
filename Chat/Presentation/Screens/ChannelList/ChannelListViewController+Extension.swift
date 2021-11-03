@@ -9,7 +9,7 @@ import UIKit
 
 extension ChannelListViewController {
     
-    final class AddChannelAlertalertController: UIAlertController {
+    final class AddChannelAlertController: UIAlertController {
         
         // MARK: - Private properties
         
@@ -20,6 +20,13 @@ extension ChannelListViewController {
         convenience init(title: String?, message: String?, okActionHandler: @escaping (String) -> Void) {
             self.init(title: title, message: message, preferredStyle: .alert)
             setupUI(okActionHandler: okActionHandler)
+        }
+        
+        // MARK: - Actions
+        
+        @objc
+        private func textFieldEditingChanged(sender: UITextField) {
+            okAction?.isEnabled = isValidChannelName(text: sender.text)
         }
         
         // MARK: - Private methods
@@ -47,10 +54,13 @@ extension ChannelListViewController {
             addAction(cancelAction)
         }
         
-        @objc
-        private func textFieldEditingChanged(sender: UITextField) {
-            let isEnabledOkAction = !(sender.text?.isEmpty ?? true)
-            okAction?.isEnabled = isEnabledOkAction
+        private func isValidChannelName(text: String?) -> Bool {
+            if let text = text,
+               !text.replacingOccurrences(of: " ", with: "").isEmpty {
+                return true
+            } else {
+                return false
+            }
         }
     }
 }
