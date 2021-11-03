@@ -12,29 +12,36 @@ final class MyMessageView: UIView {
     struct Model {
         let text: String
         let date: String
-        let isUnread: Bool // FIXME: Необходимо реализовать галочки, отображающие прочитано ли сообщение
     }
     
     // MARK: - Private properties
     
-    private var shapeImageView: UIImageView = {
+    private lazy var shapeImageView: UIImageView = {
         let imageView = UIImageView().prepareForAutoLayout()
         imageView.contentMode = .scaleToFill
         imageView.image = Images.myMessageShape
         return imageView
     }()
     
-    private var messageLabel: UILabel = {
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView().prepareForAutoLayout()
+        stackView.axis = .vertical
+        stackView.spacing = 3
+        return stackView
+    }()
+    
+    private lazy var messageLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
         label.font = Fonts.messageCellText
         label.numberOfLines = 0
         return label
     }()
     
-    private var dateLabel: UILabel = {
+    private lazy var dateLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
         label.font = Fonts.messageCellDate
         label.textColor = UIColor.black.withAlphaComponent(0.25)
+        label.textAlignment = .right
         return label
     }()
     
@@ -56,8 +63,8 @@ final class MyMessageView: UIView {
     private func setupUI() {
         prepareForAutoLayout()
         addSubview(shapeImageView)
-        addSubview(messageLabel)
-        addSubview(dateLabel)
+        addSubview(stackView)
+        stackView.addArrangedSubviews(messageLabel, dateLabel)
     }
     
     private func setupLayout() {
@@ -67,13 +74,10 @@ final class MyMessageView: UIView {
             shapeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             shapeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
             
-            messageLabel.topAnchor.constraint(equalTo: shapeImageView.topAnchor, constant: 5),
-            messageLabel.leadingAnchor.constraint(equalTo: shapeImageView.leadingAnchor, constant: 8),
-            messageLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -16),
-            messageLabel.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -26),
-            
-            dateLabel.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -16),
-            dateLabel.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -6)
+            stackView.topAnchor.constraint(equalTo: shapeImageView.topAnchor, constant: 5),
+            stackView.leadingAnchor.constraint(equalTo: shapeImageView.leadingAnchor, constant: 8),
+            stackView.trailingAnchor.constraint(equalTo: shapeImageView.trailingAnchor, constant: -16),
+            stackView.bottomAnchor.constraint(equalTo: shapeImageView.bottomAnchor, constant: -6)
         ])
     }
     

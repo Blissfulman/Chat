@@ -9,7 +9,7 @@ final class ThemesViewController: UIViewController {
     
     // MARK: - Private properties
     
-    private var topBarView: UIView = {
+    private lazy var topBarView: UIView = {
         let view = UIView().prepareForAutoLayout()
         view.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         return view
@@ -23,7 +23,7 @@ final class ThemesViewController: UIViewController {
         return button
     }()
     
-    private var centralStackView: UIStackView = {
+    private lazy var centralStackView: UIStackView = {
         let stackView = UIStackView().prepareForAutoLayout()
         stackView.axis = .vertical
         stackView.spacing = 35

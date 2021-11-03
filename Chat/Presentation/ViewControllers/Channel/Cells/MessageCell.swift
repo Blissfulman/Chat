@@ -7,7 +7,18 @@
 
 final class MessageCell: UITableViewCell, ConfigurableCell {
     
-    typealias ConfigurationModel = Message
+    typealias ConfigurationModel = CellModel
+    
+    // MARK: - Nested types
+    
+    struct CellModel {
+        let message: Message
+        let mySenderID: String?
+    }
+    
+    // MARK: - Private properties
+    
+    private let settingsManager = SettingsManager()
     
     // MARK: - Initialization
     
@@ -23,25 +34,24 @@ final class MessageCell: UITableViewCell, ConfigurableCell {
     // MARK: - Lifecycle methods
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         contentView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     // MARK: - Public methods
     
     func configure(with model: ConfigurationModel) {
-        if model.isMine {
-            let model = MyMessageView.Model(
-                text: model.text,
-                date: model.date.messageCellDate(),
-                isUnread: model.isUnread
-            )
+        let message = model.message
+        if message.senderID == model.mySenderID {
+            let model = MyMessageView.Model(text: message.content, date: message.created.messageCellDate())
             let messageView = MyMessageView(frame: .zero, model: model)
             contentView.addSubview(messageView)
             setupMyMessageLayout(messageView)
         } else {
             let model = PartnerMessageView.Model(
-                text: model.text,
-                date: model.date.messageCellDate()
+                authorName: message.senderName,
+                text: message.content,
+                date: message.created.messageCellDate()
             )
             let messageView = PartnerMessageView(frame: .zero, model: model)
             contentView.addSubview(messageView)

@@ -5,42 +5,46 @@
 //  Created by Evgeny Novgorodov on 26.09.2021.
 //
 
+protocol ProfileViewControllerDelegate {
+    func didChangeProfileData(profile: Profile)
+}
+
 final class ProfileViewController: KeyboardNotificationsViewController {
     
     // MARK: - Nested types
     
-    enum State {
+    private enum State {
         case editing
         case edited
         case saved
     }
     
-    enum SavingVariant {
+    private enum SavingVariant {
         case gcd
         case operations
     }
     
     // MARK: - Private properties
     
-    private var topView: UIView = {
+    private lazy var topView: UIView = {
         let view = UIView().prepareForAutoLayout()
         view.backgroundColor = Palette.lightBarColor
         return view
     }()
     
-    private var topStackView: UIStackView = {
+    private lazy var topStackView: UIStackView = {
         let stackView = UIStackView().prepareForAutoLayout()
         return stackView
     }()
     
-    private var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
         label.font = Fonts.title
         label.text = "My Profile"
         return label
     }()
     
-    private var closeButton: UIButton = {
+    private lazy var closeButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
         button.titleLabel?.font = Fonts.buttonTitle
         button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
@@ -49,14 +53,14 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         return button
     }()
     
-    private var centralStackView: UIStackView = {
+    private lazy var centralStackView: UIStackView = {
         let stackView = UIStackView().prepareForAutoLayout()
         stackView.axis = .vertical
         stackView.spacing = 32
         return stackView
     }()
     
-    private var avatarImageView: UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView().prepareForAutoLayout()
         imageView.image = Images.noPhoto
         return imageView
@@ -80,7 +84,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         return textField
     }()
     
-    private var editAvatarButton: UIButton = {
+    private lazy var editAvatarButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
         button.titleLabel?.font = Fonts.buttonTitle
         button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
@@ -90,13 +94,13 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         return button
     }()
     
-    private var editProfileButton: UIButton = {
+    private lazy var editProfileButton: UIButton = {
         let button = ProfileFilledButton(withTitle: "Edit profile")
         button.addTarget(self, action: #selector(editProfileButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    private var buttonsStackView: UIStackView = {
+    private lazy var buttonsStackView: UIStackView = {
         let stackView = UIStackView().prepareForAutoLayout()
         stackView.axis = .vertical
         stackView.spacing = 20
@@ -104,29 +108,28 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         return stackView
     }()
     
-    private var cancelButton: UIButton = {
+    private lazy var cancelButton: UIButton = {
         let button = ProfileFilledButton(withTitle: "Cancel")
         button.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    private var saveButton: UIButton = {
+    private lazy var saveButton: UIButton = {
         let button = ProfileFilledButton(withTitle: "Save")
         button.isEnabled = false
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         return button
     }()
-    
+
+    private let delegate: ProfileViewControllerDelegate
     private let progressView = ProgressView()
     private let imagePickerController = UIImagePickerController()
     private var buttonsStackViewBottomConstraint: NSLayoutConstraint?
     private let defaultLowerButtonsBottomSpacing: CGFloat = 30
-    private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
-    private var isChanedAvatar = false {
-        didSet {
-            state = .edited
-        }
-    }
+    private var asyncDataManager: AsyncDataManagerProtocol = AsyncDataManager(asyncHandlerType: .gcd)
+    // Хранение задачи сохранения данных необходимо для возможности её повторения
+    private var savingTask: ((Profile, SavingVariant) -> Void)?
+    private var isChangedAvatar = false
     /// Сохранённое состояние данных вью для возможности возврата к этому состоянию в случае нажатия кнопки "Cancel".
     private var savedViewData: (fullName: String?, description: String?, avatarImage: UIImage?)
     private var state: State = .saved {
@@ -148,7 +151,8 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     // MARK: - Initialization
     
-    init() {
+    init(delegate: ProfileViewControllerDelegate) {
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -205,7 +209,6 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             message: nil,
             preferredStyle: .actionSheet
         )
-        
         let galleryAction = UIAlertAction(title: "Select from the gallery", style: .default) { [weak self] _ in
             guard let self = self else { return }
             self.imagePickerController.sourceType = .savedPhotosAlbum
@@ -230,6 +233,8 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     @objc
     private func editProfileButtonTapped() {
+        saveCurrentViewData()
+        isChangedAvatar = false
         state = .editing
     }
         
@@ -265,7 +270,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     @objc
     private func textFieldsEditingChanged() {
-        guard !isChanedAvatar else { return }
+        guard !isChangedAvatar else { return }
         if fullNameTextField.text == savedViewData.fullName && descriptionTextField.text == savedViewData.description {
             state = .editing
         } else {
@@ -317,17 +322,17 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             editAvatarButton.trailingAnchor.constraint(equalTo: avatarImageView.trailingAnchor),
             editAvatarButton.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor),
             
-            buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:  50),
-            buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -50),
+            buttonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            buttonsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             
             cancelButton.heightAnchor.constraint(equalToConstant: 40),
             saveButton.heightAnchor.constraint(equalToConstant: 40),
             
-            editProfileButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:  50),
-            editProfileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -50),
+            editProfileButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            editProfileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             editProfileButton.bottomAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                constant:  -defaultLowerButtonsBottomSpacing
+                constant: -defaultLowerButtonsBottomSpacing
             ),
             editProfileButton.heightAnchor.constraint(equalToConstant: 40),
             
@@ -359,7 +364,6 @@ final class ProfileViewController: KeyboardNotificationsViewController {
                 } else {
                     self?.avatarImageView.image = Images.noPhoto
                 }
-                self?.saveCurrentViewData()
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -378,7 +382,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     }
     
     private func updateSaveButtonState() {
-        saveButton.isEnabled = isChanedAvatar || state == .edited
+        saveButton.isEnabled = isChangedAvatar || state == .edited
     }
     
     private func switchToEditingState() {
@@ -416,42 +420,43 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     /// Сохранение текущих данных профиля в постоянное хранилище.
     private func saveData(savingVariant: SavingVariant) {
-        showProgressView()
-        
         let profile = Profile(
             fullName: fullNameTextField.text ?? "",
             description: descriptionTextField.text ?? "",
             avatarData: avatarImageView.image?.jpegData(compressionQuality: 0.5)
         )
         
-        let savingTask: ((SavingVariant) -> Void) = { [weak self, asyncDataManager] savingVariant in
+        savingTask = { [weak self, asyncDataManager, delegate] profile, savingVariant in
+            guard let self = self else {
+                // Если экран уже закрыт, то просто вызывается ещё одна попытка сохранить профиль
+                asyncDataManager.saveProfile(profile: profile) { result in
+                    if case .success = result { delegate.didChangeProfileData(profile: profile) }
+                }
+                return
+            }
+            self.showProgressView()
+            
             asyncDataManager.saveProfile(profile: profile) { result in
+                self.progressView.hide()
                 switch result {
                 case .success:
-                    self?.state = .saved
-                    self?.showAlert(title: "Данные сохранены")
+                    self.state = .saved
+                    self.showAlert(title: "Data saved")
+                    delegate.didChangeProfileData(profile: profile)
                 case .failure(let error):
                     print(error.localizedDescription)
-                    self?.showFailureSavingAlert {
-                        print("Repeating...") // TEMP (не успел доделать)
+                    self.showFailureSavingAlert {
+                        self.savingTask?(profile, savingVariant)
                     }
                 }
             }
-            self?.progressView.hide()
         }
-        
-        var savingHandler: AsyncHandler?
-        switch savingVariant {
-        case .gcd:
-            savingHandler = GCDAsyncHandler(qos: .userInitiated)
-        case .operations:
-            savingHandler = OperationsAsyncHandler(qos: .userInitiated)
+        if savingVariant == .gcd {
+            asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
+        } else {
+            asyncDataManager = AsyncDataManager(asyncHandlerType: .operations)
         }
-        
-        savingHandler?.handle {
-            sleep(1) // TEMP (для демонстрации вью прогресса)
-            savingTask(savingVariant)
-        }
+        savingTask?(profile, savingVariant)
     }
     
     private func showFailureSavingAlert(repeatitionHandler: (() -> Void)? = nil) {
@@ -475,12 +480,12 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         _ picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
     ) {
-        defer {
-            imagePickerController.dismiss(animated: true)
-            isChanedAvatar = true
-        }
+        defer { imagePickerController.dismiss(animated: true) }
+        
         guard let image = info[.originalImage] as? UIImage else { return }
         avatarImageView.image = image
+        isChangedAvatar = true
+        state = .edited
     }
 }
 

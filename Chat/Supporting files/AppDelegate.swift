@@ -5,6 +5,8 @@
 //  Created by Evgeny Novgorodov on 16.09.2021.
 //
 
+import Firebase
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -18,14 +20,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        let theme = SettingsManager().theme
-        NavigationController.setupAppearance(for: theme)
+        initialConfigure()
         
-        let mainViewController = ConversationListViewController()
+        let mainViewController = ChannelListViewController()
         let navigationController = NavigationController(rootViewController: mainViewController)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true
+    }
+    
+    private func initialConfigure() {
+        FirebaseApp.configure()
+        let settingsManager = SettingsManager()
+        settingsManager.generateMySenderIDIfNeeded()
+        NavigationController.setupAppearance(for: settingsManager.theme)
     }
 }

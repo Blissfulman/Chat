@@ -1,72 +1,72 @@
 //
-//  ConversationCell.swift
+//  ChannelCell.swift
 //  Chat
 //
 //  Created by Evgeny Novgorodov on 05.10.2021.
 //
 
-final class ConversationCell: UITableViewCell, ConfigurableCell {
+final class ChannelCell: UITableViewCell, ConfigurableCell {
     
-    typealias ConfigurationModel = Conversation
+    typealias ConfigurationModel = Channel
     
     // MARK: - Private properties
     
-    private var mainStackView: UIStackView = {
+    private lazy var mainStackView: UIStackView = {
         let stackView = UIStackView().prepareForAutoLayout()
         stackView.alignment = .center
         stackView.spacing = 12
         return stackView
     }()
     
-    private var secondStackView: UIStackView = {
+    private lazy var secondStackView: UIStackView = {
         let stackView = UIStackView().prepareForAutoLayout()
         stackView.axis = .vertical
         stackView.spacing = 4
         return stackView
     }()
     
-    private var thirdStackView: UIStackView = {
+    private lazy var thirdStackView: UIStackView = {
         let stackView = UIStackView().prepareForAutoLayout()
         stackView.spacing = 6
         return stackView
     }()
     
-    private var dateStackView: UIStackView = {
+    private lazy var dateStackView: UIStackView = {
         let stackView = UIStackView().prepareForAutoLayout()
         stackView.alignment = .center
         stackView.spacing = 9
         return stackView
     }()
     
-    private var avatarImageView: UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView().prepareForAutoLayout()
         imageView.image = Images.noPhoto
         return imageView
     }()
     
-    private var fullNameLabel: UILabel = {
+    private lazy var fullNameLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
-        label.font = Fonts.conversationCellName
+        label.font = Fonts.channelCellName
         return label
     }()
     
-    private var dateLabel: UILabel = {
+    private lazy var dateLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
-        label.font = Fonts.conversationCellDate
+        label.font = Fonts.channelCellDate
         label.textColor = Palette.labelGray
         return label
     }()
     
-    private var arrowImageView: UIImageView = {
+    private lazy var arrowImageView: UIImageView = {
         let imageView = UIImageView().prepareForAutoLayout()
         imageView.image = Icons.arrowRight
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         return imageView
     }()
     
-    private var messageLabel: UILabel = {
+    private lazy var messageLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
-        label.font = Fonts.conversationCellReadMessage
+        label.font = Fonts.channelCellReadMessage
         label.textColor = Palette.labelGray
         label.numberOfLines = 2
         return label
@@ -88,35 +88,28 @@ final class ConversationCell: UITableViewCell, ConfigurableCell {
     // MARK: - Lifecycle methods
     
     override func prepareForReuse() {
-        contentView.backgroundColor = .white
-        avatarImageView.image = Images.noPhoto
+        super.prepareForReuse()
         fullNameLabel.text = nil
         dateLabel.text = nil
         messageLabel.text = nil
-        messageLabel.font = Fonts.conversationCellReadMessage
+        messageLabel.font = Fonts.channelCellReadMessage
     }
     
     // MARK: - Public methods
     
     func configure(with model: ConfigurationModel) {
-        if let avatarData = model.avatarData {
-            avatarImageView.image = UIImage(data: avatarData)
-        }
         fullNameLabel.text = model.name
-        if let date = model.date {
-            dateLabel.text = date.conversationCellDate()
+        if let date = model.lastActivity {
+            dateLabel.text = date.channelCellDate()
         }
-        if let message = model.message {
+        if let message = model.lastMessage {
             messageLabel.text = message
-            if model.hasUnreadMessage {
-                messageLabel.font = Fonts.conversationCellUnreadMessage
+            if model.lastMessage != nil {
+                messageLabel.font = Fonts.channelCellUnreadMessage
             }
         } else {
             messageLabel.text = "No messages yet"
-            messageLabel.font = Fonts.conversationCellNoMessage
-        }
-        if model.isOnline {
-            contentView.backgroundColor = UIColor.yellow.withAlphaComponent(0.1)
+            messageLabel.font = Fonts.channelCellNoMessage
         }
     }
     
@@ -145,5 +138,6 @@ final class ConversationCell: UITableViewCell, ConfigurableCell {
     private func configureUI() {
         avatarImageView.setCornerRadius(24)
         selectionStyle = .none
+        avatarImageView.image = Images.noPhoto // TEMP
     }
 }
