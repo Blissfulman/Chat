@@ -54,7 +54,6 @@ final class AsyncDataManager: AsyncDataManagerProtocol {
     
     func saveProfile(profile: Profile, completion: @escaping (Result<Void, Error>) -> Void) {
         asyncHandler.handle { [weak self] in
-            sleep(2) // TEMP: Для демонстрации вью прогресса при сохранении профиля
             guard let self = self else { return }
             let result = self.profileDataManager.saveProfile(profile: profile)
             DispatchQueue.main.async {

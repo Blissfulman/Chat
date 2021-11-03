@@ -5,6 +5,8 @@
 //  Created by Evgeny Novgorodov on 27.10.2021.
 //
 
+import Foundation
+
 // MARK: - Protocols
 
 protocol KeychainManagerProtocol {
@@ -14,10 +16,12 @@ protocol KeychainManagerProtocol {
 
 final class KeychainManager: KeychainManagerProtocol {
     
-    // MARK: - Private properties
+    // MARK: - Nested types
     
-    private let serviceName = "TinkoffChat"
-    
+    private enum Constants {
+        static let serviceName = "TinkoffChat"
+    }
+        
     // MARK: - Public methods
     
     func fetchValue(withLabel label: String) -> String? {
@@ -58,7 +62,7 @@ final class KeychainManager: KeychainManagerProtocol {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlocked,
             kSecAttrLabel as String: label as AnyObject,
-            kSecAttrService as String: serviceName as AnyObject
+            kSecAttrService as String: Constants.serviceName as AnyObject
         ]
     }
 

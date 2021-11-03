@@ -9,17 +9,22 @@ import Foundation
 
 final class ProfileDataManager {
     
+    // MARK: - Nested types {
+    
+    private enum Constants {
+        static let dataType: FileStorageManager.DataType = .profile
+        static let profileKey = "Profile"
+    }
+    
     // MARK: - Private properties
     
     private let fileStorageManager = FileStorageManager()
-    private let dataType = FileStorageManager.DataType.profile
-    private let profileKey = "Profile"
     
     // MARK: - Public properties
     
     func saveProfile(profile: Profile) -> Result<Void, Error> {
         do {
-            try fileStorageManager.saveValue(profile, withKey: profileKey, dataType: dataType)
+            try fileStorageManager.saveValue(profile, withKey: Constants.profileKey, dataType: Constants.dataType)
             return .success(())
         } catch {
             return .failure(error)
@@ -37,6 +42,6 @@ final class ProfileDataManager {
     // MARK: - Private methods
     
     private func getProfileValue() throws -> Profile? {
-        try fileStorageManager.getValue(withKey: profileKey, dataType: dataType)
+        try fileStorageManager.getValue(withKey: Constants.profileKey, dataType: Constants.dataType)
     }
 }

@@ -5,6 +5,7 @@
 //  Created by Evgeny Novgorodov on 16.09.2021.
 //
 
+import UIKit
 import Firebase
 
 @main
@@ -22,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         initialConfigure()
         
-        let mainViewController = ChannelListViewController()
+        let mainViewController = ChannelListAssembly.assembly()
         let navigationController = NavigationController(rootViewController: mainViewController)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController
@@ -33,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func initialConfigure() {
         FirebaseApp.configure()
         let settingsManager = SettingsManager()
-        settingsManager.generateMySenderIDIfNeeded()
+        settingsManager.loadMySenderID()
         NavigationController.setupAppearance(for: settingsManager.theme)
     }
 }

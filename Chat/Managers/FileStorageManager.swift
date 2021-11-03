@@ -35,7 +35,7 @@ final class FileStorageManager {
         case settings
         case profile
         
-        var key: String {
+        var toFileName: String {
             self.rawValue.capitalized
         }
     }
@@ -83,6 +83,6 @@ final class FileStorageManager {
         guard let folderDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return nil
         }
-        return folderDirectory.appendingPathComponent(dataType.key).appendingPathExtension("plist")
+        return folderDirectory.appendingPathComponent(dataType.toFileName).appendingPathExtension("plist")
     }
 }

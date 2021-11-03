@@ -5,6 +5,9 @@
 //  Created by Evgeny Novgorodov on 20.10.2021.
 //
 
+import Foundation
+import UIKit
+
 extension Data {
     
     func resizeImageFromImageData(to size: CGSize?) -> Data {
