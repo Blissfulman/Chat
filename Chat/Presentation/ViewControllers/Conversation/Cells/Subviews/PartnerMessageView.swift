@@ -33,7 +33,7 @@ final class PartnerMessageView: UIView {
     private var dateLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
         label.font = Fonts.messageCellDate
-        label.textColor = .black.withAlphaComponent(0.25)
+        label.textColor = UIColor.black.withAlphaComponent(0.25)
         return label
     }()
     

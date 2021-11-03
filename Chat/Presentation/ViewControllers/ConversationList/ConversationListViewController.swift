@@ -32,13 +32,6 @@ final class ConversationListViewController: UIViewController {
         action: #selector(openSettingsBarButtonTapped)
     )
     
-    private lazy var openProfileBarButton = UIBarButtonItem(
-        image: Icons.avatarTemp, // TEMP
-        style: .plain,
-        target: self,
-        action: #selector(openProfileBarButtonTapped)
-    )
-    
     private lazy var tableView: UITableView = {
         let tableView = UITableView().prepareForAutoLayout()
         tableView.dataSource = self
@@ -48,6 +41,7 @@ final class ConversationListViewController: UIViewController {
     
     private let onlineConversations: [Conversation] = Conversation.mockData().filter { $0.isOnline }
     private let offlineConversations: [Conversation] = Conversation.mockData().filter { !$0.isOnline }
+    private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
     
     // MARK: - Lifecycle methods
     
@@ -78,12 +72,13 @@ final class ConversationListViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupUI() {
-        navigationItem.leftBarButtonItem = openSettingsBarButton
-        navigationItem.rightBarButtonItem = openProfileBarButton
-        
+        tableView.register(ConversationCell.self, forCellReuseIdentifier: String(describing: ConversationCell.self))
         view.addSubview(tableView)
         
-        tableView.register(ConversationCell.self, forCellReuseIdentifier: String(describing: ConversationCell.self))
+        navigationItem.leftBarButtonItem = openSettingsBarButton
+        customProfileBarButton { [weak self] barButtonItem in
+            self?.navigationItem.rightBarButtonItem = barButtonItem
+        }
     }
     
     private func setupLayout() {
@@ -103,9 +98,37 @@ final class ConversationListViewController: UIViewController {
     }
     
     private func handleChangingTheme(to theme: Theme) {
-        print(theme)
-        NavigationController.updateColors(for: theme)
-        SettingsManager().theme = theme
+        let asyncHandler = GCDAsyncHandler(qos: .userInteractive)
+        asyncHandler.handle {
+            NavigationController.updateColors(for: theme)
+            SettingsManager().theme = theme
+        }
+    }
+    
+    private func customProfileBarButton(completion: @escaping (UIBarButtonItem) -> Void) {
+        let size = CGSize(width: 40, height: 40)
+        
+        asyncDataManager.fetchProfile { [weak self] result in
+            guard let self = self else { return }
+            var iconData = Data()
+            
+            if case let .success(profile) = result,
+               let avatarImageData = profile?.avatarData {
+                iconData = avatarImageData
+            } else {
+                iconData = Images.noPhoto.jpegData(compressionQuality: 0.5) ?? Data()
+            }
+            iconData = iconData.resizeImageFromImageData(to: CGSize(width: size.width, height: size.height))
+
+            let button = UIButton()
+            button.widthAnchor.constraint(equalToConstant: size.width).isActive = true
+            button.heightAnchor.constraint(equalToConstant: size.height).isActive = true
+            button.addTarget(self, action: #selector(self.openProfileBarButtonTapped), for: .touchUpInside)
+            button.setImage(UIImage(data: iconData), for: .normal)
+            button.setCornerRadius(size.width / 2)
+            
+            completion(UIBarButtonItem(customView: button))
+        }
     }
 }
 

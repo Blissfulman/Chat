@@ -116,7 +116,7 @@ final class ConversationCell: UITableViewCell, ConfigurableCell {
             messageLabel.font = Fonts.conversationCellNoMessage
         }
         if model.isOnline {
-            contentView.backgroundColor = .yellow.withAlphaComponent(0.1)
+            contentView.backgroundColor = UIColor.yellow.withAlphaComponent(0.1)
         }
     }
     

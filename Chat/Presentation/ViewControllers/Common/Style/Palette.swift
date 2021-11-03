@@ -8,6 +8,8 @@
 enum Palette {
     static let buttonTitleBlue = UIColor(named: "buttonTitleBlue")
     static let labelGray = UIColor(named: "labelGray")
+    static let textViewBorderGray = UIColor(named: "textViewBorderGray")
+    static let placeholderTextColor = UIColor(named: "placeholderTextColor")
     
     static let lightBarColor = UIColor(named: "lightBarColor")
     static let darkBarColor = UIColor(named: "darkBarColor")

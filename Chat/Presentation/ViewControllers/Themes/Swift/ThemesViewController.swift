@@ -11,7 +11,7 @@ final class ThemesViewController: UIViewController {
     
     private var topBarView: UIView = {
         let view = UIView().prepareForAutoLayout()
-        view.backgroundColor = .white.withAlphaComponent(0.6)
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         return view
     }()
     
@@ -32,7 +32,7 @@ final class ThemesViewController: UIViewController {
     
     private lazy var lightThemeButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
-        button.backgroundColor = .white.withAlphaComponent(0.6)
+        button.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
         button.setTitle("Light theme", for: .normal)
         button.addTarget(self, action: #selector(lightThemeButtonTapped), for: .touchUpInside)
@@ -41,7 +41,7 @@ final class ThemesViewController: UIViewController {
     
     private lazy var darkThemeButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
-        button.backgroundColor = .white.withAlphaComponent(0.6)
+        button.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
         button.setTitle("Dark theme", for: .normal)
         button.addTarget(self, action: #selector(darkThemeButtonTapped), for: .touchUpInside)
@@ -50,7 +50,7 @@ final class ThemesViewController: UIViewController {
     
     private lazy var champagneThemeButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
-        button.backgroundColor = .white.withAlphaComponent(0.6)
+        button.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
         button.setTitle("Champagne theme", for: .normal)
         button.addTarget(self, action: #selector(champagneThemeButtonTapped), for: .touchUpInside)
