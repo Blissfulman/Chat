@@ -50,7 +50,7 @@ final class ChannelInteractor: ChannelBusinessLogic {
                 if let messageSnapshots = snapshot?.documents {
                     let messages = messageSnapshots
                         .compactMap { Message(snapshot: $0) }
-                        .sorted { $0.created < $1.created }
+                        .sorted { $0.created > $1.created }
                     let response = ChannelModel.FetchMessages.Response(messages: messages)
                     self?.presenter.presentMessages(response: response)
                 }

@@ -81,5 +81,6 @@ final class MessageCell: UITableViewCell, ConfigurableCell {
     
     private func configureUI() {
         selectionStyle = .none
+        contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
     }
 }

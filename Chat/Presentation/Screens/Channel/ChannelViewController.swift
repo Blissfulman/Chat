@@ -29,7 +29,6 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView().prepareForAutoLayout()
         tableView.separatorStyle = .none
-        tableView.keyboardDismissMode = .onDrag
         tableView.dataSource = self
         return tableView
     }()
@@ -69,7 +68,6 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     private var messages = [Message]() {
         didSet {
             tableView.reloadData()
-            scrollToBottom()
         }
     }
     
@@ -122,7 +120,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
@@ -151,12 +149,8 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     private func configureUI() {
         navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = .white
+        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         interactor.fetchTheme(request: ChannelModel.FetchTheme.Request())
-    }
-    
-    private func scrollToBottom() {
-        guard !messages.isEmpty else { return }
-        tableView.scrollToBottom(animated: false)
     }
 }
 
@@ -177,6 +171,8 @@ extension ChannelViewController: ChannelDisplayLogic {
     }
     
     func displaySendMessage(viewModel: ChannelModel.SendMessage.ViewModel) {
+        guard !messages.isEmpty else { return }
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         newMessageTextField.text = ""
     }
 }
