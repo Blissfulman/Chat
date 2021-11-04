@@ -39,6 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Private methods
     
     private func initialConfigure() {
+        let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
+        // TEMP: Временно для демонстранции успешного удаления и последующего сохранения
+        dataStorageManager.deleteAllData()
+        
         FirebaseApp.configure()
         let settingsManager = SettingsManager()
         settingsManager.loadMySenderID()

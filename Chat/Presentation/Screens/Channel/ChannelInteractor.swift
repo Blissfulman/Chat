@@ -61,6 +61,9 @@ final class ChannelInteractor: ChannelBusinessLogic {
                     self.presenter.presentMessages(response: response)
                 }
             }
+            // TEMP: Временно для демонстранции успешного сохранения и чтения данных из CoreData
+            let messages = self.dataStorageManager.fetchMessages(forChannel: self.channel)
+            messages.forEach { print($0, separator: "\n") }
         }
     }
     

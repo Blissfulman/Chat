@@ -7,8 +7,6 @@
 
 import Foundation
 
-// MARK: - Protocols
-
 protocol AsyncDataManagerProtocol {
     var asyncHandler: AsyncHandler { get }
     

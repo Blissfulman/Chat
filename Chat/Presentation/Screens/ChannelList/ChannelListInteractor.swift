@@ -77,6 +77,9 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
                     self.presenter.presentChannelList(response: response)
                 }
             }
+            // TEMP: Временно для демонстранции успешного сохранения и чтения данных из CoreData
+            let channels = self.dataStorageManager.fetchChannels()
+            channels.forEach { print($0, separator: "\n") }
         }
     }
     

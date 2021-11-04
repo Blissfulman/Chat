@@ -7,8 +7,6 @@
 
 import Foundation
 
-// MARK: - Protocols
-
 protocol KeychainManagerProtocol {
     func fetchValue(withLabel label: String) -> String?
     @discardableResult func saveValue(_ value: String, withLabel label: String) -> Bool
