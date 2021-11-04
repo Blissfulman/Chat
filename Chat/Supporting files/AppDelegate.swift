@@ -39,8 +39,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Private methods
     
     private func initialConfigure() {
-        let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
         // TEMP: Временно для демонстранции успешного удаления и последующего сохранения
+        let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
+        let channels = dataStorageManager.fetchChannels()
+        print("SAVED CHANNELS:")
+        channels.forEach { print($0) }
         dataStorageManager.deleteAllData()
         
         FirebaseApp.configure()
