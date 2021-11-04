@@ -20,10 +20,7 @@ final class ChannelInteractor: ChannelBusinessLogic {
     private let presenter: ChannelPresentationLogic
     private let channel: Channel
     private let senderName: String
-    private let database = Firestore.firestore()
-    private lazy var reference: CollectionReference = {
-        database.collection("channels").document(channel.identifier).collection("messages")
-    }()
+    private let firestoreManager: FirestoreManagerProtocol
     private let settingsManager = SettingsManager()
     private let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
     
@@ -33,6 +30,7 @@ final class ChannelInteractor: ChannelBusinessLogic {
         self.presenter = presenter
         self.channel = channel
         self.senderName = senderName
+        self.firestoreManager = FirestoreManager(dataType: .messages(channelID: channel.identifier))
     }
     
     // MARK: - ChannelBusinessLogic
@@ -43,7 +41,7 @@ final class ChannelInteractor: ChannelBusinessLogic {
     }
     
     func fetchMessages(request: ChannelModel.FetchMessages.Request) {
-        reference.addSnapshotListener { [weak self] snapshot, error in
+        firestoreManager.reference.addSnapshotListener { [weak self] snapshot, error in
             guard let self = self else { return }
             
             if let error = error {
@@ -76,7 +74,7 @@ final class ChannelInteractor: ChannelBusinessLogic {
             senderID: SettingsManager.mySenderID,
             senderName: senderName
         )
-        reference.addDocument(data: newMessage.toDictionary)
+        firestoreManager.reference.addDocument(data: newMessage.toDictionary)
         presenter.presentSendMessage(response: ChannelModel.SendMessage.Response())
     }
 }

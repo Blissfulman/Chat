@@ -68,6 +68,7 @@
 		CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3B27025D1700D4E4EB /* Palette.swift */; };
 		CED84B3E27025F4200D4E4EB /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3D27025F4200D4E4EB /* Images.swift */; };
 		CEDBA13D27272CF700B5C98E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEDBA13C27272CF700B5C98E /* GoogleService-Info.plist */; };
+		CEDC7F2327345BD400D9BE4F /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC7F2227345BD400D9BE4F /* FirestoreManager.swift */; };
 		CEE6513E2721F013009DD993 /* AcynsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE6513D2721F013009DD993 /* AcynsDataManager.swift */; };
 		CEE9FF09272C747C00628F34 /* ChannelListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF08272C747C00628F34 /* ChannelListInteractor.swift */; };
 		CEE9FF0B272C748500628F34 /* ChannelListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF0A272C748500628F34 /* ChannelListPresenter.swift */; };
@@ -141,6 +142,7 @@
 		CED84B3B27025D1700D4E4EB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		CED84B3D27025F4200D4E4EB /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		CEDBA13C27272CF700B5C98E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CEDC7F2227345BD400D9BE4F /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		CEE6513D2721F013009DD993 /* AcynsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcynsDataManager.swift; sourceTree = "<group>"; };
 		CEE9FF08272C747C00628F34 /* ChannelListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListInteractor.swift; sourceTree = "<group>"; };
 		CEE9FF0A272C748500628F34 /* ChannelListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListPresenter.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 		CE2608812718C3C200CAE9B6 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				CEDC7F2227345BD400D9BE4F /* FirestoreManager.swift */,
 				CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */,
 				CE8B576227205F2E002E3434 /* ProfileDataManager.swift */,
 				CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */,
@@ -654,6 +657,7 @@
 				CE394792270F8581004C6FD1 /* Date+Extension.swift in Sources */,
 				CE8C4079271BEEE000D0C0B5 /* FileStorageManager.swift in Sources */,
 				CEB97ABE272D3CC200C405CA /* ChannelInteractor.swift in Sources */,
+				CEDC7F2327345BD400D9BE4F /* FirestoreManager.swift in Sources */,
 				CEB97ABA272D3C9A00C405CA /* ChannelModel.swift in Sources */,
 				CE8B576327205F2E002E3434 /* ProfileDataManager.swift in Sources */,
 				CE04B4E7271F52B80027F649 /* ProfileFilledButton.swift in Sources */,

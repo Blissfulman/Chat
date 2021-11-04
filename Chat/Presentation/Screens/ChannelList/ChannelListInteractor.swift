@@ -21,8 +21,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     // MARK: - Private properties
     
     private let presenter: ChannelListPresentationLogic
-    private let database = Firestore.firestore()
-    private lazy var reference = database.collection("channels")
+    private let firestoreManager: FirestoreManagerProtocol = FirestoreManager(dataType: .channels)
     private let settingsManager = SettingsManager()
     private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
     private let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
@@ -60,7 +59,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     }
     
     func fetchChannelList(request: ChannelListModel.ChannelList.Request) {
-        reference.addSnapshotListener { [weak self] snapshot, error in
+        firestoreManager.reference.addSnapshotListener { [weak self] snapshot, error in
             guard let self = self else { return }
             
             if let error = error {
@@ -90,7 +89,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     
     func addNewChannel(request: ChannelListModel.NewChannel.Request) {
         let newChannel = Channel(identifier: "", name: request.channelName, lastMessage: nil, lastActivity: nil)
-        reference.addDocument(data: newChannel.toDictionary)
+        firestoreManager.reference.addDocument(data: newChannel.toDictionary)
     }
     
     func updateTheme(request: ChannelListModel.UpdateTheme.Request) {
