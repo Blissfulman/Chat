@@ -14,6 +14,7 @@ protocol ChannelListBusinessLogic: AnyObject {
     func requestAddChannelAlert(request: ChannelListModel.AddChannelAlert.Request)
     func addNewChannel(request: ChannelListModel.NewChannel.Request)
     func updateTheme(request: ChannelListModel.UpdateTheme.Request)
+    func openChannel(request: ChannelListModel.OpenChannel.Request)
 }
 
 final class ChannelListInteractor: ChannelListBusinessLogic {
@@ -98,6 +99,11 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
             NavigationController.updateColors(for: request.theme)
             self?.settingsManager.theme = request.theme
         }
+    }
+    
+    func openChannel(request: ChannelListModel.OpenChannel.Request) {
+        let response = ChannelListModel.OpenChannel.Response(channel: request.channel, senderName: profile?.fullName)
+        presenter.presentSelectedChannel(response: response)
     }
     
     // MARK: - Private methods

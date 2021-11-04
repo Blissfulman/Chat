@@ -13,6 +13,7 @@ protocol ChannelListDisplayLogic: AnyObject {
     func displayChannelList(viewModel: ChannelListModel.ChannelList.ViewModel)
     func displayFetchingChannelsError(viewModel: ChannelListModel.FetchingChannelsError.ViewModel)
     func displayAddChannelAlert(viewModel: ChannelListModel.AddChannelAlert.ViewModel)
+    func displaySelectedChannel(viewModel: ChannelListModel.OpenChannel.ViewModel)
 }
 
 final class ChannelListViewController: UIViewController {
@@ -55,7 +56,6 @@ final class ChannelListViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    private var senderName = ""
     
     // MARK: - Initialization
     
@@ -146,7 +146,6 @@ final class ChannelListViewController: UIViewController {
 extension ChannelListViewController: ChannelListDisplayLogic {
     
     func displayProfileData(viewModel: ChannelListModel.UpdateProfile.ViewModel) {
-        senderName = viewModel.senderName
         navigationItem.rightBarButtonItem = customProfileBarButton(avatarData: viewModel.avatarImageData)
     }
     
@@ -167,6 +166,10 @@ extension ChannelListViewController: ChannelListDisplayLogic {
             }
         )
         present(alertController, animated: true)
+    }
+    
+    func displaySelectedChannel(viewModel: ChannelListModel.OpenChannel.ViewModel) {
+        router.navigateToChannel(route: viewModel.route)
     }
 }
 
@@ -194,10 +197,7 @@ extension ChannelListViewController: UITableViewDataSource {
 extension ChannelListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let route = ChannelListModel.Route.ChannelScreen(
-            channel: channels[indexPath.row],
-            senderName: senderName
-        )
-        router.navigateToChannel(route: route)
+        let request = ChannelListModel.OpenChannel.Request(channel: channels[indexPath.row])
+        interactor.openChannel(request: request)
     }
 }

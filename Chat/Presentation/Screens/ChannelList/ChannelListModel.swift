@@ -33,7 +33,6 @@ enum ChannelListModel {
         }
         struct ViewModel {
             let avatarImageData: Data
-            let senderName: String
         }
     }
     
@@ -64,6 +63,19 @@ enum ChannelListModel {
     enum UpdateTheme {
         struct Request {
             let theme: Theme
+        }
+    }
+    
+    enum OpenChannel {
+        struct Request {
+            let channel: Channel
+        }
+        struct Response {
+            let channel: Channel
+            let senderName: String?
+        }
+        struct ViewModel {
+            let route: Route.ChannelScreen
         }
     }
     
