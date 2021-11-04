@@ -18,13 +18,14 @@ final class ChannelInteractor: ChannelBusinessLogic {
     // MARK: - Private properties
     
     private let presenter: ChannelPresentationLogic
-    private let settingsManager = SettingsManager()
     private let channel: Channel
     private let senderName: String
-    private let db = Firestore.firestore()
+    private let database = Firestore.firestore()
     private lazy var reference: CollectionReference = {
-        db.collection("channels").document(channel.identifier).collection("messages")
+        database.collection("channels").document(channel.identifier).collection("messages")
     }()
+    private let settingsManager = SettingsManager()
+    private let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
     
     // MARK: - Initialization
     
@@ -43,16 +44,21 @@ final class ChannelInteractor: ChannelBusinessLogic {
     
     func fetchMessages(request: ChannelModel.FetchMessages.Request) {
         reference.addSnapshotListener { [weak self] snapshot, error in
+            guard let self = self else { return }
+            
             if let error = error {
                 let response = ChannelModel.FetchingMessagesError.Response(error: error)
-                self?.presenter.presentFetchingMessagesError(response: response)
+                self.presenter.presentFetchingMessagesError(response: response)
             } else {
                 if let messageSnapshots = snapshot?.documents {
                     let messages = messageSnapshots
                         .compactMap { Message(snapshot: $0) }
                         .sorted { $0.created > $1.created }
+                    
+                    self.dataStorageManager.saveMessages(messages, forChannel: self.channel)
+                    
                     let response = ChannelModel.FetchMessages.Response(messages: messages)
-                    self?.presenter.presentMessages(response: response)
+                    self.presenter.presentMessages(response: response)
                 }
             }
         }

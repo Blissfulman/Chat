@@ -20,7 +20,7 @@ struct Message {
         [
             "content": content,
             "created": Timestamp(date: created),
-            "senderID": senderID,
+            "senderId": senderID,
             "senderName": senderName
         ]
     }
@@ -50,6 +50,21 @@ struct Message {
         self.content = content
         self.created = timestamp.dateValue()
         self.senderID = totalSenderID
+        self.senderName = senderName
+    }
+    
+    init?(dbMessage: DBMessage) {
+        guard
+            let content = dbMessage.content,
+            let created = dbMessage.created,
+            let senderID = dbMessage.senderID,
+            let senderName = dbMessage.senderName
+        else {
+            return nil
+        }
+        self.content = content
+        self.created = created
+        self.senderID = senderID
         self.senderName = senderName
     }
 }
