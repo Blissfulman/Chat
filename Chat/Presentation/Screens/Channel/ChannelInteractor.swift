@@ -30,7 +30,7 @@ final class ChannelInteractor: ChannelBusinessLogic {
         self.presenter = presenter
         self.channel = channel
         self.senderName = senderName
-        self.firestoreManager = FirestoreManager<Message>(dataType: .messages(channelID: channel.identifier))
+        self.firestoreManager = FirestoreManager<Message>(dataType: .messages(channelID: channel.id))
     }
     
     // MARK: - ChannelBusinessLogic

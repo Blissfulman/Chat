@@ -11,7 +11,7 @@ struct Channel: FirestoreObject {
     
     // MARK: - Public properties
     
-    let identifier: String
+    let id: String
     let name: String
     let lastMessage: String?
     let lastActivity: Date?
@@ -22,7 +22,7 @@ struct Channel: FirestoreObject {
             lastActivityValue = Timestamp(date: lastActivity)
         }
         return [
-            "identifier": identifier,
+            "identifier": id,
             "name": name,
             "lastMessage": lastMessage as Any,
             "lastActivity": lastActivityValue as Any
@@ -31,8 +31,8 @@ struct Channel: FirestoreObject {
     
     // MARK: - Initialization
     
-    init(identifier: String, name: String, lastMessage: String?, lastActivity: Date?) {
-        self.identifier = identifier
+    init(id: String, name: String, lastMessage: String?, lastActivity: Date?) {
+        self.id = id
         self.name = name
         self.lastMessage = lastMessage
         self.lastActivity = lastActivity
@@ -41,7 +41,7 @@ struct Channel: FirestoreObject {
     init?(snapshot: QueryDocumentSnapshot) {
         let data = snapshot.data()
         guard let name = data["name"] as? String else { return nil }
-        self.identifier = snapshot.documentID
+        self.id = snapshot.documentID
         self.name = name
         self.lastMessage = data["lastMessage"] as? String
         let timestamp = data["lastActivity"] as? Timestamp
@@ -50,12 +50,12 @@ struct Channel: FirestoreObject {
     
     init?(dbChannel: DBChannel) {
         guard
-            let identifier = dbChannel.identifier,
+            let id = dbChannel.id,
             let name = dbChannel.name
         else {
             return nil
         }
-        self.identifier = identifier
+        self.id = id
         self.name = name
         self.lastMessage = dbChannel.lastMessage
         self.lastActivity = dbChannel.lastActivity

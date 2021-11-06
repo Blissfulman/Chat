@@ -53,6 +53,10 @@ final class FirestoreManager<Type: FirestoreObject>: FirestoreManagerProtocol {
         reference.addDocument(data: object.toDictionary)
     }
     
+    func deleteObject(_ object: Object) {
+        database.collection("channels").document(object.id).delete()
+    }
+    
     // MARK: - Private methods
     
     private func setupFirestoreListener() {

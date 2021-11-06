@@ -50,7 +50,7 @@ final class DataStorageManager: DataStorageManagerProtocol {
     func saveChannels(_ channels: [Channel]) {
         channels.forEach { channel in
             storage.createObject(from: DBChannel.self) { dbChannel in
-                dbChannel.identifier = channel.identifier
+                dbChannel.id = channel.id
                 dbChannel.name = channel.name
                 dbChannel.lastMessage = channel.lastMessage
                 dbChannel.lastActivity = channel.lastActivity
@@ -95,12 +95,12 @@ final class DataStorageManager: DataStorageManagerProtocol {
     // MARK: - Private methods
     
     private func makeChannelIDPredicate(forChannel channel: Channel) -> NSCompoundPredicate {
-        let predicate = NSPredicate(format: "identifier == '\(channel.identifier)'")
+        let predicate = NSPredicate(format: "id == '\(channel.id)'")
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
     }
     
     private func makeChannelMessagesPredicate(forChannel channel: Channel) -> NSCompoundPredicate {
-        let predicate = NSPredicate(format: "channel.identifier == '\(channel.identifier)'")
+        let predicate = NSPredicate(format: "channel.id == '\(channel.id)'")
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
     }
 }

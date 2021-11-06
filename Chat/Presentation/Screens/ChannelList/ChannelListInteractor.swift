@@ -87,7 +87,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     }
     
     func addNewChannel(request: ChannelListModel.NewChannel.Request) {
-        let newChannel = Channel(identifier: "", name: request.channelName, lastMessage: nil, lastActivity: nil)
+        let newChannel = Channel(id: "", name: request.channelName, lastMessage: nil, lastActivity: nil)
         firestoreManager.addObject(newChannel)
     }
     

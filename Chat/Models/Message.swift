@@ -11,6 +11,7 @@ struct Message: FirestoreObject {
     
     // MARK: - Public properties
     
+    let id: String
     let content: String
     let created: Date
     let senderID: String
@@ -28,6 +29,7 @@ struct Message: FirestoreObject {
     // MARK: - Initialization
     
     init(content: String, created: Date, senderID: String, senderName: String) {
+        self.id = ""
         self.content = content
         self.created = created
         self.senderID = senderID
@@ -47,6 +49,7 @@ struct Message: FirestoreObject {
         else {
             return nil
         }
+        self.id = snapshot.documentID
         self.content = content
         self.created = timestamp.dateValue()
         self.senderID = totalSenderID
@@ -62,6 +65,7 @@ struct Message: FirestoreObject {
         else {
             return nil
         }
+        self.id = ""
         self.content = content
         self.created = created
         self.senderID = senderID
