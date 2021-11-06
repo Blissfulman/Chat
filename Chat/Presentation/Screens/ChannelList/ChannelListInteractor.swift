@@ -22,7 +22,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     // MARK: - Private properties
     
     private let presenter: ChannelListPresentationLogic
-    private let firestoreManager: FirestoreManagerProtocol = FirestoreManager(dataType: .channels)
+    private var firestoreManager = FirestoreManager<Channel>(dataType: .channels)
     private let settingsManager = SettingsManager()
     private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
     private let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
@@ -60,22 +60,20 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     }
     
     func fetchChannelList(request: ChannelListModel.ChannelList.Request) {
-        firestoreManager.reference.addSnapshotListener { [weak self] snapshot, error in
+        firestoreManager.listener = { [weak self] result in
             guard let self = self else { return }
             
-            if let error = error {
+            switch result {
+            case let .success(channels):
+                let sortedChannels = self.sortChannels(channels)
+
+                self.dataStorageManager.saveChannels(channels)
+
+                let response = ChannelListModel.ChannelList.Response(channels: sortedChannels)
+                self.presenter.presentChannelList(response: response)
+            case let .failure(error):
                 let response = ChannelListModel.FetchingChannelsError.Response(error: error)
                 self.presenter.presentFetchingChannelsError(response: response)
-            } else {
-                if let channelSnapshots = snapshot?.documents {
-                    let channels = channelSnapshots.compactMap { Channel(snapshot: $0) }
-                    let sortedChannels = self.sortChannels(channels)
-                    
-                    self.dataStorageManager.saveChannels(channels)
-                    
-                    let response = ChannelListModel.ChannelList.Response(channels: sortedChannels)
-                    self.presenter.presentChannelList(response: response)
-                }
             }
             // TEMP: Временно для демонстранции успешного сохранения и чтения данных из CoreData
             let channels = self.dataStorageManager.fetchChannels()
@@ -90,7 +88,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     
     func addNewChannel(request: ChannelListModel.NewChannel.Request) {
         let newChannel = Channel(identifier: "", name: request.channelName, lastMessage: nil, lastActivity: nil)
-        firestoreManager.reference.addDocument(data: newChannel.toDictionary)
+        firestoreManager.addObject(newChannel)
     }
     
     func updateTheme(request: ChannelListModel.UpdateTheme.Request) {

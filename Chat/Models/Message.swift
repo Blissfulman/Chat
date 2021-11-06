@@ -7,7 +7,7 @@
 
 import Firebase
 
-struct Message {
+struct Message: FirestoreObject {
     
     // MARK: - Public properties
     

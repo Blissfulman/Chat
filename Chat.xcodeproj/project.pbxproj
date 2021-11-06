@@ -70,6 +70,7 @@
 		CEDBA13D27272CF700B5C98E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEDBA13C27272CF700B5C98E /* GoogleService-Info.plist */; };
 		CEDC7F2327345BD400D9BE4F /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC7F2227345BD400D9BE4F /* FirestoreManager.swift */; };
 		CEE6513E2721F013009DD993 /* AcynsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE6513D2721F013009DD993 /* AcynsDataManager.swift */; };
+		CEE77AB42736F1A9004F69A4 /* FirestoreObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE77AB32736F1A9004F69A4 /* FirestoreObject.swift */; };
 		CEE9FF09272C747C00628F34 /* ChannelListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF08272C747C00628F34 /* ChannelListInteractor.swift */; };
 		CEE9FF0B272C748500628F34 /* ChannelListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF0A272C748500628F34 /* ChannelListPresenter.swift */; };
 		CEE9FF0D272C749B00628F34 /* ChannelListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF0C272C749B00628F34 /* ChannelListAssembly.swift */; };
@@ -144,6 +145,7 @@
 		CEDBA13C27272CF700B5C98E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEDC7F2227345BD400D9BE4F /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		CEE6513D2721F013009DD993 /* AcynsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcynsDataManager.swift; sourceTree = "<group>"; };
+		CEE77AB32736F1A9004F69A4 /* FirestoreObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreObject.swift; sourceTree = "<group>"; };
 		CEE9FF08272C747C00628F34 /* ChannelListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListInteractor.swift; sourceTree = "<group>"; };
 		CEE9FF0A272C748500628F34 /* ChannelListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListPresenter.swift; sourceTree = "<group>"; };
 		CEE9FF0C272C749B00628F34 /* ChannelListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListAssembly.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */,
+				CEE77AB32736F1A9004F69A4 /* FirestoreObject.swift */,
 				CE6667CB272099F100DD6B40 /* AsyncHandler.swift */,
 			);
 			path = Helpers;
@@ -647,6 +650,7 @@
 				CE6667CA2720871200DD6B40 /* Data+Extension.swift in Sources */,
 				CE32F21D27048600007262A5 /* Fonts.swift in Sources */,
 				CE54E6312729D19700B20B69 /* KeychainManager.swift in Sources */,
+				CEE77AB42736F1A9004F69A4 /* FirestoreObject.swift in Sources */,
 				CE0B5F1E270CA538004B6232 /* ChannelCell.swift in Sources */,
 				CED84B3E27025F4200D4E4EB /* Images.swift in Sources */,
 				CE6667CE2720ACB100DD6B40 /* ProgressView.swift in Sources */,
