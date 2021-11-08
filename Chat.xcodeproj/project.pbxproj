@@ -52,6 +52,7 @@
 		CE9AF685270B8D44006D44A8 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9AF684270B8D44006D44A8 /* Icons.xcassets */; };
 		CE9B0BC32721BEC60001DF15 /* ProfileDescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0BC22721BEC60001DF15 /* ProfileDescriptionTextField.swift */; };
 		CE9C657C270F2F8A008756AC /* ConfigurableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */; };
+		CEA00F802739AA7C007F925E /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */; };
 		CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA143DD271600D400F39F61 /* ThemesViewController.swift */; };
 		CEB97AB8272D3C8800C405CA /* ChannelAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AB7272D3C8800C405CA /* ChannelAssembly.swift */; };
 		CEB97ABA272D3C9A00C405CA /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AB9272D3C9A00C405CA /* ChannelModel.swift */; };
@@ -128,6 +129,7 @@
 		CE9AF684270B8D44006D44A8 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		CE9B0BC22721BEC60001DF15 /* ProfileDescriptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionTextField.swift; sourceTree = "<group>"; };
 		CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableCell.swift; sourceTree = "<group>"; };
+		CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		CEA143DD271600D400F39F61 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		CEB97AB7272D3C8800C405CA /* ChannelAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelAssembly.swift; sourceTree = "<group>"; };
 		CEB97AB9272D3C9A00C405CA /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 			children = (
 				CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */,
 				CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */,
+				CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */,
 				CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */,
 				CE394791270F8581004C6FD1 /* Date+Extension.swift */,
 				CE6667C92720871200DD6B40 /* Data+Extension.swift */,
@@ -652,6 +655,7 @@
 				CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */,
 				CE6667CA2720871200DD6B40 /* Data+Extension.swift in Sources */,
 				CE32F21D27048600007262A5 /* Fonts.swift in Sources */,
+				CEA00F802739AA7C007F925E /* UITableView+Extension.swift in Sources */,
 				CE54E6312729D19700B20B69 /* KeychainManager.swift in Sources */,
 				CEE77AB42736F1A9004F69A4 /* FirestoreObject.swift in Sources */,
 				CE0B5F1E270CA538004B6232 /* ChannelCell.swift in Sources */,

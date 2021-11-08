@@ -44,6 +44,7 @@ final class ChannelListViewController: UIViewController {
         tableView.rowHeight = 88
         tableView.estimatedRowHeight = 88
         tableView.delegate = self
+        tableView.registerCell(type: ChannelCell.self)
         return tableView
     }()
     
@@ -105,7 +106,6 @@ final class ChannelListViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupUI() {
-        tableView.register(ChannelCell.self, forCellReuseIdentifier: String(describing: ChannelCell.self))
         view.addSubview(tableView)
         navigationItem.leftBarButtonItems = [openSettingsBarButton, addChannelBarButton]
     }

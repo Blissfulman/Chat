@@ -30,6 +30,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         let tableView = UITableView().prepareForAutoLayout()
         tableView.separatorStyle = .none
         tableView.dataSource = self
+        tableView.registerCell(type: MessageCell.self)
         return tableView
     }()
     
@@ -115,7 +116,6 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         bottomView.addSubview(borderView)
         bottomView.addSubview(bottomViewStackView)
         bottomViewStackView.addArrangedSubviews(addButton, newMessageTextField)
-        tableView.register(MessageCell.self, forCellReuseIdentifier: String(describing: MessageCell.self))
     }
     
     private func setupLayout() {
@@ -186,11 +186,7 @@ extension ChannelViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: MessageCell.self),
-            for: indexPath
-        ) as? MessageCell else { return UITableViewCell() }
-        
+        guard let cell = tableView.dequeue(type: MessageCell.self, for: indexPath) else { return UITableViewCell() }
         cell.configure(with: messages[indexPath.row])
         return cell
     }

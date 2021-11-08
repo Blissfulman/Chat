@@ -42,21 +42,19 @@ final class ChannelListDataSource: NSObject, ChannelListDataSourceProtocol {
 // MARK: - UITableViewDataSource
 
 extension ChannelListDataSource: UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let firstSection = fetchedResultsController.sections?.first else { return 0 }
         return firstSection.numberOfObjects
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
             let channel = Channel(dbChannel: fetchedResultsController.object(at: indexPath)),
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: String(describing: ChannelCell.self),
-                for: indexPath
-            ) as? ChannelCell
-        else { return UITableViewCell() }
-
+            let cell = tableView.dequeue(type: ChannelCell.self, for: indexPath)
+        else {
+            return UITableViewCell()
+        }
         cell.configure(with: channel)
         return cell
     }
@@ -65,11 +63,11 @@ extension ChannelListDataSource: UITableViewDataSource {
 // MARK: - NSFetchedResultsControllerDelegate
 
 extension ChannelListDataSource: NSFetchedResultsControllerDelegate {
-
+    
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView?.beginUpdates()
     }
-
+    
     func controller(
         _ controller: NSFetchedResultsController<NSFetchRequestResult>,
         didChange anObject: Any,
@@ -90,12 +88,9 @@ extension ChannelListDataSource: NSFetchedResultsControllerDelegate {
             if let indexPath = indexPath {
                 guard
                     let channel = Channel(dbChannel: fetchedResultsController.object(at: indexPath)),
-                    let cell = tableView?.dequeueReusableCell(
-                        withIdentifier: String(describing: ChannelCell.self),
-                        for: indexPath
-                    ) as? ChannelCell
+                    let cell = tableView?.dequeue(type: ChannelCell.self, for: indexPath)
                 else { return }
-
+                
                 cell.configure(with: channel)
             }
         case .move:
@@ -109,7 +104,7 @@ extension ChannelListDataSource: NSFetchedResultsControllerDelegate {
             fatalError(debugDescription)
         }
     }
-
+    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView?.endUpdates()
     }
