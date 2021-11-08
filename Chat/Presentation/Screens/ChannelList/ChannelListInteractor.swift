@@ -22,6 +22,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     // MARK: - Private properties
     
     private let presenter: ChannelListPresentationLogic
+    private let channelListDataSource: ChannelListDataSourceProtocol
     private var firestoreManager = FirestoreManager<Channel>(dataType: .channels)
     private let settingsManager = SettingsManager()
     private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
@@ -30,8 +31,9 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     
     // MARK: - Initialization
     
-    init(presenter: ChannelListPresentationLogic) {
+    init(presenter: ChannelListPresentationLogic, channelListDataSource: ChannelListDataSourceProtocol) {
         self.presenter = presenter
+        self.channelListDataSource = channelListDataSource
     }
     
     // MARK: - ChannelListBusinessLogic
@@ -62,15 +64,10 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     func fetchChannelList(request: ChannelListModel.ChannelList.Request) {
         firestoreManager.listener = { [weak self] result in
             guard let self = self else { return }
-            
+
             switch result {
             case let .success(channels):
-                let sortedChannels = self.sortChannels(channels)
-
                 self.dataStorageManager.saveChannels(channels)
-
-                let response = ChannelListModel.ChannelList.Response(channels: sortedChannels)
-                self.presenter.presentChannelList(response: response)
             case let .failure(error):
                 let response = ChannelListModel.FetchingChannelsError.Response(error: error)
                 self.presenter.presentFetchingChannelsError(response: response)
@@ -100,26 +97,8 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     }
     
     func openChannel(request: ChannelListModel.OpenChannel.Request) {
-        let response = ChannelListModel.OpenChannel.Response(channel: request.channel, senderName: profile?.fullName)
+        guard let channel = channelListDataSource.getChannel(at: request.indexPath) else { return }
+        let response = ChannelListModel.OpenChannel.Response(channel: channel, senderName: profile?.fullName)
         presenter.presentSelectedChannel(response: response)
-    }
-    
-    // MARK: - Private methods
-    
-    private func sortChannels(_ channels: [Channel]) -> [Channel] {
-        let activeChannels = channels
-            .filter { $0.lastActivity != nil }
-            .sorted {
-                if let firstDate = $0.lastActivity,
-                   let secondDate = $1.lastActivity {
-                    return firstDate > secondDate
-                } else {
-                    return true
-                }
-            }
-        let inactiveChannels = channels
-            .filter { $0.lastActivity == nil }
-            .sorted { $0.name < $1.name }
-        return activeChannels + inactiveChannels
     }
 }

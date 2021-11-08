@@ -8,6 +8,7 @@
 import CoreData
 
 protocol DataStorageManagerProtocol {
+    var channelListFetchedResultsController: NSFetchedResultsController<DBChannel> { get }
     /// Сохранение всех несохранённых данных.
     func saveData()
     /// Сохранение каналов.
@@ -32,6 +33,12 @@ final class DataStorageManager: DataStorageManagerProtocol {
     // MARK: - Static properties
     
     static let shared = DataStorageManager()
+    
+    // MARK: - Public properties
+    
+    var channelListFetchedResultsController: NSFetchedResultsController<DBChannel> {
+        storage.fetchedResultsController(for: DBChannel.self, sortDescriptorKey: #keyPath(DBChannel.lastActivity))
+    }
     
     // MARK: - Private properties
     

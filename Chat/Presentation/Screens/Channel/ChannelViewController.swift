@@ -171,9 +171,9 @@ extension ChannelViewController: ChannelDisplayLogic {
     }
     
     func displaySendMessage(viewModel: ChannelModel.SendMessage.ViewModel) {
+        newMessageTextField.text = ""
         guard !messages.isEmpty else { return }
         tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-        newMessageTextField.text = ""
     }
 }
 

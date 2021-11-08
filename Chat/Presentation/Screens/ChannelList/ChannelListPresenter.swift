@@ -9,7 +9,6 @@ import Foundation
 
 protocol ChannelListPresentationLogic: AnyObject {
     func presentProfileData(response: ChannelListModel.UpdateProfile.Response)
-    func presentChannelList(response: ChannelListModel.ChannelList.Response)
     func presentFetchingChannelsError(response: ChannelListModel.FetchingChannelsError.Response)
     func presentAddChannelAlert(response: ChannelListModel.AddChannelAlert.Response)
     func presentSelectedChannel(response: ChannelListModel.OpenChannel.Response)
@@ -28,10 +27,6 @@ final class ChannelListPresenter: ChannelListPresentationLogic {
             avatarImageData: response.avatarImageData ?? (Images.noPhoto.jpegData(compressionQuality: 0.5) ?? Data())
         )
         view?.displayProfileData(viewModel: viewModel)
-    }
-    
-    func presentChannelList(response: ChannelListModel.ChannelList.Response) {
-        view?.displayChannelList(viewModel: ChannelListModel.ChannelList.ViewModel(channels: response.channels))
     }
     
     func presentFetchingChannelsError(response: ChannelListModel.FetchingChannelsError.Response) {

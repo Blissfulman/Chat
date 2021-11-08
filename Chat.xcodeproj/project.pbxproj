@@ -46,6 +46,7 @@
 		CE8B576127205E8E002E3434 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B576027205E8E002E3434 /* Profile.swift */; };
 		CE8B576327205F2E002E3434 /* ProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B576227205F2E002E3434 /* ProfileDataManager.swift */; };
 		CE8C4079271BEEE000D0C0B5 /* FileStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */; };
+		CE93B36127385BB400AD66F7 /* ChannelListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE93B36027385BB400AD66F7 /* ChannelListDataSource.swift */; };
 		CE9AF681270B89C1006D44A8 /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AF680270B89C1006D44A8 /* ChannelViewController.swift */; };
 		CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AF682270B8D39006D44A8 /* Icons.swift */; };
 		CE9AF685270B8D44006D44A8 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9AF684270B8D44006D44A8 /* Icons.xcassets */; };
@@ -121,6 +122,7 @@
 		CE8B576027205E8E002E3434 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		CE8B576227205F2E002E3434 /* ProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManager.swift; sourceTree = "<group>"; };
 		CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileStorageManager.swift; sourceTree = "<group>"; };
+		CE93B36027385BB400AD66F7 /* ChannelListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListDataSource.swift; sourceTree = "<group>"; };
 		CE9AF680270B89C1006D44A8 /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
 		CE9AF682270B8D39006D44A8 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		CE9AF684270B8D44006D44A8 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				CEE9FF08272C747C00628F34 /* ChannelListInteractor.swift */,
 				CEE9FF0A272C748500628F34 /* ChannelListPresenter.swift */,
 				CEB97ACC272FD81700C405CA /* ChannelListViewController+Extension.swift */,
+				CE93B36027385BB400AD66F7 /* ChannelListDataSource.swift */,
 				CE0B5F1F270CA53F004B6232 /* Cells */,
 			);
 			path = ChannelList;
@@ -667,6 +670,7 @@
 				CE04B4E7271F52B80027F649 /* ProfileFilledButton.swift in Sources */,
 				CEB97ACA272D94F900C405CA /* ProfilePresenter.swift in Sources */,
 				CE6667CC272099F100DD6B40 /* AsyncHandler.swift in Sources */,
+				CE93B36127385BB400AD66F7 /* ChannelListDataSource.swift in Sources */,
 				CE3E9146270EAD430029DA74 /* MessageCell.swift in Sources */,
 				CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */,
 				CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */,

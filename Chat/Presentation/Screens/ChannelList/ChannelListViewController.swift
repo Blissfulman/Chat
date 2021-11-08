@@ -10,7 +10,6 @@ import UIKit
 
 protocol ChannelListDisplayLogic: AnyObject {
     func displayProfileData(viewModel: ChannelListModel.UpdateProfile.ViewModel)
-    func displayChannelList(viewModel: ChannelListModel.ChannelList.ViewModel)
     func displayFetchingChannelsError(viewModel: ChannelListModel.FetchingChannelsError.ViewModel)
     func displayAddChannelAlert(viewModel: ChannelListModel.AddChannelAlert.ViewModel)
     func displaySelectedChannel(viewModel: ChannelListModel.OpenChannel.ViewModel)
@@ -44,25 +43,25 @@ final class ChannelListViewController: UIViewController {
         let tableView = UITableView().prepareForAutoLayout()
         tableView.rowHeight = 88
         tableView.estimatedRowHeight = 88
-        tableView.dataSource = self
         tableView.delegate = self
         return tableView
     }()
     
     private let interactor: ChannelListBusinessLogic
     private let router: ChannelListRoutingLogic
-    private var channels = [Channel]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
     
     // MARK: - Initialization
     
-    init(interactor: ChannelListBusinessLogic, router: ChannelListRoutingLogic) {
+    init(
+        interactor: ChannelListBusinessLogic,
+        router: ChannelListRoutingLogic,
+        channelListDataSource: ChannelListDataSourceProtocol
+    ) {
         self.interactor = interactor
         self.router = router
         super.init(nibName: nil, bundle: nil)
+        var channelListDataSource = channelListDataSource
+        channelListDataSource.tableView = self.tableView
     }
     
     required init?(coder: NSCoder) {
@@ -149,10 +148,6 @@ extension ChannelListViewController: ChannelListDisplayLogic {
         navigationItem.rightBarButtonItem = customProfileBarButton(avatarData: viewModel.avatarImageData)
     }
     
-    func displayChannelList(viewModel: ChannelListModel.ChannelList.ViewModel) {
-        channels = viewModel.channels
-    }
-    
     func displayFetchingChannelsError(viewModel: ChannelListModel.FetchingChannelsError.ViewModel) {
         showAlertController(title: viewModel.title, message: viewModel.message)
     }
@@ -173,31 +168,12 @@ extension ChannelListViewController: ChannelListDisplayLogic {
     }
 }
 
-// MARK: - UITableViewDataSource
-
-extension ChannelListViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        channels.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: ChannelCell.self),
-            for: indexPath
-        ) as? ChannelCell else { return UITableViewCell() }
-        
-        cell.configure(with: channels[indexPath.row])
-        return cell
-    }
-}
-
 // MARK: - UITableViewDelegate
 
 extension ChannelListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let request = ChannelListModel.OpenChannel.Request(channel: channels[indexPath.row])
+        let request = ChannelListModel.OpenChannel.Request(indexPath: indexPath)
         interactor.openChannel(request: request)
     }
 }

@@ -44,6 +44,32 @@ final class CoreDataStorage {
         fetchData(for: entity, onContext: backgroundContext, predicate: predicate)
     }
     
+    func fetchedResultsController<T: NSManagedObject>(
+        for entity: T.Type,
+        sortDescriptorKey: String,
+        predicate: NSCompoundPredicate? = nil
+    ) -> NSFetchedResultsController<T> {
+        let entityName = String(describing: entity)
+        let request: NSFetchRequest<T> = NSFetchRequest(entityName: entityName)
+        request.predicate = predicate
+        
+        let sortDescriptor = NSSortDescriptor(key: sortDescriptorKey, ascending: false)
+        request.sortDescriptors = [sortDescriptor]
+        
+        let controller = NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: backgroundContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        do {
+            try controller.performFetch()
+        } catch {
+            debugPrint("Could not fetch: \(error.localizedDescription)")
+        }
+        return controller
+    }
+    
     // MARK: - Private methods
     
     private func createStack() {
