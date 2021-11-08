@@ -9,7 +9,6 @@ import UIKit
 
 protocol ChannelDisplayLogic: AnyObject {
     func displayTheme(viewModel: ChannelModel.FetchTheme.ViewModel)
-    func displayMessages(viewModel: ChannelModel.FetchMessages.ViewModel)
     func displayFetchingMessagesError(viewModel: ChannelModel.FetchingMessagesError.ViewModel)
     func displaySendMessage(viewModel: ChannelModel.SendMessage.ViewModel)
 }
@@ -29,7 +28,6 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView().prepareForAutoLayout()
         tableView.separatorStyle = .none
-        tableView.dataSource = self
         tableView.registerCell(type: MessageCell.self)
         return tableView
     }()
@@ -66,17 +64,14 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     
     private var bottomViewBottomConstraint: NSLayoutConstraint?
     private let interactor: ChannelBusinessLogic
-    private var messages = [Message]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
     
     // MARK: - Initialization
     
-    init(interactor: ChannelBusinessLogic, channelName: String) {
+    init(interactor: ChannelBusinessLogic, channelDataSource: ChannelDataSourceProtocol, channelName: String) {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
+        var channelDataSource = channelDataSource
+        channelDataSource.tableView = self.tableView
         title = channelName
     }
     
@@ -162,33 +157,15 @@ extension ChannelViewController: ChannelDisplayLogic {
         bottomView.backgroundColor = viewModel.theme.themeColors.backgroundColor
     }
     
-    func displayMessages(viewModel: ChannelModel.FetchMessages.ViewModel) {
-        messages = viewModel.messages
-    }
-    
     func displayFetchingMessagesError(viewModel: ChannelModel.FetchingMessagesError.ViewModel) {
         showAlertController(title: viewModel.title, message: viewModel.message)
     }
     
     func displaySendMessage(viewModel: ChannelModel.SendMessage.ViewModel) {
         newMessageTextField.text = ""
-        guard !messages.isEmpty else { return }
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-    }
-}
-
-// MARK: - UITableViewDataSource
-
-extension ChannelViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        messages.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeue(type: MessageCell.self, for: indexPath) else { return UITableViewCell() }
-        cell.configure(with: messages[indexPath.row])
-        return cell
+        if tableView.numberOfRows(inSection: 0) != 0 {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
     }
 }
 

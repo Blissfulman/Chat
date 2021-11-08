@@ -18,6 +18,7 @@ final class ChannelInteractor: ChannelBusinessLogic {
     // MARK: - Private properties
     
     private let presenter: ChannelPresentationLogic
+    private let channelDataSource: ChannelDataSourceProtocol
     private let channel: Channel
     private let senderName: String
     private var firestoreManager: FirestoreManager<Message>
@@ -26,8 +27,14 @@ final class ChannelInteractor: ChannelBusinessLogic {
     
     // MARK: - Initialization
     
-    init(presenter: ChannelPresentationLogic, channel: Channel, senderName: String) {
+    init(
+        presenter: ChannelPresentationLogic,
+        channelDataSource: ChannelDataSourceProtocol,
+        channel: Channel,
+        senderName: String
+    ) {
         self.presenter = presenter
+        self.channelDataSource = channelDataSource
         self.channel = channel
         self.senderName = senderName
         self.firestoreManager = FirestoreManager<Message>(dataType: .messages(channelID: channel.id))
@@ -45,13 +52,8 @@ final class ChannelInteractor: ChannelBusinessLogic {
             guard let self = self else { return }
             
             switch result {
-            case let .success(messages):
-                let sortedMessage = messages.sorted { $0.created > $1.created }
-                
+            case let .success(messages):                
                 self.dataStorageManager.saveMessages(messages, forChannel: self.channel)
-                
-                let response = ChannelModel.FetchMessages.Response(messages: sortedMessage)
-                self.presenter.presentMessages(response: response)
             case let .failure(error):
                 let response = ChannelModel.FetchingMessagesError.Response(error: error)
                 self.presenter.presentFetchingMessagesError(response: response)

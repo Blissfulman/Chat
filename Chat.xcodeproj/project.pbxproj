@@ -52,6 +52,7 @@
 		CE9AF685270B8D44006D44A8 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9AF684270B8D44006D44A8 /* Icons.xcassets */; };
 		CE9B0BC32721BEC60001DF15 /* ProfileDescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0BC22721BEC60001DF15 /* ProfileDescriptionTextField.swift */; };
 		CE9C657C270F2F8A008756AC /* ConfigurableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */; };
+		CEA00F7E2739AA10007F925E /* ChannelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA00F7D2739AA10007F925E /* ChannelDataSource.swift */; };
 		CEA00F802739AA7C007F925E /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */; };
 		CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA143DD271600D400F39F61 /* ThemesViewController.swift */; };
 		CEB97AB8272D3C8800C405CA /* ChannelAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AB7272D3C8800C405CA /* ChannelAssembly.swift */; };
@@ -129,6 +130,7 @@
 		CE9AF684270B8D44006D44A8 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		CE9B0BC22721BEC60001DF15 /* ProfileDescriptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionTextField.swift; sourceTree = "<group>"; };
 		CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableCell.swift; sourceTree = "<group>"; };
+		CEA00F7D2739AA10007F925E /* ChannelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDataSource.swift; sourceTree = "<group>"; };
 		CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		CEA143DD271600D400F39F61 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		CEB97AB7272D3C8800C405CA /* ChannelAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelAssembly.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				CE9AF680270B89C1006D44A8 /* ChannelViewController.swift */,
 				CEB97ABD272D3CC200C405CA /* ChannelInteractor.swift */,
 				CEB97ABF272D3CCB00C405CA /* ChannelPresenter.swift */,
+				CEA00F7D2739AA10007F925E /* ChannelDataSource.swift */,
 				CEB97AD027307CAB00C405CA /* Subviews */,
 				CE3E9144270EAD320029DA74 /* Cells */,
 			);
@@ -630,6 +633,7 @@
 				CEE9FF0F272C74AF00628F34 /* ChannelListModel.swift in Sources */,
 				CE2608802718B01800CAE9B6 /* Theme.swift in Sources */,
 				CE39478E270F73CE004C6FD1 /* MyMessageView.swift in Sources */,
+				CEA00F7E2739AA10007F925E /* ChannelDataSource.swift in Sources */,
 				CE7A11372728832600B92C0B /* NewMessageTextField.swift in Sources */,
 				CEE6513E2721F013009DD993 /* AcynsDataManager.swift in Sources */,
 				CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */,

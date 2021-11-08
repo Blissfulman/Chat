@@ -9,6 +9,7 @@ import CoreData
 
 protocol DataStorageManagerProtocol {
     var channelListFetchedResultsController: NSFetchedResultsController<DBChannel> { get }
+    func channelFetchedResultsController(forChannel channel: Channel) -> NSFetchedResultsController<DBMessage>
     /// Сохранение всех несохранённых данных.
     func saveData()
     /// Сохранение каналов.
@@ -49,6 +50,15 @@ final class DataStorageManager: DataStorageManagerProtocol {
     private init() {}
     
     // MARK: - Public methods
+    
+    func channelFetchedResultsController(forChannel channel: Channel) -> NSFetchedResultsController<DBMessage> {
+        let channelMessagesPredicate = makeChannelMessagesPredicate(forChannel: channel)
+        return storage.fetchedResultsController(
+            for: DBMessage.self,
+            sortDescriptorKey: #keyPath(DBMessage.created),
+            predicate: channelMessagesPredicate
+        )
+    }
     
     func saveData() {
         storage.saveChanges()

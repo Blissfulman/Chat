@@ -64,7 +64,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     func fetchChannelList(request: ChannelListModel.ChannelList.Request) {
         firestoreManager.listener = { [weak self] result in
             guard let self = self else { return }
-
+            
             switch result {
             case let .success(channels):
                 self.dataStorageManager.saveChannels(channels)

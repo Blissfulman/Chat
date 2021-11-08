@@ -21,12 +21,6 @@ enum ChannelModel {
     
     enum FetchMessages {
         struct Request {}
-        struct Response {
-            let messages: [Message]
-        }
-        struct ViewModel {
-            let messages: [Message]
-        }
     }
     
     enum FetchingMessagesError {
