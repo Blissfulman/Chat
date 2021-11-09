@@ -73,6 +73,12 @@ enum ChannelListModel {
         }
     }
     
+    enum DeleteChannel {
+        struct Request {
+            let indexPath: IndexPath
+        }
+    }
+    
     // MARK: - Routing
     
     enum Route {

@@ -176,4 +176,14 @@ extension ChannelListViewController: UITableViewDelegate {
         let request = ChannelListModel.OpenChannel.Request(indexPath: indexPath)
         interactor.openChannel(request: request)
     }
+    
+    func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, _ in
+            self?.interactor.deleteChannel(request: ChannelListModel.DeleteChannel.Request(indexPath: indexPath))
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }

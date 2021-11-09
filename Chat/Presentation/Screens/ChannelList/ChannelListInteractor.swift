@@ -15,6 +15,7 @@ protocol ChannelListBusinessLogic: AnyObject {
     func addNewChannel(request: ChannelListModel.NewChannel.Request)
     func updateTheme(request: ChannelListModel.UpdateTheme.Request)
     func openChannel(request: ChannelListModel.OpenChannel.Request)
+    func deleteChannel(request: ChannelListModel.DeleteChannel.Request)
 }
 
 final class ChannelListInteractor: ChannelListBusinessLogic {
@@ -64,7 +65,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     func fetchChannelList(request: ChannelListModel.ChannelList.Request) {
         firestoreManager.listener = { [weak self] result in
             guard let self = self else { return }
-            
+
             switch result {
             case let .success(channels):
                 self.dataStorageManager.saveChannels(channels)
@@ -97,8 +98,14 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     }
     
     func openChannel(request: ChannelListModel.OpenChannel.Request) {
-        guard let channel = channelListDataSource.getChannel(at: request.indexPath) else { return }
+        guard let channel = channelListDataSource.сhannel(at: request.indexPath) else { return }
         let response = ChannelListModel.OpenChannel.Response(channel: channel, senderName: profile?.fullName)
         presenter.presentSelectedChannel(response: response)
+    }
+    
+    func deleteChannel(request: ChannelListModel.DeleteChannel.Request) {
+        guard let channel = channelListDataSource.сhannel(at: request.indexPath) else { return }
+        firestoreManager.deleteObject(channel)
+        dataStorageManager.deleteChannel(channel)
     }
 }

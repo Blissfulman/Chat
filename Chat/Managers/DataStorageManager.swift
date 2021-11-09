@@ -8,16 +8,19 @@
 import CoreData
 
 protocol DataStorageManagerProtocol {
+    /// Экземпляр `NSFetchedResultsController`, отслеживающий сохранённые каналы.
     var channelListFetchedResultsController: NSFetchedResultsController<DBChannel> { get }
+    /// Экземпляр `NSFetchedResultsController`, отслеживающий сохранённые сообщения указанного канала.
+    /// - Parameter channel: Канал, чьи сообщения контроллер будет отслеживать.
     func channelFetchedResultsController(forChannel channel: Channel) -> NSFetchedResultsController<DBMessage>
     /// Сохранение всех несохранённых данных.
     func saveData()
     /// Сохранение каналов.
-    /// - Parameter channels: Каналы.
+    /// - Parameter channels: Сохраняемые каналы.
     func saveChannels(_ channels: [Channel])
     /// Сохранение сообщений.
     /// - Parameters:
-    ///   - messages: Сообщения.
+    ///   - messages: Сохраняемые сообщения.
     ///   - channel: Канал, к которому эти сообщения относятся.
     func saveMessages(_ messages: [Message], forChannel channel: Channel)
     /// Получение всех сохранённых каналов.
@@ -25,6 +28,9 @@ protocol DataStorageManagerProtocol {
     /// Получение всех сообщений канала.
     /// - Parameter channel: Канал, сообщения которого необходимо получить.
     func fetchMessages(forChannel channel: Channel) -> [Message]
+    /// Удаление указанного канала.
+    /// - Parameter channel: Удаляемый канал.
+    func deleteChannel(_ channel: Channel)
     /// Удаление всех сохранённых данных.
     func deleteAllData()
 }
@@ -100,6 +106,12 @@ final class DataStorageManager: DataStorageManagerProtocol {
         let channelMessagesPredicate = makeChannelMessagesPredicate(forChannel: channel)
         let dbMessages = storage.fetchData(for: DBMessage.self, predicate: channelMessagesPredicate)
         return dbMessages.compactMap { Message(dbMessage: $0) }
+    }
+    
+    func deleteChannel(_ channel: Channel) {
+        let channelIDPredicate = makeChannelIDPredicate(forChannel: channel)
+        let channels = storage.fetchDataInBackground(for: DBChannel.self, predicate: channelIDPredicate)
+        storage.deleteObjects(channels)
     }
     
     func deleteAllData() {

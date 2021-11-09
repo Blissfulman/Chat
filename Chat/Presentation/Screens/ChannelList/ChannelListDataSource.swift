@@ -10,7 +10,7 @@ import CoreData
 
 protocol ChannelListDataSourceProtocol {
     var tableView: UITableView? { get set }
-    func getChannel(at indexPath: IndexPath) -> Channel?
+    func сhannel(at indexPath: IndexPath) -> Channel?
 }
 
 final class ChannelListDataSource: NSObject, ChannelListDataSourceProtocol {
@@ -33,7 +33,7 @@ final class ChannelListDataSource: NSObject, ChannelListDataSourceProtocol {
     
     // MARK: - Public methods
     
-    func getChannel(at indexPath: IndexPath) -> Channel? {
+    func сhannel(at indexPath: IndexPath) -> Channel? {
         let object = fetchedResultsController.object(at: indexPath)
         return Channel(dbChannel: object)
     }
