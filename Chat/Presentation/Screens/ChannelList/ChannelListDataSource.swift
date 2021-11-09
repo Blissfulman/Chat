@@ -44,8 +44,8 @@ final class ChannelListDataSource: NSObject, ChannelListDataSourceProtocol {
 extension ChannelListDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let firstSection = fetchedResultsController.sections?.first else { return 0 }
-        return firstSection.numberOfObjects
+        guard let sections = fetchedResultsController.sections else { return 0 }
+        return sections[section].numberOfObjects
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,11 +78,11 @@ extension ChannelListDataSource: NSFetchedResultsControllerDelegate {
         switch type {
         case .insert:
             if let indexPath = newIndexPath {
-                tableView?.insertRows(at: [indexPath], with: .fade)
+                tableView?.insertRows(at: [indexPath], with: .automatic)
             }
         case .delete:
             if let indexPath = indexPath {
-                tableView?.deleteRows(at: [indexPath], with: .fade)
+                tableView?.deleteRows(at: [indexPath], with: .automatic)
             }
         case .update:
             if let indexPath = indexPath {
@@ -95,10 +95,10 @@ extension ChannelListDataSource: NSFetchedResultsControllerDelegate {
             }
         case .move:
             if let indexPath = indexPath {
-                tableView?.deleteRows(at: [indexPath], with: .fade)
+                tableView?.deleteRows(at: [indexPath], with: .automatic)
             }
             if let indexPath = newIndexPath {
-                tableView?.insertRows(at: [indexPath], with: .fade)
+                tableView?.insertRows(at: [indexPath], with: .automatic)
             }
         @unknown default:
             fatalError(debugDescription)
