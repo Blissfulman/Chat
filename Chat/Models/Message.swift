@@ -28,8 +28,8 @@ struct Message: FirestoreObject {
     
     // MARK: - Initialization
     
-    init(content: String, created: Date, senderID: String, senderName: String) {
-        self.id = ""
+    init(id: String, content: String, created: Date, senderID: String, senderName: String) {
+        self.id = id
         self.content = content
         self.created = created
         self.senderID = senderID
@@ -58,6 +58,7 @@ struct Message: FirestoreObject {
     
     init?(dbMessage: DBMessage) {
         guard
+            let id = dbMessage.id,
             let content = dbMessage.content,
             let created = dbMessage.created,
             let senderID = dbMessage.senderID,
@@ -65,7 +66,7 @@ struct Message: FirestoreObject {
         else {
             return nil
         }
-        self.id = ""
+        self.id = id
         self.content = content
         self.created = created
         self.senderID = senderID

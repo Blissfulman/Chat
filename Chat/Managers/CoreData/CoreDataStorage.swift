@@ -12,7 +12,6 @@ final class CoreDataStorage {
     // MARK: - Private properties
     
     private let persistentContainer: NSPersistentContainer
-    private var viewContext: NSManagedObjectContext!
     private var backgroundContext: NSManagedObjectContext!
     
     // MARK: - Initialization
@@ -36,12 +35,18 @@ final class CoreDataStorage {
         backgroundContext.saveChanges()
     }
     
-    func fetchData<T: NSManagedObject>(for entity: T.Type, predicate: NSCompoundPredicate? = nil) -> [T] {
-        fetchData(for: entity, onContext: viewContext, predicate: predicate)
-    }
-    
-    func fetchDataInBackground<T: NSManagedObject>(for entity: T.Type, predicate: NSCompoundPredicate? = nil) -> [T] {
-        fetchData(for: entity, onContext: backgroundContext, predicate: predicate)
+    func fetchObjects<T: NSManagedObject>(for entity: T.Type, predicate: NSCompoundPredicate? = nil) -> [T] {
+        var fetchedResult = [T]()
+        let entityName = String(describing: entity)
+        let request: NSFetchRequest<T> = NSFetchRequest(entityName: entityName)
+        request.predicate = predicate
+        
+        do {
+            fetchedResult = try backgroundContext.fetch(request)
+        } catch {
+            debugPrint("Could not fetch: \(error.localizedDescription)")
+        }
+        return fetchedResult
     }
     
     func fetchedResultsController<T: NSManagedObject>(
@@ -52,6 +57,7 @@ final class CoreDataStorage {
         let entityName = String(describing: entity)
         let request: NSFetchRequest<T> = NSFetchRequest(entityName: entityName)
         request.predicate = predicate
+        request.fetchBatchSize = 10
         
         let sortDescriptor = NSSortDescriptor(key: sortDescriptorKey, ascending: false)
         request.sortDescriptors = [sortDescriptor]
@@ -78,28 +84,8 @@ final class CoreDataStorage {
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-            
-            self.viewContext = self.persistentContainer.viewContext
             self.backgroundContext = self.persistentContainer.newBackgroundContext()
             self.backgroundContext.mergePolicy = NSMergePolicy.overwrite
         }
-    }
-    
-    private func fetchData<T: NSManagedObject>(
-        for entity: T.Type,
-        onContext context: NSManagedObjectContext,
-        predicate: NSCompoundPredicate? = nil
-    ) -> [T] {
-        var fetchedResult = [T]()
-        let entityName = String(describing: entity)
-        let request: NSFetchRequest<T> = NSFetchRequest(entityName: entityName)
-        request.predicate = predicate
-        
-        do {
-            fetchedResult = try context.fetch(request)
-        } catch {
-            debugPrint("Could not fetch: \(error.localizedDescription)")
-        }
-        return fetchedResult
     }
 }

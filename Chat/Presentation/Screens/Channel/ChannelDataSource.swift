@@ -82,12 +82,7 @@ extension ChannelDataSource: NSFetchedResultsControllerDelegate {
             }
         case .update:
             if let indexPath = indexPath {
-                guard
-                    let message = Message(dbMessage: fetchedResultsController.object(at: indexPath)),
-                    let cell = tableView?.dequeue(type: MessageCell.self, for: indexPath)
-                else { return }
-                
-                cell.configure(with: message)
+                tableView?.reloadRows(at: [indexPath], with: .automatic)
             }
         case .move:
             if let indexPath = indexPath {

@@ -67,16 +67,12 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
             guard let self = self else { return }
 
             switch result {
-            case let .success(channels):
-                self.dataStorageManager.saveChannels(channels)
+            case let .success(snapshotChannels):
+                self.dataStorageManager.updateChannels(snapshotChannels)
             case let .failure(error):
                 let response = ChannelListModel.FetchingChannelsError.Response(error: error)
                 self.presenter.presentFetchingChannelsError(response: response)
             }
-            // TEMP: Временно для демонстранции успешного сохранения и чтения данных из CoreData
-            let channels = self.dataStorageManager.fetchChannels()
-            print("SAVED CHANNELS:")
-            channels.forEach { print($0) }
         }
     }
     
@@ -106,6 +102,5 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     func deleteChannel(request: ChannelListModel.DeleteChannel.Request) {
         guard let channel = channelListDataSource.сhannel(at: request.indexPath) else { return }
         firestoreManager.deleteObject(channel)
-        dataStorageManager.deleteChannel(channel)
     }
 }

@@ -52,22 +52,19 @@ final class ChannelInteractor: ChannelBusinessLogic {
             guard let self = self else { return }
             
             switch result {
-            case let .success(messages):                
-                self.dataStorageManager.saveMessages(messages, forChannel: self.channel)
+            case let .success(snapshotMessages):
+                self.dataStorageManager.updateMessages(snapshotMessages, forChannel: self.channel)
             case let .failure(error):
                 let response = ChannelModel.FetchingMessagesError.Response(error: error)
                 self.presenter.presentFetchingMessagesError(response: response)
             }
-            // TEMP: Временно для демонстранции успешного сохранения и чтения данных из CoreData
-            let messages = self.dataStorageManager.fetchMessages(forChannel: self.channel)
-            print("SAVED MESSAGES OF THIS CHANNEL:")
-            messages.forEach { print($0) }
         }
     }
     
     func sendMessage(request: ChannelModel.SendMessage.Request) {
         guard let text = request.text else { return }
         let newMessage = Message(
+            id: "",
             content: text,
             created: Date(),
             senderID: SettingsManager.mySenderID,

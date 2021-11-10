@@ -86,12 +86,7 @@ extension ChannelListDataSource: NSFetchedResultsControllerDelegate {
             }
         case .update:
             if let indexPath = indexPath {
-                guard
-                    let channel = Channel(dbChannel: fetchedResultsController.object(at: indexPath)),
-                    let cell = tableView?.dequeue(type: ChannelCell.self, for: indexPath)
-                else { return }
-                
-                cell.configure(with: channel)
+                tableView?.reloadRows(at: [indexPath], with: .automatic)
             }
         case .move:
             if let indexPath = indexPath {

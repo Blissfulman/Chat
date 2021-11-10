@@ -9,7 +9,7 @@ import Firebase
 
 protocol FirestoreManagerProtocol {
     associatedtype Object: FirestoreObject
-    typealias Listener = (Result<[Object], Error>) -> Void
+    typealias Listener = (Result<SnapshotObjects<Object>, Error>) -> Void
 }
 
 final class FirestoreManager<Type: FirestoreObject>: FirestoreManagerProtocol {
@@ -66,9 +66,20 @@ final class FirestoreManager<Type: FirestoreObject>: FirestoreManagerProtocol {
             if let error = error {
                 self.listener?(.failure(error))
             } else {
-                guard let objectSnapshots = snapshot?.documents else { return }
-                let objects = objectSnapshots.compactMap { Object(snapshot: $0) }
-                self.listener?(.success(objects))
+                guard let objectSnapshots = snapshot?.documentChanges else { return }
+                
+                let snapshotObjects: SnapshotObjects = (
+                    addedObjects: objectSnapshots
+                        .filter { $0.type == .added }
+                        .compactMap { Object(snapshot: $0.document) },
+                    modifiedObjects: objectSnapshots
+                        .filter { $0.type == .modified }
+                        .compactMap { Object(snapshot: $0.document) },
+                    removedObjects: objectSnapshots
+                        .filter { $0.type == .removed }
+                        .compactMap { Object(snapshot: $0.document) }
+                )
+                self.listener?(.success(snapshotObjects))
             }
         }
     }
