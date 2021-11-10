@@ -19,17 +19,17 @@ final class ChannelListDataSource: NSObject, ChannelListDataSourceProtocol {
     
     weak var tableView: UITableView? {
         didSet {
-            tableView?.dataSource = self
+            guard let tableView = tableView else { return }
+            fetchedResultsControllerDelegate = FetchedResultsControllerDelegate(tableView: tableView)
+            fetchedResultsController.delegate = fetchedResultsControllerDelegate
+            tableView.dataSource = self
         }
     }
     
     // MARK: - Private properties
     
-    private lazy var fetchedResultsController: NSFetchedResultsController<DBChannel> = {
-        let fetchedResultsController = DataStorageManager.shared.channelListFetchedResultsController
-        fetchedResultsController.delegate = self
-        return fetchedResultsController
-    }()
+    private lazy var fetchedResultsController = DataStorageManager.shared.channelListFetchedResultsController
+    private var fetchedResultsControllerDelegate: FetchedResultsControllerDelegate?
     
     // MARK: - Public methods
     
@@ -57,50 +57,5 @@ extension ChannelListDataSource: UITableViewDataSource {
         }
         cell.configure(with: channel)
         return cell
-    }
-}
-
-// MARK: - NSFetchedResultsControllerDelegate
-
-extension ChannelListDataSource: NSFetchedResultsControllerDelegate {
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView?.beginUpdates()
-    }
-    
-    func controller(
-        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
-        didChange anObject: Any,
-        at indexPath: IndexPath?,
-        for type: NSFetchedResultsChangeType,
-        newIndexPath: IndexPath?
-    ) {
-        switch type {
-        case .insert:
-            if let indexPath = newIndexPath {
-                tableView?.insertRows(at: [indexPath], with: .automatic)
-            }
-        case .delete:
-            if let indexPath = indexPath {
-                tableView?.deleteRows(at: [indexPath], with: .automatic)
-            }
-        case .update:
-            if let indexPath = indexPath {
-                tableView?.reloadRows(at: [indexPath], with: .automatic)
-            }
-        case .move:
-            if let indexPath = indexPath {
-                tableView?.deleteRows(at: [indexPath], with: .automatic)
-            }
-            if let indexPath = newIndexPath {
-                tableView?.insertRows(at: [indexPath], with: .automatic)
-            }
-        @unknown default:
-            fatalError(debugDescription)
-        }
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView?.endUpdates()
     }
 }
