@@ -8,7 +8,7 @@
 import Firebase
 
 protocol ChannelBusinessLogic: AnyObject {
-    func fetchTheme(request: ChannelModel.FetchTheme.Request)
+    func setupTheme(request: ChannelModel.SetupTheme.Request)
     func fetchMessages(request: ChannelModel.FetchMessages.Request)
     func sendMessage(request: ChannelModel.SendMessage.Request)
 }
@@ -42,9 +42,9 @@ final class ChannelInteractor: ChannelBusinessLogic {
     
     // MARK: - ChannelBusinessLogic
     
-    func fetchTheme(request: ChannelModel.FetchTheme.Request) {
+    func setupTheme(request: ChannelModel.SetupTheme.Request) {
         let theme = settingsManager.theme
-        presenter.presentTheme(response: ChannelModel.FetchTheme.Response(theme: theme))
+        presenter.presentTheme(response: ChannelModel.SetupTheme.Response(theme: theme))
     }
     
     func fetchMessages(request: ChannelModel.FetchMessages.Request) {

@@ -8,6 +8,7 @@
 import Foundation
 
 protocol ProfileBusinessLogic: AnyObject {
+    func setupTheme(request: ChannelModel.SetupTheme.Request)
     func fetchProfile(request: ProfileModel.FetchProfile.Request)
     func editProfileButtonTapped(request: ProfileModel.EditProfileButtonTapped.Request)
     func requestEditingAvatarAlert(request: ProfileModel.EditingAvatarAlert.Request)
@@ -32,6 +33,7 @@ final class ProfileInteractor: ProfileBusinessLogic {
     
     private let presenter: ProfilePresentationLogic
     private let didChangeProfileHandler: ((Profile) -> Void)
+    private let settingsManager = SettingsManager()
     private var asyncDataManager: AsyncDataManagerProtocol = AsyncDataManager(asyncHandlerType: .gcd)
     // Хранение задачи сохранения данных необходимо для возможности её повторения
     private var savingTask: ((Profile, ProfileModel.SavingVariant) -> Void)?
@@ -63,6 +65,11 @@ final class ProfileInteractor: ProfileBusinessLogic {
     }
     
     // MARK: - ProfileBusinessLogic
+    
+    func setupTheme(request: ChannelModel.SetupTheme.Request) {
+        let theme = settingsManager.theme
+        presenter.presentTheme(response: ChannelModel.SetupTheme.Response(theme: theme))
+    }
     
     func fetchProfile(request: ProfileModel.FetchProfile.Request) {
         asyncDataManager.fetchProfile { [weak self] result in

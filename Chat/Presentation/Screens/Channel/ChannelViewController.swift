@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ChannelDisplayLogic: AnyObject {
-    func displayTheme(viewModel: ChannelModel.FetchTheme.ViewModel)
+    func displayTheme(viewModel: ChannelModel.SetupTheme.ViewModel)
     func displayFetchingMessagesError(viewModel: ChannelModel.FetchingMessagesError.ViewModel)
     func displaySendMessage(viewModel: ChannelModel.SendMessage.ViewModel)
 }
@@ -145,7 +145,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = .white
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
-        interactor.fetchTheme(request: ChannelModel.FetchTheme.Request())
+        interactor.setupTheme(request: ChannelModel.SetupTheme.Request())
     }
 }
 
@@ -153,7 +153,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
 
 extension ChannelViewController: ChannelDisplayLogic {
     
-    func displayTheme(viewModel: ChannelModel.FetchTheme.ViewModel) {
+    func displayTheme(viewModel: ChannelModel.SetupTheme.ViewModel) {
         bottomView.backgroundColor = viewModel.theme.themeColors.backgroundColor
     }
     

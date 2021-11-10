@@ -9,7 +9,7 @@ import Foundation
 
 enum ChannelModel {
     
-    enum FetchTheme {
+    enum SetupTheme {
         struct Request {}
         struct Response {
             let theme: Theme

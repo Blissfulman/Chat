@@ -8,6 +8,7 @@
 import Foundation
 
 protocol ProfilePresentationLogic: AnyObject {
+    func presentTheme(response: ChannelModel.SetupTheme.Response)
     func presentProfile(response: ProfileModel.FetchProfile.Response)
     func presentEditingAvatarAlert(response: ProfileModel.EditingAvatarAlert.Response)
     func presentEditingState(response: ProfileModel.EditingState.Response)
@@ -27,6 +28,10 @@ final class ProfilePresenter: ProfilePresentationLogic {
     weak var view: ProfileDisplayLogic?
     
     // MARK: - ProfilePresentationLogic
+    
+    func presentTheme(response: ChannelModel.SetupTheme.Response) {
+        view?.displayTheme(viewModel: ChannelModel.SetupTheme.ViewModel(theme: response.theme))
+    }
     
     func presentProfile(response: ProfileModel.FetchProfile.Response) {
         let viewModel = ProfileModel.FetchProfile.ViewModel(
