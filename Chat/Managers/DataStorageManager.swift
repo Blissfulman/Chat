@@ -123,7 +123,7 @@ final class DataStorageManager: DataStorageManagerProtocol {
         return dbChannels.compactMap { Channel(dbChannel: $0) }
     }
     
-    /// Получение всех сообщений канала.
+    /// Получение всех сообщений указанного канала.
     /// - Parameter channel: Канал, сообщения которого необходимо получить.
     private func fetchAllMessages(forChannel channel: Channel) -> [Message] {
         let channelMessagesPredicate = makeChannelMessagesPredicate(forChannel: channel)
@@ -169,17 +169,17 @@ final class DataStorageManager: DataStorageManagerProtocol {
     }
     
     private func makeChannelIDPredicate(forChannel channel: Channel) -> NSCompoundPredicate {
-        let predicate = NSPredicate(format: "id == '\(channel.id)'")
+        let predicate = NSPredicate(format: "id == %@", channel.id)
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
     }
     
     private func makeMessageIDPredicate(forMessage message: Message) -> NSCompoundPredicate {
-        let predicate = NSPredicate(format: "id == '\(message.id)'")
+        let predicate = NSPredicate(format: "id == %@", message.id)
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
     }
     
     private func makeChannelMessagesPredicate(forChannel channel: Channel) -> NSCompoundPredicate {
-        let predicate = NSPredicate(format: "channel.id == '\(channel.id)'")
+        let predicate = NSPredicate(format: "channel.id == %@", channel.id)
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
     }
 }
