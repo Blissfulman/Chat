@@ -62,6 +62,11 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         return button
     }()
     
+    private lazy var tableViewTapGestureRecognizer: UITapGestureRecognizer = {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapTableView))
+        return tapGestureRecognizer
+    }()
+    
     private var bottomViewBottomConstraint: NSLayoutConstraint?
     private let interactor: ChannelBusinessLogic
     
@@ -103,6 +108,13 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         }
     }
     
+    // MARK: - Actions
+    
+    @objc
+    private func didTapTableView() {
+        view.endEditing(true)
+    }
+    
     // MARK: - Private methods
     
     private func setupUI() {
@@ -111,6 +123,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         bottomView.addSubview(borderView)
         bottomView.addSubview(bottomViewStackView)
         bottomViewStackView.addArrangedSubviews(addButton, newMessageTextField)
+        tableView.addGestureRecognizer(tableViewTapGestureRecognizer)
     }
     
     private func setupLayout() {
