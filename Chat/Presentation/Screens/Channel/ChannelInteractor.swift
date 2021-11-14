@@ -5,7 +5,7 @@
 //  Created by Evgeny Novgorodov on 30.10.2021.
 //
 
-import Firebase
+import Foundation
 
 protocol ChannelBusinessLogic: AnyObject {
     func setupTheme(request: ChannelModel.SetupTheme.Request)

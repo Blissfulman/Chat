@@ -5,7 +5,7 @@
 //  Created by Evgeny Novgorodov on 29.10.2021.
 //
 
-import Firebase
+import Foundation
 
 protocol ChannelListBusinessLogic: AnyObject {
     func fetchProfile(request: ChannelListModel.FetchProfile.Request)
