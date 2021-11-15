@@ -47,4 +47,17 @@ struct Channel {
         let timestamp = data["lastActivity"] as? Timestamp
         self.lastActivity = timestamp?.dateValue()
     }
+    
+    init?(dbChannel: DBChannel) {
+        guard
+            let identifier = dbChannel.identifier,
+            let name = dbChannel.name
+        else {
+            return nil
+        }
+        self.identifier = identifier
+        self.name = name
+        self.lastMessage = dbChannel.lastMessage
+        self.lastActivity = dbChannel.lastActivity
+    }
 }

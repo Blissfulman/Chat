@@ -14,6 +14,7 @@ protocol ChannelListBusinessLogic: AnyObject {
     func requestAddChannelAlert(request: ChannelListModel.AddChannelAlert.Request)
     func addNewChannel(request: ChannelListModel.NewChannel.Request)
     func updateTheme(request: ChannelListModel.UpdateTheme.Request)
+    func openChannel(request: ChannelListModel.OpenChannel.Request)
 }
 
 final class ChannelListInteractor: ChannelListBusinessLogic {
@@ -21,10 +22,10 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     // MARK: - Private properties
     
     private let presenter: ChannelListPresentationLogic
-    private let db = Firestore.firestore()
-    private lazy var reference = db.collection("channels")
+    private let firestoreManager: FirestoreManagerProtocol = FirestoreManager(dataType: .channels)
     private let settingsManager = SettingsManager()
     private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
+    private let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
     private var profile: Profile?
     
     // MARK: - Initialization
@@ -40,12 +41,12 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
             if case let .success(profile) = result {
                 guard let profile = profile else { return }
                 self?.profile = profile
-                let response = ChannelListModel.UpdateProfile.Response(
-                    avatarImageData: profile.avatarData,
-                    senderName: profile.fullName
-                )
-                self?.presenter.presentProfileData(response: response)
             }
+            let response = ChannelListModel.UpdateProfile.Response(
+                avatarImageData: self?.profile?.avatarData,
+                senderName: self?.profile?.fullName
+            )
+            self?.presenter.presentProfileData(response: response)
         }
     }
     
@@ -59,8 +60,9 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     }
     
     func fetchChannelList(request: ChannelListModel.ChannelList.Request) {
-        reference.addSnapshotListener { [weak self] snapshot, error in
+        firestoreManager.reference.addSnapshotListener { [weak self] snapshot, error in
             guard let self = self else { return }
+            
             if let error = error {
                 let response = ChannelListModel.FetchingChannelsError.Response(error: error)
                 self.presenter.presentFetchingChannelsError(response: response)
@@ -68,10 +70,17 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
                 if let channelSnapshots = snapshot?.documents {
                     let channels = channelSnapshots.compactMap { Channel(snapshot: $0) }
                     let sortedChannels = self.sortChannels(channels)
+                    
+                    self.dataStorageManager.saveChannels(channels)
+                    
                     let response = ChannelListModel.ChannelList.Response(channels: sortedChannels)
                     self.presenter.presentChannelList(response: response)
                 }
             }
+            // TEMP: Временно для демонстранции успешного сохранения и чтения данных из CoreData
+            let channels = self.dataStorageManager.fetchChannels()
+            print("SAVED CHANNELS:")
+            channels.forEach { print($0) }
         }
     }
     
@@ -81,7 +90,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     
     func addNewChannel(request: ChannelListModel.NewChannel.Request) {
         let newChannel = Channel(identifier: "", name: request.channelName, lastMessage: nil, lastActivity: nil)
-        reference.addDocument(data: newChannel.toDictionary)
+        firestoreManager.reference.addDocument(data: newChannel.toDictionary)
     }
     
     func updateTheme(request: ChannelListModel.UpdateTheme.Request) {
@@ -90,6 +99,11 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
             NavigationController.updateColors(for: request.theme)
             self?.settingsManager.theme = request.theme
         }
+    }
+    
+    func openChannel(request: ChannelListModel.OpenChannel.Request) {
+        let response = ChannelListModel.OpenChannel.Response(channel: request.channel, senderName: profile?.fullName)
+        presenter.presentSelectedChannel(response: response)
     }
     
     // MARK: - Private methods

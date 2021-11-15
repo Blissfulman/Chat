@@ -18,13 +18,11 @@ final class ChannelInteractor: ChannelBusinessLogic {
     // MARK: - Private properties
     
     private let presenter: ChannelPresentationLogic
-    private let settingsManager = SettingsManager()
     private let channel: Channel
     private let senderName: String
-    private let db = Firestore.firestore()
-    private lazy var reference: CollectionReference = {
-        db.collection("channels").document(channel.identifier).collection("messages")
-    }()
+    private let firestoreManager: FirestoreManagerProtocol
+    private let settingsManager = SettingsManager()
+    private let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
     
     // MARK: - Initialization
     
@@ -32,6 +30,7 @@ final class ChannelInteractor: ChannelBusinessLogic {
         self.presenter = presenter
         self.channel = channel
         self.senderName = senderName
+        self.firestoreManager = FirestoreManager(dataType: .messages(channelID: channel.identifier))
     }
     
     // MARK: - ChannelBusinessLogic
@@ -42,19 +41,28 @@ final class ChannelInteractor: ChannelBusinessLogic {
     }
     
     func fetchMessages(request: ChannelModel.FetchMessages.Request) {
-        reference.addSnapshotListener { [weak self] snapshot, error in
+        firestoreManager.reference.addSnapshotListener { [weak self] snapshot, error in
+            guard let self = self else { return }
+            
             if let error = error {
                 let response = ChannelModel.FetchingMessagesError.Response(error: error)
-                self?.presenter.presentFetchingMessagesError(response: response)
+                self.presenter.presentFetchingMessagesError(response: response)
             } else {
                 if let messageSnapshots = snapshot?.documents {
                     let messages = messageSnapshots
                         .compactMap { Message(snapshot: $0) }
                         .sorted { $0.created > $1.created }
+                    
+                    self.dataStorageManager.saveMessages(messages, forChannel: self.channel)
+                    
                     let response = ChannelModel.FetchMessages.Response(messages: messages)
-                    self?.presenter.presentMessages(response: response)
+                    self.presenter.presentMessages(response: response)
                 }
             }
+            // TEMP: Временно для демонстранции успешного сохранения и чтения данных из CoreData
+            let messages = self.dataStorageManager.fetchMessages(forChannel: self.channel)
+            print("SAVED MESSAGES OF THIS CHANNEL:")
+            messages.forEach { print($0) }
         }
     }
     
@@ -66,7 +74,7 @@ final class ChannelInteractor: ChannelBusinessLogic {
             senderID: SettingsManager.mySenderID,
             senderName: senderName
         )
-        reference.addDocument(data: newMessage.toDictionary)
+        firestoreManager.reference.addDocument(data: newMessage.toDictionary)
         presenter.presentSendMessage(response: ChannelModel.SendMessage.Response())
     }
 }

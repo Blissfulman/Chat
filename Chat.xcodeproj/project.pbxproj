@@ -17,6 +17,10 @@
 		CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */; };
 		CE1F08B126F3BB67002A5985 /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08B026F3BB67002A5985 /* ChannelListViewController.swift */; };
 		CE1F08B926F3BB68002A5985 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1F08B726F3BB68002A5985 /* LaunchScreen.storyboard */; };
+		CE2474C92731C5C900A4AEC0 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2474C82731C5C900A4AEC0 /* CoreDataStorage.swift */; };
+		CE2474CB2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2474CA2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift */; };
+		CE2474CE2731C79100A4AEC0 /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE2474CC2731C79100A4AEC0 /* Chat.xcdatamodeld */; };
+		CE2474D02731CE2B00A4AEC0 /* DataStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2474CF2731CE2B00A4AEC0 /* DataStorageManager.swift */; };
 		CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */; };
 		CE2608802718B01800CAE9B6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087F2718B01800CAE9B6 /* Theme.swift */; };
 		CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */; };
@@ -64,6 +68,7 @@
 		CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3B27025D1700D4E4EB /* Palette.swift */; };
 		CED84B3E27025F4200D4E4EB /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3D27025F4200D4E4EB /* Images.swift */; };
 		CEDBA13D27272CF700B5C98E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEDBA13C27272CF700B5C98E /* GoogleService-Info.plist */; };
+		CEDC7F2327345BD400D9BE4F /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC7F2227345BD400D9BE4F /* FirestoreManager.swift */; };
 		CEE6513E2721F013009DD993 /* AcynsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE6513D2721F013009DD993 /* AcynsDataManager.swift */; };
 		CEE9FF09272C747C00628F34 /* ChannelListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF08272C747C00628F34 /* ChannelListInteractor.swift */; };
 		CEE9FF0B272C748500628F34 /* ChannelListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF0A272C748500628F34 /* ChannelListPresenter.swift */; };
@@ -86,6 +91,10 @@
 		CE1F08B026F3BB67002A5985 /* ChannelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewController.swift; sourceTree = "<group>"; };
 		CE1F08B826F3BB68002A5985 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE1F08BA26F3BB68002A5985 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE2474C82731C5C900A4AEC0 /* CoreDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		CE2474CA2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extension.swift"; sourceTree = "<group>"; };
+		CE2474CD2731C79100A4AEC0 /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
+		CE2474CF2731CE2B00A4AEC0 /* DataStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorageManager.swift; sourceTree = "<group>"; };
 		CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		CE26087F2718B01800CAE9B6 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
@@ -133,6 +142,7 @@
 		CED84B3B27025D1700D4E4EB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		CED84B3D27025F4200D4E4EB /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		CEDBA13C27272CF700B5C98E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CEDC7F2227345BD400D9BE4F /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		CEE6513D2721F013009DD993 /* AcynsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcynsDataManager.swift; sourceTree = "<group>"; };
 		CEE9FF08272C747C00628F34 /* ChannelListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListInteractor.swift; sourceTree = "<group>"; };
 		CEE9FF0A272C748500628F34 /* ChannelListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListPresenter.swift; sourceTree = "<group>"; };
@@ -223,14 +233,27 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
+		CE2474C72731C5B400A4AEC0 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				CE2474C82731C5C900A4AEC0 /* CoreDataStorage.swift */,
+				CE2474CA2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift */,
+				CE2474CC2731C79100A4AEC0 /* Chat.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		CE2608812718C3C200CAE9B6 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				CEDC7F2227345BD400D9BE4F /* FirestoreManager.swift */,
 				CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */,
 				CE8B576227205F2E002E3434 /* ProfileDataManager.swift */,
 				CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */,
 				CEE6513D2721F013009DD993 /* AcynsDataManager.swift */,
 				CE54E6302729D19700B20B69 /* KeychainManager.swift */,
+				CE2474CF2731CE2B00A4AEC0 /* DataStorageManager.swift */,
+				CE2474C72731C5B400A4AEC0 /* CoreData */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -594,6 +617,7 @@
 				CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */,
 				CEB97ACD272FD81700C405CA /* ChannelListViewController+Extension.swift in Sources */,
 				CE394790270F7C1C004C6FD1 /* PartnerMessageView.swift in Sources */,
+				CE2474CB2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift in Sources */,
 				CEE9FF0F272C74AF00628F34 /* ChannelListModel.swift in Sources */,
 				CE2608802718B01800CAE9B6 /* Theme.swift in Sources */,
 				CE39478E270F73CE004C6FD1 /* MyMessageView.swift in Sources */,
@@ -603,6 +627,7 @@
 				CE9C657C270F2F8A008756AC /* ConfigurableCell.swift in Sources */,
 				CE9AF681270B89C1006D44A8 /* ChannelViewController.swift in Sources */,
 				CE04B4E9271F59270027F649 /* ProfileNameTextField.swift in Sources */,
+				CE2474C92731C5C900A4AEC0 /* CoreDataStorage.swift in Sources */,
 				CEB97AC4272D94CC00C405CA /* ProfileModel.swift in Sources */,
 				CEB97AC2272D94B800C405CA /* ProfileAssembly.swift in Sources */,
 				CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */,
@@ -617,6 +642,7 @@
 				CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */,
 				CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */,
 				CEE9FF09272C747C00628F34 /* ChannelListInteractor.swift in Sources */,
+				CE2474D02731CE2B00A4AEC0 /* DataStorageManager.swift in Sources */,
 				CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */,
 				CE6667CA2720871200DD6B40 /* Data+Extension.swift in Sources */,
 				CE32F21D27048600007262A5 /* Fonts.swift in Sources */,
@@ -626,10 +652,12 @@
 				CE6667CE2720ACB100DD6B40 /* ProgressView.swift in Sources */,
 				CEE9FF12272C75A600628F34 /* ChannelListRouter.swift in Sources */,
 				CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */,
+				CE2474CE2731C79100A4AEC0 /* Chat.xcdatamodeld in Sources */,
 				CEB97ACF272FD9CD00C405CA /* ProfileViewController+Extension.swift in Sources */,
 				CE394792270F8581004C6FD1 /* Date+Extension.swift in Sources */,
 				CE8C4079271BEEE000D0C0B5 /* FileStorageManager.swift in Sources */,
 				CEB97ABE272D3CC200C405CA /* ChannelInteractor.swift in Sources */,
+				CEDC7F2327345BD400D9BE4F /* FirestoreManager.swift in Sources */,
 				CEB97ABA272D3C9A00C405CA /* ChannelModel.swift in Sources */,
 				CE8B576327205F2E002E3434 /* ProfileDataManager.swift in Sources */,
 				CE04B4E7271F52B80027F649 /* ProfileFilledButton.swift in Sources */,
@@ -840,6 +868,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CE2474CC2731C79100A4AEC0 /* Chat.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CE2474CD2731C79100A4AEC0 /* Chat.xcdatamodel */,
+			);
+			currentVersion = CE2474CD2731C79100A4AEC0 /* Chat.xcdatamodel */;
+			path = Chat.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CE1F08A126F3BB67002A5985 /* Project object */;
 }

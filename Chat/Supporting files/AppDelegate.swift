@@ -31,7 +31,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func applicationWillTerminate(_ application: UIApplication) {
+        let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
+        dataStorageManager.saveData()
+    }
+    
+    // MARK: - Private methods
+    
     private func initialConfigure() {
+        // TEMP: Временно для демонстранции успешного удаления и последующего сохранения
+        let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
+        let channels = dataStorageManager.fetchChannels()
+        print("SAVED CHANNELS:")
+        channels.forEach { print($0) }
+        dataStorageManager.deleteAllData()
+        
         FirebaseApp.configure()
         let settingsManager = SettingsManager()
         settingsManager.loadMySenderID()
