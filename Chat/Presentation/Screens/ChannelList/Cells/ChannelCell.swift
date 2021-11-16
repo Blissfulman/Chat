@@ -68,7 +68,7 @@ final class ChannelCell: UITableViewCell, ConfigurableCell {
     
     private lazy var messageLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
-        label.font = Fonts.channelCellReadMessage
+        label.font = Fonts.channelCellText
         label.textColor = Palette.labelGray
         label.numberOfLines = 2
         return label
@@ -94,7 +94,7 @@ final class ChannelCell: UITableViewCell, ConfigurableCell {
         fullNameLabel.text = nil
         dateLabel.text = nil
         messageLabel.text = nil
-        messageLabel.font = Fonts.channelCellReadMessage
+        messageLabel.font = Fonts.channelCellText
     }
     
     // MARK: - Public methods
@@ -106,12 +106,9 @@ final class ChannelCell: UITableViewCell, ConfigurableCell {
         }
         if let message = model.lastMessage {
             messageLabel.text = message
-            if model.lastMessage != nil {
-                messageLabel.font = Fonts.channelCellUnreadMessage
-            }
         } else {
             messageLabel.text = "No messages yet"
-            messageLabel.font = Fonts.channelCellNoMessage
+            messageLabel.font = Fonts.channelCellTextNoMessage
         }
     }
     

@@ -20,13 +20,9 @@ enum Fonts {
     
     static let channelCellName = UIFont(name: "SF Pro Text Semibold", size: 15)
         ?? .systemFont(ofSize: 15, weight: .semibold)
-    static let channelCellDate = UIFont(name: "SF Pro Text Regular", size: 15)
-        ?? .systemFont(ofSize: 15)
-    static let channelCellReadMessage = UIFont(name: "SF Pro Text Regular", size: 13)
-        ?? .systemFont(ofSize: 13)
-    static let channelCellUnreadMessage = UIFont(name: "SF Pro Text Bold", size: 13)
-        ?? .systemFont(ofSize: 13, weight: .bold)
-    static let channelCellNoMessage = UIFont(name: "SF Pro Text Regular Italic", size: 13)
+    static let channelCellDate = UIFont(name: "SF Pro Text Regular", size: 15) ?? .systemFont(ofSize: 15)
+    static let channelCellText = UIFont(name: "SF Pro Text Regular", size: 13) ?? .systemFont(ofSize: 13)
+    static let channelCellTextNoMessage = UIFont(name: "SF Pro Text Regular Italic", size: 13)
         ?? .systemFont(ofSize: 13)
     
     static let messageCellAuthorName = UIFont(name: "SF Pro Text Semibold", size: 16)
