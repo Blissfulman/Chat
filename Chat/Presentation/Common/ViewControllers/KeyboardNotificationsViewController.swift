@@ -11,12 +11,6 @@ import UIKit
 /// Сабкласс `UIViewController`, помогающий обрабатывать события появления/скрытия клавиатуры.
 class KeyboardNotificationsViewController: UIViewController {
     
-    // MARK: - Deinitialization
-    
-    deinit {
-        removeKeyboardNotifications()
-    }
-    
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
@@ -74,10 +68,5 @@ class KeyboardNotificationsViewController: UIViewController {
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
-    }
-    
-    private func removeKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
