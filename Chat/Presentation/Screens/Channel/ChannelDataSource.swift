@@ -32,8 +32,8 @@ final class ChannelDataSource: NSObject, ChannelDataSourceProtocol {
     
     // MARK: - Initialization
     
-    init(channel: Channel) {
-        fetchedResultsController = DataStorageManager.shared.channelFetchedResultsController(forChannel: channel)
+    init(channel: Channel, dataManager: DataManager = ServiceLayer.shared.dataManager) {
+        fetchedResultsController = dataManager.channelFetchedResultsController(forChannel: channel)
     }
 }
 

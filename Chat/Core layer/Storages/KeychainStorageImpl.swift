@@ -1,25 +1,24 @@
 //
-//  KeychainManager.swift
+//  KeychainStorageImpl.swift
 //  Chat
 //
-//  Created by Evgeny Novgorodov on 27.10.2021.
+//  Created by Evgeny Novgorodov on 17.11.2021.
 //
 
 import Foundation
 
-protocol KeychainManagerProtocol {
-    func fetchValue(withLabel label: String) -> String?
-    @discardableResult func saveValue(_ value: String, withLabel label: String) -> Bool
-}
-
-final class KeychainManager: KeychainManagerProtocol {
+final class KeychainStorageImpl: KeychainStorage {
     
-    // MARK: - Nested types
+    // MARK: - Private properties
     
-    private enum Constants {
-        static let serviceName = "TinkoffChat"
+    private let storageNameKey: String
+    
+    // MARK: - Initialization
+    
+    init(storageNameKey: String) {
+        self.storageNameKey = storageNameKey
     }
-        
+    
     // MARK: - Public methods
     
     func fetchValue(withLabel label: String) -> String? {
@@ -60,7 +59,7 @@ final class KeychainManager: KeychainManagerProtocol {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlocked,
             kSecAttrLabel as String: label as AnyObject,
-            kSecAttrService as String: Constants.serviceName as AnyObject
+            kSecAttrService as String: storageNameKey as AnyObject
         ]
     }
 

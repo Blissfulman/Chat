@@ -32,9 +32,9 @@ final class ProfileInteractor: ProfileBusinessLogic {
     // MARK: - Private properties
     
     private let presenter: ProfilePresentationLogic
-    private let didChangeProfileHandler: ((Profile) -> Void)
-    private let settingsManager = SettingsManager()
-    private var asyncDataManager: AsyncDataManagerProtocol = AsyncDataManager(asyncHandlerType: .gcd)
+    private let settingsService: SettingsService
+    private var profileDataManager: ProfileDataManager
+    private let didChangeProfileHandler: (Profile) -> Void
     // Хранение задачи сохранения данных необходимо для возможности её повторения
     private var savingTask: ((Profile, ProfileModel.SavingVariant) -> Void)?
     private var isChangedAvatar = false
@@ -59,20 +59,27 @@ final class ProfileInteractor: ProfileBusinessLogic {
     
     // MARK: - Initialization
     
-    init(presenter: ProfilePresentationLogic, didChangeProfileHandler: @escaping ((Profile) -> Void)) {
+    init(
+        presenter: ProfilePresentationLogic,
+        settingsService: SettingsService = ServiceLayer.shared.settingsService,
+        profileDataManager: ProfileDataManager = ServiceLayer.shared.gcdProfileDataManager,
+        didChangeProfileHandler: @escaping (Profile) -> Void
+    ) {
         self.presenter = presenter
+        self.settingsService = settingsService
+        self.profileDataManager = profileDataManager
         self.didChangeProfileHandler = didChangeProfileHandler
     }
     
     // MARK: - ProfileBusinessLogic
     
     func setupTheme(request: ChannelModel.SetupTheme.Request) {
-        let theme = settingsManager.theme
+        let theme = settingsService.getTheme()
         presenter.presentTheme(response: ChannelModel.SetupTheme.Response(theme: theme))
     }
     
     func fetchProfile(request: ProfileModel.FetchProfile.Request) {
-        asyncDataManager.fetchProfile { [weak self] result in
+        profileDataManager.fetchProfile { [weak self] result in
             switch result {
             case .success(let profile):
                 let response = ProfileModel.FetchProfile.Response(
@@ -135,17 +142,17 @@ final class ProfileInteractor: ProfileBusinessLogic {
             avatarData: request.avatarImageData
         )
         
-        savingTask = { [weak self, asyncDataManager, didChangeProfileHandler] profile, savingVariant in
+        savingTask = { [weak self, profileDataManager, didChangeProfileHandler] profile, savingVariant in
             guard let self = self else {
                 // Если экран уже закрыт, то просто совершается ещё одна попытка сохранить профиль
-                asyncDataManager.saveProfile(profile: profile) { result in
+                profileDataManager.saveProfile(profile: profile) { result in
                     if case .success = result { didChangeProfileHandler(profile) }
                 }
                 return
             }
             self.presenter.showProgressView(response: ProfileModel.ShowProgressView.Response())
             
-            asyncDataManager.saveProfile(profile: profile) { result in
+            profileDataManager.saveProfile(profile: profile) { result in
                 self.presenter.hideProgressView(response: ProfileModel.HideProgressView.Response())
                 switch result {
                 case .success:
@@ -162,9 +169,9 @@ final class ProfileInteractor: ProfileBusinessLogic {
             }
         }
         if request.savingVariant == .gcd {
-            asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
+            profileDataManager = ServiceLayer.shared.gcdProfileDataManager // TEMP: Необходимо доработать?
         } else {
-            asyncDataManager = AsyncDataManager(asyncHandlerType: .operations)
+            profileDataManager = ServiceLayer.shared.operationsProfileDataManager // TEMP: Необходимо доработать?
         }
         savingTask?(profile, request.savingVariant)
     }

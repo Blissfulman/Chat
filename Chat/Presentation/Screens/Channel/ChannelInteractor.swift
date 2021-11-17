@@ -18,32 +18,36 @@ final class ChannelInteractor: ChannelBusinessLogic {
     // MARK: - Private properties
     
     private let presenter: ChannelPresentationLogic
+    private let dataManager: DataManager
+    private let settingsService: SettingsService
+    private var firestoreManager: FirestoreManagerImpl<Message>
     private let channelDataSource: ChannelDataSourceProtocol
     private let channel: Channel
     private let senderName: String
-    private var firestoreManager: FirestoreManager<Message>
-    private let settingsManager = SettingsManager()
-    private let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
     
     // MARK: - Initialization
     
     init(
         presenter: ChannelPresentationLogic,
+        dataManager: DataManager = ServiceLayer.shared.dataManager, 
+        settingsService: SettingsService = ServiceLayer.shared.settingsService,
         channelDataSource: ChannelDataSourceProtocol,
         channel: Channel,
         senderName: String
     ) {
         self.presenter = presenter
+        self.dataManager = dataManager
+        self.settingsService = settingsService
+        self.firestoreManager = FirestoreManagerImpl<Message>(dataType: .messages(channelID: channel.id))
         self.channelDataSource = channelDataSource
         self.channel = channel
         self.senderName = senderName
-        self.firestoreManager = FirestoreManager<Message>(dataType: .messages(channelID: channel.id))
     }
     
     // MARK: - ChannelBusinessLogic
     
     func setupTheme(request: ChannelModel.SetupTheme.Request) {
-        let theme = settingsManager.theme
+        let theme = settingsService.getTheme()
         presenter.presentTheme(response: ChannelModel.SetupTheme.Response(theme: theme))
     }
     
@@ -53,7 +57,7 @@ final class ChannelInteractor: ChannelBusinessLogic {
             
             switch result {
             case let .success(snapshotMessages):
-                self.dataStorageManager.updateMessages(snapshotMessages, forChannel: self.channel)
+                self.dataManager.updateMessages(snapshotMessages, forChannel: self.channel)
             case let .failure(error):
                 let response = ChannelModel.FetchingMessagesError.Response(error: error)
                 self.presenter.presentFetchingMessagesError(response: response)
@@ -67,7 +71,7 @@ final class ChannelInteractor: ChannelBusinessLogic {
             id: "",
             content: text,
             created: Date(),
-            senderID: SettingsManager.mySenderID,
+            senderID: GlobalData.mySenderID,
             senderName: senderName
         )
         firestoreManager.addObject(newMessage)

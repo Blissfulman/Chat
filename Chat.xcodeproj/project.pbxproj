@@ -13,6 +13,7 @@
 		CE04B4E9271F59270027F649 /* ProfileNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04B4E8271F59270027F649 /* ProfileNameTextField.swift */; };
 		CE0B5F1E270CA538004B6232 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B5F1D270CA538004B6232 /* ChannelCell.swift */; };
 		CE0B5F21270CA84E004B6232 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */; };
+		CE0C600A27458ACA002A1FF9 /* SettingsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C600927458ACA002A1FF9 /* SettingsServiceImpl.swift */; };
 		CE0FDBB826FFC7C800809ABB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0FDBB726FFC7C800809ABB /* Images.xcassets */; };
 		CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */; };
 		CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */; };
@@ -21,7 +22,7 @@
 		CE2474C92731C5C900A4AEC0 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2474C82731C5C900A4AEC0 /* CoreDataStorage.swift */; };
 		CE2474CB2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2474CA2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift */; };
 		CE2474CE2731C79100A4AEC0 /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE2474CC2731C79100A4AEC0 /* Chat.xcdatamodeld */; };
-		CE2474D02731CE2B00A4AEC0 /* DataStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2474CF2731CE2B00A4AEC0 /* DataStorageManager.swift */; };
+		CE2474D02731CE2B00A4AEC0 /* CoreDataManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2474CF2731CE2B00A4AEC0 /* CoreDataManagerImpl.swift */; };
 		CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */; };
 		CE2608802718B01800CAE9B6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087F2718B01800CAE9B6 /* Theme.swift */; };
 		CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */; };
@@ -39,13 +40,13 @@
 		CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */; };
 		CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */; };
 		CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */; };
-		CE54E6312729D19700B20B69 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54E6302729D19700B20B69 /* KeychainManager.swift */; };
+		CE54E6312729D19700B20B69 /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54E6302729D19700B20B69 /* KeychainStorage.swift */; };
 		CE6667CA2720871200DD6B40 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6667C92720871200DD6B40 /* Data+Extension.swift */; };
 		CE6667CC272099F100DD6B40 /* AsyncHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6667CB272099F100DD6B40 /* AsyncHandler.swift */; };
 		CE6667CE2720ACB100DD6B40 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6667CD2720ACB100DD6B40 /* ProgressView.swift */; };
 		CE7A11372728832600B92C0B /* NewMessageTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7A11362728832600B92C0B /* NewMessageTextField.swift */; };
 		CE8B576127205E8E002E3434 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B576027205E8E002E3434 /* Profile.swift */; };
-		CE8B576327205F2E002E3434 /* ProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B576227205F2E002E3434 /* ProfileDataManager.swift */; };
+		CE8B576327205F2E002E3434 /* SyncProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B576227205F2E002E3434 /* SyncProfileDataManager.swift */; };
 		CE8C4079271BEEE000D0C0B5 /* FileStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */; };
 		CE93B36127385BB400AD66F7 /* ChannelListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE93B36027385BB400AD66F7 /* ChannelListDataSource.swift */; };
 		CE9AF681270B89C1006D44A8 /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AF680270B89C1006D44A8 /* ChannelViewController.swift */; };
@@ -73,7 +74,7 @@
 		CED84B3E27025F4200D4E4EB /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3D27025F4200D4E4EB /* Images.swift */; };
 		CEDBA13D27272CF700B5C98E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CEDBA13C27272CF700B5C98E /* GoogleService-Info.plist */; };
 		CEDC7F2327345BD400D9BE4F /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDC7F2227345BD400D9BE4F /* FirestoreManager.swift */; };
-		CEE6513E2721F013009DD993 /* AcynsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE6513D2721F013009DD993 /* AcynsDataManager.swift */; };
+		CEE6513E2721F013009DD993 /* ProfileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE6513D2721F013009DD993 /* ProfileDataManager.swift */; };
 		CEE77AB42736F1A9004F69A4 /* FirestoreObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE77AB32736F1A9004F69A4 /* FirestoreObject.swift */; };
 		CEE9FF09272C747C00628F34 /* ChannelListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF08272C747C00628F34 /* ChannelListInteractor.swift */; };
 		CEE9FF0B272C748500628F34 /* ChannelListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF0A272C748500628F34 /* ChannelListPresenter.swift */; };
@@ -82,6 +83,19 @@
 		CEE9FF12272C75A600628F34 /* ChannelListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF11272C75A600628F34 /* ChannelListRouter.swift */; };
 		CEEDAEE9271C8823005B8F21 /* KeyboardNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDAEE8271C8823005B8F21 /* KeyboardNotificationsViewController.swift */; };
 		CEFBEA27273BAECE00EE5C43 /* FetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBEA26273BAECE00EE5C43 /* FetchedResultsControllerDelegate.swift */; };
+		CEFE086E2745538E0057CED6 /* ServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE086D2745538E0057CED6 /* ServiceLayer.swift */; };
+		CEFE08702745544F0057CED6 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE086F2745544F0057CED6 /* SettingsService.swift */; };
+		CEFE0875274559600057CED6 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE0874274559600057CED6 /* CoreConstants.swift */; };
+		CEFE087727456B810057CED6 /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE087627456B810057CED6 /* GlobalData.swift */; };
+		CEFE087A274578A30057CED6 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE0879274578A30057CED6 /* DataManager.swift */; };
+		CEFE087E274579DF0057CED6 /* KeychainStorageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE087D274579DF0057CED6 /* KeychainStorageImpl.swift */; };
+		CEFE088027457A0B0057CED6 /* CoreDataStorageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE087F27457A0B0057CED6 /* CoreDataStorageImpl.swift */; };
+		CEFE088227457D3C0057CED6 /* FirestoreManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE088127457D3C0057CED6 /* FirestoreManagerImpl.swift */; };
+		CEFE088427457DA00057CED6 /* SettingsManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE088327457DA00057CED6 /* SettingsManagerImpl.swift */; };
+		CEFE088627457F760057CED6 /* ProfileDataManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE088527457F760057CED6 /* ProfileDataManagerImpl.swift */; };
+		CEFE0888274581630057CED6 /* SyncProfileDataManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE0887274581630057CED6 /* SyncProfileDataManagerImpl.swift */; };
+		CEFE088A2745826F0057CED6 /* FileStorageDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE08892745826F0057CED6 /* FileStorageDataType.swift */; };
+		CEFE088C274583730057CED6 /* FileStorageManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE088B274583730057CED6 /* FileStorageManagerImpl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +105,7 @@
 		CE04B4E8271F59270027F649 /* ProfileNameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNameTextField.swift; sourceTree = "<group>"; };
 		CE0B5F1D270CA538004B6232 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
+		CE0C600927458ACA002A1FF9 /* SettingsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsServiceImpl.swift; sourceTree = "<group>"; };
 		CE0FDBB726FFC7C800809ABB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE1F08A926F3BB67002A5985 /* Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +116,7 @@
 		CE2474C82731C5C900A4AEC0 /* CoreDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		CE2474CA2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extension.swift"; sourceTree = "<group>"; };
 		CE2474CD2731C79100A4AEC0 /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
-		CE2474CF2731CE2B00A4AEC0 /* DataStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStorageManager.swift; sourceTree = "<group>"; };
+		CE2474CF2731CE2B00A4AEC0 /* CoreDataManagerImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManagerImpl.swift; sourceTree = "<group>"; };
 		CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		CE26087F2718B01800CAE9B6 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
@@ -119,13 +134,13 @@
 		CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
-		CE54E6302729D19700B20B69 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		CE54E6302729D19700B20B69 /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		CE6667C92720871200DD6B40 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		CE6667CB272099F100DD6B40 /* AsyncHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncHandler.swift; sourceTree = "<group>"; };
 		CE6667CD2720ACB100DD6B40 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		CE7A11362728832600B92C0B /* NewMessageTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageTextField.swift; sourceTree = "<group>"; };
 		CE8B576027205E8E002E3434 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		CE8B576227205F2E002E3434 /* ProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManager.swift; sourceTree = "<group>"; };
+		CE8B576227205F2E002E3434 /* SyncProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProfileDataManager.swift; sourceTree = "<group>"; };
 		CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileStorageManager.swift; sourceTree = "<group>"; };
 		CE93B36027385BB400AD66F7 /* ChannelListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListDataSource.swift; sourceTree = "<group>"; };
 		CE9AF680270B89C1006D44A8 /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
@@ -153,7 +168,7 @@
 		CED84B3D27025F4200D4E4EB /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		CEDBA13C27272CF700B5C98E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEDC7F2227345BD400D9BE4F /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
-		CEE6513D2721F013009DD993 /* AcynsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcynsDataManager.swift; sourceTree = "<group>"; };
+		CEE6513D2721F013009DD993 /* ProfileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManager.swift; sourceTree = "<group>"; };
 		CEE77AB32736F1A9004F69A4 /* FirestoreObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreObject.swift; sourceTree = "<group>"; };
 		CEE9FF08272C747C00628F34 /* ChannelListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListInteractor.swift; sourceTree = "<group>"; };
 		CEE9FF0A272C748500628F34 /* ChannelListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListPresenter.swift; sourceTree = "<group>"; };
@@ -162,6 +177,19 @@
 		CEE9FF11272C75A600628F34 /* ChannelListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListRouter.swift; sourceTree = "<group>"; };
 		CEEDAEE8271C8823005B8F21 /* KeyboardNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardNotificationsViewController.swift; sourceTree = "<group>"; };
 		CEFBEA26273BAECE00EE5C43 /* FetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedResultsControllerDelegate.swift; sourceTree = "<group>"; };
+		CEFE086D2745538E0057CED6 /* ServiceLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
+		CEFE086F2745544F0057CED6 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
+		CEFE0874274559600057CED6 /* CoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
+		CEFE087627456B810057CED6 /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
+		CEFE0879274578A30057CED6 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		CEFE087D274579DF0057CED6 /* KeychainStorageImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorageImpl.swift; sourceTree = "<group>"; };
+		CEFE087F27457A0B0057CED6 /* CoreDataStorageImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageImpl.swift; sourceTree = "<group>"; };
+		CEFE088127457D3C0057CED6 /* FirestoreManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManagerImpl.swift; sourceTree = "<group>"; };
+		CEFE088327457DA00057CED6 /* SettingsManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManagerImpl.swift; sourceTree = "<group>"; };
+		CEFE088527457F760057CED6 /* ProfileDataManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManagerImpl.swift; sourceTree = "<group>"; };
+		CEFE0887274581630057CED6 /* SyncProfileDataManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProfileDataManagerImpl.swift; sourceTree = "<group>"; };
+		CEFE08892745826F0057CED6 /* FileStorageDataType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorageDataType.swift; sourceTree = "<group>"; };
+		CEFE088B274583730057CED6 /* FileStorageManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorageManagerImpl.swift; sourceTree = "<group>"; };
 		DCA9DF100E365DD629B40773 /* Pods_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32C6D752BDF633B478DA905 /* Pods-Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat.debug.xcconfig"; path = "Target Support Files/Pods-Chat/Pods-Chat.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -235,7 +263,8 @@
 		CE1F08AB26F3BB67002A5985 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				CE39697A274435460026D869 /* Business logic */,
+				CEFE0871274555BB0057CED6 /* Core layer */,
+				CE39697A274435460026D869 /* Service layer */,
 				CED023E526FFAFE100062489 /* Presentation */,
 				CED023E426FFAFA800062489 /* Supporting files */,
 				CED023E326FFAEE300062489 /* Resources */,
@@ -246,8 +275,7 @@
 		CE2474C72731C5B400A4AEC0 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				CE2474C82731C5C900A4AEC0 /* CoreDataStorage.swift */,
-				CE2474CA2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift */,
+				CEFE087F27457A0B0057CED6 /* CoreDataStorageImpl.swift */,
 				CE2474CC2731C79100A4AEC0 /* Chat.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -256,14 +284,13 @@
 		CE2608812718C3C200CAE9B6 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				CEDC7F2227345BD400D9BE4F /* FirestoreManager.swift */,
-				CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */,
-				CE8B576227205F2E002E3434 /* ProfileDataManager.swift */,
-				CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */,
-				CEE6513D2721F013009DD993 /* AcynsDataManager.swift */,
-				CE54E6302729D19700B20B69 /* KeychainManager.swift */,
-				CE2474CF2731CE2B00A4AEC0 /* DataStorageManager.swift */,
-				CE2474C72731C5B400A4AEC0 /* CoreData */,
+				CE2474CF2731CE2B00A4AEC0 /* CoreDataManagerImpl.swift */,
+				CEFE088327457DA00057CED6 /* SettingsManagerImpl.swift */,
+				CEFE088527457F760057CED6 /* ProfileDataManagerImpl.swift */,
+				CEFE0887274581630057CED6 /* SyncProfileDataManagerImpl.swift */,
+				CEFE088B274583730057CED6 /* FileStorageManagerImpl.swift */,
+				CEFE088127457D3C0057CED6 /* FirestoreManagerImpl.swift */,
+				CEFE08782745788B0057CED6 /* Protocols */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -311,20 +338,22 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		CE39697A274435460026D869 /* Business logic */ = {
+		CE39697A274435460026D869 /* Service layer */ = {
 			isa = PBXGroup;
 			children = (
-				CE3E913B270E20DE0029DA74 /* Models */,
+				CEFE086D2745538E0057CED6 /* ServiceLayer.swift */,
 				CE39697B274435920026D869 /* Services */,
-				CE2608812718C3C200CAE9B6 /* Managers */,
+				CE3E913B270E20DE0029DA74 /* Models */,
 				CE9C657A270F2F6F008756AC /* Helpers */,
 			);
-			path = "Business logic";
+			path = "Service layer";
 			sourceTree = "<group>";
 		};
 		CE39697B274435920026D869 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CE0C600927458ACA002A1FF9 /* SettingsServiceImpl.swift */,
+				CEFE088D27458A8C0057CED6 /* Protocols */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -423,6 +452,7 @@
 				CE03EE6F273AF76400D9F898 /* Typealiases.swift */,
 				CEE77AB32736F1A9004F69A4 /* FirestoreObject.swift */,
 				CE6667CB272099F100DD6B40 /* AsyncHandler.swift */,
+				CEFE087627456B810057CED6 /* GlobalData.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -484,6 +514,74 @@
 				CE4E07E6270247CC00AE0113 /* Extensions */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		CEFE0871274555BB0057CED6 /* Core layer */ = {
+			isa = PBXGroup;
+			children = (
+				CE2608812718C3C200CAE9B6 /* Managers */,
+				CEFE0872274556C50057CED6 /* Storages */,
+				CEFE08732745594B0057CED6 /* Helpers */,
+				CEFE087B2745799A0057CED6 /* Extensions */,
+			);
+			path = "Core layer";
+			sourceTree = "<group>";
+		};
+		CEFE0872274556C50057CED6 /* Storages */ = {
+			isa = PBXGroup;
+			children = (
+				CEFE087D274579DF0057CED6 /* KeychainStorageImpl.swift */,
+				CE2474C72731C5B400A4AEC0 /* CoreData */,
+				CEFE087C274579C20057CED6 /* Protocols */,
+			);
+			path = Storages;
+			sourceTree = "<group>";
+		};
+		CEFE08732745594B0057CED6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CEFE0874274559600057CED6 /* CoreConstants.swift */,
+				CEFE08892745826F0057CED6 /* FileStorageDataType.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CEFE08782745788B0057CED6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CEFE0879274578A30057CED6 /* DataManager.swift */,
+				CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */,
+				CEE6513D2721F013009DD993 /* ProfileDataManager.swift */,
+				CE8B576227205F2E002E3434 /* SyncProfileDataManager.swift */,
+				CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */,
+				CEDC7F2227345BD400D9BE4F /* FirestoreManager.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CEFE087B2745799A0057CED6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE2474CA2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CEFE087C274579C20057CED6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CE2474C82731C5C900A4AEC0 /* CoreDataStorage.swift */,
+				CE54E6302729D19700B20B69 /* KeychainStorage.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CEFE088D27458A8C0057CED6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				CEFE086F2745544F0057CED6 /* SettingsService.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		E470A832EFF4E0E1748B12C7 /* Pods */ = {
@@ -653,16 +751,22 @@
 				CEB97ACD272FD81700C405CA /* ChannelListViewController+Extension.swift in Sources */,
 				CE394790270F7C1C004C6FD1 /* PartnerMessageView.swift in Sources */,
 				CE2474CB2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift in Sources */,
+				CE0C600A27458ACA002A1FF9 /* SettingsServiceImpl.swift in Sources */,
 				CEE9FF0F272C74AF00628F34 /* ChannelListModel.swift in Sources */,
+				CEFE087A274578A30057CED6 /* DataManager.swift in Sources */,
+				CEFE088027457A0B0057CED6 /* CoreDataStorageImpl.swift in Sources */,
 				CE2608802718B01800CAE9B6 /* Theme.swift in Sources */,
 				CE39478E270F73CE004C6FD1 /* MyMessageView.swift in Sources */,
 				CEA00F7E2739AA10007F925E /* ChannelDataSource.swift in Sources */,
 				CE7A11372728832600B92C0B /* NewMessageTextField.swift in Sources */,
-				CEE6513E2721F013009DD993 /* AcynsDataManager.swift in Sources */,
+				CEE6513E2721F013009DD993 /* ProfileDataManager.swift in Sources */,
 				CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */,
 				CE9C657C270F2F8A008756AC /* ConfigurableCell.swift in Sources */,
 				CE9AF681270B89C1006D44A8 /* ChannelViewController.swift in Sources */,
+				CEFE087727456B810057CED6 /* GlobalData.swift in Sources */,
 				CE04B4E9271F59270027F649 /* ProfileNameTextField.swift in Sources */,
+				CEFE0875274559600057CED6 /* CoreConstants.swift in Sources */,
+				CEFE0888274581630057CED6 /* SyncProfileDataManagerImpl.swift in Sources */,
 				CE2474C92731C5C900A4AEC0 /* CoreDataStorage.swift in Sources */,
 				CEB97AC4272D94CC00C405CA /* ProfileModel.swift in Sources */,
 				CEB97AC2272D94B800C405CA /* ProfileAssembly.swift in Sources */,
@@ -673,17 +777,19 @@
 				CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */,
 				CEB97AC8272D94F000C405CA /* ProfileInteractor.swift in Sources */,
 				CEE9FF0D272C749B00628F34 /* ChannelListAssembly.swift in Sources */,
+				CEFE088227457D3C0057CED6 /* FirestoreManagerImpl.swift in Sources */,
 				CEB97AB8272D3C8800C405CA /* ChannelAssembly.swift in Sources */,
+				CEFE088427457DA00057CED6 /* SettingsManagerImpl.swift in Sources */,
 				CEE9FF0B272C748500628F34 /* ChannelListPresenter.swift in Sources */,
 				CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */,
 				CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */,
 				CEE9FF09272C747C00628F34 /* ChannelListInteractor.swift in Sources */,
-				CE2474D02731CE2B00A4AEC0 /* DataStorageManager.swift in Sources */,
+				CE2474D02731CE2B00A4AEC0 /* CoreDataManagerImpl.swift in Sources */,
 				CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */,
 				CE6667CA2720871200DD6B40 /* Data+Extension.swift in Sources */,
 				CE32F21D27048600007262A5 /* Fonts.swift in Sources */,
 				CEA00F802739AA7C007F925E /* UITableView+Extension.swift in Sources */,
-				CE54E6312729D19700B20B69 /* KeychainManager.swift in Sources */,
+				CE54E6312729D19700B20B69 /* KeychainStorage.swift in Sources */,
 				CEE77AB42736F1A9004F69A4 /* FirestoreObject.swift in Sources */,
 				CE0B5F1E270CA538004B6232 /* ChannelCell.swift in Sources */,
 				CED84B3E27025F4200D4E4EB /* Images.swift in Sources */,
@@ -697,13 +803,19 @@
 				CEB97ABE272D3CC200C405CA /* ChannelInteractor.swift in Sources */,
 				CEDC7F2327345BD400D9BE4F /* FirestoreManager.swift in Sources */,
 				CEB97ABA272D3C9A00C405CA /* ChannelModel.swift in Sources */,
-				CE8B576327205F2E002E3434 /* ProfileDataManager.swift in Sources */,
+				CEFE088627457F760057CED6 /* ProfileDataManagerImpl.swift in Sources */,
+				CE8B576327205F2E002E3434 /* SyncProfileDataManager.swift in Sources */,
 				CE04B4E7271F52B80027F649 /* ProfileFilledButton.swift in Sources */,
 				CEB97ACA272D94F900C405CA /* ProfilePresenter.swift in Sources */,
 				CE6667CC272099F100DD6B40 /* AsyncHandler.swift in Sources */,
 				CE93B36127385BB400AD66F7 /* ChannelListDataSource.swift in Sources */,
 				CE3E9146270EAD430029DA74 /* MessageCell.swift in Sources */,
+				CEFE088A2745826F0057CED6 /* FileStorageDataType.swift in Sources */,
+				CEFE087E274579DF0057CED6 /* KeychainStorageImpl.swift in Sources */,
 				CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */,
+				CEFE088C274583730057CED6 /* FileStorageManagerImpl.swift in Sources */,
+				CEFE086E2745538E0057CED6 /* ServiceLayer.swift in Sources */,
+				CEFE08702745544F0057CED6 /* SettingsService.swift in Sources */,
 				CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */,
 				CE3E913D270E21070029DA74 /* Channel.swift in Sources */,
 				CEFBEA27273BAECE00EE5C43 /* FetchedResultsControllerDelegate.swift in Sources */,

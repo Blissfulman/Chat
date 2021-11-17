@@ -28,8 +28,14 @@ final class ChannelListDataSource: NSObject, ChannelListDataSourceProtocol {
     
     // MARK: - Private properties
     
-    private lazy var fetchedResultsController = DataStorageManager.shared.channelListFetchedResultsController
+    private let fetchedResultsController: NSFetchedResultsController<DBChannel>
     private var fetchedResultsControllerDelegate: FetchedResultsControllerDelegate?
+    
+    // MARK: - Initialization
+    
+    init(dataManager: DataManager = ServiceLayer.shared.dataManager) {
+        fetchedResultsController = dataManager.channelListFetchedResultsController
+    }
     
     // MARK: - Public methods
     

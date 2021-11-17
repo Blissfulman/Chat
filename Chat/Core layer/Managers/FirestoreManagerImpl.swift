@@ -1,18 +1,13 @@
 //
-//  FirestoreManager.swift
+//  FirestoreManagerImpl.swift
 //  Chat
 //
-//  Created by Evgeny Novgorodov on 04.11.2021.
+//  Created by Evgeny Novgorodov on 17.11.2021.
 //
 
 import Firebase
 
-protocol FirestoreManagerProtocol {
-    associatedtype Object: FirestoreObject
-    typealias Listener = (Result<SnapshotObjects<Object>, Error>) -> Void
-}
-
-final class FirestoreManager<Type: FirestoreObject>: FirestoreManagerProtocol {
+final class FirestoreManagerImpl<Type: FirestoreObject>: FirestoreManager {
     
     typealias Object = Type
     

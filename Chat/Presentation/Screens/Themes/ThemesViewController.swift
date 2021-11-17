@@ -59,11 +59,16 @@ final class ThemesViewController: UIViewController {
         return button
     }()
     
-    private let didChooseThemeHandler: ((Theme) -> Void)
+    private let settingsService: SettingsService
+    private let didChooseThemeHandler: (Theme) -> Void
     
     // MARK: - Initialization
     
-    init(didChooseThemeHandler: @escaping ((Theme) -> Void)) {
+    init(
+        settingsService: SettingsService = ServiceLayer.shared.settingsService,
+        didChooseThemeHandler: @escaping (Theme) -> Void
+    ) {
+        self.settingsService = settingsService
         self.didChooseThemeHandler = didChooseThemeHandler
         super.init(nibName: nil, bundle: nil)
     }
@@ -135,7 +140,7 @@ final class ThemesViewController: UIViewController {
     }
     
     private func configureUI() {
-        let theme = SettingsManager().theme
+        let theme = settingsService.getTheme()
         view.backgroundColor = theme.themeColors.backgroundColor
     }
 }

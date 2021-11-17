@@ -1,8 +1,8 @@
 //
-//  FileStorageManager.swift
+//  FileStorageManagerImpl.swift
 //  Chat
 //
-//  Created by Evgeny Novgorodov on 17.10.2021.
+//  Created by Evgeny Novgorodov on 17.11.2021.
 //
 
 import Foundation
@@ -27,22 +27,11 @@ enum FileStorageManagerError: Error, LocalizedError {
     }
 }
 
-final class FileStorageManager {
-    
-    // MARK: - Nested types
-    
-    enum DataType: String {
-        case settings
-        case profile
-        
-        var toFileName: String {
-            self.rawValue.capitalized
-        }
-    }
+final class FileStorageManagerImpl: FileStorageManager {
     
     // MARK: - Public methods
     
-    func getValue<Value: Decodable>(withKey key: String, dataType: DataType) throws -> Value? {
+    func getValue<Value: Decodable>(withKey key: String, dataType: FileStorageDataType) throws -> Value? {
         guard let fileDirectory = fileDirectory(for: dataType) else {
             throw FileStorageManagerError.fileReadingError(wrappedError: nil)
         }
@@ -60,7 +49,7 @@ final class FileStorageManager {
         }
     }
     
-    func saveValue<Value: Encodable>(_ value: Value, withKey key: String, dataType: DataType) throws {
+    func saveValue<Value: Encodable>(_ value: Value, withKey key: String, dataType: FileStorageDataType) throws {
         guard let fileDirectory = fileDirectory(for: dataType) else {
             throw FileStorageManagerError.fileReadingError(wrappedError: nil)
         }
@@ -79,7 +68,7 @@ final class FileStorageManager {
     
     // MARK: - Private methods
     
-    private func fileDirectory(for dataType: DataType) -> URL? {
+    private func fileDirectory(for dataType: FileStorageDataType) -> URL? {
         guard let folderDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return nil
         }

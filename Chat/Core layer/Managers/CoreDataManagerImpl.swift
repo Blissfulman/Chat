@@ -1,5 +1,5 @@
 //
-//  DataStorageManager.swift
+//  CoreDataManagerImpl.swift
 //  Chat
 //
 //  Created by Evgeny Novgorodov on 03.11.2021.
@@ -7,43 +7,27 @@
 
 import CoreData
 
-protocol DataStorageManagerProtocol {
-    /// Экземпляр `NSFetchedResultsController`, отслеживающий сохранённые каналы.
-    var channelListFetchedResultsController: NSFetchedResultsController<DBChannel> { get }
-    /// Экземпляр `NSFetchedResultsController`, отслеживающий сохранённые сообщения указанного канала.
-    /// - Parameter channel: Канал, чьи сообщения контроллер будет отслеживать.
-    func channelFetchedResultsController(forChannel channel: Channel) -> NSFetchedResultsController<DBMessage>
-    /// Сохранение всех несохранённых данных.
-    func saveData()
-    /// Обновление данных о каналах.
-    /// - Parameter snapshotChannels: Снимок изменений каналов.
-    func updateChannels(_ snapshotChannels: SnapshotObjects<Channel>)
-    /// Обновление данных о сообщениях в канале.
-    /// - Parameters:
-    ///   - snapshotMessages: Снимок изменений сообщений.
-    ///   - channel: Канал, к которому эти сообщения относятся.
-    func updateMessages(_ snapshotMessages: SnapshotObjects<Message>, forChannel channel: Channel)
-}
-
-final class DataStorageManager: DataStorageManagerProtocol {
-    
-    // MARK: - Static properties
-    
-    static let shared = DataStorageManager()
+final class CoreDataManagerImpl: DataManager {
     
     // MARK: - Public properties
     
     var channelListFetchedResultsController: NSFetchedResultsController<DBChannel> {
-        storage.fetchedResultsController(for: DBChannel.self, sortDescriptorKey: #keyPath(DBChannel.lastActivity))
+        storage.fetchedResultsController(
+            for: DBChannel.self,
+            sortDescriptorKey: #keyPath(DBChannel.lastActivity),
+            predicate: nil
+        )
     }
     
     // MARK: - Private properties
     
-    private let storage = CoreDataStorage(modelName: "Chat")
+    private let storage: CoreDataStorage
     
     // MARK: - Initialization
     
-    private init() {}
+    init(storage: CoreDataStorage) {
+        self.storage = storage
+    }
     
     // MARK: - Public methods
     
@@ -119,7 +103,7 @@ final class DataStorageManager: DataStorageManagerProtocol {
     
     /// Получение всех каналов.
     private func fetchAllChannels() -> [Channel] {
-        let dbChannels = storage.fetchObjects(for: DBChannel.self)
+        let dbChannels = storage.fetchObjects(for: DBChannel.self, predicate: nil)
         return dbChannels.compactMap { Channel(dbChannel: $0) }
     }
     

@@ -32,15 +32,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
-        dataStorageManager.saveData()
+        let dataManager: DataManager = ServiceLayer.shared.dataManager
+        dataManager.saveData()
     }
     
     // MARK: - Private methods
     
     private func initialConfigure() {
         FirebaseApp.configure()
-        let settingsManager = SettingsManager()
+        let settingsManager: SettingsManager = ServiceLayer.shared.settingsManager
         settingsManager.loadMySenderID()
         NavigationController.setupAppearance(for: settingsManager.theme)
     }

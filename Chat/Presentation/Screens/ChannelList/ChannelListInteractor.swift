@@ -23,24 +23,34 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     // MARK: - Private properties
     
     private let presenter: ChannelListPresentationLogic
+    private let dataManager: DataManager
+    private var settingsService: SettingsService
+    private let profileDataManager: ProfileDataManager
+    private var firestoreManager: FirestoreManagerImpl<Channel>
     private let channelListDataSource: ChannelListDataSourceProtocol
-    private var firestoreManager = FirestoreManager<Channel>(dataType: .channels)
-    private let settingsManager = SettingsManager()
-    private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
-    private let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
     private var profile: Profile?
     
     // MARK: - Initialization
     
-    init(presenter: ChannelListPresentationLogic, channelListDataSource: ChannelListDataSourceProtocol) {
+    init(
+        presenter: ChannelListPresentationLogic,
+        dataManager: DataManager = ServiceLayer.shared.dataManager,
+        settingsService: SettingsService = ServiceLayer.shared.settingsService,
+        profileDataManager: ProfileDataManager = ServiceLayer.shared.gcdProfileDataManager,
+        channelListDataSource: ChannelListDataSourceProtocol
+    ) {
         self.presenter = presenter
+        self.dataManager = dataManager
+        self.settingsService = settingsService
+        self.profileDataManager = profileDataManager
+        self.firestoreManager = FirestoreManagerImpl<Channel>(dataType: .channels)
         self.channelListDataSource = channelListDataSource
     }
     
     // MARK: - ChannelListBusinessLogic
     
     func fetchProfile(request: ChannelListModel.FetchProfile.Request) {
-        asyncDataManager.fetchProfile { [weak self] result in
+        profileDataManager.fetchProfile { [weak self] result in
             if case let .success(profile) = result {
                 guard let profile = profile else { return }
                 self?.profile = profile
@@ -68,7 +78,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
 
             switch result {
             case let .success(snapshotChannels):
-                self.dataStorageManager.updateChannels(snapshotChannels)
+                self.dataManager.updateChannels(snapshotChannels)
             case let .failure(error):
                 let response = ChannelListModel.FetchingChannelsError.Response(error: error)
                 self.presenter.presentFetchingChannelsError(response: response)
@@ -89,7 +99,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
         let asyncHandler = GCDAsyncHandler(qos: .userInteractive)
         asyncHandler.handle { [weak self] in
             NavigationController.updateColors(for: request.theme)
-            self?.settingsManager.theme = request.theme
+            self?.settingsService.saveTheme(request.theme)
         }
     }
     

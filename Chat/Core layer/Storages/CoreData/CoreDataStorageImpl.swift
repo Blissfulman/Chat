@@ -1,13 +1,13 @@
 //
-//  CoreDataStorage.swift
+//  CoreDataStorageImpl.swift
 //  Chat
 //
-//  Created by Evgeny Novgorodov on 03.11.2021.
+//  Created by Evgeny Novgorodov on 17.11.2021.
 //
 
 import CoreData
 
-final class CoreDataStorage {
+final class CoreDataStorageImpl: CoreDataStorage {
     
     // MARK: - Private properties
     

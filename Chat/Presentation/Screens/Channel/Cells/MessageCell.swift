@@ -11,10 +11,6 @@ final class MessageCell: UITableViewCell, ConfigurableCell {
     
     typealias ConfigurationModel = Message
     
-    // MARK: - Private properties
-    
-    private let settingsManager = SettingsManager()
-    
     // MARK: - Initialization
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -36,7 +32,7 @@ final class MessageCell: UITableViewCell, ConfigurableCell {
     // MARK: - Public methods
     
     func configure(with model: ConfigurationModel) {
-        if model.senderID == SettingsManager.mySenderID {
+        if model.senderID == GlobalData.mySenderID {
             let model = MyMessageView.Model(text: model.content, date: model.created.messageCellDate())
             let messageView = MyMessageView(frame: .zero, model: model)
             contentView.addSubview(messageView)

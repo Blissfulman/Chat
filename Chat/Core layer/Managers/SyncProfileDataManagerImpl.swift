@@ -1,24 +1,30 @@
 //
-//  ProfileDataManager.swift
+//  SyncProfileDataManagerImpl.swift
 //  Chat
 //
-//  Created by Evgeny Novgorodov on 20.10.2021.
+//  Created by Evgeny Novgorodov on 17.11.2021.
 //
 
 import Foundation
 
-final class ProfileDataManager {
+final class SyncProfileDataManagerImpl: SyncProfileDataManager {
     
     // MARK: - Nested types {
     
     private enum Constants {
-        static let dataType: FileStorageManager.DataType = .profile
+        static let dataType: FileStorageDataType = .profile
         static let profileKey = "Profile"
     }
     
     // MARK: - Private properties
     
-    private let fileStorageManager = FileStorageManager()
+    private let fileStorageManager: FileStorageManager
+    
+    // MARK: - Initialization
+    
+    init(fileStorageManager: FileStorageManager) {
+        self.fileStorageManager = fileStorageManager
+    }
     
     // MARK: - Public properties
     
