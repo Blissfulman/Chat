@@ -235,10 +235,8 @@
 		CE1F08AB26F3BB67002A5985 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				CE3E913B270E20DE0029DA74 /* Models */,
+				CE39697A274435460026D869 /* Business logic */,
 				CED023E526FFAFE100062489 /* Presentation */,
-				CE2608812718C3C200CAE9B6 /* Managers */,
-				CE4E07E027023DE100AE0113 /* Additional files */,
 				CED023E426FFAFA800062489 /* Supporting files */,
 				CED023E326FFAEE300062489 /* Resources */,
 			);
@@ -313,6 +311,33 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		CE39697A274435460026D869 /* Business logic */ = {
+			isa = PBXGroup;
+			children = (
+				CE3E913B270E20DE0029DA74 /* Models */,
+				CE39697B274435920026D869 /* Services */,
+				CE2608812718C3C200CAE9B6 /* Managers */,
+				CE9C657A270F2F6F008756AC /* Helpers */,
+			);
+			path = "Business logic";
+			sourceTree = "<group>";
+		};
+		CE39697B274435920026D869 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CE39697C2744360C0026D869 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */,
+				CEFBEA26273BAECE00EE5C43 /* FetchedResultsControllerDelegate.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		CE3E913B270E20DE0029DA74 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,15 +356,6 @@
 				CE04B4E5271F41610027F649 /* Subviews */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		CE4E07E027023DE100AE0113 /* Additional files */ = {
-			isa = PBXGroup;
-			children = (
-				CE9C657A270F2F6F008756AC /* Helpers */,
-				CE4E07E6270247CC00AE0113 /* Extensions */,
-			);
-			path = "Additional files";
 			sourceTree = "<group>";
 		};
 		CE4E07E6270247CC00AE0113 /* Extensions */ = {
@@ -404,11 +420,9 @@
 		CE9C657A270F2F6F008756AC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				CE9C657B270F2F8A008756AC /* ConfigurableCell.swift */,
+				CE03EE6F273AF76400D9F898 /* Typealiases.swift */,
 				CEE77AB32736F1A9004F69A4 /* FirestoreObject.swift */,
 				CE6667CB272099F100DD6B40 /* AsyncHandler.swift */,
-				CE03EE6F273AF76400D9F898 /* Typealiases.swift */,
-				CEFBEA26273BAECE00EE5C43 /* FetchedResultsControllerDelegate.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -466,6 +480,8 @@
 			children = (
 				CE39478C270F73A9004C6FD1 /* ViewControllers */,
 				CED84B3A27025CFE00D4E4EB /* Style */,
+				CE39697C2744360C0026D869 /* Helpers */,
+				CE4E07E6270247CC00AE0113 /* Extensions */,
 			);
 			path = Common;
 			sourceTree = "<group>";
