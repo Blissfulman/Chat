@@ -25,11 +25,9 @@ final class ChannelsServiceImpl: ChannelsService {
     
     func setChannelsListener(failureHandler: @escaping (Error) -> Void) {
         firestoreManager.listener = { [weak self] result in
-            guard let self = self else { return }
-
             switch result {
             case let .success(snapshotChannels):
-                self.dataManager.updateChannels(snapshotChannels)
+                self?.dataManager.updateChannels(snapshotChannels)
             case let .failure(error):
                 failureHandler(error)
             }

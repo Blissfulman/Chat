@@ -15,6 +15,7 @@ final class ChannelAssembly {
         let channelDataSource: ChannelDataSourceProtocol = ChannelDataSource(channel: parameters.channel)
         let interactor = ChannelInteractor(
             presenter: presenter,
+            messagesService: ServiceLayer.shared.messagesService(channelID: parameters.channel.id),
             channelDataSource: channelDataSource,
             channel: parameters.channel,
             senderName: parameters.senderName

@@ -16,6 +16,8 @@
 		CE0C600A27458ACA002A1FF9 /* SettingsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C600927458ACA002A1FF9 /* SettingsServiceImpl.swift */; };
 		CE0C600C27458F76002A1FF9 /* ChannelsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C600B27458F76002A1FF9 /* ChannelsService.swift */; };
 		CE0C600E27459691002A1FF9 /* ChannelsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C600D27459691002A1FF9 /* ChannelsServiceImpl.swift */; };
+		CE0C60102745981F002A1FF9 /* MessagesServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C600F2745981F002A1FF9 /* MessagesServiceImpl.swift */; };
+		CE0C60122745A0C0002A1FF9 /* MessagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C60112745A0C0002A1FF9 /* MessagesService.swift */; };
 		CE0FDBB826FFC7C800809ABB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0FDBB726FFC7C800809ABB /* Images.xcassets */; };
 		CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */; };
 		CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */; };
@@ -110,6 +112,8 @@
 		CE0C600927458ACA002A1FF9 /* SettingsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsServiceImpl.swift; sourceTree = "<group>"; };
 		CE0C600B27458F76002A1FF9 /* ChannelsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsService.swift; sourceTree = "<group>"; };
 		CE0C600D27459691002A1FF9 /* ChannelsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsServiceImpl.swift; sourceTree = "<group>"; };
+		CE0C600F2745981F002A1FF9 /* MessagesServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesServiceImpl.swift; sourceTree = "<group>"; };
+		CE0C60112745A0C0002A1FF9 /* MessagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesService.swift; sourceTree = "<group>"; };
 		CE0FDBB726FFC7C800809ABB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE1F08A926F3BB67002A5985 /* Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -358,6 +362,7 @@
 			children = (
 				CE0C600927458ACA002A1FF9 /* SettingsServiceImpl.swift */,
 				CE0C600D27459691002A1FF9 /* ChannelsServiceImpl.swift */,
+				CE0C600F2745981F002A1FF9 /* MessagesServiceImpl.swift */,
 				CEFE088D27458A8C0057CED6 /* Protocols */,
 			);
 			path = Services;
@@ -586,6 +591,7 @@
 			children = (
 				CEFE086F2745544F0057CED6 /* SettingsService.swift */,
 				CE0C600B27458F76002A1FF9 /* ChannelsService.swift */,
+				CE0C60112745A0C0002A1FF9 /* MessagesService.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -764,6 +770,7 @@
 				CE2608802718B01800CAE9B6 /* Theme.swift in Sources */,
 				CE39478E270F73CE004C6FD1 /* MyMessageView.swift in Sources */,
 				CEA00F7E2739AA10007F925E /* ChannelDataSource.swift in Sources */,
+				CE0C60102745981F002A1FF9 /* MessagesServiceImpl.swift in Sources */,
 				CE7A11372728832600B92C0B /* NewMessageTextField.swift in Sources */,
 				CEE6513E2721F013009DD993 /* ProfileDataManager.swift in Sources */,
 				CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */,
@@ -772,6 +779,7 @@
 				CEFE087727456B810057CED6 /* GlobalData.swift in Sources */,
 				CE04B4E9271F59270027F649 /* ProfileNameTextField.swift in Sources */,
 				CEFE0875274559600057CED6 /* CoreConstants.swift in Sources */,
+				CE0C60122745A0C0002A1FF9 /* MessagesService.swift in Sources */,
 				CEFE0888274581630057CED6 /* SyncProfileDataManagerImpl.swift in Sources */,
 				CE2474C92731C5C900A4AEC0 /* CoreDataStorage.swift in Sources */,
 				CEB97AC4272D94CC00C405CA /* ProfileModel.swift in Sources */,

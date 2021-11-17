@@ -15,7 +15,7 @@ final class FirestoreManagerImpl<Type: FirestoreObject>: FirestoreManager {
     
     enum DataType {
         case channels
-        case messages(channelID: String)
+        case messages(channelID: Channel.ID)
     }
     
     // MARK: - Public properties

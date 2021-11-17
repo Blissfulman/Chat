@@ -32,7 +32,7 @@ final class CoreDataManagerImpl: DataManager {
     // MARK: - Public methods
     
     func channelFetchedResultsController(forChannel channel: Channel) -> NSFetchedResultsController<DBMessage> {
-        let channelMessagesPredicate = makeChannelMessagesPredicate(forChannel: channel)
+        let channelMessagesPredicate = makeChannelMessagesPredicate(channelID: channel.id)
         return storage.fetchedResultsController(
             for: DBMessage.self,
             sortDescriptorKey: #keyPath(DBMessage.created),
@@ -85,7 +85,7 @@ final class CoreDataManagerImpl: DataManager {
         guard !messages.isEmpty else { return }
         let savedMessagesIDs = fetchAllMessages(forChannel: channel).map { $0.id }
         
-        let channelIDPredicate = makeChannelIDPredicate(forChannel: channel)
+        let channelIDPredicate = makeChannelIDPredicate(channelID: channel.id)
         let dbChannel = storage.fetchObjects(for: DBChannel.self, predicate: channelIDPredicate).first
         
         messages.forEach { message in
@@ -110,7 +110,7 @@ final class CoreDataManagerImpl: DataManager {
     /// Получение всех сообщений указанного канала.
     /// - Parameter channel: Канал, сообщения которого необходимо получить.
     private func fetchAllMessages(forChannel channel: Channel) -> [Message] {
-        let channelMessagesPredicate = makeChannelMessagesPredicate(forChannel: channel)
+        let channelMessagesPredicate = makeChannelMessagesPredicate(channelID: channel.id)
         let dbMessages = storage.fetchObjects(for: DBMessage.self, predicate: channelMessagesPredicate)
         return dbMessages.compactMap { Message(dbMessage: $0) }
     }
@@ -119,7 +119,7 @@ final class CoreDataManagerImpl: DataManager {
     /// - Parameter channels: Каналы с обновлёнными данными.
     private func modifyChannels(_ channels: [Channel]) {
         channels.forEach { channel in
-            let channelIDPredicate = makeChannelIDPredicate(forChannel: channel)
+            let channelIDPredicate = makeChannelIDPredicate(channelID: channel.id)
             let dbChannel = storage.fetchObjects(for: DBChannel.self, predicate: channelIDPredicate).first
             dbChannel?.name = channel.name
             dbChannel?.lastMessage = channel.lastMessage
@@ -131,7 +131,7 @@ final class CoreDataManagerImpl: DataManager {
     /// - Parameter messages: Сообщения с обновлёнными данными.
     private func modifyMessages(_ messages: [Message]) {
         messages.forEach { message in
-            let messageIDPredicate = makeMessageIDPredicate(forMessage: message)
+            let messageIDPredicate = makeMessageIDPredicate(messageID: message.id)
             let dbMessage = storage.fetchObjects(for: DBMessage.self, predicate: messageIDPredicate).first
             dbMessage?.content = message.content
             dbMessage?.created = message.created
@@ -141,29 +141,29 @@ final class CoreDataManagerImpl: DataManager {
     }
     
     private func deleteChannel(_ channel: Channel) {
-        let channelIDPredicate = makeChannelIDPredicate(forChannel: channel)
+        let channelIDPredicate = makeChannelIDPredicate(channelID: channel.id)
         let channels = storage.fetchObjects(for: DBChannel.self, predicate: channelIDPredicate)
         storage.deleteObjects(channels)
     }
     
     private func deleteMessage(_ message: Message) {
-        let messageIDPredicate = makeMessageIDPredicate(forMessage: message)
+        let messageIDPredicate = makeMessageIDPredicate(messageID: message.id)
         let messages = storage.fetchObjects(for: DBMessage.self, predicate: messageIDPredicate)
         storage.deleteObjects(messages)
     }
     
-    private func makeChannelIDPredicate(forChannel channel: Channel) -> NSCompoundPredicate {
-        let predicate = NSPredicate(format: "id == %@", channel.id)
+    private func makeChannelIDPredicate(channelID: Channel.ID) -> NSCompoundPredicate {
+        let predicate = NSPredicate(format: "id == %@", channelID)
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
     }
     
-    private func makeMessageIDPredicate(forMessage message: Message) -> NSCompoundPredicate {
-        let predicate = NSPredicate(format: "id == %@", message.id)
+    private func makeMessageIDPredicate(messageID: Message.ID) -> NSCompoundPredicate {
+        let predicate = NSPredicate(format: "id == %@", messageID)
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
     }
     
-    private func makeChannelMessagesPredicate(forChannel channel: Channel) -> NSCompoundPredicate {
-        let predicate = NSPredicate(format: "channel.id == %@", channel.id)
+    private func makeChannelMessagesPredicate(channelID: Channel.ID) -> NSCompoundPredicate {
+        let predicate = NSPredicate(format: "channel.id == %@", channelID)
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
     }
 }

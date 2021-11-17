@@ -43,9 +43,20 @@ final class ServiceLayer {
     
     private lazy var coreDataStorage: CoreDataStorage = CoreDataStorageImpl(modelName: CoreConstants.storageNameKey)
     private lazy var fileStorageManager: FileStorageManager = FileStorageManagerImpl()
-    private lazy var keychainStorage: KeychainStorage = KeychainStorageImpl(storageNameKey: CoreConstants.storageNameKey)
+    private lazy var keychainStorage: KeychainStorage = KeychainStorageImpl(
+        storageNameKey: CoreConstants.storageNameKey
+    )
     
     // MARK: - Initialization
     
     private init() {}
+    
+    // MARK: - Public methods
+    
+    func messagesService(channelID: Channel.ID) -> MessagesService {
+        MessagesServiceImpl(
+            firestoreManager: FirestoreManagerImpl<Message>(dataType: .messages(channelID: channelID)),
+            dataManager: dataManager
+        )
+    }
 }

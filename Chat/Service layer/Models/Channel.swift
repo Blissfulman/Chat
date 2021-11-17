@@ -7,7 +7,7 @@
 
 import Firebase
 
-struct Channel: FirestoreObject {
+struct Channel: FirestoreObject, Identifiable {
     
     // MARK: - Public properties
     
