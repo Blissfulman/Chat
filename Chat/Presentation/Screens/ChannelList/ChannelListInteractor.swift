@@ -23,10 +23,9 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     // MARK: - Private properties
     
     private let presenter: ChannelListPresentationLogic
-    private let dataManager: DataManager
     private var settingsService: SettingsService
+    private var channelsService: ChannelsService
     private let profileDataManager: ProfileDataManager
-    private var firestoreManager: FirestoreManagerImpl<Channel>
     private let channelListDataSource: ChannelListDataSourceProtocol
     private var profile: Profile?
     
@@ -34,16 +33,15 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     
     init(
         presenter: ChannelListPresentationLogic,
-        dataManager: DataManager = ServiceLayer.shared.dataManager,
         settingsService: SettingsService = ServiceLayer.shared.settingsService,
+        channelsService: ChannelsService = ServiceLayer.shared.channelsService,
         profileDataManager: ProfileDataManager = ServiceLayer.shared.gcdProfileDataManager,
         channelListDataSource: ChannelListDataSourceProtocol
     ) {
         self.presenter = presenter
-        self.dataManager = dataManager
         self.settingsService = settingsService
+        self.channelsService = channelsService
         self.profileDataManager = profileDataManager
-        self.firestoreManager = FirestoreManagerImpl<Channel>(dataType: .channels)
         self.channelListDataSource = channelListDataSource
     }
     
@@ -73,17 +71,10 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     }
     
     func fetchChannelList(request: ChannelListModel.ChannelList.Request) {
-        firestoreManager.listener = { [weak self] result in
-            guard let self = self else { return }
-
-            switch result {
-            case let .success(snapshotChannels):
-                self.dataManager.updateChannels(snapshotChannels)
-            case let .failure(error):
-                let response = ChannelListModel.FetchingChannelsError.Response(error: error)
-                self.presenter.presentFetchingChannelsError(response: response)
-            }
-        }
+        channelsService.setChannelsListener(failureHandler: { [weak self] error in
+            let response = ChannelListModel.FetchingChannelsError.Response(error: error)
+            self?.presenter.presentFetchingChannelsError(response: response)
+        })
     }
     
     func requestAddChannelAlert(request: ChannelListModel.AddChannelAlert.Request) {
@@ -92,7 +83,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     
     func addNewChannel(request: ChannelListModel.NewChannel.Request) {
         let newChannel = Channel(id: "", name: request.channelName, lastMessage: nil, lastActivity: nil)
-        firestoreManager.addObject(newChannel)
+        channelsService.addNewChannel(newChannel)
     }
     
     func updateTheme(request: ChannelListModel.UpdateTheme.Request) {
@@ -111,6 +102,6 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     
     func deleteChannel(request: ChannelListModel.DeleteChannel.Request) {
         guard let channel = channelListDataSource.сhannel(at: request.indexPath) else { return }
-        firestoreManager.deleteObject(channel)
+        channelsService.deleteChannel(channel)
     }
 }

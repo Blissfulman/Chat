@@ -16,6 +16,10 @@ final class ServiceLayer {
     // MARK: - Public properties
     
     lazy var settingsService: SettingsService = SettingsServiceImpl(settingsManager: settingsManager)
+    lazy var channelsService: ChannelsService = ChannelsServiceImpl(
+        firestoreManager: FirestoreManagerImpl<Channel>(dataType: .channels),
+        dataManager: dataManager
+    )
     
     lazy var dataManager: DataManager = CoreDataManagerImpl(storage: coreDataStorage)
     lazy var settingsManager: SettingsManager = SettingsManagerImpl(

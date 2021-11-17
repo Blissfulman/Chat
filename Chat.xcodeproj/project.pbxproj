@@ -14,6 +14,8 @@
 		CE0B5F1E270CA538004B6232 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B5F1D270CA538004B6232 /* ChannelCell.swift */; };
 		CE0B5F21270CA84E004B6232 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */; };
 		CE0C600A27458ACA002A1FF9 /* SettingsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C600927458ACA002A1FF9 /* SettingsServiceImpl.swift */; };
+		CE0C600C27458F76002A1FF9 /* ChannelsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C600B27458F76002A1FF9 /* ChannelsService.swift */; };
+		CE0C600E27459691002A1FF9 /* ChannelsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C600D27459691002A1FF9 /* ChannelsServiceImpl.swift */; };
 		CE0FDBB826FFC7C800809ABB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE0FDBB726FFC7C800809ABB /* Images.xcassets */; };
 		CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */; };
 		CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */; };
@@ -106,6 +108,8 @@
 		CE0B5F1D270CA538004B6232 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		CE0B5F20270CA84E004B6232 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		CE0C600927458ACA002A1FF9 /* SettingsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsServiceImpl.swift; sourceTree = "<group>"; };
+		CE0C600B27458F76002A1FF9 /* ChannelsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsService.swift; sourceTree = "<group>"; };
+		CE0C600D27459691002A1FF9 /* ChannelsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsServiceImpl.swift; sourceTree = "<group>"; };
 		CE0FDBB726FFC7C800809ABB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CE0FDBB926FFCABA00809ABB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE1F08A926F3BB67002A5985 /* Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -353,6 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				CE0C600927458ACA002A1FF9 /* SettingsServiceImpl.swift */,
+				CE0C600D27459691002A1FF9 /* ChannelsServiceImpl.swift */,
 				CEFE088D27458A8C0057CED6 /* Protocols */,
 			);
 			path = Services;
@@ -580,6 +585,7 @@
 			isa = PBXGroup;
 			children = (
 				CEFE086F2745544F0057CED6 /* SettingsService.swift */,
+				CE0C600B27458F76002A1FF9 /* ChannelsService.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -774,6 +780,7 @@
 				CE1F08B126F3BB67002A5985 /* ChannelListViewController.swift in Sources */,
 				CEB97AC0272D3CCB00C405CA /* ChannelPresenter.swift in Sources */,
 				CEB97AC6272D94E600C405CA /* ProfileRouter.swift in Sources */,
+				CE0C600C27458F76002A1FF9 /* ChannelsService.swift in Sources */,
 				CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */,
 				CEB97AC8272D94F000C405CA /* ProfileInteractor.swift in Sources */,
 				CEE9FF0D272C749B00628F34 /* ChannelListAssembly.swift in Sources */,
@@ -797,6 +804,7 @@
 				CEE9FF12272C75A600628F34 /* ChannelListRouter.swift in Sources */,
 				CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */,
 				CE2474CE2731C79100A4AEC0 /* Chat.xcdatamodeld in Sources */,
+				CE0C600E27459691002A1FF9 /* ChannelsServiceImpl.swift in Sources */,
 				CEB97ACF272FD9CD00C405CA /* ProfileViewController+Extension.swift in Sources */,
 				CE394792270F8581004C6FD1 /* Date+Extension.swift in Sources */,
 				CE8C4079271BEEE000D0C0B5 /* FileStorageManager.swift in Sources */,
