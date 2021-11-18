@@ -5,9 +5,15 @@
 //  Created by Evgeny Novgorodov on 18.11.2021.
 //
 
-import Foundation
+import CoreData
 
 final class ChannelsServiceImpl: ChannelsService {
+    
+    // MARK: - Public properties
+    
+    var channelListFetchedResultsController: NSFetchedResultsController<DBChannel> {
+        contentManager.channelListFetchedResultsController
+    }
     
     // MARK: - Private properties
     

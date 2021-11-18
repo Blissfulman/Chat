@@ -33,8 +33,8 @@ final class ChannelListDataSource: NSObject, ChannelListDataSourceProtocol {
     
     // MARK: - Initialization
     
-    init(contentManager: ContentManager = ServiceLayer.shared.contentManager) {
-        fetchedResultsController = contentManager.channelListFetchedResultsController
+    init(fetchedResultsController: NSFetchedResultsController<DBChannel>) {
+        self.fetchedResultsController = fetchedResultsController
     }
     
     // MARK: - Public methods
