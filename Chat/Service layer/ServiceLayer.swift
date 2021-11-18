@@ -20,19 +20,14 @@ final class ServiceLayer {
         firestoreManager: FirestoreManagerImpl<Channel>(dataType: .channels),
         dataManager: dataManager
     )
+    lazy var profileService: ProfileService = ProfileServiceImpl(
+        profileDataManager: profileDataManager(handlerQoS: .userInitiated)
+    )
     
     lazy var dataManager: DataManager = CoreDataManagerImpl(storage: coreDataStorage)
     lazy var settingsManager: SettingsManager = SettingsManagerImpl(
         fileStorageManager: fileStorageManager,
         keychainStorage: keychainStorage
-    )
-    lazy var gcdProfileDataManager: ProfileDataManager = ProfileDataManagerImpl(
-        syncProfileDataManager: syncProfileDataManager,
-        asyncHandlerType: .gcd
-    )
-    lazy var operationsProfileDataManager: ProfileDataManager = ProfileDataManagerImpl(
-        syncProfileDataManager: syncProfileDataManager,
-        asyncHandlerType: .operations
     )
     
     // MARK: - Private properties
@@ -58,5 +53,9 @@ final class ServiceLayer {
             firestoreManager: FirestoreManagerImpl<Message>(dataType: .messages(channelID: channelID)),
             dataManager: dataManager
         )
+    }
+    
+    func profileDataManager(handlerQoS: AsyncHandlerQoS) -> ProfileDataManager {
+        ProfileDataManagerImpl(syncProfileDataManager: syncProfileDataManager, handlerQoS: handlerQoS)
     }
 }

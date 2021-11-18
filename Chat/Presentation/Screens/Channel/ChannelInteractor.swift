@@ -28,8 +28,8 @@ final class ChannelInteractor: ChannelBusinessLogic {
     
     init(
         presenter: ChannelPresentationLogic,
-        messagesService: MessagesService,
         settingsService: SettingsService = ServiceLayer.shared.settingsService,
+        messagesService: MessagesService,
         channelDataSource: ChannelDataSourceProtocol,
         channel: Channel,
         senderName: String

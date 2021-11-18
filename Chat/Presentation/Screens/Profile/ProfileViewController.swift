@@ -67,6 +67,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView().prepareForAutoLayout()
+        imageView.contentMode = .scaleAspectFill
         imageView.image = Images.noPhoto
         return imageView
     }()
@@ -299,12 +300,12 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     }
     
     /// Сохранение текущих данных профиля в постоянное хранилище.
-    private func saveData(savingVariant: ProfileModel.SavingVariant) {
+    private func saveData(asyncHandlerType: AsyncHandlerType) {
         let request = ProfileModel.SaveProfile.Request(
             fullName: fullNameTextField.text,
             description: descriptionTextField.text,
             avatarImageData: avatarImageView.image?.jpegData(compressionQuality: 0.5),
-            savingVariant: savingVariant
+            asyncHandlerType: asyncHandlerType
         )
         interactor.saveProfile(request: request)
     }
@@ -367,9 +368,9 @@ extension ProfileViewController: ProfileDisplayLogic {
     
     func displaySavingProfileAlert(viewModel: ProfileModel.SavingProfileAlert.ViewModel) {
         let alertController = savingProfileAlertController(saveWithGCDAction: { [weak self] in
-            self?.saveData(savingVariant: .gcd)
+            self?.saveData(asyncHandlerType: .gcd)
         }, saveWithOperationsAction: { [weak self] in
-            self?.saveData(savingVariant: .operations)
+            self?.saveData(asyncHandlerType: .operations)
         })
         present(alertController, animated: true)
     }

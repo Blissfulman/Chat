@@ -134,7 +134,7 @@ final class ChannelListViewController: UIViewController {
         button.heightAnchor.constraint(equalToConstant: size.height).isActive = true
         button.addTarget(self, action: #selector(self.openProfileBarButtonTapped), for: .touchUpInside)
         button.setImage(UIImage(data: iconData), for: .normal)
-        button.setCornerRadius(size.width / 2)
+        button.setCornerRadius(size.width / 2, continuousCurve: false)
         
         return UIBarButtonItem(customView: button)
     }

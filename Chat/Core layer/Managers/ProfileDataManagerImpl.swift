@@ -9,34 +9,29 @@ import Foundation
 
 final class ProfileDataManagerImpl: ProfileDataManager {
     
-    // MARK: - Nested types
-    
-    enum AsyncHandlerType {
-        case gcd
-        case operations
-    }
-    
     // MARK: - Private properties
     
     private let syncProfileDataManager: SyncProfileDataManager
-    private let asyncHandler: AsyncHandler
+    private let gcdAsyncHandler: GCDAsyncHandler
+    private let operationsAsyncHandler: OperationsAsyncHandler
     
     // MARK: - Initialization
     
-    init(syncProfileDataManager: SyncProfileDataManager, asyncHandlerType: AsyncHandlerType) {
+    init(syncProfileDataManager: SyncProfileDataManager, handlerQoS: AsyncHandlerQoS) {
         self.syncProfileDataManager = syncProfileDataManager
-        switch asyncHandlerType {
-        case .gcd:
-            asyncHandler = GCDAsyncHandler(qos: .userInteractive)
-        case .operations:
-            asyncHandler = OperationsAsyncHandler(qos: .userInteractive)
-        }
+        gcdAsyncHandler = GCDAsyncHandler(qos: handlerQoS.gcdQoS)
+        operationsAsyncHandler = OperationsAsyncHandler(qos: handlerQoS.operationsQoS)
     }
     
     // MARK: - Public methods
     
-    func saveProfile(profile: Profile, completion: @escaping (Result<Void, Error>) -> Void) {
-        asyncHandler.handle { [weak self] in
+    func saveProfile(
+        profile: Profile,
+        handlerType: AsyncHandlerType,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
+        let handler: AsyncHandler = handlerType == .gcd ? gcdAsyncHandler : operationsAsyncHandler
+        handler.handle { [weak self] in
             guard let self = self else { return }
             let result = self.syncProfileDataManager.saveProfile(profile: profile)
             DispatchQueue.main.async {
@@ -45,8 +40,9 @@ final class ProfileDataManagerImpl: ProfileDataManager {
         }
     }
     
-    func fetchProfile(completion: @escaping (Result<Profile?, Error>) -> Void) {
-        asyncHandler.handle { [weak self] in
+    func fetchProfile(handlerType: AsyncHandlerType, completion: @escaping (Result<Profile?, Error>) -> Void) {
+        let handler: AsyncHandler = handlerType == .gcd ? gcdAsyncHandler : operationsAsyncHandler
+        handler.handle { [weak self] in
             guard let self = self else { return }
             let result = self.syncProfileDataManager.fetchProfile()
             DispatchQueue.main.async {

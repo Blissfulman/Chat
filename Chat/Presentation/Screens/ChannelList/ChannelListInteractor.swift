@@ -25,7 +25,7 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     private let presenter: ChannelListPresentationLogic
     private var settingsService: SettingsService
     private var channelsService: ChannelsService
-    private let profileDataManager: ProfileDataManager
+    private var profileService: ProfileService
     private let channelListDataSource: ChannelListDataSourceProtocol
     private var profile: Profile?
     
@@ -35,20 +35,20 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
         presenter: ChannelListPresentationLogic,
         settingsService: SettingsService = ServiceLayer.shared.settingsService,
         channelsService: ChannelsService = ServiceLayer.shared.channelsService,
-        profileDataManager: ProfileDataManager = ServiceLayer.shared.gcdProfileDataManager,
+        profileService: ProfileService = ServiceLayer.shared.profileService,
         channelListDataSource: ChannelListDataSourceProtocol
     ) {
         self.presenter = presenter
         self.settingsService = settingsService
         self.channelsService = channelsService
-        self.profileDataManager = profileDataManager
+        self.profileService = profileService
         self.channelListDataSource = channelListDataSource
     }
     
     // MARK: - ChannelListBusinessLogic
     
     func fetchProfile(request: ChannelListModel.FetchProfile.Request) {
-        profileDataManager.fetchProfile { [weak self] result in
+        profileService.fetchProfile { [weak self] result in
             if case let .success(profile) = result {
                 guard let profile = profile else { return }
                 self?.profile = profile

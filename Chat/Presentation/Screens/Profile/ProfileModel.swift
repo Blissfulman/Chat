@@ -94,7 +94,7 @@ enum ProfileModel {
             let fullName: String?
             let description: String?
             let avatarImageData: Data?
-            let savingVariant: SavingVariant
+            let asyncHandlerType: AsyncHandlerType
         }
     }
     
@@ -124,10 +124,5 @@ enum ProfileModel {
             let message: String
             let retryHandler: () -> Void
         }
-    }
-    
-    enum SavingVariant {
-        case gcd
-        case operations
     }
 }

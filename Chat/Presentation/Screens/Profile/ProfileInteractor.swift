@@ -33,10 +33,10 @@ final class ProfileInteractor: ProfileBusinessLogic {
     
     private let presenter: ProfilePresentationLogic
     private let settingsService: SettingsService
-    private var profileDataManager: ProfileDataManager
+    private var profileService: ProfileService
     private let didChangeProfileHandler: (Profile) -> Void
     // Хранение задачи сохранения данных необходимо для возможности её повторения
-    private var savingTask: ((Profile, ProfileModel.SavingVariant) -> Void)?
+    private var savingTask: ((Profile, AsyncHandlerType) -> Void)?
     private var isChangedAvatar = false
     /// Сохранённое состояние данных вью для возможности возврата к этому состоянию в случае нажатия кнопки "Cancel".
     private var savedViewData: (fullName: String?, description: String?, avatarImageData: Data?)
@@ -62,12 +62,12 @@ final class ProfileInteractor: ProfileBusinessLogic {
     init(
         presenter: ProfilePresentationLogic,
         settingsService: SettingsService = ServiceLayer.shared.settingsService,
-        profileDataManager: ProfileDataManager = ServiceLayer.shared.gcdProfileDataManager,
+        profileService: ProfileService = ServiceLayer.shared.profileService,
         didChangeProfileHandler: @escaping (Profile) -> Void
     ) {
         self.presenter = presenter
         self.settingsService = settingsService
-        self.profileDataManager = profileDataManager
+        self.profileService = profileService
         self.didChangeProfileHandler = didChangeProfileHandler
     }
     
@@ -79,7 +79,7 @@ final class ProfileInteractor: ProfileBusinessLogic {
     }
     
     func fetchProfile(request: ProfileModel.FetchProfile.Request) {
-        profileDataManager.fetchProfile { [weak self] result in
+        profileService.fetchProfile { [weak self] result in
             switch result {
             case .success(let profile):
                 let response = ProfileModel.FetchProfile.Response(
@@ -142,17 +142,17 @@ final class ProfileInteractor: ProfileBusinessLogic {
             avatarData: request.avatarImageData
         )
         
-        savingTask = { [weak self, profileDataManager, didChangeProfileHandler] profile, savingVariant in
+        savingTask = { [weak self, profileService, didChangeProfileHandler] profile, asyncHandlerType in
             guard let self = self else {
                 // Если экран уже закрыт, то просто совершается ещё одна попытка сохранить профиль
-                profileDataManager.saveProfile(profile: profile) { result in
+                profileService.saveProfile(profile: profile, asyncHandlerType: asyncHandlerType) { result in
                     if case .success = result { didChangeProfileHandler(profile) }
                 }
                 return
             }
             self.presenter.showProgressView(response: ProfileModel.ShowProgressView.Response())
             
-            profileDataManager.saveProfile(profile: profile) { result in
+            profileService.saveProfile(profile: profile, asyncHandlerType: asyncHandlerType) { result in
                 self.presenter.hideProgressView(response: ProfileModel.HideProgressView.Response())
                 switch result {
                 case .success:
@@ -162,18 +162,13 @@ final class ProfileInteractor: ProfileBusinessLogic {
                 case .failure(let error):
                     print(error.localizedDescription)
                     let response = ProfileModel.SavingProfileError.Response(
-                        retryHandler: { self.savingTask?(profile, savingVariant) }
+                        retryHandler: { self.savingTask?(profile, asyncHandlerType) }
                     )
                     self.presenter.presentSavingProfileError(response: response)
                 }
             }
         }
-        if request.savingVariant == .gcd {
-            profileDataManager = ServiceLayer.shared.gcdProfileDataManager // TEMP: Необходимо доработать?
-        } else {
-            profileDataManager = ServiceLayer.shared.operationsProfileDataManager // TEMP: Необходимо доработать?
-        }
-        savingTask?(profile, request.savingVariant)
+        savingTask?(profile, request.asyncHandlerType)
     }
     
     // MARK: - Private methods

@@ -15,10 +15,11 @@ extension UIView {
         return self
     }
     
-    /// Устанавливает переданный радиус скругления всех углов (по кривой суперэллипса).
+    /// Устанавливает переданный радиус скругления всех углов.
     /// - Parameter value: Значение радиуса.
-    func setCornerRadius(_ value: CGFloat) {
-        if #available(iOS 13.0, *) {
+    /// - Parameter continuousCurve: Логическое значение, указывающее на необходимость скругления по кривой суперэллипса.
+    func setCornerRadius(_ value: CGFloat, continuousCurve: Bool = true) {
+        if continuousCurve, #available(iOS 13.0, *) {
             layer.cornerCurve = .continuous
         }
         layer.cornerRadius = value
