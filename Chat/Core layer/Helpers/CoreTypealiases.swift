@@ -1,5 +1,5 @@
 //
-//  Typealiases.swift
+//  CoreTypealiases.swift
 //  Chat
 //
 //  Created by Evgeny Novgorodov on 09.11.2021.

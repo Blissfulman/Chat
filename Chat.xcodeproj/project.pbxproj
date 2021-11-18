@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D9E97E9521022F580AD478C /* Pods_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA9DF100E365DD629B40773 /* Pods_Chat.framework */; };
-		CE03EE70273AF76400D9F898 /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE03EE6F273AF76400D9F898 /* Typealiases.swift */; };
+		CE03EE70273AF76400D9F898 /* CoreTypealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE03EE6F273AF76400D9F898 /* CoreTypealiases.swift */; };
 		CE04B4E7271F52B80027F649 /* ProfileFilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04B4E6271F52B80027F649 /* ProfileFilledButton.swift */; };
 		CE04B4E9271F59270027F649 /* ProfileNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04B4E8271F59270027F649 /* ProfileNameTextField.swift */; };
 		CE0B5F1E270CA538004B6232 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B5F1D270CA538004B6232 /* ChannelCell.swift */; };
@@ -109,7 +109,7 @@
 
 /* Begin PBXFileReference section */
 		91BA8C10F59B945498394334 /* Pods-Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat.release.xcconfig"; path = "Target Support Files/Pods-Chat/Pods-Chat.release.xcconfig"; sourceTree = "<group>"; };
-		CE03EE6F273AF76400D9F898 /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
+		CE03EE6F273AF76400D9F898 /* CoreTypealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTypealiases.swift; sourceTree = "<group>"; };
 		CE04B4E6271F52B80027F649 /* ProfileFilledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilledButton.swift; sourceTree = "<group>"; };
 		CE04B4E8271F59270027F649 /* ProfileNameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNameTextField.swift; sourceTree = "<group>"; };
 		CE0B5F1D270CA538004B6232 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
@@ -260,6 +260,25 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		CE1DE6952746DA9C00D1219B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				CE3E913B270E20DE0029DA74 /* Models */,
+				CE1DE6962746DCD900D1219B /* Helpers */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		CE1DE6962746DCD900D1219B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CEFE087627456B810057CED6 /* GlobalData.swift */,
+				CE1DE6932746893D00D1219B /* DubugLogger.swift */,
+				CE1DE68B2746379300D1219B /* AsyncHandlerType.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		CE1F08A026F3BB67002A5985 = {
 			isa = PBXGroup;
 			children = (
@@ -283,7 +302,8 @@
 			children = (
 				CEFE0871274555BB0057CED6 /* Core layer */,
 				CE39697A274435460026D869 /* Service layer */,
-				CED023E526FFAFE100062489 /* Presentation */,
+				CED023E526FFAFE100062489 /* Presentation layer */,
+				CE1DE6952746DA9C00D1219B /* Common */,
 				CED023E426FFAFA800062489 /* Supporting files */,
 				CED023E326FFAEE300062489 /* Resources */,
 			);
@@ -361,8 +381,6 @@
 			children = (
 				CEFE086D2745538E0057CED6 /* ServiceLayer.swift */,
 				CE39697B274435920026D869 /* Services */,
-				CE3E913B270E20DE0029DA74 /* Models */,
-				CE9C657A270F2F6F008756AC /* Helpers */,
 			);
 			path = "Service layer";
 			sourceTree = "<group>";
@@ -467,13 +485,6 @@
 			path = Channel;
 			sourceTree = "<group>";
 		};
-		CE9C657A270F2F6F008756AC /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
 		CEB97AD027307CAB00C405CA /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,13 +513,13 @@
 			path = "Supporting files";
 			sourceTree = "<group>";
 		};
-		CED023E526FFAFE100062489 /* Presentation */ = {
+		CED023E526FFAFE100062489 /* Presentation layer */ = {
 			isa = PBXGroup;
 			children = (
 				CE39478B270F738D004C6FD1 /* Screens */,
 				CEEDAEE7271C8815005B8F21 /* Common */,
 			);
-			path = Presentation;
+			path = "Presentation layer";
 			sourceTree = "<group>";
 		};
 		CED84B3A27025CFE00D4E4EB /* Style */ = {
@@ -557,15 +568,12 @@
 		CEFE08732745594B0057CED6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				CE03EE6F273AF76400D9F898 /* Typealiases.swift */,
+				CE03EE6F273AF76400D9F898 /* CoreTypealiases.swift */,
 				CEFE0874274559600057CED6 /* CoreConstants.swift */,
-				CEFE087627456B810057CED6 /* GlobalData.swift */,
 				CEE77AB32736F1A9004F69A4 /* FirestoreObject.swift */,
-				CE6667CB272099F100DD6B40 /* AsyncHandler.swift */,
 				CEFE08892745826F0057CED6 /* FileStorageDataType.swift */,
-				CE1DE68B2746379300D1219B /* AsyncHandlerType.swift */,
+				CE6667CB272099F100DD6B40 /* AsyncHandler.swift */,
 				CE1DE68D2746418A00D1219B /* AsyncHandlerQoS.swift */,
-				CE1DE6932746893D00D1219B /* DubugLogger.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -774,7 +782,7 @@
 				CE8B576127205E8E002E3434 /* Profile.swift in Sources */,
 				CE9B0BC32721BEC60001DF15 /* ProfileDescriptionTextField.swift in Sources */,
 				CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */,
-				CE03EE70273AF76400D9F898 /* Typealiases.swift in Sources */,
+				CE03EE70273AF76400D9F898 /* CoreTypealiases.swift in Sources */,
 				CE1DE68A2746323B00D1219B /* ProfileServiceImpl.swift in Sources */,
 				CEB97ACD272FD81700C405CA /* ChannelListViewController+Extension.swift in Sources */,
 				CE394790270F7C1C004C6FD1 /* PartnerMessageView.swift in Sources */,
