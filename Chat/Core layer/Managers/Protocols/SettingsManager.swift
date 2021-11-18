@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Менеджер настроек приложения.
 protocol SettingsManager {
     /// Тема приложения.
     ///

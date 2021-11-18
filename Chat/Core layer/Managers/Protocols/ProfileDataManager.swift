@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Менеджер асинхронного взаимодействия с хранилищем данных профиля.
 protocol ProfileDataManager {
     /// Асинхронное сохранение данных профиля.
     /// - Parameters:

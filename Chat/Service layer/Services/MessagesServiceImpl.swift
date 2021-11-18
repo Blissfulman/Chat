@@ -12,13 +12,13 @@ final class MessagesServiceImpl: MessagesService {
     // MARK: - Private properties
     
     private var firestoreManager: FirestoreManagerImpl<Message>
-    private let dataManager: DataManager
+    private let contentManager: ContentManager
     
     // MARK: - Initialization
     
-    init(firestoreManager: FirestoreManagerImpl<Message>, dataManager: DataManager) {
+    init(firestoreManager: FirestoreManagerImpl<Message>, contentManager: ContentManager) {
         self.firestoreManager = firestoreManager
-        self.dataManager = dataManager
+        self.contentManager = contentManager
     }
     
     // MARK: - Public methods
@@ -27,7 +27,7 @@ final class MessagesServiceImpl: MessagesService {
         firestoreManager.listener = { [weak self] result in
             switch result {
             case let .success(snapshotMessages):
-                self?.dataManager.updateMessages(snapshotMessages, forChannel: channel)
+                self?.contentManager.updateMessages(snapshotMessages, forChannel: channel)
             case let .failure(error):
                 failureHandler(error)
             }

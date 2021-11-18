@@ -32,8 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        let dataManager: DataManager = ServiceLayer.shared.dataManager
-        dataManager.saveData()
+        let contentManager: ContentManager = ServiceLayer.shared.contentManager
+        contentManager.saveData()
     }
     
     // MARK: - Private methods

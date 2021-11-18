@@ -12,13 +12,13 @@ final class ChannelsServiceImpl: ChannelsService {
     // MARK: - Private properties
     
     private var firestoreManager: FirestoreManagerImpl<Channel>
-    private let dataManager: DataManager
+    private let contentManager: ContentManager
     
     // MARK: - Initialization
     
-    init(firestoreManager: FirestoreManagerImpl<Channel>, dataManager: DataManager) {
+    init(firestoreManager: FirestoreManagerImpl<Channel>, contentManager: ContentManager) {
         self.firestoreManager = firestoreManager
-        self.dataManager = dataManager
+        self.contentManager = contentManager
     }
     
     // MARK: - Public methods
@@ -27,7 +27,7 @@ final class ChannelsServiceImpl: ChannelsService {
         firestoreManager.listener = { [weak self] result in
             switch result {
             case let .success(snapshotChannels):
-                self?.dataManager.updateChannels(snapshotChannels)
+                self?.contentManager.updateChannels(snapshotChannels)
             case let .failure(error):
                 failureHandler(error)
             }

@@ -18,13 +18,13 @@ final class ServiceLayer {
     lazy var settingsService: SettingsService = SettingsServiceImpl(settingsManager: settingsManager)
     lazy var channelsService: ChannelsService = ChannelsServiceImpl(
         firestoreManager: FirestoreManagerImpl<Channel>(dataType: .channels),
-        dataManager: dataManager
+        contentManager: contentManager
     )
     lazy var profileService: ProfileService = ProfileServiceImpl(
         profileDataManager: profileDataManager(handlerQoS: .userInitiated)
     )
     
-    lazy var dataManager: DataManager = CoreDataManagerImpl(storage: coreDataStorage)
+    lazy var contentManager: ContentManager = ContentManagerImpl(storage: coreDataStorage)
     lazy var settingsManager: SettingsManager = SettingsManagerImpl(
         fileStorageManager: fileStorageManager,
         keychainStorage: keychainStorage
@@ -51,7 +51,7 @@ final class ServiceLayer {
     func messagesService(channelID: Channel.ID) -> MessagesService {
         MessagesServiceImpl(
             firestoreManager: FirestoreManagerImpl<Message>(dataType: .messages(channelID: channelID)),
-            dataManager: dataManager
+            contentManager: contentManager
         )
     }
     

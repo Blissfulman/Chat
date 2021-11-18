@@ -1,5 +1,5 @@
 //
-//  DataManager.swift
+//  ContentManager.swift
 //  Chat
 //
 //  Created by Evgeny Novgorodov on 17.11.2021.
@@ -7,9 +7,11 @@
 
 import CoreData
 
-protocol DataManager {
+/// Менеджер контента приложения.
+protocol ContentManager {
     /// Экземпляр `NSFetchedResultsController`, отслеживающий сохранённые каналы.
     var channelListFetchedResultsController: NSFetchedResultsController<DBChannel> { get }
+    
     /// Экземпляр `NSFetchedResultsController`, отслеживающий сохранённые сообщения указанного канала.
     /// - Parameter channel: Канал, чьи сообщения контроллер будет отслеживать.
     func channelFetchedResultsController(forChannel channel: Channel) -> NSFetchedResultsController<DBMessage>

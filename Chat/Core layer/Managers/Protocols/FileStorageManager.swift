@@ -7,7 +7,17 @@
 
 import Foundation
 
+/// Менеджер файлового хранилища.
 protocol FileStorageManager {
+    /// Получение данных из файла.
+    /// - Parameters:
+    ///   - key: Ключ данных.
+    ///   - dataType: Тип данных файлового хранилища.
     func getValue<Value: Decodable>(withKey key: String, dataType: FileStorageDataType) throws -> Value?
+    /// Сохранение данных в файл.
+    /// - Parameters:
+    ///   - value: Сохраняемые данные.
+    ///   - key: Ключ данных.
+    ///   - dataType: Тип данных файлового хранилища.
     func saveValue<Value: Encodable>(_ value: Value, withKey key: String, dataType: FileStorageDataType) throws
 }

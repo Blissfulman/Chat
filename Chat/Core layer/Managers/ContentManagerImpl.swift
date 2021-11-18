@@ -1,5 +1,5 @@
 //
-//  CoreDataManagerImpl.swift
+//  ContentManagerImpl.swift
 //  Chat
 //
 //  Created by Evgeny Novgorodov on 03.11.2021.
@@ -7,7 +7,7 @@
 
 import CoreData
 
-final class CoreDataManagerImpl: DataManager {
+final class ContentManagerImpl: ContentManager {
     
     // MARK: - Public properties
     

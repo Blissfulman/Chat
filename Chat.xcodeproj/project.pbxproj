@@ -30,7 +30,7 @@
 		CE2474C92731C5C900A4AEC0 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2474C82731C5C900A4AEC0 /* CoreDataStorage.swift */; };
 		CE2474CB2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2474CA2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift */; };
 		CE2474CE2731C79100A4AEC0 /* Chat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE2474CC2731C79100A4AEC0 /* Chat.xcdatamodeld */; };
-		CE2474D02731CE2B00A4AEC0 /* CoreDataManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2474CF2731CE2B00A4AEC0 /* CoreDataManagerImpl.swift */; };
+		CE2474D02731CE2B00A4AEC0 /* ContentManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2474CF2731CE2B00A4AEC0 /* ContentManagerImpl.swift */; };
 		CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */; };
 		CE2608802718B01800CAE9B6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087F2718B01800CAE9B6 /* Theme.swift */; };
 		CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */; };
@@ -95,7 +95,7 @@
 		CEFE08702745544F0057CED6 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE086F2745544F0057CED6 /* SettingsService.swift */; };
 		CEFE0875274559600057CED6 /* CoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE0874274559600057CED6 /* CoreConstants.swift */; };
 		CEFE087727456B810057CED6 /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE087627456B810057CED6 /* GlobalData.swift */; };
-		CEFE087A274578A30057CED6 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE0879274578A30057CED6 /* DataManager.swift */; };
+		CEFE087A274578A30057CED6 /* ContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE0879274578A30057CED6 /* ContentManager.swift */; };
 		CEFE087E274579DF0057CED6 /* KeychainStorageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE087D274579DF0057CED6 /* KeychainStorageImpl.swift */; };
 		CEFE088027457A0B0057CED6 /* CoreDataStorageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE087F27457A0B0057CED6 /* CoreDataStorageImpl.swift */; };
 		CEFE088227457D3C0057CED6 /* FirestoreManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE088127457D3C0057CED6 /* FirestoreManagerImpl.swift */; };
@@ -132,7 +132,7 @@
 		CE2474C82731C5C900A4AEC0 /* CoreDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		CE2474CA2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extension.swift"; sourceTree = "<group>"; };
 		CE2474CD2731C79100A4AEC0 /* Chat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chat.xcdatamodel; sourceTree = "<group>"; };
-		CE2474CF2731CE2B00A4AEC0 /* CoreDataManagerImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManagerImpl.swift; sourceTree = "<group>"; };
+		CE2474CF2731CE2B00A4AEC0 /* ContentManagerImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentManagerImpl.swift; sourceTree = "<group>"; };
 		CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		CE26087F2718B01800CAE9B6 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 		CEFE086F2745544F0057CED6 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
 		CEFE0874274559600057CED6 /* CoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreConstants.swift; sourceTree = "<group>"; };
 		CEFE087627456B810057CED6 /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
-		CEFE0879274578A30057CED6 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		CEFE0879274578A30057CED6 /* ContentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentManager.swift; sourceTree = "<group>"; };
 		CEFE087D274579DF0057CED6 /* KeychainStorageImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorageImpl.swift; sourceTree = "<group>"; };
 		CEFE087F27457A0B0057CED6 /* CoreDataStorageImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorageImpl.swift; sourceTree = "<group>"; };
 		CEFE088127457D3C0057CED6 /* FirestoreManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManagerImpl.swift; sourceTree = "<group>"; };
@@ -300,7 +300,7 @@
 		CE2608812718C3C200CAE9B6 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				CE2474CF2731CE2B00A4AEC0 /* CoreDataManagerImpl.swift */,
+				CE2474CF2731CE2B00A4AEC0 /* ContentManagerImpl.swift */,
 				CEFE088327457DA00057CED6 /* SettingsManagerImpl.swift */,
 				CEFE0887274581630057CED6 /* SyncProfileDataManagerImpl.swift */,
 				CEFE088527457F760057CED6 /* ProfileDataManagerImpl.swift */,
@@ -570,7 +570,7 @@
 		CEFE08782745788B0057CED6 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				CEFE0879274578A30057CED6 /* DataManager.swift */,
+				CEFE0879274578A30057CED6 /* ContentManager.swift */,
 				CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */,
 				CE8B576227205F2E002E3434 /* SyncProfileDataManager.swift */,
 				CEE6513D2721F013009DD993 /* ProfileDataManager.swift */,
@@ -778,7 +778,7 @@
 				CE2474CB2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift in Sources */,
 				CE0C600A27458ACA002A1FF9 /* SettingsServiceImpl.swift in Sources */,
 				CEE9FF0F272C74AF00628F34 /* ChannelListModel.swift in Sources */,
-				CEFE087A274578A30057CED6 /* DataManager.swift in Sources */,
+				CEFE087A274578A30057CED6 /* ContentManager.swift in Sources */,
 				CEFE088027457A0B0057CED6 /* CoreDataStorageImpl.swift in Sources */,
 				CE2608802718B01800CAE9B6 /* Theme.swift in Sources */,
 				CE39478E270F73CE004C6FD1 /* MyMessageView.swift in Sources */,
@@ -815,7 +815,7 @@
 				CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */,
 				CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */,
 				CEE9FF09272C747C00628F34 /* ChannelListInteractor.swift in Sources */,
-				CE2474D02731CE2B00A4AEC0 /* CoreDataManagerImpl.swift in Sources */,
+				CE2474D02731CE2B00A4AEC0 /* ContentManagerImpl.swift in Sources */,
 				CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */,
 				CE6667CA2720871200DD6B40 /* Data+Extension.swift in Sources */,
 				CE32F21D27048600007262A5 /* Fonts.swift in Sources */,
