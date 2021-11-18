@@ -89,7 +89,7 @@ final class ProfileInteractor: ProfileBusinessLogic {
                 )
                 self?.presenter.presentProfile(response: response)
             case .failure(let error):
-                print(error.localizedDescription)
+                DebugLogger.log(error.localizedDescription)
             }
         }
     }
@@ -160,7 +160,7 @@ final class ProfileInteractor: ProfileBusinessLogic {
                     self.presenter.presentProfileSavedAlert(response: ProfileModel.ProfileSavedAlert.Response())
                     didChangeProfileHandler(profile)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    DebugLogger.log(error.localizedDescription)
                     let response = ProfileModel.SavingProfileError.Response(
                         retryHandler: { self.savingTask?(profile, asyncHandlerType) }
                     )

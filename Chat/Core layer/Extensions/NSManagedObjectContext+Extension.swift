@@ -34,7 +34,7 @@ extension NSManagedObjectContext {
             do {
                 try save()
             } catch {
-                print("Saving changes failed with error:", error.localizedDescription)
+                DebugLogger.log("Saving changes failed with error: \(error.localizedDescription)")
             }
         }
     }

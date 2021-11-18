@@ -24,6 +24,7 @@
 		CE1DE68C2746379300D1219B /* AsyncHandlerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DE68B2746379300D1219B /* AsyncHandlerType.swift */; };
 		CE1DE68E2746418A00D1219B /* AsyncHandlerQoS.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DE68D2746418A00D1219B /* AsyncHandlerQoS.swift */; };
 		CE1DE69027464C1200D1219B /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DE68F27464C1200D1219B /* ProfileService.swift */; };
+		CE1DE6942746893D00D1219B /* DubugLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1DE6932746893D00D1219B /* DubugLogger.swift */; };
 		CE1F08AD26F3BB67002A5985 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */; };
 		CE1F08B126F3BB67002A5985 /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F08B026F3BB67002A5985 /* ChannelListViewController.swift */; };
 		CE1F08B926F3BB68002A5985 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1F08B726F3BB68002A5985 /* LaunchScreen.storyboard */; };
@@ -124,6 +125,7 @@
 		CE1DE68B2746379300D1219B /* AsyncHandlerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncHandlerType.swift; sourceTree = "<group>"; };
 		CE1DE68D2746418A00D1219B /* AsyncHandlerQoS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncHandlerQoS.swift; sourceTree = "<group>"; };
 		CE1DE68F27464C1200D1219B /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		CE1DE6932746893D00D1219B /* DubugLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DubugLogger.swift; sourceTree = "<group>"; };
 		CE1F08A926F3BB67002A5985 /* Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1F08AC26F3BB67002A5985 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE1F08B026F3BB67002A5985 /* ChannelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewController.swift; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 				CEFE08892745826F0057CED6 /* FileStorageDataType.swift */,
 				CE1DE68B2746379300D1219B /* AsyncHandlerType.swift */,
 				CE1DE68D2746418A00D1219B /* AsyncHandlerQoS.swift */,
+				CE1DE6932746893D00D1219B /* DubugLogger.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -810,6 +813,7 @@
 				CEE9FF0D272C749B00628F34 /* ChannelListAssembly.swift in Sources */,
 				CEFE088227457D3C0057CED6 /* FirestoreManagerImpl.swift in Sources */,
 				CEB97AB8272D3C8800C405CA /* ChannelAssembly.swift in Sources */,
+				CE1DE6942746893D00D1219B /* DubugLogger.swift in Sources */,
 				CEFE088427457DA00057CED6 /* SettingsManagerImpl.swift in Sources */,
 				CEE9FF0B272C748500628F34 /* ChannelListPresenter.swift in Sources */,
 				CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */,

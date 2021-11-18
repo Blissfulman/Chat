@@ -25,7 +25,7 @@ final class KeychainStorageImpl: KeychainStorage {
         guard
             let value = readValue(withLabel: label)
         else {
-            log(message: "Keychain data not found")
+            DebugLogger.log("Keychain data not found")
             return nil
         }
         return value
@@ -46,7 +46,7 @@ final class KeychainStorageImpl: KeychainStorage {
         item[kSecValueData as String] = data as AnyObject
         let status = SecItemAdd(item as CFDictionary, nil)
         
-        log(message: status == noErr ? "Data saved to Keychain" : "Keychain saving error")
+        DebugLogger.log(status == noErr ? "Data saved to Keychain" : "Keychain saving error")
         return status == noErr
     }
     
@@ -77,15 +77,9 @@ final class KeychainStorageImpl: KeychainStorage {
             let data = item[kSecValueData as String] as? Data,
             let value = String(data: data, encoding: .utf8)
         else {
-            log(message: "Unexpected Keychain data")
+            DebugLogger.log("Unexpected Keychain data")
             return nil
         }
         return value
-    }
-    
-    private func log(message: String) {
-        #if DEBUG
-        print(message)
-        #endif
     }
 }

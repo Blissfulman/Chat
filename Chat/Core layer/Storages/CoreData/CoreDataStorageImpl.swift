@@ -44,7 +44,7 @@ final class CoreDataStorageImpl: CoreDataStorage {
         do {
             fetchedResult = try backgroundContext.fetch(request)
         } catch {
-            debugPrint("Could not fetch: \(error.localizedDescription)")
+            DebugLogger.log("Could not fetch: \(error.localizedDescription)")
         }
         return fetchedResult
     }
@@ -71,7 +71,7 @@ final class CoreDataStorageImpl: CoreDataStorage {
         do {
             try controller.performFetch()
         } catch {
-            debugPrint("Could not fetch: \(error.localizedDescription)")
+            DebugLogger.log("Could not fetch: \(error.localizedDescription)")
         }
         return controller
     }
