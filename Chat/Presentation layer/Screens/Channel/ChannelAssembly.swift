@@ -12,7 +12,10 @@ final class ChannelAssembly {
     
     static func assembly(parameters: Parameters) -> UIViewController {
         let presenter = ChannelPresenter()
-        let channelDataSource: ChannelDataSourceProtocol = ChannelDataSource(channel: parameters.channel)
+        let messagesService: MessagesService = ServiceLayer.shared.messagesService(channelID: parameters.channel.id)
+        let channelDataSource: ChannelDataSourceProtocol = ChannelDataSource(
+            fetchedResultsController: messagesService.channelFetchedResultsController(forChannel: parameters.channel)
+        )
         let interactor = ChannelInteractor(
             presenter: presenter,
             messagesService: ServiceLayer.shared.messagesService(channelID: parameters.channel.id),

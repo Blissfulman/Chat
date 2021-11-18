@@ -5,7 +5,7 @@
 //  Created by Evgeny Novgorodov on 18.11.2021.
 //
 
-import Foundation
+import CoreData
 
 final class MessagesServiceImpl: MessagesService {
     
@@ -23,6 +23,10 @@ final class MessagesServiceImpl: MessagesService {
     
     // MARK: - Public methods
     
+    func channelFetchedResultsController(forChannel channel: Channel) -> NSFetchedResultsController<DBMessage> {
+        contentManager.channelFetchedResultsController(forChannel: channel)
+    }
+
     func setMessagesListener(channel: Channel, failureHandler: @escaping (Error) -> Void) {
         firestoreManager.listener = { [weak self] result in
             switch result {

@@ -13,7 +13,7 @@ protocol ContentManager {
     var channelListFetchedResultsController: NSFetchedResultsController<DBChannel> { get }
     
     /// Экземпляр `NSFetchedResultsController`, отслеживающий сохранённые сообщения указанного канала.
-    /// - Parameter channel: Канал, чьи сообщения контроллер будет отслеживать.
+    /// - Parameter channel: Канал, сообщения которого контроллер будет отслеживать.
     func channelFetchedResultsController(forChannel channel: Channel) -> NSFetchedResultsController<DBMessage>
     /// Сохранение всех несохранённых данных.
     func saveData()
