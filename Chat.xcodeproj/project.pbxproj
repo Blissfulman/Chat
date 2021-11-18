@@ -302,8 +302,8 @@
 			children = (
 				CE2474CF2731CE2B00A4AEC0 /* CoreDataManagerImpl.swift */,
 				CEFE088327457DA00057CED6 /* SettingsManagerImpl.swift */,
-				CEFE088527457F760057CED6 /* ProfileDataManagerImpl.swift */,
 				CEFE0887274581630057CED6 /* SyncProfileDataManagerImpl.swift */,
+				CEFE088527457F760057CED6 /* ProfileDataManagerImpl.swift */,
 				CEFE088B274583730057CED6 /* FileStorageManagerImpl.swift */,
 				CEFE088127457D3C0057CED6 /* FirestoreManagerImpl.swift */,
 				CEFE08782745788B0057CED6 /* Protocols */,
@@ -572,8 +572,8 @@
 			children = (
 				CEFE0879274578A30057CED6 /* DataManager.swift */,
 				CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */,
-				CEE6513D2721F013009DD993 /* ProfileDataManager.swift */,
 				CE8B576227205F2E002E3434 /* SyncProfileDataManager.swift */,
+				CEE6513D2721F013009DD993 /* ProfileDataManager.swift */,
 				CE8C4078271BEEE000D0C0B5 /* FileStorageManager.swift */,
 				CEDC7F2227345BD400D9BE4F /* FirestoreManager.swift */,
 			);
