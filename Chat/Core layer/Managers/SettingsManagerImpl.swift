@@ -42,11 +42,6 @@ final class SettingsManagerImpl: SettingsManager {
     
     // MARK: - Public methods
     
-    /// Выполняется проверка наличия значения ID текущего пользователя в постоянном хранилище (Keychain).
-    /// В случае успешного получения значения, оно присваивается в соответствующую глобальную переменную.
-    /// В случае неудачной попытки, генерируется новое значение параметра, сохраняется в постоянное хранилище и присваивается в соответствующую глобальную переменную..
-    ///
-    /// Необходимо вызывать при запуске приложения.
     func loadMySenderID() {
         if let mySenderID = keychainStorage.fetchValue(withLabel: Constants.mySenderIDKey),
            !mySenderID.isEmpty {
