@@ -140,7 +140,8 @@ final class ThemesViewController: UIViewController {
     }
     
     private func configureUI() {
-        let theme = settingsService.getTheme()
-        view.backgroundColor = theme.themeColors.backgroundColor
+        settingsService.getTheme { [weak self] theme in
+            self?.view.backgroundColor = theme.themeColors.backgroundColor
+        }
     }
 }

@@ -19,8 +19,8 @@ final class ProfileDataManagerImpl: ProfileDataManager {
     
     init(syncProfileDataManager: SyncProfileDataManager, handlerQoS: AsyncHandlerQoS) {
         self.syncProfileDataManager = syncProfileDataManager
-        gcdAsyncHandler = GCDAsyncHandler(qos: handlerQoS.gcdQoS)
-        operationsAsyncHandler = OperationsAsyncHandler(qos: handlerQoS.operationsQoS)
+        self.gcdAsyncHandler = GCDAsyncHandler(qos: handlerQoS.gcdQoS)
+        self.operationsAsyncHandler = OperationsAsyncHandler(qos: handlerQoS.operationsQoS)
     }
     
     // MARK: - Public methods

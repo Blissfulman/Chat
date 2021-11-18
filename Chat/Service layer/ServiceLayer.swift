@@ -15,7 +15,10 @@ final class ServiceLayer {
     
     // MARK: - Public properties
     
-    lazy var settingsService: SettingsService = SettingsServiceImpl(settingsManager: settingsManager)
+    lazy var settingsService: SettingsService = SettingsServiceImpl(
+        settingsManager: settingsManager,
+        asyncHandler: GCDAsyncHandler(qos: .userInitiated)
+    )
     lazy var channelsService: ChannelsService = ChannelsServiceImpl(
         firestoreManager: FirestoreManagerImpl<Channel>(dataType: .channels),
         contentManager: contentManager

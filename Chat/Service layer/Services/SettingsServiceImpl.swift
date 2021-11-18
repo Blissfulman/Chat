@@ -12,20 +12,30 @@ final class SettingsServiceImpl: SettingsService {
     // MARK: - Private properties
     
     private var settingsManager: SettingsManager
+    private let asyncHandler: AsyncHandler
     
     // MARK: - Initialization
     
-    init(settingsManager: SettingsManager) {
+    init(settingsManager: SettingsManager, asyncHandler: AsyncHandler) {
         self.settingsManager = settingsManager
+        self.asyncHandler = asyncHandler
     }
     
     // MARK: - Public methods
     
     func saveTheme(_ theme: Theme) {
-        settingsManager.theme = theme
+        asyncHandler.handle { [weak self] in
+            self?.settingsManager.theme = theme
+        }
     }
     
-    func getTheme() -> Theme {
-        settingsManager.theme
+    func getTheme(completion: @escaping (Theme) -> Void) {
+        asyncHandler.handle { [weak self] in
+            if let theme = self?.settingsManager.theme {
+                DispatchQueue.main.async {
+                    completion(theme)
+                }
+            }
+        }
     }
 }

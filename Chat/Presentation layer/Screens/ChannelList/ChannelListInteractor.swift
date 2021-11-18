@@ -87,11 +87,8 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     }
     
     func updateTheme(request: ChannelListModel.UpdateTheme.Request) {
-        let asyncHandler = GCDAsyncHandler(qos: .userInteractive)
-        asyncHandler.handle { [weak self] in
-            NavigationController.updateColors(for: request.theme)
-            self?.settingsService.saveTheme(request.theme)
-        }
+        NavigationController.updateColors(for: request.theme) // Вероятно не должно быть в интеракторе?
+        settingsService.saveTheme(request.theme)
     }
     
     func openChannel(request: ChannelListModel.OpenChannel.Request) {

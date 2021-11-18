@@ -45,8 +45,9 @@ final class ChannelInteractor: ChannelBusinessLogic {
     // MARK: - ChannelBusinessLogic
     
     func setupTheme(request: ChannelModel.SetupTheme.Request) {
-        let theme = settingsService.getTheme()
-        presenter.presentTheme(response: ChannelModel.SetupTheme.Response(theme: theme))
+        settingsService.getTheme { [weak self] theme in
+            self?.presenter.presentTheme(response: ChannelModel.SetupTheme.Response(theme: theme))
+        }
     }
     
     func fetchMessages(request: ChannelModel.FetchMessages.Request) {
