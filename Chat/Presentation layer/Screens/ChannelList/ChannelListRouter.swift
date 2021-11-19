@@ -22,7 +22,8 @@ final class ChannelListRouter: ChannelListRoutingLogic {
     // MARK: - ChannelListRoutingLogic
     
     func navigateToSettings(route: ChannelListModel.Route.SettingsScreen) {
-        let themesViewController = ThemesViewController(didChooseThemeHandler: route.didChooseThemeHandler)
+        let themesPresenter = ThemesPresenter(didChooseThemeHandler: route.didChooseThemeHandler)
+        let themesViewController = ThemesViewController(presenter: themesPresenter)
         themesViewController.modalPresentationStyle = .fullScreen
         viewController?.present(themesViewController, animated: true)
     }

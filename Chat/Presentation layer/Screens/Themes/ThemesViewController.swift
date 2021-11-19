@@ -59,17 +59,12 @@ final class ThemesViewController: UIViewController {
         return button
     }()
     
-    private let settingsService: SettingsService
-    private let didChooseThemeHandler: (Theme) -> Void
+    private let presenter: ThemesPresenterLogic
     
     // MARK: - Initialization
     
-    init(
-        settingsService: SettingsService = ServiceLayer.shared.settingsService,
-        didChooseThemeHandler: @escaping (Theme) -> Void
-    ) {
-        self.settingsService = settingsService
-        self.didChooseThemeHandler = didChooseThemeHandler
+    init(presenter: ThemesPresenterLogic) {
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -95,23 +90,20 @@ final class ThemesViewController: UIViewController {
     
     @objc
     private func lightThemeButtonTapped() {
-        let themeColors = Theme.light.themeColors
-        view.backgroundColor = themeColors.backgroundColor
-        didChooseThemeHandler(.light)
+        view.backgroundColor = Theme.light.backgroundColor
+        presenter.didChooseTheme(to: .light)
     }
     
     @objc
     private func darkThemeButtonTapped() {
-        let themeColors = Theme.dark.themeColors
-        view.backgroundColor = themeColors.backgroundColor
-        didChooseThemeHandler(.dark)
+        view.backgroundColor = Theme.dark.backgroundColor
+        presenter.didChooseTheme(to: .dark)
     }
     
     @objc
     private func champagneThemeButtonTapped() {
-        let themeColors = Theme.champagne.themeColors
-        view.backgroundColor = themeColors.backgroundColor
-        didChooseThemeHandler(.champagne)
+        view.backgroundColor = Theme.champagne.backgroundColor
+        presenter.didChooseTheme(to: .champagne)
     }
     
     // MARK: - Private methods
@@ -140,8 +132,8 @@ final class ThemesViewController: UIViewController {
     }
     
     private func configureUI() {
-        settingsService.getTheme { [weak self] theme in
-            self?.view.backgroundColor = theme.themeColors.backgroundColor
+        presenter.getTheme { [weak self] theme in
+            self?.view.backgroundColor = theme.backgroundColor
         }
     }
 }

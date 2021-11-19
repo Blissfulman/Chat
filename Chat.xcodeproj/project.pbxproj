@@ -66,6 +66,7 @@
 		CEA00F7E2739AA10007F925E /* ChannelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA00F7D2739AA10007F925E /* ChannelDataSource.swift */; };
 		CEA00F802739AA7C007F925E /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */; };
 		CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA143DD271600D400F39F61 /* ThemesViewController.swift */; };
+		CEAC8207274826B000F50125 /* ThemesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC8206274826B000F50125 /* ThemesPresenter.swift */; };
 		CEB97AB8272D3C8800C405CA /* ChannelAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AB7272D3C8800C405CA /* ChannelAssembly.swift */; };
 		CEB97ABA272D3C9A00C405CA /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AB9272D3C9A00C405CA /* ChannelModel.swift */; };
 		CEB97ABE272D3CC200C405CA /* ChannelInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97ABD272D3CC200C405CA /* ChannelInteractor.swift */; };
@@ -169,6 +170,7 @@
 		CEA00F7D2739AA10007F925E /* ChannelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDataSource.swift; sourceTree = "<group>"; };
 		CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		CEA143DD271600D400F39F61 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
+		CEAC8206274826B000F50125 /* ThemesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesPresenter.swift; sourceTree = "<group>"; };
 		CEB97AB7272D3C8800C405CA /* ChannelAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelAssembly.swift; sourceTree = "<group>"; };
 		CEB97AB9272D3C9A00C405CA /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
 		CEB97ABD272D3CC200C405CA /* ChannelInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelInteractor.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				CEA143DD271600D400F39F61 /* ThemesViewController.swift */,
+				CEAC8206274826B000F50125 /* ThemesPresenter.swift */,
 			);
 			path = Themes;
 			sourceTree = "<group>";
@@ -824,6 +827,7 @@
 				CE1DE6942746893D00D1219B /* DubugLogger.swift in Sources */,
 				CEFE088427457DA00057CED6 /* SettingsManagerImpl.swift in Sources */,
 				CEE9FF0B272C748500628F34 /* ChannelListPresenter.swift in Sources */,
+				CEAC8207274826B000F50125 /* ThemesPresenter.swift in Sources */,
 				CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */,
 				CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */,
 				CEE9FF09272C747C00628F34 /* ChannelListInteractor.swift in Sources */,

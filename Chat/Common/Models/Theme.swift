@@ -13,14 +13,23 @@ enum Theme: String, Codable {
     case dark
     case champagne
     
-    var themeColors: (backgroundColor: UIColor?, fontColor: UIColor) {
+    var backgroundColor: UIColor? {
         switch self {
         case .light:
-            return (backgroundColor: Palette.lightBarColor, fontColor: .black)
+            return Palette.lightBarColor
         case .dark:
-            return (backgroundColor: Palette.darkBarColor, fontColor: .white)
+            return Palette.darkBarColor
         case .champagne:
-            return (backgroundColor: Palette.champagneBarColor, fontColor: .black)
+            return Palette.champagneBarColor
+        }
+    }
+    
+    var fontColor: UIColor {
+        switch self {
+        case .light, .champagne:
+            return .black
+        case .dark:
+            return .white
         }
     }
 }

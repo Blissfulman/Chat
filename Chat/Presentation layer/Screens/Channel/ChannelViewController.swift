@@ -167,7 +167,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
 extension ChannelViewController: ChannelDisplayLogic {
     
     func displayTheme(viewModel: ChannelModel.SetupTheme.ViewModel) {
-        bottomView.backgroundColor = viewModel.theme.themeColors.backgroundColor
+        bottomView.backgroundColor = viewModel.theme.backgroundColor
     }
     
     func displayFetchingMessagesError(viewModel: ChannelModel.FetchingMessagesError.ViewModel) {

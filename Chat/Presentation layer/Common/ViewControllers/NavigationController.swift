@@ -31,9 +31,9 @@ final class NavigationController: UINavigationController {
     static func updateColors(for theme: Theme) {
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
-            appearance.backgroundColor = theme.themeColors.backgroundColor
-            appearance.titleTextAttributes = [.foregroundColor: theme.themeColors.fontColor]
-            appearance.largeTitleTextAttributes = [.foregroundColor: theme.themeColors.fontColor]
+            appearance.backgroundColor = theme.backgroundColor
+            appearance.titleTextAttributes = [.foregroundColor: theme.fontColor]
+            appearance.largeTitleTextAttributes = [.foregroundColor: theme.fontColor]
             
             let navigationBar = UINavigationBar.appearance(whenContainedInInstancesOf: [NavigationController.self])
             navigationBar.standardAppearance = appearance

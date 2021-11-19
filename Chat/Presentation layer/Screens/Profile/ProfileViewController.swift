@@ -316,8 +316,8 @@ final class ProfileViewController: KeyboardNotificationsViewController {
 extension ProfileViewController: ProfileDisplayLogic {
     
     func displayTheme(viewModel: ChannelModel.SetupTheme.ViewModel) {
-        topView.backgroundColor = viewModel.theme.themeColors.backgroundColor
-        titleLabel.textColor = viewModel.theme.themeColors.fontColor
+        topView.backgroundColor = viewModel.theme.backgroundColor
+        titleLabel.textColor = viewModel.theme.fontColor
     }
     
     func displayProfile(viewModel: ProfileModel.FetchProfile.ViewModel) {
