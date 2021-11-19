@@ -13,7 +13,7 @@ final class ChannelListAssembly {
     static func assembly() -> UIViewController {
         let presenter = ChannelListPresenter()
         let channelsService: ChannelsService = ServiceLayer.shared.channelsService
-        let channelListDataSource: ChannelListDataSourceProtocol = ChannelListDataSource(
+        let channelListDataSource = ChannelListDataSource(
             fetchedResultsController: channelsService.channelListFetchedResultsController
         )
         let interactor = ChannelListInteractor(presenter: presenter, channelListDataSource: channelListDataSource)
