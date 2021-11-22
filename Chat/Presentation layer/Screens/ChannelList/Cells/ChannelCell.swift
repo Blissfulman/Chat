@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ChannelCell: UITableViewCell, ConfigurableCell {
+final class ChannelCell: UITableViewCell, ConfigurableTableCell {
     
     typealias ConfigurationModel = Channel
     

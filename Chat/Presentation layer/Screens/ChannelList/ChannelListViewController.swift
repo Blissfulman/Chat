@@ -121,7 +121,6 @@ final class ChannelListViewController: UIViewController {
     
     private func configureUI() {
         navigationItem.backButtonTitle = ""
-        view.backgroundColor = .white
         title = "Channels"
     }
     

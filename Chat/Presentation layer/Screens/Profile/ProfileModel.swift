@@ -125,4 +125,14 @@ enum ProfileModel {
             let retryHandler: () -> Void
         }
     }
+    
+    // MARK: - Routing
+    
+    enum Route {
+        struct ImagePicker {
+            let didPickImageHandler: (Data) -> Void
+        }
+        
+        struct Back {}
+    }
 }

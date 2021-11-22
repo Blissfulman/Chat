@@ -182,7 +182,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     @objc
     private func closeButtonTapped() {
-        router.dismiss()
+        router.back(route: ProfileModel.Route.Back())
     }
     
     @objc
@@ -339,6 +339,14 @@ extension ProfileViewController: ProfileDisplayLogic {
             }
             self.imagePickerController.sourceType = .camera
             self.present(self.imagePickerController, animated: true)
+        }, downloadAction: { [weak self] in
+            guard let self = self else { return }
+            let route = ProfileModel.Route.ImagePicker(didPickImageHandler: { [weak self] imageData in
+                guard let self = self else { return }
+                self.avatarImageView.image = UIImage(data: imageData)
+                self.interactor.didSelectNewAvatar(request: ProfileModel.DidSelectNewAvatar.Request())
+            })
+            self.router.navigateToImagePicker(route: route)
         })
         present(alertController, animated: true)
     }

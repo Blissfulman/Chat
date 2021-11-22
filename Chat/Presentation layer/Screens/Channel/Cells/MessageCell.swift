@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MessageCell: UITableViewCell, ConfigurableCell {
+final class MessageCell: UITableViewCell, ConfigurableTableCell {
     
     typealias ConfigurationModel = Message
     

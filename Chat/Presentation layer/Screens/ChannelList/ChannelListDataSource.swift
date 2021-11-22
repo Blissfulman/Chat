@@ -10,6 +10,7 @@ import CoreData
 
 protocol ChannelListDataSourceProtocol {
     var tableView: UITableView? { get set }
+    
     func сhannel(at indexPath: IndexPath) -> Channel?
 }
 

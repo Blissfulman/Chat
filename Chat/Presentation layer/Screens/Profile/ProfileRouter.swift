@@ -8,7 +8,8 @@
 import UIKit
 
 protocol ProfileRoutingLogic: AnyObject {
-    func dismiss()
+    func navigateToImagePicker(route: ProfileModel.Route.ImagePicker)
+    func back(route: ProfileModel.Route.Back)
 }
 
 final class ProfileRouter: ProfileRoutingLogic {
@@ -17,9 +18,16 @@ final class ProfileRouter: ProfileRoutingLogic {
     
     weak var viewController: UIViewController?
     
-    // MARK: - ChannelListRoutingLogic
+    // MARK: - ProfileRoutingLogic
     
-    func dismiss() {
+    func navigateToImagePicker(route: ProfileModel.Route.ImagePicker) {
+        let parameters = ImagePickerAssemby.Parameters(didPickImageHandler: route.didPickImageHandler)
+        let imagePickerViewController = ImagePickerAssemby.assembly(parameters: parameters)
+        imagePickerViewController.modalPresentationStyle = .overFullScreen
+        viewController?.present(imagePickerViewController, animated: true)
+    }
+    
+    func back(route: ProfileModel.Route.Back) {
         viewController?.dismiss(animated: true)
     }
 }
