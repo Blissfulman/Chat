@@ -22,6 +22,11 @@ final class ImagePickerViewController: UIViewController {
     
     // MARK: - Private properties
     
+    private lazy var topBarView: TopBarView = {
+        let view = TopBarView(rightButtonTitle: "Close", rightButtonAction: closeButtonTapped)
+        return view
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let size = (UIScreen.main.bounds.width - (Constants.numberOfColumns + 1) * Constants.cellSpacing)
@@ -65,19 +70,29 @@ final class ImagePickerViewController: UIViewController {
         setupLayout()
     }
     
+    // MARK: - Actions
+    
+    private func closeButtonTapped() {
+        router.back()
+    }
+    
     // MARK: - Private methods
     
     private func setupUI() {
+        view.roundCorners([.topLeft, .topRight], radius: 18)
         view.backgroundColor = .white
+        view.addSubview(topBarView)
         view.addSubview(collectionView)
     }
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor,
-                constant: Constants.cellSpacing
-            ),
+            topBarView.topAnchor.constraint(equalTo: view.topAnchor),
+            topBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topBarView.heightAnchor.constraint(equalToConstant: 70),
+                                            
+            collectionView.topAnchor.constraint(equalTo: topBarView.bottomAnchor, constant: Constants.cellSpacing),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.cellSpacing),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.cellSpacing),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.cellSpacing)

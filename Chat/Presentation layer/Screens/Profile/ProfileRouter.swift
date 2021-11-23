@@ -23,7 +23,6 @@ final class ProfileRouter: ProfileRoutingLogic {
     func navigateToImagePicker(route: ProfileModel.Route.ImagePicker) {
         let parameters = ImagePickerAssemby.Parameters(didPickImageHandler: route.didPickImageHandler)
         let imagePickerViewController = ImagePickerAssemby.assembly(parameters: parameters)
-        imagePickerViewController.modalPresentationStyle = .overFullScreen
         viewController?.present(imagePickerViewController, animated: true)
     }
     

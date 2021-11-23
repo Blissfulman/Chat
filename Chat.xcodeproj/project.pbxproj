@@ -100,6 +100,7 @@
 		CEE9FF0D272C749B00628F34 /* ChannelListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF0C272C749B00628F34 /* ChannelListAssembly.swift */; };
 		CEE9FF0F272C74AF00628F34 /* ChannelListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF0E272C74AF00628F34 /* ChannelListModel.swift */; };
 		CEE9FF12272C75A600628F34 /* ChannelListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF11272C75A600628F34 /* ChannelListRouter.swift */; };
+		CEEA427E274D206500420134 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA427D274D206500420134 /* TopBarView.swift */; };
 		CEEDAEE9271C8823005B8F21 /* KeyboardNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDAEE8271C8823005B8F21 /* KeyboardNotificationsViewController.swift */; };
 		CEFBEA27273BAECE00EE5C43 /* FetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBEA26273BAECE00EE5C43 /* FetchedResultsControllerDelegate.swift */; };
 		CEFE086E2745538E0057CED6 /* ServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE086D2745538E0057CED6 /* ServiceLayer.swift */; };
@@ -213,6 +214,7 @@
 		CEE9FF0C272C749B00628F34 /* ChannelListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListAssembly.swift; sourceTree = "<group>"; };
 		CEE9FF0E272C74AF00628F34 /* ChannelListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListModel.swift; sourceTree = "<group>"; };
 		CEE9FF11272C75A600628F34 /* ChannelListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListRouter.swift; sourceTree = "<group>"; };
+		CEEA427D274D206500420134 /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 		CEEDAEE8271C8823005B8F21 /* KeyboardNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardNotificationsViewController.swift; sourceTree = "<group>"; };
 		CEFBEA26273BAECE00EE5C43 /* FetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedResultsControllerDelegate.swift; sourceTree = "<group>"; };
 		CEFE086D2745538E0057CED6 /* ServiceLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
@@ -579,10 +581,19 @@
 			path = Style;
 			sourceTree = "<group>";
 		};
+		CEEA427C274D203000420134 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CEEA427D274D206500420134 /* TopBarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CEEDAEE7271C8815005B8F21 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				CE39478C270F73A9004C6FD1 /* ViewControllers */,
+				CEEA427C274D203000420134 /* Views */,
 				CED84B3A27025CFE00D4E4EB /* Style */,
 				CE39697C2744360C0026D869 /* Helpers */,
 				CE4E07E6270247CC00AE0113 /* Extensions */,
@@ -864,6 +875,7 @@
 				CEB97AC0272D3CCB00C405CA /* ChannelPresenter.swift in Sources */,
 				CEB97AC6272D94E600C405CA /* ProfileRouter.swift in Sources */,
 				CE0C600C27458F76002A1FF9 /* ChannelsService.swift in Sources */,
+				CEEA427E274D206500420134 /* TopBarView.swift in Sources */,
 				CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */,
 				CEB97AC8272D94F000C405CA /* ProfileInteractor.swift in Sources */,
 				CE1DE68C2746379300D1219B /* AsyncHandlerType.swift in Sources */,
