@@ -310,9 +310,9 @@ extension ProfileViewController: ProfileDisplayLogic {
             self.present(self.imagePickerController, animated: true)
         }, downloadAction: { [weak self] in
             guard let self = self else { return }
-            let route = ProfileModel.Route.ImagePicker(didPickImageHandler: { [weak self] imageData in
+            let route = ProfileModel.Route.ImagePicker(didPickImageHandler: { [weak self] imageURL in
                 guard let self = self else { return }
-                self.avatarImageView.image = UIImage(data: imageData)
+                self.avatarImageView.setImage(with: imageURL)
                 self.interactor.didSelectNewAvatar(request: ProfileModel.DidSelectNewAvatar.Request())
             })
             self.router.navigateToImagePicker(route: route)

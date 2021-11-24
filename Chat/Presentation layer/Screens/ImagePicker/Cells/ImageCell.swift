@@ -9,13 +9,15 @@ import UIKit
 
 final class ImageCell: UICollectionViewCell, ConfigurableCollectionCell {
     
-    typealias ConfigurationModel = Data
+    typealias ConfigurationModel = URL
     
     // MARK: - Private properties
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView().prepareForAutoLayout()
-        imageView.image = Images.noPhoto
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = Images.imagePlaceholder
         return imageView
     }()
     
@@ -31,10 +33,17 @@ final class ImageCell: UICollectionViewCell, ConfigurableCollectionCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle methods
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = Images.imagePlaceholder
+    }
+    
     // MARK: - Public methods
     
     func configure(with model: ConfigurationModel) {
-        imageView.image = UIImage(data: model)
+        imageView.setImage(with: model)
     }
     
     // MARK: - Private methods

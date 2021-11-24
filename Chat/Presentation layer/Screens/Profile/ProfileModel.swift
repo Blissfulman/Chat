@@ -130,7 +130,7 @@ enum ProfileModel {
     
     enum Route {
         struct ImagePicker {
-            let didPickImageHandler: (Data) -> Void
+            let didPickImageHandler: (URL) -> Void
         }
         
         struct Back {}

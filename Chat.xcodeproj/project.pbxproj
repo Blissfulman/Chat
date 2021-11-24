@@ -36,6 +36,8 @@
 		CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */; };
 		CE2608802718B01800CAE9B6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE26087F2718B01800CAE9B6 /* Theme.swift */; };
 		CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */; };
+		CE29D2A0274E6D52001C103A /* ImagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29D29F274E6D52001C103A /* ImagesService.swift */; };
+		CE29D2A3274E6DDC001C103A /* APIRequestSenderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29D2A2274E6DDC001C103A /* APIRequestSenderImpl.swift */; };
 		CE32F21A270484EE007262A5 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */; };
 		CE32F21B270484F1007262A5 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */; };
 		CE32F21D27048600007262A5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32F21C27048600007262A5 /* Fonts.swift */; };
@@ -87,6 +89,15 @@
 		CEB97ACA272D94F900C405CA /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97AC9272D94F900C405CA /* ProfilePresenter.swift */; };
 		CEB97ACD272FD81700C405CA /* ChannelListViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97ACC272FD81700C405CA /* ChannelListViewController+Extension.swift */; };
 		CEB97ACF272FD9CD00C405CA /* ProfileViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB97ACE272FD9CD00C405CA /* ProfileViewController+Extension.swift */; };
+		CEC630BB274EB06300415528 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630BA274EB06300415528 /* APIConstants.swift */; };
+		CEC630BD274EB97300415528 /* APIRequestsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630BC274EB97300415528 /* APIRequestsFactory.swift */; };
+		CEC630BF274EBD9E00415528 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630BE274EBD9E00415528 /* APIRequest.swift */; };
+		CEC630C1274EBFCA00415528 /* APIParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630C0274EBFCA00415528 /* APIParser.swift */; };
+		CEC630C3274EC00000415528 /* APIRequestConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630C2274EC00000415528 /* APIRequestConfig.swift */; };
+		CEC630C5274EC0A100415528 /* APIRequestSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630C4274EC0A100415528 /* APIRequestSender.swift */; };
+		CEC630C8274EC2FA00415528 /* ImagesAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630C7274EC2FA00415528 /* ImagesAPIRequest.swift */; };
+		CEC630CB274EC3E400415528 /* ImagesResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630CA274EC3E400415528 /* ImagesResponseParser.swift */; };
+		CEC630CD274EC9E000415528 /* ImagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630CC274EC9E000415528 /* ImagesResponse.swift */; };
 		CED023E726FFB61100062489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED023E626FFB61100062489 /* Assets.xcassets */; };
 		CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED84B3827025BC300D4E4EB /* Palette.xcassets */; };
 		CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3B27025D1700D4E4EB /* Palette.swift */; };
@@ -101,6 +112,8 @@
 		CEE9FF0F272C74AF00628F34 /* ChannelListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF0E272C74AF00628F34 /* ChannelListModel.swift */; };
 		CEE9FF12272C75A600628F34 /* ChannelListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9FF11272C75A600628F34 /* ChannelListRouter.swift */; };
 		CEEA427E274D206500420134 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA427D274D206500420134 /* TopBarView.swift */; };
+		CEEA4280274D4B0500420134 /* ImagesServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA427F274D4B0500420134 /* ImagesServiceImpl.swift */; };
+		CEEA4282274D686700420134 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA4281274D686700420134 /* UIImageView+Extension.swift */; };
 		CEEDAEE9271C8823005B8F21 /* KeyboardNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDAEE8271C8823005B8F21 /* KeyboardNotificationsViewController.swift */; };
 		CEFBEA27273BAECE00EE5C43 /* FetchedResultsControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBEA26273BAECE00EE5C43 /* FetchedResultsControllerDelegate.swift */; };
 		CEFE086E2745538E0057CED6 /* ServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE086D2745538E0057CED6 /* ServiceLayer.swift */; };
@@ -150,6 +163,8 @@
 		CE26087D2718A9EF00CAE9B6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		CE26087F2718B01800CAE9B6 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		CE29D29F274E6D52001C103A /* ImagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesService.swift; sourceTree = "<group>"; };
+		CE29D2A2274E6DDC001C103A /* APIRequestSenderImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestSenderImpl.swift; sourceTree = "<group>"; };
 		CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		CE32F21C27048600007262A5 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -201,6 +216,15 @@
 		CEB97AC9272D94F900C405CA /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		CEB97ACC272FD81700C405CA /* ChannelListViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChannelListViewController+Extension.swift"; sourceTree = "<group>"; };
 		CEB97ACE272FD9CD00C405CA /* ProfileViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController+Extension.swift"; sourceTree = "<group>"; };
+		CEC630BA274EB06300415528 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		CEC630BC274EB97300415528 /* APIRequestsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestsFactory.swift; sourceTree = "<group>"; };
+		CEC630BE274EBD9E00415528 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		CEC630C0274EBFCA00415528 /* APIParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIParser.swift; sourceTree = "<group>"; };
+		CEC630C2274EC00000415528 /* APIRequestConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestConfig.swift; sourceTree = "<group>"; };
+		CEC630C4274EC0A100415528 /* APIRequestSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestSender.swift; sourceTree = "<group>"; };
+		CEC630C7274EC2FA00415528 /* ImagesAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesAPIRequest.swift; sourceTree = "<group>"; };
+		CEC630CA274EC3E400415528 /* ImagesResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesResponseParser.swift; sourceTree = "<group>"; };
+		CEC630CC274EC9E000415528 /* ImagesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesResponse.swift; sourceTree = "<group>"; };
 		CED023E626FFB61100062489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CED84B3827025BC300D4E4EB /* Palette.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Palette.xcassets; sourceTree = "<group>"; };
 		CED84B3B27025D1700D4E4EB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -215,6 +239,8 @@
 		CEE9FF0E272C74AF00628F34 /* ChannelListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListModel.swift; sourceTree = "<group>"; };
 		CEE9FF11272C75A600628F34 /* ChannelListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListRouter.swift; sourceTree = "<group>"; };
 		CEEA427D274D206500420134 /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
+		CEEA427F274D4B0500420134 /* ImagesServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesServiceImpl.swift; sourceTree = "<group>"; };
+		CEEA4281274D686700420134 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		CEEDAEE8271C8823005B8F21 /* KeyboardNotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardNotificationsViewController.swift; sourceTree = "<group>"; };
 		CEFBEA26273BAECE00EE5C43 /* FetchedResultsControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedResultsControllerDelegate.swift; sourceTree = "<group>"; };
 		CEFE086D2745538E0057CED6 /* ServiceLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
@@ -356,6 +382,29 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		CE29D2A1274E6DA2001C103A /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				CE29D2A2274E6DDC001C103A /* APIRequestSenderImpl.swift */,
+				CEC630BC274EB97300415528 /* APIRequestsFactory.swift */,
+				CEC630C6274EC2E600415528 /* Requests */,
+				CEC630C9274EC31D00415528 /* Parsers */,
+				CE29D2A4274E6E09001C103A /* Helpers */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		CE29D2A4274E6E09001C103A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CEC630BE274EBD9E00415528 /* APIRequest.swift */,
+				CEC630C0274EBFCA00415528 /* APIParser.swift */,
+				CEC630C2274EC00000415528 /* APIRequestConfig.swift */,
+				CEC630C4274EC0A100415528 /* APIRequestSender.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		CE32F21627048490007262A5 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +465,7 @@
 				CE0C600D27459691002A1FF9 /* ChannelsServiceImpl.swift */,
 				CE0C600F2745981F002A1FF9 /* MessagesServiceImpl.swift */,
 				CE1DE6892746323B00D1219B /* ProfileServiceImpl.swift */,
+				CEEA427F274D4B0500420134 /* ImagesServiceImpl.swift */,
 				CEFE088D27458A8C0057CED6 /* Protocols */,
 			);
 			path = Services;
@@ -437,6 +487,7 @@
 				CE3E913E270E21120029DA74 /* Message.swift */,
 				CE26087F2718B01800CAE9B6 /* Theme.swift */,
 				CE8B576027205E8E002E3434 /* Profile.swift */,
+				CEC630CC274EC9E000415528 /* ImagesResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -481,6 +532,7 @@
 				CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */,
 				CE1AE10727493D6800DFFDDD /* UICollectionView+Extension.swift */,
 				CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */,
+				CEEA4281274D686700420134 /* UIImageView+Extension.swift */,
 				CE394791270F8581004C6FD1 /* Date+Extension.swift */,
 				CE6667C92720871200DD6B40 /* Data+Extension.swift */,
 			);
@@ -539,6 +591,22 @@
 				CE7A11362728832600B92C0B /* NewMessageTextField.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		CEC630C6274EC2E600415528 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				CEC630C7274EC2FA00415528 /* ImagesAPIRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		CEC630C9274EC31D00415528 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				CEC630CA274EC3E400415528 /* ImagesResponseParser.swift */,
+			);
+			path = Parsers;
 			sourceTree = "<group>";
 		};
 		CED023E326FFAEE300062489 /* Resources */ = {
@@ -604,6 +672,7 @@
 		CEFE0871274555BB0057CED6 /* Core layer */ = {
 			isa = PBXGroup;
 			children = (
+				CE29D2A1274E6DA2001C103A /* Networking */,
 				CE2608812718C3C200CAE9B6 /* Managers */,
 				CEFE0872274556C50057CED6 /* Storages */,
 				CEFE08732745594B0057CED6 /* Helpers */,
@@ -631,6 +700,7 @@
 				CEFE08892745826F0057CED6 /* FileStorageDataType.swift */,
 				CE6667CB272099F100DD6B40 /* AsyncHandler.swift */,
 				CE1DE68D2746418A00D1219B /* AsyncHandlerQoS.swift */,
+				CEC630BA274EB06300415528 /* APIConstants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -672,6 +742,7 @@
 				CE0C600B27458F76002A1FF9 /* ChannelsService.swift */,
 				CE0C60112745A0C0002A1FF9 /* MessagesService.swift */,
 				CE1DE68F27464C1200D1219B /* ProfileService.swift */,
+				CE29D29F274E6D52001C103A /* ImagesService.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -835,29 +906,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC630C8274EC2FA00415528 /* ImagesAPIRequest.swift in Sources */,
 				CEEDAEE9271C8823005B8F21 /* KeyboardNotificationsViewController.swift in Sources */,
+				CEC630C5274EC0A100415528 /* APIRequestSender.swift in Sources */,
 				CE8B576127205E8E002E3434 /* Profile.swift in Sources */,
 				CE9B0BC32721BEC60001DF15 /* ProfileDescriptionTextField.swift in Sources */,
 				CE4240A82704C1A800CA3386 /* UIViewController+Extension.swift in Sources */,
 				CE03EE70273AF76400D9F898 /* CoreTypealiases.swift in Sources */,
 				CE1DE68A2746323B00D1219B /* ProfileServiceImpl.swift in Sources */,
+				CEC630CD274EC9E000415528 /* ImagesResponse.swift in Sources */,
 				CEB97ACD272FD81700C405CA /* ChannelListViewController+Extension.swift in Sources */,
 				CE394790270F7C1C004C6FD1 /* PartnerMessageView.swift in Sources */,
 				CE2474CB2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift in Sources */,
 				CE0C600A27458ACA002A1FF9 /* SettingsServiceImpl.swift in Sources */,
+				CEC630BB274EB06300415528 /* APIConstants.swift in Sources */,
 				CE1AE10827493D6800DFFDDD /* UICollectionView+Extension.swift in Sources */,
 				CEE9FF0F272C74AF00628F34 /* ChannelListModel.swift in Sources */,
 				CEFE087A274578A30057CED6 /* ContentManager.swift in Sources */,
 				CEFE088027457A0B0057CED6 /* CoreDataStorageImpl.swift in Sources */,
 				CE2608802718B01800CAE9B6 /* Theme.swift in Sources */,
 				CE39478E270F73CE004C6FD1 /* MyMessageView.swift in Sources */,
+				CEC630CB274EC3E400415528 /* ImagesResponseParser.swift in Sources */,
 				CEA00F7E2739AA10007F925E /* ChannelDataSource.swift in Sources */,
 				CE0C60102745981F002A1FF9 /* MessagesServiceImpl.swift in Sources */,
 				CE7A11372728832600B92C0B /* NewMessageTextField.swift in Sources */,
 				CEE6513E2721F013009DD993 /* ProfileDataManager.swift in Sources */,
+				CE29D2A3274E6DDC001C103A /* APIRequestSenderImpl.swift in Sources */,
 				CE1DE68E2746418A00D1219B /* AsyncHandlerQoS.swift in Sources */,
 				CE0FDBBA26FFCABA00809ABB /* ProfileViewController.swift in Sources */,
 				CE9C657C270F2F8A008756AC /* ConfigurableCells.swift in Sources */,
+				CEC630BD274EB97300415528 /* APIRequestsFactory.swift in Sources */,
 				CE9AF681270B89C1006D44A8 /* ChannelViewController.swift in Sources */,
 				CEFE087727456B810057CED6 /* GlobalData.swift in Sources */,
 				CE1DE69027464C1200D1219B /* ProfileService.swift in Sources */,
@@ -875,9 +953,12 @@
 				CEB97AC0272D3CCB00C405CA /* ChannelPresenter.swift in Sources */,
 				CEB97AC6272D94E600C405CA /* ProfileRouter.swift in Sources */,
 				CE0C600C27458F76002A1FF9 /* ChannelsService.swift in Sources */,
+				CEC630BF274EBD9E00415528 /* APIRequest.swift in Sources */,
 				CEEA427E274D206500420134 /* TopBarView.swift in Sources */,
 				CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */,
 				CEB97AC8272D94F000C405CA /* ProfileInteractor.swift in Sources */,
+				CEC630C3274EC00000415528 /* APIRequestConfig.swift in Sources */,
+				CEC630C1274EBFCA00415528 /* APIParser.swift in Sources */,
 				CE1DE68C2746379300D1219B /* AsyncHandlerType.swift in Sources */,
 				CEE9FF0D272C749B00628F34 /* ChannelListAssembly.swift in Sources */,
 				CEFE088227457D3C0057CED6 /* FirestoreManagerImpl.swift in Sources */,
@@ -914,10 +995,13 @@
 				CEB97ABA272D3C9A00C405CA /* ChannelModel.swift in Sources */,
 				CE4B251027495917007E92F3 /* ImagePickerAssemby.swift in Sources */,
 				CEFE088627457F760057CED6 /* ProfileDataManagerImpl.swift in Sources */,
+				CEEA4280274D4B0500420134 /* ImagesServiceImpl.swift in Sources */,
 				CE8B576327205F2E002E3434 /* SyncProfileDataManager.swift in Sources */,
+				CE29D2A0274E6D52001C103A /* ImagesService.swift in Sources */,
 				CE04B4E7271F52B80027F649 /* ProfileFilledButton.swift in Sources */,
 				CE4B251227496EA0007E92F3 /* ImagePickerInteractor.swift in Sources */,
 				CEB97ACA272D94F900C405CA /* ProfilePresenter.swift in Sources */,
+				CEEA4282274D686700420134 /* UIImageView+Extension.swift in Sources */,
 				CE6667CC272099F100DD6B40 /* AsyncHandler.swift in Sources */,
 				CE93B36127385BB400AD66F7 /* ChannelListDataSource.swift in Sources */,
 				CEAC820A274937FC00F50125 /* ImagePickerViewController.swift in Sources */,

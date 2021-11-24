@@ -10,5 +10,6 @@ import Firebase
 protocol FirestoreObject {
     var id: String { get } // Необходимо для возможности удалять объекты по их ID
     var toDictionary: [String: Any] { get }
+    
     init?(snapshot: QueryDocumentSnapshot)
 }

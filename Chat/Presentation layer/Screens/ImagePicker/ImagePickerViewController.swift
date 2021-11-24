@@ -68,6 +68,7 @@ final class ImagePickerViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupLayout()
+        interactor.fetchImages(request: ImagePickerModel.FetchImages.Request(indexPath: IndexPath(item: 0, section: 0)))
     }
     
     // MARK: - Actions

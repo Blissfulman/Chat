@@ -14,7 +14,6 @@ final class ImagePickerAssemby {
         let imagePickerDataSource = ImagePickerDataSource()
         let interactor = ImagePickerInteractor(
             presenter: presenter,
-//            imagesService: ServiceLayer.shared.imagesService,
             imagePickerDataSource: imagePickerDataSource,
             didPickImageHandler: parameters.didPickImageHandler
         )
@@ -30,6 +29,6 @@ final class ImagePickerAssemby {
     }
     
     struct Parameters {
-        let didPickImageHandler: (Data) -> Void
+        let didPickImageHandler: (URL) -> Void
     }
 }

@@ -9,13 +9,17 @@ import Foundation
 
 enum ImagePickerModel {
     
+    struct FetchImages {
+        struct Request {
+            let indexPath: IndexPath
+        }
+    }
+    
     struct PickImage {
         struct Request {
             let indexPath: IndexPath
         }
-        struct Response {
-            let imageData: Data?
-        }
+        struct Response {}
         struct ViewModel {}
     }
 }

@@ -10,7 +10,8 @@ import UIKit
 protocol ImagePickerDataSourceProtocol {
     var collectionView: UICollectionView? { get set }
     
-    func imageData(at indexPath: IndexPath) -> Data?
+    func updateData(imageItems: [ImageItem])
+    func imageItem(at indexPath: IndexPath) -> ImageItem
 }
 
 final class ImagePickerDataSource: NSObject, ImagePickerDataSourceProtocol {
@@ -20,18 +21,22 @@ final class ImagePickerDataSource: NSObject, ImagePickerDataSourceProtocol {
     weak var collectionView: UICollectionView? {
         didSet {
             collectionView?.dataSource = self
-            collectionView?.reloadData() // TEMP?
         }
     }
     
     // MARK: - Private properties
     
-    private var images = [Data]()
+    private var imageItems = [ImageItem]()
     
     // MARK: - Public methods
     
-    func imageData(at indexPath: IndexPath) -> Data? {
-        nil
+    func updateData(imageItems: [ImageItem]) {
+        self.imageItems = imageItems
+        collectionView?.reloadData()
+    }
+    
+    func imageItem(at indexPath: IndexPath) -> ImageItem {
+        imageItems[indexPath.row]
     }
 }
 
@@ -40,7 +45,7 @@ final class ImagePickerDataSource: NSObject, ImagePickerDataSourceProtocol {
 extension ImagePickerDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        30
+        imageItems.count
     }
     
     func collectionView(
@@ -52,7 +57,9 @@ extension ImagePickerDataSource: UICollectionViewDataSource {
         else {
             return UICollectionViewCell()
         }
-//        cell.configure(with: Data())
+        if let url = imageItems[indexPath.row].previewURL {
+            cell.configure(with: url)
+        }
         return cell
     }
 }
