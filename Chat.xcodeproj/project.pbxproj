@@ -102,6 +102,7 @@
 		CEC630D3274FC90700415528 /* MyMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630D2274FC90700415528 /* MyMessageViewModel.swift */; };
 		CEC630D5274FCE1F00415528 /* ChannelRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630D4274FCE1F00415528 /* ChannelRouter.swift */; };
 		CEC630F72750039D00415528 /* CellDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630F62750039D00415528 /* CellDataFetcher.swift */; };
+		CEC630F92750137300415528 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630F82750137300415528 /* String+Extension.swift */; };
 		CED023E726FFB61100062489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED023E626FFB61100062489 /* Assets.xcassets */; };
 		CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED84B3827025BC300D4E4EB /* Palette.xcassets */; };
 		CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3B27025D1700D4E4EB /* Palette.swift */; };
@@ -233,6 +234,7 @@
 		CEC630D2274FC90700415528 /* MyMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageViewModel.swift; sourceTree = "<group>"; };
 		CEC630D4274FCE1F00415528 /* ChannelRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRouter.swift; sourceTree = "<group>"; };
 		CEC630F62750039D00415528 /* CellDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDataFetcher.swift; sourceTree = "<group>"; };
+		CEC630F82750137300415528 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		CED023E626FFB61100062489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CED84B3827025BC300D4E4EB /* Palette.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Palette.xcassets; sourceTree = "<group>"; };
 		CED84B3B27025D1700D4E4EB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -750,6 +752,7 @@
 			isa = PBXGroup;
 			children = (
 				CE2474CA2731C5E000A4AEC0 /* NSManagedObjectContext+Extension.swift */,
+				CEC630F82750137300415528 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -992,6 +995,7 @@
 				CEE9FF0D272C749B00628F34 /* ChannelListAssembly.swift in Sources */,
 				CEFE088227457D3C0057CED6 /* FirestoreManagerImpl.swift in Sources */,
 				CEB97AB8272D3C8800C405CA /* ChannelAssembly.swift in Sources */,
+				CEC630F92750137300415528 /* String+Extension.swift in Sources */,
 				CE1DE6942746893D00D1219B /* DubugLogger.swift in Sources */,
 				CEFE088427457DA00057CED6 /* SettingsManagerImpl.swift in Sources */,
 				CEE9FF0B272C748500628F34 /* ChannelListPresenter.swift in Sources */,

@@ -26,7 +26,7 @@ struct ImagesAPIRequest: APIRequest {
     private var queryParameters: [String: String] {
         [
             "key": APIConstants.apiKey,
-            "q": query,
+            "q": query.urlEncoded() ?? "",
             "per_page": "\(itemsPerPage)",
             "page": "\(page)"
         ]
