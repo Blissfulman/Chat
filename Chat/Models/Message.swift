@@ -7,10 +7,11 @@
 
 import Firebase
 
-struct Message {
+struct Message: FirestoreObject {
     
     // MARK: - Public properties
     
+    let id: String
     let content: String
     let created: Date
     let senderID: String
@@ -27,7 +28,8 @@ struct Message {
     
     // MARK: - Initialization
     
-    init(content: String, created: Date, senderID: String, senderName: String) {
+    init(id: String, content: String, created: Date, senderID: String, senderName: String) {
+        self.id = id
         self.content = content
         self.created = created
         self.senderID = senderID
@@ -47,6 +49,7 @@ struct Message {
         else {
             return nil
         }
+        self.id = snapshot.documentID
         self.content = content
         self.created = timestamp.dateValue()
         self.senderID = totalSenderID
@@ -55,6 +58,7 @@ struct Message {
     
     init?(dbMessage: DBMessage) {
         guard
+            let id = dbMessage.id,
             let content = dbMessage.content,
             let created = dbMessage.created,
             let senderID = dbMessage.senderID,
@@ -62,6 +66,7 @@ struct Message {
         else {
             return nil
         }
+        self.id = id
         self.content = content
         self.created = created
         self.senderID = senderID

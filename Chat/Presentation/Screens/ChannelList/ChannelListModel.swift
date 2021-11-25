@@ -38,12 +38,6 @@ enum ChannelListModel {
     
     enum ChannelList {
         struct Request {}
-        struct Response {
-            let channels: [Channel]
-        }
-        struct ViewModel {
-            let channels: [Channel]
-        }
     }
     
     enum AddChannelAlert {
@@ -68,7 +62,7 @@ enum ChannelListModel {
     
     enum OpenChannel {
         struct Request {
-            let channel: Channel
+            let indexPath: IndexPath
         }
         struct Response {
             let channel: Channel
@@ -76,6 +70,12 @@ enum ChannelListModel {
         }
         struct ViewModel {
             let route: Route.ChannelScreen
+        }
+    }
+    
+    enum DeleteChannel {
+        struct Request {
+            let indexPath: IndexPath
         }
     }
     

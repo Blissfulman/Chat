@@ -8,6 +8,7 @@
 import UIKit
 
 protocol ProfileDisplayLogic: AnyObject {
+    func displayTheme(viewModel: ChannelModel.SetupTheme.ViewModel)
     func displayProfile(viewModel: ProfileModel.FetchProfile.ViewModel)
     func displayEditingAvatarAlert(viewModel: ProfileModel.EditingAvatarAlert.ViewModel)
     func displayEditingState(viewModel: ProfileModel.EditingState.ViewModel)
@@ -293,6 +294,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private func configureUI() {
         view.backgroundColor = .white
         imagePickerController.delegate = self
+        interactor.setupTheme(request: ChannelModel.SetupTheme.Request())
         interactor.fetchProfile(request: ProfileModel.FetchProfile.Request())
     }
     
@@ -311,6 +313,11 @@ final class ProfileViewController: KeyboardNotificationsViewController {
 // MARK: - ProfileDisplayLogic
 
 extension ProfileViewController: ProfileDisplayLogic {
+    
+    func displayTheme(viewModel: ChannelModel.SetupTheme.ViewModel) {
+        topView.backgroundColor = viewModel.theme.themeColors.backgroundColor
+        titleLabel.textColor = viewModel.theme.themeColors.fontColor
+    }
     
     func displayProfile(viewModel: ProfileModel.FetchProfile.ViewModel) {
         fullNameTextField.text = viewModel.fullName

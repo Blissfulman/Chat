@@ -8,23 +8,21 @@
 import CoreData
 
 protocol DataStorageManagerProtocol {
+    /// Экземпляр `NSFetchedResultsController`, отслеживающий сохранённые каналы.
+    var channelListFetchedResultsController: NSFetchedResultsController<DBChannel> { get }
+    /// Экземпляр `NSFetchedResultsController`, отслеживающий сохранённые сообщения указанного канала.
+    /// - Parameter channel: Канал, чьи сообщения контроллер будет отслеживать.
+    func channelFetchedResultsController(forChannel channel: Channel) -> NSFetchedResultsController<DBMessage>
     /// Сохранение всех несохранённых данных.
     func saveData()
-    /// Сохранение каналов.
-    /// - Parameter channels: Каналы.
-    func saveChannels(_ channels: [Channel])
-    /// Сохранение сообщений.
+    /// Обновление данных о каналах.
+    /// - Parameter snapshotChannels: Снимок изменений каналов.
+    func updateChannels(_ snapshotChannels: SnapshotObjects<Channel>)
+    /// Обновление данных о сообщениях в канале.
     /// - Parameters:
-    ///   - messages: Сообщения.
+    ///   - snapshotMessages: Снимок изменений сообщений.
     ///   - channel: Канал, к которому эти сообщения относятся.
-    func saveMessages(_ messages: [Message], forChannel channel: Channel)
-    /// Получение всех сохранённых каналов.
-    func fetchChannels() -> [Channel]
-    /// Получение всех сообщений канала.
-    /// - Parameter channel: Канал, сообщения которого необходимо получить.
-    func fetchMessages(forChannel channel: Channel) -> [Message]
-    /// Удаление всех сохранённых данных.
-    func deleteAllData()
+    func updateMessages(_ snapshotMessages: SnapshotObjects<Message>, forChannel channel: Channel)
 }
 
 final class DataStorageManager: DataStorageManagerProtocol {
@@ -32,6 +30,12 @@ final class DataStorageManager: DataStorageManagerProtocol {
     // MARK: - Static properties
     
     static let shared = DataStorageManager()
+    
+    // MARK: - Public properties
+    
+    var channelListFetchedResultsController: NSFetchedResultsController<DBChannel> {
+        storage.fetchedResultsController(for: DBChannel.self, sortDescriptorKey: #keyPath(DBChannel.lastActivity))
+    }
     
     // MARK: - Private properties
     
@@ -43,64 +47,139 @@ final class DataStorageManager: DataStorageManagerProtocol {
     
     // MARK: - Public methods
     
+    func channelFetchedResultsController(forChannel channel: Channel) -> NSFetchedResultsController<DBMessage> {
+        let channelMessagesPredicate = makeChannelMessagesPredicate(forChannel: channel)
+        return storage.fetchedResultsController(
+            for: DBMessage.self,
+            sortDescriptorKey: #keyPath(DBMessage.created),
+            predicate: channelMessagesPredicate
+        )
+    }
+    
     func saveData() {
         storage.saveChanges()
     }
     
-    func saveChannels(_ channels: [Channel]) {
+    func updateChannels(_ snapshotChannels: SnapshotObjects<Channel>) {
+        createChannels(snapshotChannels.addedObjects)
+        modifyChannels(snapshotChannels.modifiedObjects)
+        snapshotChannels.removedObjects.forEach { deleteChannel($0) }
+        saveData()
+    }
+    
+    func updateMessages(_ snapshotMessages: SnapshotObjects<Message>, forChannel channel: Channel) {
+        createMessages(snapshotMessages.addedObjects, forChannel: channel)
+        modifyMessages(snapshotMessages.modifiedObjects)
+        snapshotMessages.removedObjects.forEach { deleteMessage($0) }
+        saveData()
+    }
+    
+    // MARK: - Private methods
+    
+    /// Добавление в хранилище новых каналов.
+    /// - Parameter channels: Каналы, которые необходимо добавить в хранилище.
+    private func createChannels(_ channels: [Channel]) {
+        guard !channels.isEmpty else { return }
+        let savedChannelsIDs = fetchAllChannels().map { $0.id }
+        
         channels.forEach { channel in
+            guard !savedChannelsIDs.contains(channel.id) else { return }
             storage.createObject(from: DBChannel.self) { dbChannel in
-                dbChannel.identifier = channel.identifier
+                dbChannel.id = channel.id
                 dbChannel.name = channel.name
                 dbChannel.lastMessage = channel.lastMessage
                 dbChannel.lastActivity = channel.lastActivity
             }
         }
-        saveData()
     }
     
-    func saveMessages(_ messages: [Message], forChannel channel: Channel) {
+    /// Добавление в хранилище новых сообщений.
+    /// - Parameters:
+    ///   - messages: Сообщения, которые необходимо добавить в хранилище.
+    ///   - channel: Канал, к которому эти сообщения относятся.
+    private func createMessages(_ messages: [Message], forChannel channel: Channel) {
+        guard !messages.isEmpty else { return }
+        let savedMessagesIDs = fetchAllMessages(forChannel: channel).map { $0.id }
+        
         let channelIDPredicate = makeChannelIDPredicate(forChannel: channel)
-        let channel = storage.fetchDataInBackground(for: DBChannel.self, predicate: channelIDPredicate).first
+        let dbChannel = storage.fetchObjects(for: DBChannel.self, predicate: channelIDPredicate).first
+        
         messages.forEach { message in
+            guard !savedMessagesIDs.contains(message.id) else { return }
             storage.createObject(from: DBMessage.self) { dbMessage in
+                dbMessage.id = message.id
                 dbMessage.content = message.content
                 dbMessage.created = message.created
                 dbMessage.senderID = message.senderID
                 dbMessage.senderName = message.senderName
-                dbMessage.channel = channel
+                dbMessage.channel = dbChannel
             }
         }
-        saveData()
     }
     
-    func fetchChannels() -> [Channel] {
-        let dbChannels = storage.fetchData(for: DBChannel.self)
+    /// Получение всех каналов.
+    private func fetchAllChannels() -> [Channel] {
+        let dbChannels = storage.fetchObjects(for: DBChannel.self)
         return dbChannels.compactMap { Channel(dbChannel: $0) }
     }
     
-    func fetchMessages(forChannel channel: Channel) -> [Message] {
+    /// Получение всех сообщений указанного канала.
+    /// - Parameter channel: Канал, сообщения которого необходимо получить.
+    private func fetchAllMessages(forChannel channel: Channel) -> [Message] {
         let channelMessagesPredicate = makeChannelMessagesPredicate(forChannel: channel)
-        let dbMessages = storage.fetchData(for: DBMessage.self, predicate: channelMessagesPredicate)
+        let dbMessages = storage.fetchObjects(for: DBMessage.self, predicate: channelMessagesPredicate)
         return dbMessages.compactMap { Message(dbMessage: $0) }
     }
     
-    func deleteAllData() {
-        let channels = storage.fetchDataInBackground(for: DBChannel.self)
+    /// Обновление данных у имеющихся в хранилище каналах.
+    /// - Parameter channels: Каналы с обновлёнными данными.
+    private func modifyChannels(_ channels: [Channel]) {
+        channels.forEach { channel in
+            let channelIDPredicate = makeChannelIDPredicate(forChannel: channel)
+            let dbChannel = storage.fetchObjects(for: DBChannel.self, predicate: channelIDPredicate).first
+            dbChannel?.name = channel.name
+            dbChannel?.lastMessage = channel.lastMessage
+            dbChannel?.lastActivity = channel.lastActivity
+        }
+    }
+    
+    /// Обновление данных у имеющихся в хранилище сообщениях.
+    /// - Parameter messages: Сообщения с обновлёнными данными.
+    private func modifyMessages(_ messages: [Message]) {
+        messages.forEach { message in
+            let messageIDPredicate = makeMessageIDPredicate(forMessage: message)
+            let dbMessage = storage.fetchObjects(for: DBMessage.self, predicate: messageIDPredicate).first
+            dbMessage?.content = message.content
+            dbMessage?.created = message.created
+            dbMessage?.senderID = message.senderID
+            dbMessage?.senderName = message.senderName
+        }
+    }
+    
+    private func deleteChannel(_ channel: Channel) {
+        let channelIDPredicate = makeChannelIDPredicate(forChannel: channel)
+        let channels = storage.fetchObjects(for: DBChannel.self, predicate: channelIDPredicate)
         storage.deleteObjects(channels)
-        let messages = storage.fetchDataInBackground(for: DBMessage.self)
+    }
+    
+    private func deleteMessage(_ message: Message) {
+        let messageIDPredicate = makeMessageIDPredicate(forMessage: message)
+        let messages = storage.fetchObjects(for: DBMessage.self, predicate: messageIDPredicate)
         storage.deleteObjects(messages)
     }
-        
-    // MARK: - Private methods
     
     private func makeChannelIDPredicate(forChannel channel: Channel) -> NSCompoundPredicate {
-        let predicate = NSPredicate(format: "identifier == '\(channel.identifier)'")
+        let predicate = NSPredicate(format: "id == %@", channel.id)
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
+    }
+    
+    private func makeMessageIDPredicate(forMessage message: Message) -> NSCompoundPredicate {
+        let predicate = NSPredicate(format: "id == %@", message.id)
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
     }
     
     private func makeChannelMessagesPredicate(forChannel channel: Channel) -> NSCompoundPredicate {
-        let predicate = NSPredicate(format: "channel.identifier == '\(channel.identifier)'")
+        let predicate = NSPredicate(format: "channel.id == %@", channel.id)
         return NSCompoundPredicate(andPredicateWithSubpredicates: [predicate])
     }
 }

@@ -9,6 +9,16 @@ import Foundation
 
 enum ProfileModel {
     
+    enum FetchTheme {
+        struct Request {}
+        struct Response {
+            let theme: Theme
+        }
+        struct ViewModel {
+            let theme: Theme
+        }
+    }
+    
     enum FetchProfile {
         struct Request {}
         struct Response {

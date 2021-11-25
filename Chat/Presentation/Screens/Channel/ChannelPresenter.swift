@@ -8,8 +8,7 @@
 import Foundation
 
 protocol ChannelPresentationLogic: AnyObject {
-    func presentTheme(response: ChannelModel.FetchTheme.Response)
-    func presentMessages(response: ChannelModel.FetchMessages.Response)
+    func presentTheme(response: ChannelModel.SetupTheme.Response)
     func presentFetchingMessagesError(response: ChannelModel.FetchingMessagesError.Response)
     func presentSendMessage(response: ChannelModel.SendMessage.Response)
 }
@@ -22,12 +21,8 @@ final class ChannelPresenter: ChannelPresentationLogic {
     
     // MARK: - ChannelPresentationLogic
     
-    func presentTheme(response: ChannelModel.FetchTheme.Response) {
-        view?.displayTheme(viewModel: ChannelModel.FetchTheme.ViewModel(theme: response.theme))
-    }
-    
-    func presentMessages(response: ChannelModel.FetchMessages.Response) {
-        view?.displayMessages(viewModel: ChannelModel.FetchMessages.ViewModel(messages: response.messages))
+    func presentTheme(response: ChannelModel.SetupTheme.Response) {
+        view?.displayTheme(viewModel: ChannelModel.SetupTheme.ViewModel(theme: response.theme))
     }
     
     func presentFetchingMessagesError(response: ChannelModel.FetchingMessagesError.Response) {

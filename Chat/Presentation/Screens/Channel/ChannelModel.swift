@@ -9,7 +9,7 @@ import Foundation
 
 enum ChannelModel {
     
-    enum FetchTheme {
+    enum SetupTheme {
         struct Request {}
         struct Response {
             let theme: Theme
@@ -21,12 +21,6 @@ enum ChannelModel {
     
     enum FetchMessages {
         struct Request {}
-        struct Response {
-            let messages: [Message]
-        }
-        struct ViewModel {
-            let messages: [Message]
-        }
     }
     
     enum FetchingMessagesError {

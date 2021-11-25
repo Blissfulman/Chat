@@ -5,7 +5,7 @@
 //  Created by Evgeny Novgorodov on 29.10.2021.
 //
 
-import Firebase
+import Foundation
 
 protocol ChannelListBusinessLogic: AnyObject {
     func fetchProfile(request: ChannelListModel.FetchProfile.Request)
@@ -15,6 +15,7 @@ protocol ChannelListBusinessLogic: AnyObject {
     func addNewChannel(request: ChannelListModel.NewChannel.Request)
     func updateTheme(request: ChannelListModel.UpdateTheme.Request)
     func openChannel(request: ChannelListModel.OpenChannel.Request)
+    func deleteChannel(request: ChannelListModel.DeleteChannel.Request)
 }
 
 final class ChannelListInteractor: ChannelListBusinessLogic {
@@ -22,7 +23,8 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     // MARK: - Private properties
     
     private let presenter: ChannelListPresentationLogic
-    private let firestoreManager: FirestoreManagerProtocol = FirestoreManager(dataType: .channels)
+    private let channelListDataSource: ChannelListDataSourceProtocol
+    private var firestoreManager = FirestoreManager<Channel>(dataType: .channels)
     private let settingsManager = SettingsManager()
     private let asyncDataManager = AsyncDataManager(asyncHandlerType: .gcd)
     private let dataStorageManager: DataStorageManagerProtocol = DataStorageManager.shared
@@ -30,8 +32,9 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     
     // MARK: - Initialization
     
-    init(presenter: ChannelListPresentationLogic) {
+    init(presenter: ChannelListPresentationLogic, channelListDataSource: ChannelListDataSourceProtocol) {
         self.presenter = presenter
+        self.channelListDataSource = channelListDataSource
     }
     
     // MARK: - ChannelListBusinessLogic
@@ -60,27 +63,16 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     }
     
     func fetchChannelList(request: ChannelListModel.ChannelList.Request) {
-        firestoreManager.reference.addSnapshotListener { [weak self] snapshot, error in
+        firestoreManager.listener = { [weak self] result in
             guard let self = self else { return }
-            
-            if let error = error {
+
+            switch result {
+            case let .success(snapshotChannels):
+                self.dataStorageManager.updateChannels(snapshotChannels)
+            case let .failure(error):
                 let response = ChannelListModel.FetchingChannelsError.Response(error: error)
                 self.presenter.presentFetchingChannelsError(response: response)
-            } else {
-                if let channelSnapshots = snapshot?.documents {
-                    let channels = channelSnapshots.compactMap { Channel(snapshot: $0) }
-                    let sortedChannels = self.sortChannels(channels)
-                    
-                    self.dataStorageManager.saveChannels(channels)
-                    
-                    let response = ChannelListModel.ChannelList.Response(channels: sortedChannels)
-                    self.presenter.presentChannelList(response: response)
-                }
             }
-            // TEMP: Временно для демонстранции успешного сохранения и чтения данных из CoreData
-            let channels = self.dataStorageManager.fetchChannels()
-            print("SAVED CHANNELS:")
-            channels.forEach { print($0) }
         }
     }
     
@@ -89,8 +81,8 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     }
     
     func addNewChannel(request: ChannelListModel.NewChannel.Request) {
-        let newChannel = Channel(identifier: "", name: request.channelName, lastMessage: nil, lastActivity: nil)
-        firestoreManager.reference.addDocument(data: newChannel.toDictionary)
+        let newChannel = Channel(id: "", name: request.channelName, lastMessage: nil, lastActivity: nil)
+        firestoreManager.addObject(newChannel)
     }
     
     func updateTheme(request: ChannelListModel.UpdateTheme.Request) {
@@ -102,26 +94,13 @@ final class ChannelListInteractor: ChannelListBusinessLogic {
     }
     
     func openChannel(request: ChannelListModel.OpenChannel.Request) {
-        let response = ChannelListModel.OpenChannel.Response(channel: request.channel, senderName: profile?.fullName)
+        guard let channel = channelListDataSource.сhannel(at: request.indexPath) else { return }
+        let response = ChannelListModel.OpenChannel.Response(channel: channel, senderName: profile?.fullName)
         presenter.presentSelectedChannel(response: response)
     }
     
-    // MARK: - Private methods
-    
-    private func sortChannels(_ channels: [Channel]) -> [Channel] {
-        let activeChannels = channels
-            .filter { $0.lastActivity != nil }
-            .sorted {
-                if let firstDate = $0.lastActivity,
-                   let secondDate = $1.lastActivity {
-                    return firstDate > secondDate
-                } else {
-                    return true
-                }
-            }
-        let inactiveChannels = channels
-            .filter { $0.lastActivity == nil }
-            .sorted { $0.name < $1.name }
-        return activeChannels + inactiveChannels
+    func deleteChannel(request: ChannelListModel.DeleteChannel.Request) {
+        guard let channel = channelListDataSource.сhannel(at: request.indexPath) else { return }
+        firestoreManager.deleteObject(channel)
     }
 }

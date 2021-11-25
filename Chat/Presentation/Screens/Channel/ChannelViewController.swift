@@ -8,8 +8,7 @@
 import UIKit
 
 protocol ChannelDisplayLogic: AnyObject {
-    func displayTheme(viewModel: ChannelModel.FetchTheme.ViewModel)
-    func displayMessages(viewModel: ChannelModel.FetchMessages.ViewModel)
+    func displayTheme(viewModel: ChannelModel.SetupTheme.ViewModel)
     func displayFetchingMessagesError(viewModel: ChannelModel.FetchingMessagesError.ViewModel)
     func displaySendMessage(viewModel: ChannelModel.SendMessage.ViewModel)
 }
@@ -29,7 +28,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView().prepareForAutoLayout()
         tableView.separatorStyle = .none
-        tableView.dataSource = self
+        tableView.registerCell(type: MessageCell.self)
         return tableView
     }()
     
@@ -63,19 +62,21 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         return button
     }()
     
+    private lazy var tableViewTapGestureRecognizer: UITapGestureRecognizer = {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapTableView))
+        return tapGestureRecognizer
+    }()
+    
     private var bottomViewBottomConstraint: NSLayoutConstraint?
     private let interactor: ChannelBusinessLogic
-    private var messages = [Message]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
     
     // MARK: - Initialization
     
-    init(interactor: ChannelBusinessLogic, channelName: String) {
+    init(interactor: ChannelBusinessLogic, channelDataSource: ChannelDataSourceProtocol, channelName: String) {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
+        var channelDataSource = channelDataSource
+        channelDataSource.tableView = self.tableView
         title = channelName
     }
     
@@ -107,6 +108,13 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         }
     }
     
+    // MARK: - Actions
+    
+    @objc
+    private func didTapTableView() {
+        view.endEditing(true)
+    }
+    
     // MARK: - Private methods
     
     private func setupUI() {
@@ -115,7 +123,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         bottomView.addSubview(borderView)
         bottomView.addSubview(bottomViewStackView)
         bottomViewStackView.addArrangedSubviews(addButton, newMessageTextField)
-        tableView.register(MessageCell.self, forCellReuseIdentifier: String(describing: MessageCell.self))
+        tableView.addGestureRecognizer(tableViewTapGestureRecognizer)
     }
     
     private func setupLayout() {
@@ -150,7 +158,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         navigationItem.largeTitleDisplayMode = .never
         view.backgroundColor = .white
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
-        interactor.fetchTheme(request: ChannelModel.FetchTheme.Request())
+        interactor.setupTheme(request: ChannelModel.SetupTheme.Request())
     }
 }
 
@@ -158,12 +166,8 @@ final class ChannelViewController: KeyboardNotificationsViewController {
 
 extension ChannelViewController: ChannelDisplayLogic {
     
-    func displayTheme(viewModel: ChannelModel.FetchTheme.ViewModel) {
+    func displayTheme(viewModel: ChannelModel.SetupTheme.ViewModel) {
         bottomView.backgroundColor = viewModel.theme.themeColors.backgroundColor
-    }
-    
-    func displayMessages(viewModel: ChannelModel.FetchMessages.ViewModel) {
-        messages = viewModel.messages
     }
     
     func displayFetchingMessagesError(viewModel: ChannelModel.FetchingMessagesError.ViewModel) {
@@ -171,28 +175,10 @@ extension ChannelViewController: ChannelDisplayLogic {
     }
     
     func displaySendMessage(viewModel: ChannelModel.SendMessage.ViewModel) {
-        guard !messages.isEmpty else { return }
-        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         newMessageTextField.text = ""
-    }
-}
-
-// MARK: - UITableViewDataSource
-
-extension ChannelViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        messages.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: String(describing: MessageCell.self),
-            for: indexPath
-        ) as? MessageCell else { return UITableViewCell() }
-        
-        cell.configure(with: messages[indexPath.row])
-        return cell
+        if tableView.numberOfRows(inSection: 0) != 0 {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
     }
 }
 

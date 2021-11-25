@@ -12,12 +12,18 @@ final class ChannelAssembly {
     
     static func assembly(parameters: Parameters) -> UIViewController {
         let presenter = ChannelPresenter()
+        let channelDataSource: ChannelDataSourceProtocol = ChannelDataSource(channel: parameters.channel)
         let interactor = ChannelInteractor(
             presenter: presenter,
+            channelDataSource: channelDataSource,
             channel: parameters.channel,
             senderName: parameters.senderName
         )
-        let viewController = ChannelViewController(interactor: interactor, channelName: parameters.channel.name)
+        let viewController = ChannelViewController(
+            interactor: interactor,
+            channelDataSource: channelDataSource,
+            channelName: parameters.channel.name
+        )
         presenter.view = viewController
         return viewController
     }

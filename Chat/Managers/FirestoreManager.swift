@@ -8,10 +8,13 @@
 import Firebase
 
 protocol FirestoreManagerProtocol {
-    var reference: CollectionReference { get }
+    associatedtype Object: FirestoreObject
+    typealias Listener = (Result<SnapshotObjects<Object>, Error>) -> Void
 }
 
-final class FirestoreManager: FirestoreManagerProtocol {
+final class FirestoreManager<Type: FirestoreObject>: FirestoreManagerProtocol {
+    
+    typealias Object = Type
     
     // MARK: - Nested types
     
@@ -22,23 +25,62 @@ final class FirestoreManager: FirestoreManagerProtocol {
     
     // MARK: - Public properties
     
-    lazy var reference: CollectionReference = {
-        switch dataType {
-        case .channels:
-            return database.collection("channels")
-        case let .messages(channelID):
-            return database.collection("channels").document(channelID).collection("messages")
+    var listener: Listener? {
+        didSet {
+            setupFirestoreListener()
         }
-    }()
+    }
     
     // MARK: - Private properties
     
-    private let dataType: DataType
     private let database = Firestore.firestore()
+    private let reference: CollectionReference
     
     // MARK: - Initialization
     
     init(dataType: DataType) {
-        self.dataType = dataType
+        switch dataType {
+        case .channels:
+            reference = database.collection("channels")
+        case let .messages(channelID):
+            reference = database.collection("channels").document(channelID).collection("messages")
+        }
+    }
+    
+    // MARK: - Public methods
+    
+    func addObject(_ object: Object) {
+        reference.addDocument(data: object.toDictionary)
+    }
+    
+    func deleteObject(_ object: Object) {
+        database.collection("channels").document(object.id).delete()
+    }
+    
+    // MARK: - Private methods
+    
+    private func setupFirestoreListener() {
+        reference.addSnapshotListener { [weak self] snapshot, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                self.listener?(.failure(error))
+            } else {
+                guard let objectSnapshots = snapshot?.documentChanges else { return }
+                
+                let snapshotObjects: SnapshotObjects = (
+                    addedObjects: objectSnapshots
+                        .filter { $0.type == .added }
+                        .compactMap { Object(snapshot: $0.document) },
+                    modifiedObjects: objectSnapshots
+                        .filter { $0.type == .modified }
+                        .compactMap { Object(snapshot: $0.document) },
+                    removedObjects: objectSnapshots
+                        .filter { $0.type == .removed }
+                        .compactMap { Object(snapshot: $0.document) }
+                )
+                self.listener?(.success(snapshotObjects))
+            }
+        }
     }
 }

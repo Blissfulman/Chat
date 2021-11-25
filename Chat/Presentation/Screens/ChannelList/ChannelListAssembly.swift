@@ -12,9 +12,14 @@ final class ChannelListAssembly {
     
     static func assembly() -> UIViewController {
         let presenter = ChannelListPresenter()
-        let interactor = ChannelListInteractor(presenter: presenter)
+        let channelListDataSource: ChannelListDataSourceProtocol = ChannelListDataSource()
+        let interactor = ChannelListInteractor(presenter: presenter, channelListDataSource: channelListDataSource)
         let router = ChannelListRouter()
-        let viewController = ChannelListViewController(interactor: interactor, router: router)
+        let viewController = ChannelListViewController(
+            interactor: interactor,
+            router: router,
+            channelListDataSource: channelListDataSource
+        )
         presenter.view = viewController
         router.viewController = viewController
         return viewController
