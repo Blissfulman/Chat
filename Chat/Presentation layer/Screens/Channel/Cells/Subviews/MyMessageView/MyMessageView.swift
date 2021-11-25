@@ -9,13 +9,6 @@ import UIKit
 
 final class MyMessageView: UIView {
     
-    // MARK: - Nested types
-    
-    struct Model {
-        let text: String
-        let date: String
-    }
-    
     // MARK: - Private properties
     
     private lazy var shapeImageView: UIImageView = {
@@ -39,6 +32,15 @@ final class MyMessageView: UIView {
         return label
     }()
     
+    private lazy var messageImageView: UIImageView = {
+        let imageView = UIImageView().prepareForAutoLayout()
+        imageView.contentMode = .scaleAspectFill
+        imageView.setCornerRadius(8)
+        imageView.clipsToBounds = true
+        imageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        return imageView
+    }()
+    
     private lazy var dateLabel: UILabel = {
         let label = UILabel().prepareForAutoLayout()
         label.font = Fonts.messageCellDate
@@ -47,13 +49,16 @@ final class MyMessageView: UIView {
         return label
     }()
     
+    private let viewModel: MyMessageViewModelProtocol
+    
     // MARK: - Initialization
     
-    init(frame: CGRect, model: Model) {
+    init(frame: CGRect = .zero, viewModel: MyMessageViewModelProtocol) {
+        self.viewModel = viewModel
         super.init(frame: frame)
         setupUI()
         setupLayout()
-        configureUI(model: model)
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -66,7 +71,10 @@ final class MyMessageView: UIView {
         prepareForAutoLayout()
         addSubview(shapeImageView)
         addSubview(stackView)
-        stackView.addArrangedSubviews(messageLabel, dateLabel)
+        stackView.addArrangedSubviews(
+            viewModel.isImageMessage ? messageImageView : messageLabel,
+            dateLabel
+        )
     }
     
     private func setupLayout() {
@@ -83,9 +91,14 @@ final class MyMessageView: UIView {
         ])
     }
     
-    private func configureUI(model: Model) {
-        messageLabel.text = model.text
-        dateLabel.text = model.date
+    private func configureUI() {
+        if viewModel.isImageMessage,
+           let messageURL = viewModel.messageURL {
+            messageImageView.setImage(with: messageURL, stubImage: Images.noImageAvailable)
+        } else {
+            messageLabel.text = viewModel.text
+        }
+        dateLabel.text = viewModel.date
         shapeImageView.setMessageShapeShadow()
     }
 }

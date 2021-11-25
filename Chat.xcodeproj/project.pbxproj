@@ -98,6 +98,8 @@
 		CEC630C8274EC2FA00415528 /* ImagesAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630C7274EC2FA00415528 /* ImagesAPIRequest.swift */; };
 		CEC630CB274EC3E400415528 /* ImagesResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630CA274EC3E400415528 /* ImagesResponseParser.swift */; };
 		CEC630CD274EC9E000415528 /* ImagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630CC274EC9E000415528 /* ImagesResponse.swift */; };
+		CEC630D0274FC53A00415528 /* PartnerMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630CF274FC53A00415528 /* PartnerMessageViewModel.swift */; };
+		CEC630D3274FC90700415528 /* MyMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630D2274FC90700415528 /* MyMessageViewModel.swift */; };
 		CED023E726FFB61100062489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED023E626FFB61100062489 /* Assets.xcassets */; };
 		CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED84B3827025BC300D4E4EB /* Palette.xcassets */; };
 		CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3B27025D1700D4E4EB /* Palette.swift */; };
@@ -225,6 +227,8 @@
 		CEC630C7274EC2FA00415528 /* ImagesAPIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesAPIRequest.swift; sourceTree = "<group>"; };
 		CEC630CA274EC3E400415528 /* ImagesResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesResponseParser.swift; sourceTree = "<group>"; };
 		CEC630CC274EC9E000415528 /* ImagesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesResponse.swift; sourceTree = "<group>"; };
+		CEC630CF274FC53A00415528 /* PartnerMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerMessageViewModel.swift; sourceTree = "<group>"; };
+		CEC630D2274FC90700415528 /* MyMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageViewModel.swift; sourceTree = "<group>"; };
 		CED023E626FFB61100062489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CED84B3827025BC300D4E4EB /* Palette.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Palette.xcassets; sourceTree = "<group>"; };
 		CED84B3B27025D1700D4E4EB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -295,8 +299,8 @@
 		CE04B4E5271F41610027F649 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				CE39478F270F7C1C004C6FD1 /* PartnerMessageView.swift */,
-				CE39478D270F73CE004C6FD1 /* MyMessageView.swift */,
+				CEC630CE274FC52E00415528 /* PartnerMessageView */,
+				CEC630D1274FC5B800415528 /* MyMessageView */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -607,6 +611,24 @@
 				CEC630CA274EC3E400415528 /* ImagesResponseParser.swift */,
 			);
 			path = Parsers;
+			sourceTree = "<group>";
+		};
+		CEC630CE274FC52E00415528 /* PartnerMessageView */ = {
+			isa = PBXGroup;
+			children = (
+				CEC630CF274FC53A00415528 /* PartnerMessageViewModel.swift */,
+				CE39478F270F7C1C004C6FD1 /* PartnerMessageView.swift */,
+			);
+			path = PartnerMessageView;
+			sourceTree = "<group>";
+		};
+		CEC630D1274FC5B800415528 /* MyMessageView */ = {
+			isa = PBXGroup;
+			children = (
+				CEC630D2274FC90700415528 /* MyMessageViewModel.swift */,
+				CE39478D270F73CE004C6FD1 /* MyMessageView.swift */,
+			);
+			path = MyMessageView;
 			sourceTree = "<group>";
 		};
 		CED023E326FFAEE300062489 /* Resources */ = {
@@ -926,6 +948,7 @@
 				CEFE088027457A0B0057CED6 /* CoreDataStorageImpl.swift in Sources */,
 				CE2608802718B01800CAE9B6 /* Theme.swift in Sources */,
 				CE39478E270F73CE004C6FD1 /* MyMessageView.swift in Sources */,
+				CEC630D0274FC53A00415528 /* PartnerMessageViewModel.swift in Sources */,
 				CEC630CB274EC3E400415528 /* ImagesResponseParser.swift in Sources */,
 				CEA00F7E2739AA10007F925E /* ChannelDataSource.swift in Sources */,
 				CE0C60102745981F002A1FF9 /* MessagesServiceImpl.swift in Sources */,
@@ -995,6 +1018,7 @@
 				CEB97ABA272D3C9A00C405CA /* ChannelModel.swift in Sources */,
 				CE4B251027495917007E92F3 /* ImagePickerAssemby.swift in Sources */,
 				CEFE088627457F760057CED6 /* ProfileDataManagerImpl.swift in Sources */,
+				CEC630D3274FC90700415528 /* MyMessageViewModel.swift in Sources */,
 				CEEA4280274D4B0500420134 /* ImagesServiceImpl.swift in Sources */,
 				CE8B576327205F2E002E3434 /* SyncProfileDataManager.swift in Sources */,
 				CE29D2A0274E6D52001C103A /* ImagesService.swift in Sources */,

@@ -33,17 +33,17 @@ final class MessageCell: UITableViewCell, ConfigurableTableCell {
     
     func configure(with model: ConfigurationModel) {
         if model.senderID == GlobalData.mySenderID {
-            let model = MyMessageView.Model(text: model.content, date: model.created.messageCellDate())
-            let messageView = MyMessageView(frame: .zero, model: model)
+            let viewModel = MyMessageViewModel(text: model.content, date: model.created.messageCellDate())
+            let messageView = MyMessageView(viewModel: viewModel)
             contentView.addSubview(messageView)
             setupMyMessageLayout(messageView)
         } else {
-            let model = PartnerMessageView.Model(
+            let viewModel = PartnerMessageViewModel(
                 authorName: model.senderName,
                 text: model.content,
                 date: model.created.messageCellDate()
             )
-            let messageView = PartnerMessageView(frame: .zero, model: model)
+            let messageView = PartnerMessageView(viewModel: viewModel)
             contentView.addSubview(messageView)
             setupPartnerMessageLayout(messageView)
         }
