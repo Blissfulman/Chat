@@ -40,4 +40,12 @@ enum ChannelModel {
         struct Response {}
         struct ViewModel {}
     }
+    
+    // MARK: - Routing
+    
+    enum Route {
+        struct ImagePicker {
+            let didPickImageHandler: (URL) -> Void
+        }
+    }
 }

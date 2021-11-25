@@ -100,6 +100,7 @@
 		CEC630CD274EC9E000415528 /* ImagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630CC274EC9E000415528 /* ImagesResponse.swift */; };
 		CEC630D0274FC53A00415528 /* PartnerMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630CF274FC53A00415528 /* PartnerMessageViewModel.swift */; };
 		CEC630D3274FC90700415528 /* MyMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630D2274FC90700415528 /* MyMessageViewModel.swift */; };
+		CEC630D5274FCE1F00415528 /* ChannelRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC630D4274FCE1F00415528 /* ChannelRouter.swift */; };
 		CED023E726FFB61100062489 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED023E626FFB61100062489 /* Assets.xcassets */; };
 		CED84B3927025BC300D4E4EB /* Palette.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED84B3827025BC300D4E4EB /* Palette.xcassets */; };
 		CED84B3C27025D1700D4E4EB /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED84B3B27025D1700D4E4EB /* Palette.swift */; };
@@ -229,6 +230,7 @@
 		CEC630CC274EC9E000415528 /* ImagesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesResponse.swift; sourceTree = "<group>"; };
 		CEC630CF274FC53A00415528 /* PartnerMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerMessageViewModel.swift; sourceTree = "<group>"; };
 		CEC630D2274FC90700415528 /* MyMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageViewModel.swift; sourceTree = "<group>"; };
+		CEC630D4274FCE1F00415528 /* ChannelRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRouter.swift; sourceTree = "<group>"; };
 		CED023E626FFB61100062489 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CED84B3827025BC300D4E4EB /* Palette.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Palette.xcassets; sourceTree = "<group>"; };
 		CED84B3B27025D1700D4E4EB /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 			children = (
 				CEB97AB7272D3C8800C405CA /* ChannelAssembly.swift */,
 				CEB97AB9272D3C9A00C405CA /* ChannelModel.swift */,
+				CEC630D4274FCE1F00415528 /* ChannelRouter.swift */,
 				CE9AF680270B89C1006D44A8 /* ChannelViewController.swift */,
 				CEB97ABD272D3CC200C405CA /* ChannelInteractor.swift */,
 				CEB97ABF272D3CCB00C405CA /* ChannelPresenter.swift */,
@@ -1007,6 +1010,7 @@
 				CE6667CE2720ACB100DD6B40 /* ProgressView.swift in Sources */,
 				CEE9FF12272C75A600628F34 /* ChannelListRouter.swift in Sources */,
 				CE4B251627496ECB007E92F3 /* ImagePickerDataSource.swift in Sources */,
+				CEC630D5274FCE1F00415528 /* ChannelRouter.swift in Sources */,
 				CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */,
 				CE2474CE2731C79100A4AEC0 /* Chat.xcdatamodeld in Sources */,
 				CE0C600E27459691002A1FF9 /* ChannelsServiceImpl.swift in Sources */,
