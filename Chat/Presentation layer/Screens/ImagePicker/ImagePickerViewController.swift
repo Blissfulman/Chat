@@ -140,4 +140,12 @@ extension ImagePickerViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         interactor.didPickImage(request: ImagePickerModel.PickImage.Request(indexPath: indexPath))
     }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        interactor.fetchMoreImages(request: ImagePickerModel.FetchMoreImages.Request(indexPath: indexPath))
+    }
 }

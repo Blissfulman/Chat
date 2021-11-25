@@ -19,7 +19,7 @@ final class ImagePickerInteractor: ImagePickerBusinessLogic {
     // MARK: - Nested types
     
     enum Constants {
-        static let itemsPerPage = 30
+        static let itemsPerPage = 50
     }
     
     // MARK: - Private properties
@@ -70,6 +70,8 @@ final class ImagePickerInteractor: ImagePickerBusinessLogic {
     }
     
     func fetchMoreImages(request: ImagePickerModel.FetchMoreImages.Request) {
+        guard request.indexPath.row == (fetchedPages * Constants.itemsPerPage - 20) else { return }
+        
         imagesService.fetchImages(
             query: "cats",
             itemsPerPage: Constants.itemsPerPage,

@@ -21,6 +21,8 @@ final class ImageCell: UICollectionViewCell, ConfigurableCollectionCell {
         return imageView
     }()
     
+    private var lastImageURL: URL?
+    
     // MARK: - Initialization
     
     override init(frame: CGRect) {
@@ -43,7 +45,14 @@ final class ImageCell: UICollectionViewCell, ConfigurableCollectionCell {
     // MARK: - Public methods
     
     func configure(with model: ConfigurationModel) {
-        imageView.setImage(with: model)
+        lastImageURL = model
+        CellDataFetcher.fetchImageData(with: model) { [weak self] imageData, imageURL in
+            // Проверка URL последнего загружаемого изображения ячейки с URL полученного изображения
+            if let lastImageURL = self?.lastImageURL,
+               imageURL == lastImageURL {
+                self?.imageView.image = UIImage(data: imageData)
+            }
+        }
     }
     
     // MARK: - Private methods
