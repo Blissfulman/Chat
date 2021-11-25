@@ -10,7 +10,7 @@ import Foundation
 enum NetworkError: Error, LocalizedError {
     case badURL
     case noData
-    case parsingError
+    case parsingError(wrappedError: Error)
     
     var errorDescription: String? {
         switch self {
@@ -18,8 +18,8 @@ enum NetworkError: Error, LocalizedError {
             return "URL error"
         case .noData:
             return "No data"
-        case .parsingError:
-            return "Data parsing error"
+        case .parsingError(let wrappedError):
+            return "Data parsing error. \(wrappedError.localizedDescription)"
         }
     }
 }
@@ -46,7 +46,10 @@ final class APIRequestSenderImpl: APIRequestSender {
                 let parsedModel = try config.parser.parse(data: data)
                 self.mainThreadCompletion(.success(parsedModel), completion: completion)
             } catch {
-                self.mainThreadCompletion(.failure(NetworkError.parsingError), completion: completion)
+                self.mainThreadCompletion(
+                    .failure(NetworkError.parsingError(wrappedError: error)),
+                    completion: completion
+                )
             }
         }.resume()
     }
