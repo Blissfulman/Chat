@@ -9,7 +9,7 @@ import Foundation
 
 enum ProfileModel {
     
-    enum FetchTheme {
+    enum SetupTheme {
         struct Request {}
         struct Response {
             let theme: Theme

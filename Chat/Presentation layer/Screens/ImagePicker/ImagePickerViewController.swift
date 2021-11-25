@@ -8,7 +8,9 @@
 import UIKit
 
 protocol ImagePickerDisplayLogic: AnyObject {
-    func displayDidPickImage(request: ImagePickerModel.PickImage.ViewModel)
+    func displayTheme(viewModel: ImagePickerModel.SetupTheme.ViewModel)
+    func displayImages(viewModel: ImagePickerModel.FetchImages.ViewModel)
+    func displayDidPickImage(viewModel: ImagePickerModel.PickImage.ViewModel)
 }
 
 final class ImagePickerViewController: UIViewController {
@@ -41,6 +43,7 @@ final class ImagePickerViewController: UIViewController {
         return collectionView
     }()
     
+    private let progressView = ProgressView()
     private let interactor: ImagePickerBusinessLogic
     private let router: ImagePickerRoutingLogic
     
@@ -68,7 +71,7 @@ final class ImagePickerViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupLayout()
-        interactor.fetchImages(request: ImagePickerModel.FetchImages.Request(indexPath: IndexPath(item: 0, section: 0)))
+        configureUI()
     }
     
     // MARK: - Actions
@@ -84,6 +87,7 @@ final class ImagePickerViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(topBarView)
         view.addSubview(collectionView)
+        view.addSubview(progressView)
     }
     
     private func setupLayout() {
@@ -96,8 +100,19 @@ final class ImagePickerViewController: UIViewController {
             collectionView.topAnchor.constraint(equalTo: topBarView.bottomAnchor, constant: Constants.cellSpacing),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.cellSpacing),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.cellSpacing),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.cellSpacing)
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Constants.cellSpacing),
+            
+            progressView.topAnchor.constraint(equalTo: topBarView.bottomAnchor),
+            progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            progressView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    private func configureUI() {
+        interactor.setupTheme(request: ImagePickerModel.SetupTheme.Request())
+        progressView.show()
+        interactor.fetchImages(request: ImagePickerModel.FetchImages.Request())
     }
 }
 
@@ -105,7 +120,15 @@ final class ImagePickerViewController: UIViewController {
 
 extension ImagePickerViewController: ImagePickerDisplayLogic {
     
-    func displayDidPickImage(request: ImagePickerModel.PickImage.ViewModel) {
+    func displayTheme(viewModel: ImagePickerModel.SetupTheme.ViewModel) {
+        topBarView.setTheme(viewModel.theme)
+    }
+    
+    func displayImages(viewModel: ImagePickerModel.FetchImages.ViewModel) {
+        progressView.hide()
+    }
+    
+    func displayDidPickImage(viewModel: ImagePickerModel.PickImage.ViewModel) {
         router.back()
     }
 }

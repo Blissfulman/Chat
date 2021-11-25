@@ -8,7 +8,9 @@
 import Foundation
 
 protocol ImagePickerPresentationLogic {
-    func presentDidPickImage(request: ImagePickerModel.PickImage.Response)
+    func presentTheme(response: ImagePickerModel.SetupTheme.Response)
+    func presentImages(response: ImagePickerModel.FetchImages.Response)
+    func presentDidPickImage(response: ImagePickerModel.PickImage.Response)
 }
 
 final class ImagePickerPresenter: ImagePickerPresentationLogic {
@@ -19,7 +21,15 @@ final class ImagePickerPresenter: ImagePickerPresentationLogic {
     
     // MARK: - ImagePickerPresentationLogic
     
-    func presentDidPickImage(request: ImagePickerModel.PickImage.Response) {
-        view?.displayDidPickImage(request: ImagePickerModel.PickImage.ViewModel())
+    func presentTheme(response: ImagePickerModel.SetupTheme.Response) {
+        view?.displayTheme(viewModel: ImagePickerModel.SetupTheme.ViewModel(theme: response.theme))
+    }
+    
+    func presentImages(response: ImagePickerModel.FetchImages.Response) {
+        view?.displayImages(viewModel: ImagePickerModel.FetchImages.ViewModel())
+    }
+    
+    func presentDidPickImage(response: ImagePickerModel.PickImage.Response) {
+        view?.displayDidPickImage(viewModel: ImagePickerModel.PickImage.ViewModel())
     }
 }

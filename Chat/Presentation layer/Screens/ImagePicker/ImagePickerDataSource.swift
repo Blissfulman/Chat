@@ -31,7 +31,7 @@ final class ImagePickerDataSource: NSObject, ImagePickerDataSourceProtocol {
     // MARK: - Public methods
     
     func updateData(imageItems: [ImageItem]) {
-        self.imageItems = imageItems
+        self.imageItems += imageItems
         collectionView?.reloadData()
     }
     

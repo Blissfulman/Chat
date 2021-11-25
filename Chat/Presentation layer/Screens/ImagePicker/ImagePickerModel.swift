@@ -9,7 +9,23 @@ import Foundation
 
 enum ImagePickerModel {
     
+    enum SetupTheme {
+        struct Request {}
+        struct Response {
+            let theme: Theme
+        }
+        struct ViewModel {
+            let theme: Theme
+        }
+    }
+    
     struct FetchImages {
+        struct Request {}
+        struct Response {}
+        struct ViewModel {}
+    }
+    
+    struct FetchMoreImages {
         struct Request {
             let indexPath: IndexPath
         }
