@@ -20,7 +20,9 @@ enum ImagePickerModel {
     }
     
     struct FetchImages {
-        struct Request {}
+        struct Request {
+            let query: String
+        }
         struct Response {}
         struct ViewModel {}
     }

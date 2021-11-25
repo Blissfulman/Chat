@@ -29,6 +29,7 @@ final class ImagePickerInteractor: ImagePickerBusinessLogic {
     private let imagesService: ImagesService
     private let imagePickerDataSource: ImagePickerDataSourceProtocol
     private let didPickImageHandler: (URL) -> Void
+    private var query = ""
     private var fetchedPages = 0
     
     // MARK: - Initialization
@@ -56,7 +57,8 @@ final class ImagePickerInteractor: ImagePickerBusinessLogic {
     }
     
     func fetchImages(request: ImagePickerModel.FetchImages.Request) {
-        imagesService.fetchImages(query: "cats", itemsPerPage: Constants.itemsPerPage, page: 1) { [weak self] result in
+        query = request.query
+        imagesService.fetchImages(query: query, itemsPerPage: Constants.itemsPerPage, page: 1) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .success(imagesResponse):
@@ -73,7 +75,7 @@ final class ImagePickerInteractor: ImagePickerBusinessLogic {
         guard request.indexPath.row == (fetchedPages * Constants.itemsPerPage - 20) else { return }
         
         imagesService.fetchImages(
-            query: "cats",
+            query: query,
             itemsPerPage: Constants.itemsPerPage,
             page: fetchedPages + 1
         ) { [weak self] result in

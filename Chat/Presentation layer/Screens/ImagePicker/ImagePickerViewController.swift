@@ -74,6 +74,16 @@ final class ImagePickerViewController: UIViewController {
         configureUI()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let queryAlertController = queryAlertController(okActionHandler: { [weak self] query in
+            guard let self = self else { return }
+            self.progressView.show()
+            self.interactor.fetchImages(request: ImagePickerModel.FetchImages.Request(query: query))
+        })
+        present(queryAlertController, animated: true)
+    }
+    
     // MARK: - Actions
     
     private func closeButtonTapped() {
@@ -111,8 +121,22 @@ final class ImagePickerViewController: UIViewController {
     
     private func configureUI() {
         interactor.setupTheme(request: ImagePickerModel.SetupTheme.Request())
-        progressView.show()
-        interactor.fetchImages(request: ImagePickerModel.FetchImages.Request())
+    }
+    
+    private func queryAlertController(okActionHandler: @escaping (String) -> Void) -> UIAlertController {
+        let queryAlertController = UIAlertController(
+            title: "Enter query for images",
+            message: nil,
+            preferredStyle: .alert
+        )
+        queryAlertController.addTextField { textField in
+            textField.placeholder = "query"
+        }
+        let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
+            okActionHandler(queryAlertController.textFields?.first?.text ?? "")
+        }
+        queryAlertController.addAction(okAction)
+        return queryAlertController
     }
 }
 
