@@ -32,7 +32,9 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     // MARK: - Private properties
     
     private lazy var topBarView: TopBarView = {
-        let view = TopBarView(title: "My Profile", rightButtonTitle: "Close", rightButtonAction: closeButtonTapped)
+        let view = TopBarView(title: "My Profile", rightButtonTitle: "Close", rightButtonAction: { [weak self] in
+            self?.closeButtonTapped()
+        })
         return view
     }()
     

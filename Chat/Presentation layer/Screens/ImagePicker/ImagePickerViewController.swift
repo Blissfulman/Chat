@@ -25,7 +25,9 @@ final class ImagePickerViewController: UIViewController {
     // MARK: - Private properties
     
     private lazy var topBarView: TopBarView = {
-        let view = TopBarView(rightButtonTitle: "Close", rightButtonAction: closeButtonTapped)
+        let view = TopBarView(rightButtonTitle: "Close", rightButtonAction: { [weak self] in
+            self?.closeButtonTapped()
+        })
         return view
     }()
     
