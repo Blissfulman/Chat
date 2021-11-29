@@ -10,7 +10,7 @@ import UIKit
 protocol ImagePickerDataSourceProtocol {
     var collectionView: UICollectionView? { get set }
     
-    func updateData(imageItems: [ImageItem])
+    func appendImageItems(_ imageItems: [ImageItem])
     func imageItem(at indexPath: IndexPath) -> ImageItem
 }
 
@@ -30,9 +30,12 @@ final class ImagePickerDataSource: NSObject, ImagePickerDataSourceProtocol {
     
     // MARK: - Public methods
     
-    func updateData(imageItems: [ImageItem]) {
-        self.imageItems += imageItems
-        collectionView?.reloadData()
+    func appendImageItems(_ items: [ImageItem]) {
+        self.imageItems += items
+        let numberOfItems = collectionView?.numberOfItems(inSection: 0) ?? 0
+        let appendingIndexPathes = (numberOfItems...(numberOfItems + items.count - 1))
+            .map { IndexPath(item: $0, section: 0) }
+        collectionView?.insertItems(at: appendingIndexPathes)
     }
     
     func imageItem(at indexPath: IndexPath) -> ImageItem {

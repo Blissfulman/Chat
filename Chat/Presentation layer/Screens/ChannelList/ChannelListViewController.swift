@@ -62,7 +62,7 @@ final class ChannelListViewController: UIViewController {
         self.router = router
         super.init(nibName: nil, bundle: nil)
         var channelListDataSource = channelListDataSource
-        channelListDataSource.tableView = self.tableView
+        channelListDataSource.tableView = tableView
     }
     
     required init?(coder: NSCoder) {

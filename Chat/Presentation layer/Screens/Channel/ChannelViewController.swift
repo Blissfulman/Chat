@@ -84,7 +84,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         self.router = router
         super.init(nibName: nil, bundle: nil)
         var channelDataSource = channelDataSource
-        channelDataSource.tableView = self.tableView
+        channelDataSource.tableView = tableView
         title = channelName
     }
     

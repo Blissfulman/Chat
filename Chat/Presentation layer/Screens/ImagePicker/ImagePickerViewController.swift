@@ -58,7 +58,7 @@ final class ImagePickerViewController: UIViewController {
         self.router = router
         super.init(nibName: nil, bundle: nil)
         var imagePickerDataSource = imagePickerDataSource
-        imagePickerDataSource.collectionView = self.collectionView
+        imagePickerDataSource.collectionView = collectionView
     }
     
     required init?(coder: NSCoder) {
