@@ -337,12 +337,14 @@ extension ProfileViewController: ProfileDisplayLogic {
             Animator.appear(self.editProfileButton, duration: 0.3)
         }
         Animator.disappear(editAvatarButton, duration: 0.3)
+        Animator.stopShake(saveButton)
         fullNameTextField.isEnabled = false
         descriptionTextField.isEnabled = false
     }
     
     func updateSaveButtonState(viewModel: ProfileModel.UpdateSaveButtonState.ViewModel) {
         saveButton.isEnabled = viewModel.isEnabledButton
+        viewModel.isEnabledButton ? Animator.shake(saveButton) : Animator.stopShake(saveButton)
     }
     
     func displaySavingProfileAlert(viewModel: ProfileModel.SavingProfileAlert.ViewModel) {

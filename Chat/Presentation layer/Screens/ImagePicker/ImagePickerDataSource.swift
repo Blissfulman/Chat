@@ -31,6 +31,7 @@ final class ImagePickerDataSource: NSObject, ImagePickerDataSourceProtocol {
     // MARK: - Public methods
     
     func appendImageItems(_ items: [ImageItem]) {
+        guard !items.isEmpty else { return }
         self.imageItems += items
         let numberOfItems = collectionView?.numberOfItems(inSection: 0) ?? 0
         let appendingIndexPathes = (numberOfItems...(numberOfItems + items.count - 1))
