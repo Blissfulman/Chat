@@ -86,7 +86,6 @@ final class Animator {
         animationGroup.duration = 0.3
         animationGroup.repeatCount = .infinity
         animationGroup.animations = [positionAnimation, rotationAnimation]
-        animationGroup.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         animatingView.layer.add(animationGroup, forKey: "shakeAnimation")
     }
     
@@ -98,27 +97,16 @@ final class Animator {
         
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
         rotationAnimation.toValue = 0
-
+        
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            animatingView.layer.removeAllAnimations()
+        }
         let animationGroup = CAAnimationGroup()
-        animationGroup.delegate = StopShakeAnimationDelegate(animatingView: animatingView)
         animationGroup.animations = [positionAnimation, rotationAnimation]
         animationGroup.duration = 0.5
         animationGroup.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         animatingView.layer.add(animationGroup, forKey: "stopShakeAnimation")
-    }
-}
-
-// MARK: - StopShakeAnimationDelegate
-
-private final class StopShakeAnimationDelegate: NSObject, CAAnimationDelegate {
-    
-    private weak var animatingView: UIView?
-    
-    init(animatingView: UIView) {
-        self.animatingView = animatingView
-    }
-    
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        animatingView?.layer.removeAllAnimations()
+        CATransaction.commit()
     }
 }
