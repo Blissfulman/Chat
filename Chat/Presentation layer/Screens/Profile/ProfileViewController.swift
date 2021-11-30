@@ -323,20 +323,20 @@ extension ProfileViewController: ProfileDisplayLogic {
     }
     
     func displayEditingState(viewModel: ProfileModel.EditingState.ViewModel) {
-        editProfileButton.disappear(duration: 0.3) {
-            self.buttonsStackView.appear(duration: 0.3)
+        Animator.disappear(editProfileButton, duration: 0.3) {
+            Animator.appear(self.buttonsStackView, duration: 0.3)
         }
-        editAvatarButton.appear(duration: 0.3)
+        Animator.appear(editAvatarButton, duration: 0.3)
         saveButton.isEnabled = false
         fullNameTextField.isEnabled = true
         descriptionTextField.isEnabled = true
     }
     
     func displaySavedState(viewModel: ProfileModel.SavedState.ViewModel) {
-        buttonsStackView.disappear(duration: 0.3) {
-            self.editProfileButton.appear(duration: 0.3)
+        Animator.disappear(buttonsStackView, duration: 0.3) {
+            Animator.appear(self.editProfileButton, duration: 0.3)
         }
-        editAvatarButton.disappear(duration: 0.3)
+        Animator.disappear(editAvatarButton, duration: 0.3)
         fullNameTextField.isEnabled = false
         descriptionTextField.isEnabled = false
     }

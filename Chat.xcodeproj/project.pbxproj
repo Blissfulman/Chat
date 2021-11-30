@@ -38,6 +38,7 @@
 		CE2608832718C3DF00CAE9B6 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */; };
 		CE29D2A0274E6D52001C103A /* ImagesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29D29F274E6D52001C103A /* ImagesService.swift */; };
 		CE29D2A3274E6DDC001C103A /* APIRequestSenderImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29D2A2274E6DDC001C103A /* APIRequestSenderImpl.swift */; };
+		CE327B43275637E600E7996B /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327B42275637E600E7996B /* Animator.swift */; };
 		CE32F21A270484EE007262A5 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */; };
 		CE32F21B270484F1007262A5 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */; };
 		CE32F21D27048600007262A5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE32F21C27048600007262A5 /* Fonts.swift */; };
@@ -170,6 +171,7 @@
 		CE2608822718C3DF00CAE9B6 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		CE29D29F274E6D52001C103A /* ImagesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesService.swift; sourceTree = "<group>"; };
 		CE29D2A2274E6DDC001C103A /* APIRequestSenderImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestSenderImpl.swift; sourceTree = "<group>"; };
+		CE327B42275637E600E7996B /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		CE32F218270484C4007262A5 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
 		CE32F219270484DB007262A5 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
 		CE32F21C27048600007262A5 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 				CE9C657B270F2F8A008756AC /* ConfigurableCells.swift */,
 				CEFBEA26273BAECE00EE5C43 /* FetchedResultsControllerDelegate.swift */,
 				CEC630F62750039D00415528 /* CellDataFetcher.swift */,
+				CE327B42275637E600E7996B /* Animator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1001,6 +1004,7 @@
 				CEE9FF0B272C748500628F34 /* ChannelListPresenter.swift in Sources */,
 				CEAC8207274826B000F50125 /* ThemesPresenter.swift in Sources */,
 				CE9AF683270B8D39006D44A8 /* Icons.swift in Sources */,
+				CE327B43275637E600E7996B /* Animator.swift in Sources */,
 				CE26087E2718A9EF00CAE9B6 /* NavigationController.swift in Sources */,
 				CE4B250C274958A5007E92F3 /* ImegePickerRouter.swift in Sources */,
 				CEE9FF09272C747C00628F34 /* ChannelListInteractor.swift in Sources */,
@@ -1192,6 +1196,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SMTJMFX82;
 				INFOPLIST_FILE = "Chat/Supporting files/Info.plist";
@@ -1201,6 +1206,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1215,6 +1221,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4SMTJMFX82;
 				INFOPLIST_FILE = "Chat/Supporting files/Info.plist";
@@ -1224,6 +1231,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tinkoff.TinkoffChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
