@@ -61,6 +61,7 @@
 		CE4E07E8270247DD00AE0113 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */; };
 		CE4E07EB270249D400AE0113 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */; };
 		CE54E6312729D19700B20B69 /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54E6302729D19700B20B69 /* KeychainStorage.swift */; };
+		CE5834E32757C18600781733 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5834E22757C18600781733 /* UIWindow+Extension.swift */; };
 		CE6667CA2720871200DD6B40 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6667C92720871200DD6B40 /* Data+Extension.swift */; };
 		CE6667CC272099F100DD6B40 /* AsyncHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6667CB272099F100DD6B40 /* AsyncHandler.swift */; };
 		CE6667CE2720ACB100DD6B40 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6667CD2720ACB100DD6B40 /* ProgressView.swift */; };
@@ -194,6 +195,7 @@
 		CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		CE54E6302729D19700B20B69 /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
+		CE5834E22757C18600781733 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		CE6667C92720871200DD6B40 /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		CE6667CB272099F100DD6B40 /* AsyncHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncHandler.swift; sourceTree = "<group>"; };
 		CE6667CD2720ACB100DD6B40 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 			children = (
 				CE4E07E7270247DD00AE0113 /* UIView+Extension.swift */,
 				CE4240A72704C1A800CA3386 /* UIViewController+Extension.swift */,
+				CE5834E22757C18600781733 /* UIWindow+Extension.swift */,
 				CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */,
 				CE1AE10727493D6800DFFDDD /* UICollectionView+Extension.swift */,
 				CE4E07EA270249D400AE0113 /* UIStackView+Extension.swift */,
@@ -978,6 +981,7 @@
 				CEFE0875274559600057CED6 /* CoreConstants.swift in Sources */,
 				CE0C60122745A0C0002A1FF9 /* MessagesService.swift in Sources */,
 				CE4B250A27494601007E92F3 /* ImageCell.swift in Sources */,
+				CE5834E32757C18600781733 /* UIWindow+Extension.swift in Sources */,
 				CEFE0888274581630057CED6 /* SyncProfileDataManagerImpl.swift in Sources */,
 				CE4B250E2749590C007E92F3 /* ImagePickerModel.swift in Sources */,
 				CE2474C92731C5C900A4AEC0 /* CoreDataStorage.swift in Sources */,

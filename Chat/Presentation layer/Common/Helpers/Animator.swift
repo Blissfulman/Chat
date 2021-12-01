@@ -9,6 +9,34 @@ import UIKit
 
 final class Animator {
     
+    // MARK: - Static private properties
+    
+    static private let tinkoffLogoCell: CAEmitterCell = {
+        var cell = CAEmitterCell()
+        cell.contents = Icons.tinkoffLogo.cgImage
+        cell.scale = 0.6
+        cell.emissionRange = .pi
+        cell.lifetime = 4
+        cell.birthRate = 1
+        cell.velocity = 200
+        cell.yAcceleration = 30
+        cell.spin = 0.5
+        cell.spinRange = 0.5
+        cell.alphaSpeed = -0.8
+        return cell
+    }()
+    
+    static private var tinkoffLogoEmissionLayer: CAEmitterLayer = {
+        let logoLayer = CAEmitterLayer()
+        logoLayer.emitterShape = .point
+        logoLayer.beginTime = CACurrentMediaTime()
+        logoLayer.timeOffset = CFTimeInterval(Int.random(in: 5...10))
+        logoLayer.emitterCells = [tinkoffLogoCell]
+        return logoLayer
+    }()
+    
+    // MARK: - Static public methods
+    
     /// Анимация плавного появления.
     /// - Parameters:
     ///   - animatingView: Анимируемое вью.
@@ -108,5 +136,26 @@ final class Animator {
         animationGroup.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         animatingView.layer.add(animationGroup, forKey: "stopShakeAnimation")
         CATransaction.commit()
+    }
+    
+    /// Старт анимации испускания гербов Тинькофф.
+    /// - Parameters:
+    ///   - ownerView: Вью, к которому будет добавлен слой с анимацией.
+    ///   - emissionPoint: Точка позиции для анимации.
+    static func startTinkoffLogoEmission(_ ownerView: UIView, with emissionPoint: CGPoint) {
+        tinkoffLogoEmissionLayer.emitterPosition = emissionPoint
+        tinkoffLogoEmissionLayer.birthRate = 12
+        ownerView.layer.addSublayer(tinkoffLogoEmissionLayer)
+    }
+    
+    /// Перемещение анимации испускания гербов Тинькофф на новую позицию.
+    /// - Parameter emissionPoint: Новая точка позиции для анимации.
+    static func moveTinkoffLogoEmission(to emissionPoint: CGPoint) {
+        tinkoffLogoEmissionLayer.emitterPosition = emissionPoint
+    }
+    
+    /// Остановка анимации испускания гербов Тинькофф.
+    static func stopTinkoffLogoEmission() {
+        tinkoffLogoEmissionLayer.birthRate = 0
     }
 }
