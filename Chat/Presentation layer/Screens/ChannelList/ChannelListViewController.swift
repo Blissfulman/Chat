@@ -96,10 +96,14 @@ final class ChannelListViewController: UIViewController {
     }
     
     @objc
-    private func openProfileBarButtonTapped() {
-        let route = ChannelListModel.Route.ProfileScreen(didChangeProfileHandler: { [weak self] profile in
-            self?.interactor.updateProfile(request: ChannelListModel.UpdateProfile.Request(profile: profile))
-        })
+    private func openProfileBarButtonTapped(sender: UIButton, event: UIEvent) {
+        let presentingStartPoint = event.allTouches?.first?.location(in: UIApplication.shared.keyWindow) ?? view.center
+        let route = ChannelListModel.Route.ProfileScreen(
+            presentingStartPoint: presentingStartPoint,
+            didChangeProfileHandler: { [weak self] profile in
+                self?.interactor.updateProfile(request: ChannelListModel.UpdateProfile.Request(profile: profile))
+            }
+        )
         router.navigateToProfile(route: route)
     }
     

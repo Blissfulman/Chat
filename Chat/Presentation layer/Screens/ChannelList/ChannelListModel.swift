@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum ChannelListModel {
     
@@ -87,6 +88,7 @@ enum ChannelListModel {
         }
         
         struct ProfileScreen {
+            let presentingStartPoint: CGPoint
             let didChangeProfileHandler: (Profile) -> Void
         }
         

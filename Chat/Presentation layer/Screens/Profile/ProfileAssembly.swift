@@ -17,13 +17,21 @@ final class ProfileAssembly {
             didChangeProfileHandler: parameters.didChangeProfileHandler
         )
         let router = ProfileRouter()
-        let viewController = ProfileViewController(interactor: interactor, router: router)
+        let transitioningDelegate = ProfileViewControllerTransitioningDelegate(
+            presentingStartPoint: parameters.presentingStartPoint
+        )
+        let viewController = ProfileViewController(
+            interactor: interactor,
+            router: router,
+            transitioningDelegate: transitioningDelegate
+        )
         presenter.view = viewController
         router.viewController = viewController
         return viewController
     }
     
     struct Parameters {
+        let presentingStartPoint: CGPoint
         let didChangeProfileHandler: (Profile) -> Void
     }
 }

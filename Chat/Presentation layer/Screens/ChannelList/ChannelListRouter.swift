@@ -29,8 +29,12 @@ final class ChannelListRouter: ChannelListRoutingLogic {
     }
     
     func navigateToProfile(route: ChannelListModel.Route.ProfileScreen) {
-        let parameters = ProfileAssembly.Parameters(didChangeProfileHandler: route.didChangeProfileHandler)
+        let parameters = ProfileAssembly.Parameters(
+            presentingStartPoint: route.presentingStartPoint,
+            didChangeProfileHandler: route.didChangeProfileHandler
+        )
         let profileViewController = ProfileAssembly.assembly(parameters: parameters)
+        profileViewController.modalPresentationStyle = .overFullScreen
         viewController?.present(profileViewController, animated: true)
     }
     

@@ -112,13 +112,20 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private var buttonsStackViewBottomConstraint: NSLayoutConstraint?
     private let interactor: ProfileBusinessLogic
     private let router: ProfileRoutingLogic
+    private let transitioningDelegateImpl: UIViewControllerTransitioningDelegate
     
     // MARK: - Initialization
     
-    init(interactor: ProfileBusinessLogic, router: ProfileRoutingLogic) {
+    init(
+        interactor: ProfileBusinessLogic,
+        router: ProfileRoutingLogic,
+        transitioningDelegate: UIViewControllerTransitioningDelegate
+    ) {
         self.interactor = interactor
         self.router = router
+        self.transitioningDelegateImpl = transitioningDelegate
         super.init(nibName: nil, bundle: nil)
+        self.transitioningDelegate = transitioningDelegateImpl
     }
     
     required init?(coder: NSCoder) {
@@ -224,7 +231,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             topBarView.topAnchor.constraint(equalTo: view.topAnchor),
             topBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             topBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topBarView.heightAnchor.constraint(equalToConstant: 70),
+            topBarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
             
             avatarImageView.topAnchor.constraint(lessThanOrEqualTo: topBarView.bottomAnchor, constant: 10),
             avatarImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -267,6 +274,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private func configureUI() {
         view.backgroundColor = .white
         imagePickerController.delegate = self
+//        modalPresentationStyle = .custom
         interactor.setupTheme(request: ProfileModel.SetupTheme.Request())
         interactor.fetchProfile(request: ProfileModel.FetchProfile.Request())
     }
