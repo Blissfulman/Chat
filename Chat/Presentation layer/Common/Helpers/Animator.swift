@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class Animator {
+enum Animator {
     
     // MARK: - Static private properties
     
