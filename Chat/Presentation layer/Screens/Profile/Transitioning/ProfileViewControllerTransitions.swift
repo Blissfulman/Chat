@@ -63,16 +63,17 @@ final class ProfileViewControllerDismissedTransition: NSObject, UIViewController
     // MARK: - UIViewControllerAnimatedTransitioning
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        0.7
+        0.5
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
         if let fromView = transitionContext.view(forKey: .from) {
             containerView.addSubview(fromView)
-            UIView.animate(withDuration: 0.7, delay: 0, options: [.curveEaseInOut], animations: {
+            UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn], animations: {
                 fromView.center = self.dismissingEndPoint
-                fromView.transform = CGAffineTransform(scaleX: 0.05, y: 0.05)
+                fromView.transform = CGAffineTransform(scaleX: 0.2, y: 0.2)
+                fromView.alpha = 0
             }, completion: { _ in
                 transitionContext.completeTransition(true)
             })

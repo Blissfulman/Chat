@@ -168,6 +168,8 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     // MARK: - Actions
     
     private func closeButtonTapped() {
+        view.backgroundColor = .clear
+        [topBarView, buttonsStackView, centralStackView, editProfileButton].forEach { $0.alpha = 0 }
         router.back(route: ProfileModel.Route.Back())
     }
     
