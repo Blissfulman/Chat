@@ -17,7 +17,7 @@ final class ChannelsServiceImpl: ChannelsService {
     
     // MARK: - Private properties
     
-    private var firestoreManager: FirestoreManagerImpl<Channel>
+    private let firestoreManager: FirestoreManagerImpl<Channel>
     private let contentManager: ContentManager
     
     // MARK: - Initialization

@@ -102,7 +102,6 @@ enum Animator {
         ]
         
         let rotationAnimation = CAKeyframeAnimation(keyPath: "transform.rotation")
-        // Установил угол поворота в 9 градусов, т.к. большая кнопка слишком сильно тряслась
         rotationAnimation.values = [0, -Float.pi / 20, 0, Float.pi / 20, 0]
         
         [positionAnimation, rotationAnimation].forEach {
