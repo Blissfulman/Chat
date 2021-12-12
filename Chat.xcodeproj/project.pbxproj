@@ -79,6 +79,8 @@
 		CE9EADD627660B8E00E85E0A /* ProfileDataManagerFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EADD527660B8E00E85E0A /* ProfileDataManagerFake.swift */; };
 		CE9EADD827660BEA00E85E0A /* ProfileServiceIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EADD727660BEA00E85E0A /* ProfileServiceIntegrationTests.swift */; };
 		CE9EADDA276610E600E85E0A /* FileStorageManagerFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EADD9276610E600E85E0A /* FileStorageManagerFake.swift */; };
+		CE9EADDC27664BA000E85E0A /* ImagesServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EADDB27664BA000E85E0A /* ImagesServiceTests.swift */; };
+		CE9EADDE27664CCC00E85E0A /* APIRequestSenderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EADDD27664CCC00E85E0A /* APIRequestSenderMock.swift */; };
 		CEA00F7E2739AA10007F925E /* ChannelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA00F7D2739AA10007F925E /* ChannelDataSource.swift */; };
 		CEA00F802739AA7C007F925E /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */; };
 		CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA143DD271600D400F39F61 /* ThemesViewController.swift */; };
@@ -239,6 +241,8 @@
 		CE9EADD527660B8E00E85E0A /* ProfileDataManagerFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManagerFake.swift; sourceTree = "<group>"; };
 		CE9EADD727660BEA00E85E0A /* ProfileServiceIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServiceIntegrationTests.swift; sourceTree = "<group>"; };
 		CE9EADD9276610E600E85E0A /* FileStorageManagerFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorageManagerFake.swift; sourceTree = "<group>"; };
+		CE9EADDB27664BA000E85E0A /* ImagesServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesServiceTests.swift; sourceTree = "<group>"; };
+		CE9EADDD27664CCC00E85E0A /* APIRequestSenderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestSenderMock.swift; sourceTree = "<group>"; };
 		CEA00F7D2739AA10007F925E /* ChannelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDataSource.swift; sourceTree = "<group>"; };
 		CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		CEA143DD271600D400F39F61 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
@@ -567,6 +571,7 @@
 				CE3FE6FE2761447400B5AC22 /* SettingsServiceTests.swift */,
 				CE9EADCF2765FB3A00E85E0A /* ProfileServiceTests.swift */,
 				CE9EADD727660BEA00E85E0A /* ProfileServiceIntegrationTests.swift */,
+				CE9EADDB27664BA000E85E0A /* ImagesServiceTests.swift */,
 				CEC450D627614A3D009C210B /* Mocks */,
 			);
 			path = Services;
@@ -683,6 +688,7 @@
 				CECBD2AB2762570200B63D87 /* AsyncHandlerMock.swift */,
 				CE9EADD527660B8E00E85E0A /* ProfileDataManagerFake.swift */,
 				CE9EADD9276610E600E85E0A /* FileStorageManagerFake.swift */,
+				CE9EADDD27664CCC00E85E0A /* APIRequestSenderMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1212,9 +1218,11 @@
 			files = (
 				CE9EADDA276610E600E85E0A /* FileStorageManagerFake.swift in Sources */,
 				CE9EADD827660BEA00E85E0A /* ProfileServiceIntegrationTests.swift in Sources */,
+				CE9EADDE27664CCC00E85E0A /* APIRequestSenderMock.swift in Sources */,
 				CEC450D927614CC3009C210B /* SettingsServiceTests.swift in Sources */,
 				CE9EADD627660B8E00E85E0A /* ProfileDataManagerFake.swift in Sources */,
 				CE9EADD02765FB3A00E85E0A /* ProfileServiceTests.swift in Sources */,
+				CE9EADDC27664BA000E85E0A /* ImagesServiceTests.swift in Sources */,
 				CEC450DC27614CEC009C210B /* SettingsManagerMock.swift in Sources */,
 				CECBD2AC2762570200B63D87 /* AsyncHandlerMock.swift in Sources */,
 			);
