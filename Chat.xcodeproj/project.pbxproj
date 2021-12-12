@@ -81,6 +81,7 @@
 		CE9EADDA276610E600E85E0A /* FileStorageManagerFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EADD9276610E600E85E0A /* FileStorageManagerFake.swift */; };
 		CE9EADDC27664BA000E85E0A /* ImagesServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EADDB27664BA000E85E0A /* ImagesServiceTests.swift */; };
 		CE9EADDE27664CCC00E85E0A /* APIRequestSenderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EADDD27664CCC00E85E0A /* APIRequestSenderMock.swift */; };
+		CE9EADE6276663D600E85E0A /* ProfileViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EADE5276663D600E85E0A /* ProfileViewControllerUITests.swift */; };
 		CEA00F7E2739AA10007F925E /* ChannelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA00F7D2739AA10007F925E /* ChannelDataSource.swift */; };
 		CEA00F802739AA7C007F925E /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */; };
 		CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA143DD271600D400F39F61 /* ThemesViewController.swift */; };
@@ -152,6 +153,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		CE3FE7092761465A00B5AC22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE1F08A126F3BB67002A5985 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE1F08A826F3BB67002A5985;
+			remoteInfo = Chat;
+		};
+		CE9EADE8276663D600E85E0A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE1F08A126F3BB67002A5985 /* Project object */;
 			proxyType = 1;
@@ -243,6 +251,9 @@
 		CE9EADD9276610E600E85E0A /* FileStorageManagerFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorageManagerFake.swift; sourceTree = "<group>"; };
 		CE9EADDB27664BA000E85E0A /* ImagesServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesServiceTests.swift; sourceTree = "<group>"; };
 		CE9EADDD27664CCC00E85E0A /* APIRequestSenderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestSenderMock.swift; sourceTree = "<group>"; };
+		CE9EADE3276663D600E85E0A /* ChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE9EADE5276663D600E85E0A /* ProfileViewControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewControllerUITests.swift; sourceTree = "<group>"; };
+		CE9EADE7276663D600E85E0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA00F7D2739AA10007F925E /* ChannelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDataSource.swift; sourceTree = "<group>"; };
 		CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		CEA143DD271600D400F39F61 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
@@ -329,6 +340,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE9EADE0276663D600E85E0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -393,6 +411,7 @@
 			children = (
 				CE1F08AB26F3BB67002A5985 /* Chat */,
 				CE3FE7052761465A00B5AC22 /* ChatTests */,
+				CE9EADE4276663D600E85E0A /* ChatUITests */,
 				CE1F08AA26F3BB67002A5985 /* Products */,
 				E470A832EFF4E0E1748B12C7 /* Pods */,
 				F051348D2CAC0FAA904EFEA4 /* Frameworks */,
@@ -404,6 +423,7 @@
 			children = (
 				CE1F08A926F3BB67002A5985 /* Chat.app */,
 				CE3FE7042761465A00B5AC22 /* ChatTests.xctest */,
+				CE9EADE3276663D600E85E0A /* ChatUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -673,6 +693,15 @@
 			path = Channel;
 			sourceTree = "<group>";
 		};
+		CE9EADE4276663D600E85E0A /* ChatUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CE9EADE5276663D600E85E0A /* ProfileViewControllerUITests.swift */,
+				CE9EADE7276663D600E85E0A /* Info.plist */,
+			);
+			path = ChatUITests;
+			sourceTree = "<group>";
+		};
 		CEB97AD027307CAB00C405CA /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
@@ -937,6 +966,24 @@
 			productReference = CE3FE7042761465A00B5AC22 /* ChatTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		CE9EADE2276663D600E85E0A /* ChatUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE9EADEA276663D600E85E0A /* Build configuration list for PBXNativeTarget "ChatUITests" */;
+			buildPhases = (
+				CE9EADDF276663D600E85E0A /* Sources */,
+				CE9EADE0276663D600E85E0A /* Frameworks */,
+				CE9EADE1276663D600E85E0A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE9EADE9276663D600E85E0A /* PBXTargetDependency */,
+			);
+			name = ChatUITests;
+			productName = ChatUITests;
+			productReference = CE9EADE3276663D600E85E0A /* ChatUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -951,6 +998,10 @@
 						LastSwiftMigration = 1250;
 					};
 					CE3FE7032761465A00B5AC22 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = CE1F08A826F3BB67002A5985;
+					};
+					CE9EADE2276663D600E85E0A = {
 						CreatedOnToolsVersion = 12.5.1;
 						TestTargetID = CE1F08A826F3BB67002A5985;
 					};
@@ -971,6 +1022,7 @@
 			targets = (
 				CE1F08A826F3BB67002A5985 /* Chat */,
 				CE3FE7032761465A00B5AC22 /* ChatTests */,
+				CE9EADE2276663D600E85E0A /* ChatUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -995,6 +1047,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CE3FE7022761465A00B5AC22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE9EADE1276663D600E85E0A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1228,6 +1287,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE9EADDF276663D600E85E0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE9EADE6276663D600E85E0A /* ProfileViewControllerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1235,6 +1302,11 @@
 			isa = PBXTargetDependency;
 			target = CE1F08A826F3BB67002A5985 /* Chat */;
 			targetProxy = CE3FE7092761465A00B5AC22 /* PBXContainerItemProxy */;
+		};
+		CE9EADE9276663D600E85E0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE1F08A826F3BB67002A5985 /* Chat */;
+			targetProxy = CE9EADE8276663D600E85E0A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1461,6 +1533,48 @@
 			};
 			name = Release;
 		};
+		CE9EADEB276663D600E85E0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4SMTJMFX82;
+				INFOPLIST_FILE = ChatUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.evgeny-novgorodov.ChatUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Chat;
+			};
+			name = Debug;
+		};
+		CE9EADEC276663D600E85E0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4SMTJMFX82;
+				INFOPLIST_FILE = ChatUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.evgeny-novgorodov.ChatUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Chat;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1487,6 +1601,15 @@
 			buildConfigurations = (
 				CE3FE70C2761465A00B5AC22 /* Debug */,
 				CE3FE70D2761465A00B5AC22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE9EADEA276663D600E85E0A /* Build configuration list for PBXNativeTarget "ChatUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE9EADEB276663D600E85E0A /* Debug */,
+				CE9EADEC276663D600E85E0A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

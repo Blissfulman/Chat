@@ -138,6 +138,7 @@ final class ChannelListViewController: UIViewController {
         button.addTarget(self, action: #selector(self.openProfileBarButtonTapped), for: .touchUpInside)
         button.setImage(UIImage(data: iconData), for: .normal)
         button.setCornerRadius(size.width / 2, continuousCurve: false)
+        button.accessibilityLabel = "OpenProfileBarButton"
         
         return UIBarButtonItem(customView: button)
     }

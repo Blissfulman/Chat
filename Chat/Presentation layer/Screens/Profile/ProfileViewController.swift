@@ -58,6 +58,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         textField.isEnabled = false
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldsEditingChanged), for: .editingChanged)
+        textField.accessibilityLabel = "ProfileFullNameTextField"
         return textField
     }()
     
@@ -67,6 +68,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         textField.isEnabled = false
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldsEditingChanged), for: .editingChanged)
+        textField.accessibilityLabel = "ProfileDescriptionTextField"
         return textField
     }()
     
@@ -83,6 +85,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private lazy var editProfileButton: UIButton = {
         let button = ProfileFilledButton(withTitle: "Edit profile")
         button.addTarget(self, action: #selector(editProfileButtonTapped), for: .touchUpInside)
+        button.accessibilityLabel = "ProfileEditProfileButton"
         return button
     }()
     
