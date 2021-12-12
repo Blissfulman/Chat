@@ -75,6 +75,8 @@
 		CE9AF685270B8D44006D44A8 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE9AF684270B8D44006D44A8 /* Icons.xcassets */; };
 		CE9B0BC32721BEC60001DF15 /* ProfileDescriptionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B0BC22721BEC60001DF15 /* ProfileDescriptionTextField.swift */; };
 		CE9C657C270F2F8A008756AC /* ConfigurableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C657B270F2F8A008756AC /* ConfigurableCells.swift */; };
+		CE9EADD02765FB3A00E85E0A /* ProfileServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EADCF2765FB3A00E85E0A /* ProfileServiceTests.swift */; };
+		CE9EADD22765FC1B00E85E0A /* ProfileDataManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9EADD12765FC1B00E85E0A /* ProfileDataManagerMock.swift */; };
 		CEA00F7E2739AA10007F925E /* ChannelDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA00F7D2739AA10007F925E /* ChannelDataSource.swift */; };
 		CEA00F802739AA7C007F925E /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */; };
 		CEA143DE271600D400F39F61 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA143DD271600D400F39F61 /* ThemesViewController.swift */; };
@@ -231,6 +233,8 @@
 		CE9AF684270B8D44006D44A8 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		CE9B0BC22721BEC60001DF15 /* ProfileDescriptionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDescriptionTextField.swift; sourceTree = "<group>"; };
 		CE9C657B270F2F8A008756AC /* ConfigurableCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableCells.swift; sourceTree = "<group>"; };
+		CE9EADCF2765FB3A00E85E0A /* ProfileServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileServiceTests.swift; sourceTree = "<group>"; };
+		CE9EADD12765FC1B00E85E0A /* ProfileDataManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataManagerMock.swift; sourceTree = "<group>"; };
 		CEA00F7D2739AA10007F925E /* ChannelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDataSource.swift; sourceTree = "<group>"; };
 		CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		CEA143DD271600D400F39F61 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
@@ -557,6 +561,7 @@
 			isa = PBXGroup;
 			children = (
 				CE3FE6FE2761447400B5AC22 /* SettingsServiceTests.swift */,
+				CE9EADCF2765FB3A00E85E0A /* ProfileServiceTests.swift */,
 				CEC450D627614A3D009C210B /* Mocks */,
 			);
 			path = Services;
@@ -671,6 +676,7 @@
 			children = (
 				CEC450D727614AC3009C210B /* SettingsManagerMock.swift */,
 				CECBD2AB2762570200B63D87 /* AsyncHandlerMock.swift */,
+				CE9EADD12765FC1B00E85E0A /* ProfileDataManagerMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -1199,6 +1205,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC450D927614CC3009C210B /* SettingsServiceTests.swift in Sources */,
+				CE9EADD22765FC1B00E85E0A /* ProfileDataManagerMock.swift in Sources */,
+				CE9EADD02765FB3A00E85E0A /* ProfileServiceTests.swift in Sources */,
 				CEC450DC27614CEC009C210B /* SettingsManagerMock.swift in Sources */,
 				CECBD2AC2762570200B63D87 /* AsyncHandlerMock.swift in Sources */,
 			);

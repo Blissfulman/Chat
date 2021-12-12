@@ -40,13 +40,15 @@ final class SettingsServiceTests: XCTestCase {
     }
     
     func testGettingTheme() {
-        settingsManager?.theme = .champagne
         let expectation = XCTestExpectation()
+        settingsManager?.theme = .champagne
         var theme: Theme?
+        
         settingsService?.getTheme { value in
             theme = value
             expectation.fulfill()
         }
+        
         wait(for: [expectation], timeout: 0.1)
         XCTAssertEqual(theme, .champagne)
     }

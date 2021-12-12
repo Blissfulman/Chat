@@ -9,7 +9,11 @@
 
 final class SettingsManagerMock: SettingsManager {
     
+    // MARK: - Public properties
+    
     var theme = Theme.light
+    
+    // MARK: - Public methods
     
     func loadMySenderID() {}
 }

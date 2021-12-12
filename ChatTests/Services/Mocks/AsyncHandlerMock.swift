@@ -10,6 +10,8 @@ import Foundation
 
 final class AsyncHandlerMock: AsyncHandler {
     
+    // MARK: - Public methods
+    
     // Т.к. это mock, то тут можно сделать синхронную обработку задачи
     func handle(task: @escaping () -> Void) {
         task()
