@@ -1,5 +1,5 @@
 //
-//  ProfileDataManagerMock.swift
+//  ProfileDataManagerFake.swift
 //  ChatTests
 //
 //  Created by Evgeny Novgorodov on 12.12.2021.
@@ -7,7 +7,7 @@
 
 @testable import Chat
 
-final class ProfileDataManagerMock: ProfileDataManager {
+final class ProfileDataManagerFake: ProfileDataManager {
     
     // MARK: - Public properties
     
