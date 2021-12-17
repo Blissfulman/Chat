@@ -2,12 +2,17 @@ name: CI
 on: [push]
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: self-hosted
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
     - uses: ruby/setup-ruby@v1
+      env:
+        ImageOS : macos11
       with:
         ruby-version: 2.6
         bundler-cache: true
-    - name: Run
-      run: bundle exec fastlane build_and_run_tests
+    - name: Build and run tests
+      env:
+        SECRETS_URL: ${{ secrets.SECRETS_URL }}
+      run: |
+        bundle exec fastlane build_and_run_test
