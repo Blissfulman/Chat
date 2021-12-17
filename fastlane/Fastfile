@@ -16,11 +16,20 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Build and run tests"
-  lane :build_and_run_tests do
+  lane :build_for_testing do
     scan(clean: true)
+    puts("Success build for testing")
+  end
 
-    puts("SUCCESS")
+  lane :run_tests do
+    scan(clean: true)
+    puts("Success testing")
+  end
+
+  lane :build_and_run_tests do
+    cocoapods
+    scan(clean: true)
+    puts("Success build and run tests")
   end
 end
 
