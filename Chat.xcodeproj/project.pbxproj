@@ -263,7 +263,6 @@
 		CEA00F7D2739AA10007F925E /* ChannelDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDataSource.swift; sourceTree = "<group>"; };
 		CEA00F7F2739AA7C007F925E /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		CEA143DD271600D400F39F61 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
-		CEA9C016276C615900ED4A2D /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = SOURCE_ROOT; };
 		CEAC8206274826B000F50125 /* ThemesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesPresenter.swift; sourceTree = "<group>"; };
 		CEAC8209274937FC00F50125 /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		CEB97AB7272D3C8800C405CA /* ChannelAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelAssembly.swift; sourceTree = "<group>"; };
@@ -416,7 +415,6 @@
 		CE1F08A026F3BB67002A5985 = {
 			isa = PBXGroup;
 			children = (
-				CEA9C016276C615900ED4A2D /* Config.xcconfig */,
 				CE1F08AB26F3BB67002A5985 /* Chat */,
 				CE3FE7052761465A00B5AC22 /* ChatTests */,
 				CE9EADE4276663D600E85E0A /* ChatUITests */,
@@ -1346,7 +1344,6 @@
 /* Begin XCBuildConfiguration section */
 		CE1F08BB26F3BB68002A5985 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CEA9C016276C615900ED4A2D /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
