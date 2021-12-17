@@ -2,7 +2,11 @@ default_platform(:ios)
 
 platform :ios do
   lane :build_for_testing do
-    gym(clean: true)
+    cocoapods
+    scan(
+      clean: true,
+      build_for_testing: true
+    )
     puts("Success build for testing")
   end
 
@@ -12,7 +16,6 @@ platform :ios do
   end
 
   lane :build_and_run_tests do
-    cocoapods
     build_for_testing
     run_test
     puts("Success build and run tests")
