@@ -1,5 +1,6 @@
 excluded:
   - Pods
+  - ${PWD}/Pods
   - .git
 
 disabled_rules:
