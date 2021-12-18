@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)](https://github.com/TFS-iOS/chat-app-Blissfulman/.github/workflows/github.yml)
+[![CI Actions Status](https://github.com/TFS-iOS/chat-app-Blissfulman/workflows/github/badge.svg)](https://github.com/TFS-iOS/chat-app-Blissfulman/actions)
 
 # Приложение Chat
 
