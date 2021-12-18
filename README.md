@@ -1,3 +1,5 @@
+![Build Status](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)](https://github.com/TFS-iOS/chat-app-Blissfulman/.github/workflows/github.yml)
+
 # Приложение Chat
 
 ## Приложение разрабатывалось в течение практики в компании Tinkoff осенью 2021 года
