@@ -83,11 +83,11 @@ enum ChannelListModel {
     
     enum Route {
         struct SettingsScreen {
-            let didChooseThemeHandler: ((Theme) -> Void)
+            let didChooseThemeHandler: (Theme) -> Void
         }
         
         struct ProfileScreen {
-            let didChangeProfileHandler: ((Profile) -> Void)
+            let didChangeProfileHandler: (Profile) -> Void
         }
         
         struct ChannelScreen {

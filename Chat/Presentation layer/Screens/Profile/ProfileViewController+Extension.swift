@@ -12,7 +12,8 @@ extension ProfileViewController {
     func editAvatarAlert(
         title: String,
         galleryAction: @escaping () -> Void,
-        cameraAction: @escaping () -> Void
+        cameraAction: @escaping () -> Void,
+        downloadAction: @escaping () -> Void
     ) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
         
@@ -22,10 +23,14 @@ extension ProfileViewController {
         let cameraAction = UIAlertAction(title: "Take a photo", style: .default) { _ in
             cameraAction()
         }
+        let downloadAction = UIAlertAction(title: "Download image", style: .default) { _ in
+            downloadAction()
+        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         
         alertController.addAction(galleryAction)
         alertController.addAction(cameraAction)
+        alertController.addAction(downloadAction)
         alertController.addAction(cancelAction)
         return alertController
     }

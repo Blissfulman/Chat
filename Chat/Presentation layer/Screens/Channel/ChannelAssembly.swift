@@ -23,12 +23,15 @@ final class ChannelAssembly {
             channel: parameters.channel,
             senderName: parameters.senderName
         )
+        let router = ChannelRouter()
         let viewController = ChannelViewController(
             interactor: interactor,
+            router: router,
             channelDataSource: channelDataSource,
             channelName: parameters.channel.name
         )
         presenter.view = viewController
+        router.viewController = viewController
         return viewController
     }
     

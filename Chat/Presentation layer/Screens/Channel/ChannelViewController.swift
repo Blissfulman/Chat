@@ -56,9 +56,10 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         return textField
     }()
     
-    private lazy var addButton: UIButton = {
+    private lazy var addToMessageButton: UIButton = {
         let button = UIButton().prepareForAutoLayout()
         button.setImage(Icons.addToMessage, for: .normal)
+        button.addTarget(self, action: #selector(didTapAddToMessageButton), for: .touchUpInside)
         return button
     }()
     
@@ -69,11 +70,18 @@ final class ChannelViewController: KeyboardNotificationsViewController {
     
     private var bottomViewBottomConstraint: NSLayoutConstraint?
     private let interactor: ChannelBusinessLogic
+    private let router: ChannelRoutingLogic
     
     // MARK: - Initialization
     
-    init(interactor: ChannelBusinessLogic, channelDataSource: ChannelDataSourceProtocol, channelName: String) {
+    init(
+        interactor: ChannelBusinessLogic,
+        router: ChannelRoutingLogic,
+        channelDataSource: ChannelDataSourceProtocol,
+        channelName: String
+    ) {
         self.interactor = interactor
+        self.router = router
         super.init(nibName: nil, bundle: nil)
         var channelDataSource = channelDataSource
         channelDataSource.tableView = self.tableView
@@ -115,6 +123,14 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         view.endEditing(true)
     }
     
+    @objc
+    private func didTapAddToMessageButton() {
+        let route = ChannelModel.Route.ImagePicker(didPickImageHandler: { [weak self] url in
+            self?.newMessageTextField.text = url.absoluteString
+        })
+        router.navigateToImagePicker(route: route)
+    }
+    
     // MARK: - Private methods
     
     private func setupUI() {
@@ -122,7 +138,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
         view.addSubview(bottomView)
         bottomView.addSubview(borderView)
         bottomView.addSubview(bottomViewStackView)
-        bottomViewStackView.addArrangedSubviews(addButton, newMessageTextField)
+        bottomViewStackView.addArrangedSubviews(addToMessageButton, newMessageTextField)
         tableView.addGestureRecognizer(tableViewTapGestureRecognizer)
     }
     
@@ -147,7 +163,7 @@ final class ChannelViewController: KeyboardNotificationsViewController {
             bottomViewStackView.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -20),
             
             newMessageTextField.heightAnchor.constraint(equalToConstant: Constants.newMessageTexrFieldHeight),
-            addButton.widthAnchor.constraint(equalToConstant: 19)
+            addToMessageButton.widthAnchor.constraint(equalToConstant: 19)
         ])
         
         bottomViewBottomConstraint = bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)

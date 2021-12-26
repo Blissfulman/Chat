@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ChannelPresentationLogic: AnyObject {
+protocol ChannelPresentationLogic {
     func presentTheme(response: ChannelModel.SetupTheme.Response)
     func presentFetchingMessagesError(response: ChannelModel.FetchingMessagesError.Response)
     func presentSendMessage(response: ChannelModel.SendMessage.Response)

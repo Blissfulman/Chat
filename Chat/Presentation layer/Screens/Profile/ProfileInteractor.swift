@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ProfileBusinessLogic: AnyObject {
-    func setupTheme(request: ChannelModel.SetupTheme.Request)
+    func setupTheme(request: ProfileModel.SetupTheme.Request)
     func fetchProfile(request: ProfileModel.FetchProfile.Request)
     func editProfileButtonTapped(request: ProfileModel.EditProfileButtonTapped.Request)
     func requestEditingAvatarAlert(request: ProfileModel.EditingAvatarAlert.Request)
@@ -73,9 +73,9 @@ final class ProfileInteractor: ProfileBusinessLogic {
     
     // MARK: - ProfileBusinessLogic
     
-    func setupTheme(request: ChannelModel.SetupTheme.Request) {
+    func setupTheme(request: ProfileModel.SetupTheme.Request) {
         settingsService.getTheme { [weak self] theme in
-            self?.presenter.presentTheme(response: ChannelModel.SetupTheme.Response(theme: theme))
+            self?.presenter.presentTheme(response: ProfileModel.SetupTheme.Response(theme: theme))
         }
     }
     

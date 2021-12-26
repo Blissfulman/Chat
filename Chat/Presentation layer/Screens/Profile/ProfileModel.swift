@@ -9,7 +9,7 @@ import Foundation
 
 enum ProfileModel {
     
-    enum FetchTheme {
+    enum SetupTheme {
         struct Request {}
         struct Response {
             let theme: Theme
@@ -124,5 +124,15 @@ enum ProfileModel {
             let message: String
             let retryHandler: () -> Void
         }
+    }
+    
+    // MARK: - Routing
+    
+    enum Route {
+        struct ImagePicker {
+            let didPickImageHandler: (URL) -> Void
+        }
+        
+        struct Back {}
     }
 }

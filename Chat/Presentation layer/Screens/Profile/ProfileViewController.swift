@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ProfileDisplayLogic: AnyObject {
-    func displayTheme(viewModel: ChannelModel.SetupTheme.ViewModel)
+    func displayTheme(viewModel: ProfileModel.SetupTheme.ViewModel)
     func displayProfile(viewModel: ProfileModel.FetchProfile.ViewModel)
     func displayEditingAvatarAlert(viewModel: ProfileModel.EditingAvatarAlert.ViewModel)
     func displayEditingState(viewModel: ProfileModel.EditingState.ViewModel)
@@ -31,31 +31,9 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     // MARK: - Private properties
     
-    private lazy var topView: UIView = {
-        let view = UIView().prepareForAutoLayout()
-        view.backgroundColor = Palette.lightBarColor
+    private lazy var topBarView: TopBarView = {
+        let view = TopBarView(title: "My Profile", rightButtonTitle: "Close", rightButtonAction: closeButtonTapped)
         return view
-    }()
-    
-    private lazy var topStackView: UIStackView = {
-        let stackView = UIStackView().prepareForAutoLayout()
-        return stackView
-    }()
-    
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel().prepareForAutoLayout()
-        label.font = Fonts.title
-        label.text = "My Profile"
-        return label
-    }()
-    
-    private lazy var closeButton: UIButton = {
-        let button = UIButton().prepareForAutoLayout()
-        button.titleLabel?.font = Fonts.buttonTitle
-        button.setTitleColor(Palette.buttonTitleBlue, for: .normal)
-        button.setTitle("Close", for: .normal)
-        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        return button
     }()
     
     private lazy var centralStackView: UIStackView = {
@@ -126,7 +104,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         return button
     }()
-
+    
     private let progressView = ProgressView()
     private let imagePickerController = UIImagePickerController()
     private var buttonsStackViewBottomConstraint: NSLayoutConstraint?
@@ -180,9 +158,8 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     
     // MARK: - Actions
     
-    @objc
     private func closeButtonTapped() {
-        router.dismiss()
+        router.back(route: ProfileModel.Route.Back())
     }
     
     @objc
@@ -200,7 +177,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         )
         interactor.editProfileButtonTapped(request: request)
     }
-        
+    
     @objc
     private func cancelButtonTapped() {
         view.endEditing(true)
@@ -233,28 +210,21 @@ final class ProfileViewController: KeyboardNotificationsViewController {
         view.addSubview(editAvatarButton)
         view.addSubview(buttonsStackView)
         view.addSubview(editProfileButton)
-        topView.addSubview(topStackView)
         // Добавляется последним, чтобы быть более верхним слоем поверх остального контента
-        view.addSubview(topView)
+        view.addSubview(topBarView)
         
-        topStackView.addArrangedSubviews(titleLabel, closeButton)
         centralStackView.addArrangedSubviews(fullNameTextField, descriptionTextField)
         buttonsStackView.addArrangedSubviews(cancelButton, saveButton)
     }
     
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            topView.topAnchor.constraint(equalTo: view.topAnchor),
-            topView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topView.heightAnchor.constraint(equalToConstant: 70),
+            topBarView.topAnchor.constraint(equalTo: view.topAnchor),
+            topBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topBarView.heightAnchor.constraint(equalToConstant: 70),
             
-            topStackView.topAnchor.constraint(equalTo: topView.topAnchor),
-            topStackView.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 16),
-            topStackView.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -16),
-            topStackView.bottomAnchor.constraint(equalTo: topView.bottomAnchor),
-            
-            avatarImageView.topAnchor.constraint(lessThanOrEqualTo: topView.bottomAnchor, constant: 10),
+            avatarImageView.topAnchor.constraint(lessThanOrEqualTo: topBarView.bottomAnchor, constant: 10),
             avatarImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             avatarImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
@@ -295,7 +265,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private func configureUI() {
         view.backgroundColor = .white
         imagePickerController.delegate = self
-        interactor.setupTheme(request: ChannelModel.SetupTheme.Request())
+        interactor.setupTheme(request: ProfileModel.SetupTheme.Request())
         interactor.fetchProfile(request: ProfileModel.FetchProfile.Request())
     }
     
@@ -315,9 +285,8 @@ final class ProfileViewController: KeyboardNotificationsViewController {
 
 extension ProfileViewController: ProfileDisplayLogic {
     
-    func displayTheme(viewModel: ChannelModel.SetupTheme.ViewModel) {
-        topView.backgroundColor = viewModel.theme.backgroundColor
-        titleLabel.textColor = viewModel.theme.fontColor
+    func displayTheme(viewModel: ProfileModel.SetupTheme.ViewModel) {
+        topBarView.setTheme(viewModel.theme)
     }
     
     func displayProfile(viewModel: ProfileModel.FetchProfile.ViewModel) {
@@ -339,6 +308,14 @@ extension ProfileViewController: ProfileDisplayLogic {
             }
             self.imagePickerController.sourceType = .camera
             self.present(self.imagePickerController, animated: true)
+        }, downloadAction: { [weak self] in
+            guard let self = self else { return }
+            let route = ProfileModel.Route.ImagePicker(didPickImageHandler: { [weak self] imageURL in
+                guard let self = self else { return }
+                self.avatarImageView.setImage(with: imageURL)
+                self.interactor.didSelectNewAvatar(request: ProfileModel.DidSelectNewAvatar.Request())
+            })
+            self.router.navigateToImagePicker(route: route)
         })
         present(alertController, animated: true)
     }
@@ -378,7 +355,7 @@ extension ProfileViewController: ProfileDisplayLogic {
     func showProgressView(viewModel: ProfileModel.ShowProgressView.ViewModel) {
         view.addSubview(progressView)
         NSLayoutConstraint.activate([
-            progressView.topAnchor.constraint(equalTo: topView.bottomAnchor),
+            progressView.topAnchor.constraint(equalTo: topBarView.bottomAnchor),
             progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             progressView.bottomAnchor.constraint(equalTo: view.bottomAnchor)

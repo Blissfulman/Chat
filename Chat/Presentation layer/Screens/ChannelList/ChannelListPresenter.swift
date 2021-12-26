@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ChannelListPresentationLogic: AnyObject {
+protocol ChannelListPresentationLogic {
     func presentProfileData(response: ChannelListModel.UpdateProfile.Response)
     func presentFetchingChannelsError(response: ChannelListModel.FetchingChannelsError.Response)
     func presentAddChannelAlert(response: ChannelListModel.AddChannelAlert.Response)

@@ -15,6 +15,8 @@ final class ServiceLayer {
     
     // MARK: - Public properties
     
+    lazy var apiRequestSender: APIRequestSender = APIRequestSenderImpl()
+    
     lazy var settingsService: SettingsService = SettingsServiceImpl(
         settingsManager: settingsManager,
         asyncHandler: GCDAsyncHandler(qos: .userInitiated)
@@ -26,6 +28,7 @@ final class ServiceLayer {
     lazy var profileService: ProfileService = ProfileServiceImpl(
         profileDataManager: profileDataManager(handlerQoS: .userInitiated)
     )
+    lazy var imagesService: ImagesService = ImagesServiceImpl(apiRequestSender: apiRequestSender)
     
     lazy var contentManager: ContentManager = ContentManagerImpl(storage: coreDataStorage)
     lazy var settingsManager: SettingsManager = SettingsManagerImpl(
