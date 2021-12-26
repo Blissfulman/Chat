@@ -12,4 +12,5 @@ enum Icons {
     static let arrowRight = #imageLiteral(resourceName: "arrow-right")
     static let addToMessage = #imageLiteral(resourceName: "add-to-message")
     static let sendMessage = #imageLiteral(resourceName: "send-message")
+    static let tinkoffLogo = #imageLiteral(resourceName: "tinkoff-logo")
 }

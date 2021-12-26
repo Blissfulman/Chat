@@ -32,7 +32,9 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     // MARK: - Private properties
     
     private lazy var topBarView: TopBarView = {
-        let view = TopBarView(title: "My Profile", rightButtonTitle: "Close", rightButtonAction: closeButtonTapped)
+        let view = TopBarView(title: "My Profile", rightButtonTitle: "Close", rightButtonAction: { [weak self] in
+            self?.closeButtonTapped()
+        })
         return view
     }()
     
@@ -110,13 +112,20 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private var buttonsStackViewBottomConstraint: NSLayoutConstraint?
     private let interactor: ProfileBusinessLogic
     private let router: ProfileRoutingLogic
+    private let transitioningDelegateImpl: UIViewControllerTransitioningDelegate
     
     // MARK: - Initialization
     
-    init(interactor: ProfileBusinessLogic, router: ProfileRoutingLogic) {
+    init(
+        interactor: ProfileBusinessLogic,
+        router: ProfileRoutingLogic,
+        transitioningDelegate: UIViewControllerTransitioningDelegate
+    ) {
         self.interactor = interactor
         self.router = router
+        self.transitioningDelegateImpl = transitioningDelegate
         super.init(nibName: nil, bundle: nil)
+        self.transitioningDelegate = transitioningDelegateImpl
     }
     
     required init?(coder: NSCoder) {
@@ -159,6 +168,8 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     // MARK: - Actions
     
     private func closeButtonTapped() {
+        view.backgroundColor = .clear
+        [topBarView, buttonsStackView, centralStackView, editProfileButton].forEach { $0.alpha = 0 }
         router.back(route: ProfileModel.Route.Back())
     }
     
@@ -222,7 +233,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
             topBarView.topAnchor.constraint(equalTo: view.topAnchor),
             topBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             topBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topBarView.heightAnchor.constraint(equalToConstant: 70),
+            topBarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
             
             avatarImageView.topAnchor.constraint(lessThanOrEqualTo: topBarView.bottomAnchor, constant: 10),
             avatarImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -265,6 +276,7 @@ final class ProfileViewController: KeyboardNotificationsViewController {
     private func configureUI() {
         view.backgroundColor = .white
         imagePickerController.delegate = self
+//        modalPresentationStyle = .custom
         interactor.setupTheme(request: ProfileModel.SetupTheme.Request())
         interactor.fetchProfile(request: ProfileModel.FetchProfile.Request())
     }
@@ -321,26 +333,28 @@ extension ProfileViewController: ProfileDisplayLogic {
     }
     
     func displayEditingState(viewModel: ProfileModel.EditingState.ViewModel) {
-        editProfileButton.disappear(duration: 0.3) {
-            self.buttonsStackView.appear(duration: 0.3)
+        Animator.disappear(editProfileButton, duration: 0.3) {
+            Animator.appear(self.buttonsStackView, duration: 0.3)
         }
-        editAvatarButton.appear(duration: 0.3)
+        Animator.appear(editAvatarButton, duration: 0.3)
         saveButton.isEnabled = false
         fullNameTextField.isEnabled = true
         descriptionTextField.isEnabled = true
     }
     
     func displaySavedState(viewModel: ProfileModel.SavedState.ViewModel) {
-        buttonsStackView.disappear(duration: 0.3) {
-            self.editProfileButton.appear(duration: 0.3)
+        Animator.disappear(buttonsStackView, duration: 0.3) {
+            Animator.appear(self.editProfileButton, duration: 0.3)
         }
-        editAvatarButton.disappear(duration: 0.3)
+        Animator.disappear(editAvatarButton, duration: 0.3)
+        Animator.stopShake(saveButton)
         fullNameTextField.isEnabled = false
         descriptionTextField.isEnabled = false
     }
     
     func updateSaveButtonState(viewModel: ProfileModel.UpdateSaveButtonState.ViewModel) {
         saveButton.isEnabled = viewModel.isEnabledButton
+        viewModel.isEnabledButton ? Animator.shake(saveButton) : Animator.stopShake(saveButton)
     }
     
     func displaySavingProfileAlert(viewModel: ProfileModel.SavingProfileAlert.ViewModel) {

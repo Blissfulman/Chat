@@ -63,7 +63,7 @@ final class ImagePickerInteractor: ImagePickerBusinessLogic {
             switch result {
             case let .success(imagesResponse):
                 self.fetchedPages = 1
-                self.imagePickerDataSource.updateData(imageItems: imagesResponse.imageItems)
+                self.imagePickerDataSource.appendImageItems(imagesResponse.imageItems)
                 self.presenter.presentImages(response: ImagePickerModel.FetchImages.Response())
             case let .failure(error):
                 DebugLogger.log(error.localizedDescription)
@@ -83,7 +83,7 @@ final class ImagePickerInteractor: ImagePickerBusinessLogic {
             switch result {
             case let .success(imagesResponse):
                 self.fetchedPages += 1
-                self.imagePickerDataSource.updateData(imageItems: imagesResponse.imageItems)
+                self.imagePickerDataSource.appendImageItems(imagesResponse.imageItems)
             case let .failure(error):
                 DebugLogger.log(error.localizedDescription)
             }

@@ -47,44 +47,4 @@ extension UIView {
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowOpacity = 0.1
     }
-    
-    // MARK: - Animations
-    
-    /// Анимация плавного появления.
-    /// - Parameters:
-    ///   - fromValue: Изначальное значение параметра `alpha` (по умолчанию равно `0`).
-    ///   - toValue: Конечное значение параметра `alpha` (по умолчанию равно `1`).
-    ///   - duration: Длительность анимации.
-    ///   - completion: Блок, выполняемый после окончания анимации.
-    func appear(fromValue: CGFloat = 0, toValue: CGFloat = 1, duration: Double, completion: (() -> Void)? = nil) {
-        isHidden = false
-        alpha = fromValue
-        UIView.animate(withDuration: duration) {
-            self.alpha = toValue
-        } completion: { isEnded in
-            if isEnded {
-                self.alpha = toValue
-                completion?()
-            }
-        }
-    }
-    
-    /// Анимация плавного исчезновения.
-    /// - Parameters:
-    ///   - fromValue: Изначальное значение параметра `alpha` (по умолчанию равно `1`).
-    ///   - toValue: Конечное значение параметра `alpha` (по умолчанию равно `0`).
-    ///   - duration: Длительность анимации.
-    ///   - completion: Блок, выполняемый после окончания анимации.
-    func disappear(fromValue: CGFloat = 1, toValue: CGFloat = 0, duration: Double, completion: (() -> Void)? = nil) {
-        alpha = fromValue
-        UIView.animate(withDuration: duration) {
-            self.alpha = toValue
-        } completion: { isEnded in
-            if isEnded {
-                self.alpha = toValue
-                self.isHidden = true
-                completion?()
-            }
-        }
-    }
 }

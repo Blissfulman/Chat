@@ -25,7 +25,9 @@ final class ImagePickerViewController: UIViewController {
     // MARK: - Private properties
     
     private lazy var topBarView: TopBarView = {
-        let view = TopBarView(rightButtonTitle: "Close", rightButtonAction: closeButtonTapped)
+        let view = TopBarView(rightButtonTitle: "Close", rightButtonAction: { [weak self] in
+            self?.closeButtonTapped()
+        })
         return view
     }()
     
@@ -58,7 +60,7 @@ final class ImagePickerViewController: UIViewController {
         self.router = router
         super.init(nibName: nil, bundle: nil)
         var imagePickerDataSource = imagePickerDataSource
-        imagePickerDataSource.collectionView = self.collectionView
+        imagePickerDataSource.collectionView = collectionView
     }
     
     required init?(coder: NSCoder) {
