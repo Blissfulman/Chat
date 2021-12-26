@@ -1,6 +1,8 @@
 excluded:
   - Pods
+  - ${PWD}/Pods
   - .git
+  - vendor
 
 disabled_rules:
   - trailing_whitespace

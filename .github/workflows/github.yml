@@ -1,0 +1,39 @@
+name: CI
+on: [push]
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ruby/setup-ruby@v1
+      env:
+        ImageOS : macos11
+      with:
+        ruby-version: 2.6
+        bundler-cache: true
+    - name: Build and run tests
+      env:
+        SECRETS_URL: ${{ secrets.SECRETS_URL }}
+      run: |
+        bundle exec fastlane build_and_run_tests
+    - name: Test Success
+      uses: rjstone/discord-webhook-notify@v1
+      if: success()
+      with:
+        severity: info
+        details: Test Succeeded!
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    - name: Test Failure
+      uses: rjstone/discord-webhook-notify@v1
+      if: failure()
+      with:
+        severity: error
+        details: Test Failed!
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    - name: Test Cancelled
+      uses: rjstone/discord-webhook-notify@v1
+      if: cancelled()
+      with:
+        severity: warn
+        details: Test Cancelled!
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}

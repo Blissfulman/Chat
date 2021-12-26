@@ -1,0 +1,29 @@
+default_platform(:ios)
+
+platform :ios do
+  lane :build_for_testing do
+    cocoapods
+    scan(
+      clean: true,
+      derived_data_path: "build_folder",
+      build_for_testing: true
+    )
+    puts("Success build for testing")
+  end
+
+  lane :run_test do
+    scan(
+      derived_data_path: "build_folder",
+      test_without_building: true
+    )
+    puts("Success testing")
+  end
+
+  lane :build_and_run_tests do
+    build_for_testing
+    run_test
+    puts("Success build and run tests")
+  end
+end
+
+

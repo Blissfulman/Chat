@@ -8,6 +8,11 @@
 import Foundation
 
 enum APIConstants {
-    static let baseURL = "https://pixabay.com/api/"
-    static let apiKey = "24484220-eca5b62bef8c95bf38868cbd7" // В рамках учебного проекта, думаю, хранить так допустимо
+    
+    static var baseURL = valueForKey("APIBaseURL") ?? ""
+    static var apiKey = valueForKey("APIKey") ?? ""
+    
+    static private func valueForKey(_ key: String) -> String? {
+        (Bundle.main.infoDictionary?[key] as? String)?.replacingOccurrences(of: "\\", with: "")
+    }
 }
