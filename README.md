@@ -1,4 +1,4 @@
-[![CI](https://github.com/TFS-iOS/chat-app-Blissfulman/actions/workflows/github.yml/badge.svg?branch=homework13)](https://github.com/TFS-iOS/chat-app-Blissfulman/actions/workflows/github.yml)
+[![CI](https://github.com/TFS-iOS/chat-app-Blissfulman/actions/workflows/github.yml/badge.svg)](https://github.com/TFS-iOS/chat-app-Blissfulman/actions/workflows/github.yml)
 
 # Приложение Chat
 
