@@ -11,7 +11,7 @@ final class MessagesServiceImpl: MessagesService {
     
     // MARK: - Private properties
     
-    private var firestoreManager: FirestoreManagerImpl<Message>
+    private let firestoreManager: FirestoreManagerImpl<Message>
     private let contentManager: ContentManager
     
     // MARK: - Initialization

@@ -11,7 +11,7 @@ final class ProfileServiceImpl: ProfileService {
     
     // MARK: - Private properties
     
-    private var profileDataManager: ProfileDataManager
+    private let profileDataManager: ProfileDataManager
     
     // MARK: - Initialization
     
