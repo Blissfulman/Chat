@@ -33,14 +33,14 @@ final class ChannelListRouter: ChannelListRoutingLogic {
             presentingStartPoint: route.presentingStartPoint,
             didChangeProfileHandler: route.didChangeProfileHandler
         )
-        let profileViewController = ProfileAssembly.assembly(parameters: parameters)
+        let profileViewController = ProfileAssembly.assemble(parameters: parameters)
         profileViewController.modalPresentationStyle = .overFullScreen
         viewController?.present(profileViewController, animated: true)
     }
     
     func navigateToChannel(route: ChannelListModel.Route.ChannelScreen) {
         let parameters = ChannelAssembly.Parameters(channel: route.channel, senderName: route.senderName)
-        let channelViewController = ChannelAssembly.assembly(parameters: parameters)
+        let channelViewController = ChannelAssembly.assemble(parameters: parameters)
         viewController?.navigationController?.show(channelViewController, sender: self)
     }
 }

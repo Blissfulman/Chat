@@ -10,7 +10,7 @@ import UIKit
 
 final class ProfileAssembly {
     
-    static func assembly(parameters: Parameters) -> UIViewController {
+    static func assemble(parameters: Parameters) -> UIViewController {
         let presenter = ProfilePresenter()
         let interactor = ProfileInteractor(
             presenter: presenter,

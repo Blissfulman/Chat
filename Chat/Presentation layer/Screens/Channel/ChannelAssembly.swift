@@ -10,7 +10,7 @@ import UIKit
 
 final class ChannelAssembly {
     
-    static func assembly(parameters: Parameters) -> UIViewController {
+    static func assemble(parameters: Parameters) -> UIViewController {
         let presenter = ChannelPresenter()
         let messagesService: MessagesService = ServiceLayer.shared.messagesService(channelID: parameters.channel.id)
         let channelDataSource = ChannelDataSource(

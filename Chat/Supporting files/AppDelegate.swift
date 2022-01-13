@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         initialConfigure()
         
-        let mainViewController = ChannelListAssembly.assembly()
+        let mainViewController = ChannelListAssembly.assemble()
         let navigationController = NavigationController(rootViewController: mainViewController)
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navigationController

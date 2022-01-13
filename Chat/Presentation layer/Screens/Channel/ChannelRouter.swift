@@ -21,7 +21,7 @@ final class ChannelRouter: ChannelRoutingLogic {
     
     func navigateToImagePicker(route: ChannelModel.Route.ImagePicker) {
         let parameters = ImagePickerAssemby.Parameters(didPickImageHandler: route.didPickImageHandler)
-        let imagePickerViewController = ImagePickerAssemby.assembly(parameters: parameters)
+        let imagePickerViewController = ImagePickerAssemby.assemble(parameters: parameters)
         viewController?.present(imagePickerViewController, animated: true)
     }
 }

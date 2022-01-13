@@ -9,7 +9,7 @@ import UIKit
 
 final class ImagePickerAssemby {
     
-    static func assembly(parameters: Parameters) -> UIViewController {
+    static func assemble(parameters: Parameters) -> UIViewController {
         let presenter = ImagePickerPresenter()
         let imagePickerDataSource = ImagePickerDataSource()
         let interactor = ImagePickerInteractor(

@@ -10,7 +10,7 @@ import UIKit
 
 final class ChannelListAssembly {
     
-    static func assembly() -> UIViewController {
+    static func assemble() -> UIViewController {
         let presenter = ChannelListPresenter()
         let channelsService: ChannelsService = ServiceLayer.shared.channelsService
         let channelListDataSource = ChannelListDataSource(
